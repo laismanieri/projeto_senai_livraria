@@ -1,0 +1,301 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: none;
+}
+
+/* .linhaHorizontal {
+  width: 100%;
+  border: 0.05px outset rgba(144, 202, 252, 0.26);
+  margin-top: 2em;
+  margin-bottom: 1em;
+} */
+
+
+.modalBackground {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+
+.modalCarrinho {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 25%;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  background: whitesmoke;
+  margin: 0;
+
+  height: 100%;
+}
+
+
+  
+  
+.navBarCarrinho{
+  background:  #033579;
+  width: 100%;
+  height: 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+}
+
+
+
+.navBarCarrinhoUl{
+  display: flex;
+  margin: 0 0 0 1em;
+  padding: 0;
+  list-style-type: none;
+}
+
+.sacolaH1{
+  margin: 4px 0 0 10px;
+  color: aliceblue;
+  font-size: 18px;
+}  
+
+.imgFechar{
+  color: rgba(240, 248, 255, 0.785);
+  font-size: 1.5em;
+  margin: 0 1em 0 0;
+}
+
+.navBarCarrinhoButton{
+  border:none;
+  background-color:transparent;
+  cursor: pointer;
+  /* opacity: 0.8; */
+}
+
+.listaItemCarrinho{
+  width: 100%;
+  height:70%;
+
+}
+
+.containerLista {
+  display: grid;
+  grid-template-columns: 6.5em 24.5em;
+  grid-template-rows: 10em;
+  padding: 20px;
+  color: #146b97;  
+  margin: 0;
+  justify-content: center;
+}
+
+.divImg{
+  justify-content: center;
+
+}
+
+.imagemGrid{
+  box-shadow: 2px 2px 15px 0 rgba(1, 23, 61, 0.078);
+  border-radius: 8px 0 0 8px;
+  width: 100%;
+  height: 9em;
+}
+
+
+.containerListaInfo{
+  color: #146b97;
+}
+
+
+.divComprarLivros{
+  background:rgba(205, 231, 255, 0.368);
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 2px 15px 2px rgba(1, 23, 61, 0.078);
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1f 1f 1f;
+  grid-template-rows: 3em 3em 3em;
+}
+
+
+.divPreco,
+.qtde {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #146b97;
+
+}
+
+
+
+.divNomeExcluir {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #146b97;
+  justify-content: space-around;
+}
+
+
+
+.totalCarrinho{
+  background:  #033579;
+  width: 100%;
+  height:23%;
+  justify-content: center;
+}
+
+.valorCarrinho{
+  width: 100%;
+  padding: 1.5em;
+}
+
+/* .divCartButtonCompra{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+} */
+
+.carrinhoButtonComprar{
+  width: 100%;
+  height: 2.3em;
+  text-align: center;  
+  border-radius: 7px;
+  text-decoration: none;
+  border: none;
+  color: #146b97;  
+  align-items: center;
+  font-size: 15px;
+  margin-top: 12px;  
+  background: rgb(192, 225, 255);
+}
+
+.carrinhoButtonComprar:hover{
+  cursor: pointer;
+  background: aliceblue;
+  text-decoration: none;
+  color: #146b97bc;  
+}
+
+
+.tituloItem{
+  margin: 0;
+  color: #146b97; 
+  font-size: 18px;
+} 
+
+.imgExcluirItemCarrinho{
+  text-align: center;  
+  font-size: 1.3em;
+  text-decoration: none;
+  border: none;
+  color: #146b97;  
+  margin: 0 10px 0 10px;
+  background:rgba(205, 231, 255, 0.368);
+
+}
+
+.imgExcluirItemCarrinho:hover{
+  cursor: pointer;
+  text-decoration: none;
+  color: #146b97b9; 
+}
+
+.precoAntigo{
+  text-decoration: line-through;
+  color: brown;
+  text-align: left;
+  margin: 0;
+  height: 1.5em;
+
+}
+
+.precoOferta, .precoRegular{
+  color: #146b97; 
+  margin: 0;
+}
+
+
+
+.spanRegular{
+  color: #146b97; 
+  margin: 0;
+  font-size: 14px;
+  background: whitesmoke;
+  height: 1.5em;
+}
+
+
+.buttonQtde{
+  border: none;
+  width: 30px;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #d2d2d27d;
+  color: #146b97; 
+}
+
+.buttonQtde:hover{
+  cursor: pointer;
+  background-color: #d2d2d2d8;
+  text-decoration: none;
+  color: rgb(255, 255, 255)
+}
+
+.spanQtde {
+  max-width: 3rem; 
+  padding: 0.2rem 0.7rem; 
+  background-color: #dad9d9;
+  border-radius: 5px; 
+  color: #146b97; 
+}
+
+
+.valorSubtotal, .valorTotal{
+  display: flex;
+  justify-content: space-between;
+  padding: 7px;
+  flex-wrap: nowrap;
+  font-size: 18px;
+  color: rgb(192, 225, 255);
+  border-radius: 10px;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.valorSubtotal, .valorTotal{
+  color: white;
+
+}
+
+.valorTotal{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+span{
+  margin: 15px;
+
+}
+
+@media (max-width: 768px) {
+  .modalCarrinho {
+    width: 35%;
+    top: 2vw;
+
+  }
+}
+
+@media (min-width: 992px) {
+  .modalCarrinho {
+    width: 30%;
+    top: 2vw;
+  }
+}

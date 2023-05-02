@@ -1,0 +1,166 @@
+
+
+.containerVoltar {
+    /* position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.811);
+    display: flex; */
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    /* background: whitesmoke; */
+    margin-top: 13vh ;
+    text-shadow: 5px 5px 15px rgba(1, 23, 61, 0.22);
+  }
+  
+  .containerPagto{
+    display: grid;
+    grid-template-columns: 56em 20em;
+    grid-template-rows: 50em;
+    color: #146b97; 
+    overflow: auto;
+}
+
+  .linhaHorizontal {
+    width: 100%;
+    border: 0.05px outset rgba(144, 202, 252, 0.26);
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+
+.voltarHome{
+    color: #146b97; 
+    cursor: pointer;
+    font-size: 1em;
+    margin-left: 0.1em;
+}
+
+.tablePagamento{
+    border-collapse: collapse;
+}
+
+.theadPagamento, .tbodyPagamento{
+    font-size: 18px;
+    text-align: center;
+    border-bottom: 0.05px outset rgba(144, 202, 252, 0.26);
+   
+}
+
+
+.thPagamento, .tdPagamento{
+    padding: 15px;
+}
+
+.tbodyPagamento{
+    font-size: 15px;
+}
+
+.imgLivroPagamento{
+    width: 50%;
+}
+
+
+/* .trPagamento:nth-child(even){
+    background-color: #f2f2f2; 
+    color:#6b1f1c} */ 
+
+
+.buttonPgtoDelete{
+    border: none;
+    cursor: pointer;
+    color: #146b97; 
+    font-size: 20px;
+    border:none;
+    background-color:transparent;
+    cursor: pointer;
+
+}
+
+.buttonPgtoDelete:hover{
+    color:  #033579;
+
+}
+
+.buttonPagamento{
+    width: 100%;
+    height: 2.5em;
+    border-radius: 10px;
+    text-align: center;  
+    background: #033579;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+    color: aliceblue;
+
+}
+
+.buttonPagamento:hover{
+    background: #033479cd;
+    text-decoration: none;
+    color: white;
+
+}
+
+
+
+.ficha{
+    border: solid 1px rgb(205, 231, 255);
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 1px 1px 20px 1px rgba(1, 23, 61, 0.042);
+
+  }
+
+  .ficha1, .ficha2 {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px;
+    flex-wrap: nowrap;
+    font-size: 17px;
+    color: #146b97;
+    margin-bottom: 0;
+    list-style-type: none;
+  }
+
+  .ficha1{
+
+  }
+
+    .ficha2{
+    border-top: 0.05px outset rgba(144, 202, 252, 0.26);
+  }
+
+  .fichaH1{
+        text-align: left;
+        color: #146b97;
+        font-size: 1.5em;
+        margin-left: 0.3em;
+        margin: 0;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+  }
+
+  .voltarHome{
+    font-size: 1em;
+
+  }
+
+
+  .fichaTh{
+    font-weight: bold;
+  }
+
+  span{
+    margin: 15px;
+
+  }
+
+
+
+
+

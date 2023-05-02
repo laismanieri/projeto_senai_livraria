@@ -1,0 +1,24 @@
+
+*{
+    scroll-behavior: smooth;
+    text-decoration: none;
+
+}
+
+
+.homeContainer{
+    width: 100%;
+    text-decoration: none;
+
+}
+
+.oferta {
+    color:  #015a80;
+    font-size: 25px;
+  }
+  
+.linhaHorizontal {
+    width: 100%;
+    border: 0.05px outset rgba(144, 202, 252, 0.26);
+    margin-top: 1em;
+  }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="jakarta.persistence.Entity"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Table"/>
+    <fullyQualifiedTypeName name="lombok.Builder"/>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.PrePersist"/>
+    <fullyQualifiedTypeName name="br.senai.sp.livraria.model.entity.Usuario"/>
+    <fullyQualifiedTypeName name="br.senai.sp.livraria.service.UsuarioService"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.OneToMany"/>
+    <fullyQualifiedTypeName name="br.senai.sp.livraria.model.entity.Endereco"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.EnumType"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Enumerated"/>
+    <fullyQualifiedTypeName name="br.senai.sp.livraria.model.enums.TipoLivro"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
+    <fullyQualifiedTypeName name="br.senai.sp.livraria.model.repository.DetalheLivroRepository"/>
+    <fullyQualifiedTypeName name="br.senai.sp.livraria.service.DetalheLivroService"/>
+    <fullyQualifiedTypeName name="br.senai.sp.livraria.model.entity.DetalheLivro"/>
+    <fullyQualifiedTypeName name="br.senai.sp.livraria.model.repository.FavoritoRepository"/>
+    <fullyQualifiedTypeName name="br.senai.sp.livraria.service.FavoritoService"/>
+    <fullyQualifiedTypeName name="br.senai.sp.livraria.model.entity.Favorito"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Lob"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Column"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Convert"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters"/>
+    <fullyQualifiedTypeName name="br.senai.sp.livraria.model.repository.PedidoRepository"/>
+    <fullyQualifiedTypeName name="br.senai.sp.livraria.model.entity.Pedido"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.ManyToOne"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.JoinColumn"/>
+    <fullyQualifiedTypeName name="java.math.BigDecimal"/>
+    <fullyQualifiedTypeName name="br.senai.sp.livraria.model.repository.ItemPedidoRepositoy"/>
+    <fullyQualifiedTypeName name="br.senai.sp.livraria.model.entity.ItemPedido"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.ManyToMany"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.config.annotation.CorsRegistry"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.config.annotation.WebMvcConfigurer"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.FetchType"/>
+</qualifiedTypeNameHistroy>

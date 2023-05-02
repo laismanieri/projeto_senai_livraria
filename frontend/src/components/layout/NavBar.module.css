@@ -1,0 +1,64 @@
+.navbar {  
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #033579;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+
+}
+
+.navbarLogo {
+  height: 50px;
+}
+
+.navbarInput {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-left: 20px;
+}
+
+
+.navbarSpan {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  background-color: #555;
+  color: #fff;
+  border-radius: 50%;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+
+.navbarButton {
+  background: #033579;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  width: 4vh;
+  height: 4vh;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+}
+
+

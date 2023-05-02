@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.containerResultadoPesquisa{
+    margin: 5vh 0 5vh 0;
+}
+
+.resultadoContainer{
+    width: 100%;
+    text-decoration: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tituloResultadoContainer {
+    margin-top: 10vh;
+}
+
+.resultadoBusca {
+    color:  #015a80;
+}
+
+
+.resultadoCount {
+    color:  #015a80;
+    margin-top: 0.5em;
+    font-weight: 400;
+
+}
+
+.linhaHorizontal {
+    width: 100%;
+    border: 0.05px outset rgba(144, 202, 252, 0.26);
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+
+.voltarHome{
+    color: #146b97; 
+    cursor: pointer;
+    font-size: 1em;
+    margin-left: 0.1em;
+}
+
+
+

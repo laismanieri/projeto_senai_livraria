@@ -1,0 +1,81 @@
+
+.containerCard{
+  display: inline-block;   
+  justify-content: center;
+  text-decoration: none;
+}
+
+
+
+  
+.card{
+  border-radius: 12px;
+  box-shadow: 5px 5px 15px 5px rgba(1, 23, 61, 0.22);
+  padding: 25px;
+  transition: all 0,3s ease-out;
+  background: whitesmoke;
+  width: 200PX;
+  text-align: center; 
+  text-align: center;
+  margin: 20px;
+}
+
+.card:hover{
+  transform: translateY(-5px);
+  cursor: pointer;
+}
+
+.cardImageLivro {
+  width: 100%;
+}
+
+.cardTitulo{
+  height: 7vh;
+  text-align: center;
+  margin-bottom: 5px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+  
+.h2TituloCard{
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  color:  #033579;
+  margin: 0;
+}
+
+.cardOferta h2, .cardRegular h2{
+  margin: 0;
+}
+
+.precoAntigo{
+  text-decoration: line-through;
+  color: brown;
+  text-align: left;
+  margin: 0;
+  height: 1.5em;
+
+}
+
+.precoOferta, .precoRegular{
+  color: #146b97; 
+  margin: 0;
+  font-size: 18px;
+}
+
+
+
+.spanRegular{
+  color: #146b97; 
+  margin: 0;
+  font-size: 14px;
+  background: whitesmoke;
+  height: 1.5em;
+}
+
+
+  
+  
