@@ -135,14 +135,23 @@ function ModalNovo({ isOpen, onClose }) {
                   value={livro.preco}
                   onChange={handleChange}
                 />
-                {/* <label className={styles.labelModal}> PREÇO OFERTA</label>
+                <label className={styles.labelModal}>ESTOQUE</label>
 
                 <input
                   className={styles.inputModal}
-                  name="precoOferta"
-                  value={livro.precoOferta}
+                  name="qtdeEstoque"
+                  value={livro.qtdeEstoque}
                   onChange={handleChange}
-                /> */}
+                />
+
+                <label className={styles.labelModal}>TIPO LIVRO</label>              
+                  <input
+                  className={styles.inputModal}
+                  name="tipoLivro"
+                  value={livro.tipoLivro}
+                  onChange={handleChange}
+                />   
+
                 <label className={styles.labelModal}> QUANTIDADE DE PÁGINAS</label>
 
                 <input

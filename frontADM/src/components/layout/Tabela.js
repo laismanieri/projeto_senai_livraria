@@ -41,7 +41,7 @@ function Tabela() {
 
   const getLivro = () => {
     axios
-      .get("http://localhost:8082/livro")
+      .get("http://localhost:8082/livro/tabela")
       .then((response) => setLista(response.data))
       .catch((error) => console.log(error));
   };
@@ -61,7 +61,10 @@ function Tabela() {
             <th>IMAGEM</th>
             <th>QTDE PAGINAS</th>
             <th>OFERTA</th>
-            <th  >DESTAQUE</th>
+            <th>DESTAQUE</th>
+            <th>TIPO LIVRO</th>
+            <th>PREÇO</th>
+            <th>ESTOQUE</th>
 
             <th>
               <AiFillDelete />
@@ -87,6 +90,9 @@ function Tabela() {
                   <td>{livro.qtdePagina}</td>
                   <td>{livro.oferta ? 'Sim' : 'Não'}</td>
                   <td>{livro.destaque ? 'Sim' : 'Não'}</td>
+                  <td>{livro.tipoLivro}</td>
+                  <td>{livro.preco}</td>
+                  <td>{livro.qtdeEstoque}</td>
                   <td>
                     <AiFillDelete
                       onClick={() => handleDeleteLivro(livro.id)}

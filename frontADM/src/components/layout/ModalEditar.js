@@ -18,7 +18,8 @@ function ModalEditar({ isOpenEdit, onCloseEdit, livro }) {
       destaque: livro.destaque,
       preco: livro.preco,
       qtdePagina: livro.qtdePagina,
-      precoOferta: livro.precoOferta,
+      qtdeEstoque: livro.qtdeEstoque,
+      tipoLivro: livro.tipoLivro,
     });
   }, [isOpenEdit, livro]);
 
@@ -124,14 +125,22 @@ function ModalEditar({ isOpenEdit, onCloseEdit, livro }) {
                 defaultValue={livro.preco}
                 onChange={handleChangeEdit}
               />   
-{/* 
-              <label className={styles.labelModal}> PREÇO OFERTA</label>              
+
+              <label className={styles.labelModal}>ESTOQUE</label>              
                 <input
                 className={styles.inputModalEdit}
-                name="precoOferta"
-                defaultValue={livro.precoOferta}
+                name="qtdeEstoque"
+                defaultValue={livro.qtdeEstoque}
                 onChange={handleChangeEdit}
-              />    */}
+              />   
+
+                <label className={styles.labelModal}>TIPO LIVRO</label>              
+                <input
+                className={styles.inputModalEdit}
+                name="tipoLivro"
+                defaultValue={livro.tipoLivro}
+                onChange={handleChangeEdit}
+              />   
 
                             <label className={styles.labelModal}> QUANTIDADE DE PÁGINAS</label>              
                 <input
