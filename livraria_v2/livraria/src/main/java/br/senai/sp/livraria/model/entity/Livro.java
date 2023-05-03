@@ -1,17 +1,23 @@
 package br.senai.sp.livraria.model.entity;
 
-import jakarta.persistence.Column;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@JsonSerialize
 @Entity
 @Table( name = "livro")
 @Builder
@@ -31,8 +37,6 @@ public class Livro {
 
 	private int anoPublicacao;
 
-	@Lob
-	@Column(name = "sinopse", columnDefinition = "LONGTEXT")
 	private String sinopse;
 
 	private String genero;
@@ -46,5 +50,9 @@ public class Livro {
 	private Boolean destaque;
 	
 	private String imagem;
+	
+	@OneToMany(mappedBy = "livro", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("livro")
+	private List<DetalheLivro> detalhes;
 
 }

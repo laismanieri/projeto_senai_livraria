@@ -1,6 +1,9 @@
 package br.senai.sp.livraria.model.entity;
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import br.senai.sp.livraria.model.enums.TipoLivro;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -17,6 +20,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@JsonSerialize
 @Entity
 @Table( name = "detalhe_livro")
 @Builder
@@ -38,6 +42,5 @@ public class DetalheLivro {
     private int qtdeEstoque;
 	
     @ManyToOne
-    @JoinColumn(name = "id_livro")
     private Livro livro;
 }

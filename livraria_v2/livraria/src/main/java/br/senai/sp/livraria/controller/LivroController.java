@@ -1,5 +1,6 @@
 package br.senai.sp.livraria.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import br.senai.sp.livraria.dto.LivroTabelaDTO;
+import br.senai.sp.livraria.model.entity.DetalheLivro;
 import br.senai.sp.livraria.model.entity.Livro;
 import br.senai.sp.livraria.service.LivroService;
 
@@ -26,8 +29,24 @@ public class LivroController {
     @GetMapping("")
     public ResponseEntity<List<Livro>> listarTodos() {
         List<Livro> livros = livroService.listarTodos();
+        
         return ResponseEntity.ok(livros);
     }
+    
+    @GetMapping("/tabela")
+    public ResponseEntity<List<LivroTabelaDTO>> listarTodosTabela() {
+        List<Livro> livros = livroService.listarTodos();
+
+        List<LivroTabelaDTO> lista = new ArrayList<>();
+        for (Livro livro : livros) {
+            for (DetalheLivro detalhe : livro.getDetalhes()) {
+                lista.add(new LivroTabelaDTO(detalhe));
+            }
+        }
+
+        return ResponseEntity.ok(lista);
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Livro> buscarPorId(@PathVariable Long id) {
