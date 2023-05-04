@@ -13,7 +13,7 @@ function Home() {
   const [livros, setLivros] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8082/livro')
+    axios.get('http://localhost:8082/livro/tabela')
       .then((response) => {
         console.log(response.data);
         setLivros(response.data)

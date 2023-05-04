@@ -19,7 +19,7 @@ function InformacaoLivro() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8082/livro/${id}`)
+      .get(`http://localhost:8082/livro/tabela/${id}`)
       .then((response) => {
         setLivro(response.data);
       })
