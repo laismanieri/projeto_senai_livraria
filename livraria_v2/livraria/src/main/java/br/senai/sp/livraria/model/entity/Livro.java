@@ -6,10 +6,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -36,6 +38,9 @@ public class Livro {
 	private String autor;
 
 	private int anoPublicacao;
+
+	@Lob
+	@Column(name = "sinopse", columnDefinition = "LONGTEXT")
 
 	private String sinopse;
 
