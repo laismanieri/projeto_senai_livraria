@@ -6,6 +6,7 @@ import Cadastro from "./pages/Cadastro";
 import Contact from "./pages/Contact"
 import InformacaoLivro from "./pages/InformacaoLivro";
 import Pagamento from "./pages/Pagamento";
+import Adm from "./pages/Adm";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Home />} path="/" exact></Route>
+          <Route element={<Adm/>} path="/adm" />
           <Route element={<Login />} path="/login" />
           <Route element={<Cadastro />} path="/cadastro" />
           <Route element={<ResultadosPesquisa />} path="/resultados-pesquisa"></Route>
