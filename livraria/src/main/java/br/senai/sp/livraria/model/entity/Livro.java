@@ -2,7 +2,9 @@ package br.senai.sp.livraria.model.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import jakarta.persistence.CascadeType;
@@ -11,6 +13,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -54,8 +57,8 @@ public class Livro {
 
 	private String imagem;
 
-	@OneToMany(mappedBy = "livro", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("livro")
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "livro_id")
 	private List<DetalheLivro> detalhes;
 
 }
