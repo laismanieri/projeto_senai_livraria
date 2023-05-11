@@ -3,7 +3,15 @@ import styles from "../cards/Card.module.css";
 import { Link } from "react-router-dom";
 
 function Card({ livro }) {
-  // const isPrecoRegular = livro.preco !== livro.precoOferta;
+  const ebookDetalhe = livro.detalhes.find(
+    (detalhe) => detalhe.tipoLivro === 'EBOOK'
+  );
+  const fisicoDetalhe = livro.detalhes.find(
+    (detalhe) => detalhe.tipoLivro === 'FISICO'
+  );
+
+  const ebookPreco = ebookDetalhe ? ebookDetalhe.preco : null;
+  const fisicoPreco = fisicoDetalhe ? fisicoDetalhe.preco : null;
 
   return (
     <div className={styles.containerCard}>
@@ -22,44 +30,38 @@ function Card({ livro }) {
             />
           </Link>
         </div>
+        <h2 className={styles.h2TituloCard}>{livro.titulo}</h2>
         <div className={styles.cardTitulo}>
-          <h2 className={styles.h2TituloCard}>{livro.tipoLivro}</h2>
-          <h2 className={styles.h2TituloCard}>{livro.titulo}</h2>
+          <h2 className={styles.h2TituloCard}>
+            {fisicoDetalhe && (
+              <>
+                <span>{fisicoDetalhe.tipoLivro}</span>
+              </>
+            )}
+            {ebookDetalhe && (
+              <>
+                <span>{ebookDetalhe.tipoLivro}</span>
+              </>
+            )}
+          </h2>
+
         </div>
-        <div className={styles.cardTitulo}>
-          <h2 className={styles.h2TituloCard}>{livro.titulo}</h2>
-        </div>
-        {/* <div className={styles.divPreco}>
-          {isPrecoRegular ? (
-            <div className={styles.cardOferta}>
-              <h1 className={styles.precoAntigo}>
-                {livro.preco.toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
-              </h1>
-              <h2 className={styles.precoOferta}>
-                {livro.precoOferta.toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
-              </h2>
-            </div>
-          ) : (
-            <div className={styles.cardRegular}>
-              <h1 className={styles.spanRegular} />
-              <h2 className={styles.precoRegular}>
-                {livro.preco.toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
-              </h2>
-            </div>
+        <div className={styles.cardPreco}>
+          {fisicoPreco && (
+              <span>{fisicoPreco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
           )}
-        </div> */}
+          {ebookPreco && (
+
+              <span>{ebookPreco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+          )}
+        </div>
       </div>
     </div>
   );
 }
 
+
 export default Card;
+
+
+
