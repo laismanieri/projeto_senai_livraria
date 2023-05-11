@@ -16,10 +16,19 @@ function InformacaoLivro() {
   // const [quantidade, setQuantidade] = useState(1);
   // const [cartItems, setCartItems] = useState(0);
 
+  const ebookDetalhe = livro.detalhes.find(
+    (detalhe) => detalhe.tipoLivro === "EBOOK"
+  );
+  const fisicoDetalhe = livro.detalhes.find(
+    (detalhe) => detalhe.tipoLivro === "FISICO"
+  );
+
+  const ebookPreco = ebookDetalhe ? ebookDetalhe.preco : null;
+  const fisicoPreco = fisicoDetalhe ? fisicoDetalhe.preco : null;
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8082/livro/tabela/${id}`)
+      .get(`http://localhost:8082/livro/${id}`)
       .then((response) => {
         setLivro(response.data);
       })
@@ -50,8 +59,6 @@ function InformacaoLivro() {
   //   }
   // };
 
-
-
   // const handleAddToCart = () => {
   //   setCartItems(cartItems + quantidade);
   //   setModalCarrinhoOpen(true);
@@ -59,7 +66,6 @@ function InformacaoLivro() {
   // };
 
   // const isPrecoRegular = livro.preco !== livro.precoOferta;
-
 
   return (
     <>
@@ -91,6 +97,36 @@ function InformacaoLivro() {
             </div>
             <div className={styles.comprarLivros}>
               <div className={styles.divComprarLivros}>
+                <div>
+                  {fisicoDetalhe && (
+                    <>
+                      <span>{fisicoDetalhe.tipoLivro}</span>
+                    </>
+                  )}
+                  {ebookDetalhe && (
+                    <>
+                      <span>{ebookDetalhe.tipoLivro}</span>
+                    </>
+                  )}
+                </div>
+                <div>
+                  {fisicoPreco && (
+                    <span>
+                      {fisicoPreco.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
+                    </span>
+                  )}
+                  {ebookPreco && (
+                    <span>
+                      {ebookPreco.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
+                    </span>
+                  )}
+                </div>
                 <div className={styles.compra}>
                   <div className={styles.preco}>
                     <div className={styles.divPreco}>
@@ -121,7 +157,6 @@ function InformacaoLivro() {
                         </div>
                       )} */}
                     </div>
-
                   </div>
                   <div className={styles.qtde}>
                     <button
@@ -144,14 +179,15 @@ function InformacaoLivro() {
                     className={styles.buttonCompra}
                     // onClick={handleAddToCart}
                   >
-                    <h1 className={styles.h1AdicionarSacola} >
+                    <h1 className={styles.h1AdicionarSacola}>
                       Adicionar à sacola
                     </h1>
                   </button>
                   <Link to={"/pagamento"}>
                     <button className={styles.buttonAdicionarSacola}>
                       <h1 className={styles.h1AdicionarSacola}>Comprar</h1>
-                    </button></Link>
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -197,9 +233,7 @@ function InformacaoLivro() {
                   <span className={styles.fichaTh}>Ano:</span>
                 </li>
                 <li>
-                  <span className={styles.fichaTr}>
-                    {livro.anoDePublicacao}
-                  </span>
+                  <span className={styles.fichaTr}>{livro.anoPublicacao}</span>
                 </li>
               </ul>
               <ul className={styles.ficha1}>
@@ -207,9 +241,7 @@ function InformacaoLivro() {
                   <span className={styles.fichaTh}>Quantidade de Páginas:</span>
                 </li>
                 <li>
-                  <span className={styles.fichaTr}>
-                    {livro.qtdPagina}
-                  </span>
+                  <span className={styles.fichaTr}>{livro.qtdePagina}</span>
                 </li>
               </ul>
             </div>

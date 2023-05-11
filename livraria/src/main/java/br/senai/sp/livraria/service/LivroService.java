@@ -67,13 +67,15 @@ public class LivroService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Livro findLivroById(Long id) {
+    public Livro findLivroById(String id) {
+        Long livroId = Long.parseLong(id); // conversão de String para Long
         TypedQuery<Object[]> query = entityManager.createQuery("SELECT l, d FROM Livro l JOIN l.detalhes d WHERE l.id = :livroId GROUP BY l.id", Object[].class);
-        query.setParameter("livroId", id);
+        query.setParameter("livroId", livroId);
         Object[] result = query.getSingleResult();
         Livro livro = (Livro) result[0];
         List<DetalheLivro> detalhes = Arrays.asList((DetalheLivro[]) result[1]);
         livro.setDetalhes(detalhes);
         return livro;
     }
+
 }
