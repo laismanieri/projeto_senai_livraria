@@ -1,6 +1,7 @@
 package br.senai.sp.livraria.model.entity;
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -37,10 +38,11 @@ public class DetalheLivro {
 	@Enumerated(value = EnumType.STRING)
     private TipoLivro tipoLivro;
 
-    private BigDecimal preco;
+    private float preco;
 	
     private int qtdeEstoque;
 	
+    @JsonBackReference
     @ManyToOne
     private Livro livro;
 }

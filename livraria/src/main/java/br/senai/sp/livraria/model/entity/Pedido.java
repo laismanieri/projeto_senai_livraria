@@ -1,13 +1,19 @@
 package br.senai.sp.livraria.model.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -27,18 +33,23 @@ public class Pedido {
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	private Long id;
-	
-	@ManyToOne
-	@JoinColumn(name = "usuario")
-	private Usuario usuario;
 	private LocalDate dataPedido;
-
+	
 	@PrePersist
 	public void prePersist() {
 		this.dataPedido = LocalDate.now();
-		
 	}
 	
+	@JsonManagedReference
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "pedido_id")
+	private Usuario usuario;
+	
+	@JsonManagedReference
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "pedido_id")
+	private List<ItemPedido> itens;
+
 
 
 }

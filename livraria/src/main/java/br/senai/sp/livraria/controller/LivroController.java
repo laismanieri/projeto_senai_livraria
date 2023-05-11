@@ -20,18 +20,19 @@ public class LivroController {
     @Autowired
     private LivroService livroService;
 
-    @PostMapping
-    public ResponseEntity<Livro> criar(@RequestBody Livro livro) {
-        Livro livroSalvo = livroService.salvar(livro);
-        return ResponseEntity.status(HttpStatus.CREATED).body(livroSalvo);
-    }
-
     @GetMapping("")
     public ResponseEntity<List<Livro>> listarTodos() {
         List<Livro> livros = livroService.listarTodos();
         
         return ResponseEntity.ok(livros);
     }
+    
+    @GetMapping("/ofertas")
+    public ResponseEntity<List<Livro>> listarOfertas() {
+        List<Livro> livros = livroService.buscarOferta();
+        
+        return ResponseEntity.ok(livros);
+    } 
     
     @GetMapping("/tabela")
     public ResponseEntity<List<LivroTabelaDTO>> listarTodosTabela() {
@@ -53,24 +54,17 @@ public class LivroController {
         Livro livro = livroService.buscarPorId(id);
         return ResponseEntity.ok(livro);
     }
+    
+    @PostMapping
+    public ResponseEntity<Livro> criar(@RequestBody Livro livro) {
+        Livro livroSalvo = livroService.salvar(livro);
+        return ResponseEntity.status(HttpStatus.CREATED).body(livroSalvo);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Livro> atualizar(@PathVariable Long id, @RequestBody Livro livro) {
 
     	livro.setId(id);
-    	/*
- *         Livro livro = livroService.buscarPorId(id);
-        livro.setTitulo(livroAtualizado.getTitulo());
-        livro.setAutor(livroAtualizado.getAutor());
-        livro.setAnoPublicacao(livroAtualizado.getAnoPublicacao());
-        livro.setSinopse(livroAtualizado.getSinopse());
-        livro.setGenero(livroAtualizado.getGenero());
-        livro.setEditora(livroAtualizado.getEditora());
-        livro.setQtdePagina(livroAtualizado.getQtdePagina());
-        livro.setOferta(livroAtualizado.getOferta());
-        livro.setDestaque(livroAtualizado.getDestaque());
-        livro.setImagem(livroAtualizado.getImagem());
- * */
         Livro livroAtualizadoSalvo = livroService.salvar(livro);
         return ResponseEntity.ok(livroAtualizadoSalvo);
     }

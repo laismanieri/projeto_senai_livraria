@@ -2,10 +2,13 @@ package br.senai.sp.livraria.model.entity;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -33,13 +36,15 @@ public class Usuario {
 	
 	private String senha;
 	
-
 	private LocalDate dataCadastro;
 
 	@PrePersist
 	public void prePersist() {
-		this.dataCadastro = LocalDate.now();
-		
+		this.dataCadastro = LocalDate.now();		
 	}
+	
+    @JsonBackReference
+    @ManyToOne
+    private Pedido pedido;
 
 }

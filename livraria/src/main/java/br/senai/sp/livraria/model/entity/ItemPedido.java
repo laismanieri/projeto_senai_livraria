@@ -2,6 +2,8 @@ package br.senai.sp.livraria.model.entity;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,6 +32,7 @@ public class ItemPedido {
 	@JoinColumn(name = "id_detalhe_livro")
 	private DetalheLivro detalheLivro;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "id_pedido")
 	private Pedido pedido;

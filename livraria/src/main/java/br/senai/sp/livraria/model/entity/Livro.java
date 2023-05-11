@@ -57,8 +57,10 @@ public class Livro {
 
 	private String imagem;
 
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@JsonManagedReference
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "livro_id")
 	private List<DetalheLivro> detalhes;
+
 
 }
