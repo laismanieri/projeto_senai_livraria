@@ -46,7 +46,7 @@ public class LivroTabelaDTO {
 
 	private String imagem;
 
-	private BigDecimal preco;
+	private float preco;
 
 	private TipoLivro tipoLivro;
 

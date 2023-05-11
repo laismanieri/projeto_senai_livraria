@@ -1,6 +1,6 @@
 package br.senai.sp.livraria.service;
 
-import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import br.senai.sp.livraria.model.entity.DetalheLivro;
 import br.senai.sp.livraria.model.entity.Livro;
 import br.senai.sp.livraria.model.repository.LivroRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 
 
 @Service
@@ -59,5 +62,18 @@ public class LivroService {
 		}
     	
         return listaOfertas;
+    }
+    
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    public Livro findLivroById(Long id) {
+        TypedQuery<Object[]> query = entityManager.createQuery("SELECT l, d FROM Livro l JOIN l.detalhes d WHERE l.id = :livroId GROUP BY l.id", Object[].class);
+        query.setParameter("livroId", id);
+        Object[] result = query.getSingleResult();
+        Livro livro = (Livro) result[0];
+        List<DetalheLivro> detalhes = Arrays.asList((DetalheLivro[]) result[1]);
+        livro.setDetalhes(detalhes);
+        return livro;
     }
 }
