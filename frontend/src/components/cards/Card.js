@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 
 function Card({ livro }) {
   const ebookDetalhe = livro.detalhes.find(
-    (detalhe) => detalhe.tipoLivro === 'EBOOK'
+    (detalhe) => detalhe.tipoLivro === "EBOOK"
   );
   const fisicoDetalhe = livro.detalhes.find(
-    (detalhe) => detalhe.tipoLivro === 'FISICO'
+    (detalhe) => detalhe.tipoLivro === "FISICO"
   );
 
   const ebookPreco = ebookDetalhe ? ebookDetalhe.preco : null;
@@ -20,7 +20,7 @@ function Card({ livro }) {
           <Link
             to={{
               pathname: `/informacao-livro/${livro.id}`,
-              state: { id: livro.id },
+              state: { livro, detalhelivro: [ebookDetalhe, fisicoDetalhe] },
             }}
           >
             <img
@@ -44,15 +44,23 @@ function Card({ livro }) {
               </>
             )}
           </h2>
-
         </div>
         <div className={styles.cardPreco}>
           {fisicoPreco && (
-              <span>{fisicoPreco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+            <span>
+              {fisicoPreco.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </span>
           )}
           {ebookPreco && (
-
-              <span>{ebookPreco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+            <span>
+              {ebookPreco.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </span>
           )}
         </div>
       </div>
@@ -60,8 +68,4 @@ function Card({ livro }) {
   );
 }
 
-
 export default Card;
-
-
-

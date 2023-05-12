@@ -12,10 +12,13 @@ import ModalCarrinho from "../components/modals/ModalCarrinho";
 function InformacaoLivro() {
   const { id } = useParams();
   const [livro, setLivro] = useState(null);
+  // const [modalCarrinhoOpen, setModalCarrinhoOpen] = useState(false);
+  // const [quantidade, setQuantidade] = useState(1);
+  // const [cartItems, setCartItems] = useState(0);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8082/livro/${id}?_embed=detalhes`)
+      .get(`http://localhost:8082/livro/${id}`)
       .then((response) => {
         setLivro(response.data);
       })
@@ -28,15 +31,31 @@ function InformacaoLivro() {
     return <p>Carregando...</p>;
   }
 
-  const ebookDetalhe = livro.detalhes.find(
-    (detalhe) => detalhe.tipoLivro === 'EBOOK'
-  );
-  const fisicoDetalhe = livro.detalhes.find(
-    (detalhe) => detalhe.tipoLivro === 'FISICO'
-  );
+  // const handleOpenModalCarrinho = () => {
+  //   setModalCarrinhoOpen(true);
+  // };
 
-  const ebookPreco = ebookDetalhe ? ebookDetalhe.preco : null;
-  const fisicoPreco = fisicoDetalhe ? fisicoDetalhe.preco : null;
+  // const handleCloseModalCarrinho = () => {
+  //   setModalCarrinhoOpen(false);
+  // };
+
+  // const handleIncrementQuantidade = () => {
+  //   setQuantidade(quantidade + 1);
+  // };
+
+  // const handleDecrementQuantidade = () => {
+  //   if (quantidade > 1) {
+  //     setQuantidade(quantidade - 1);
+  //   }
+  // };
+
+  // const handleAddToCart = () => {
+  //   setCartItems(cartItems + quantidade);
+  //   setModalCarrinhoOpen(true);
+  //   quantidade = 1
+  // };
+
+  // const isPrecoRegular = livro.preco !== livro.precoOferta;
 
   return (
     <>
@@ -68,30 +87,36 @@ function InformacaoLivro() {
             </div>
             <div className={styles.comprarLivros}>
               <div className={styles.divComprarLivros}>
+               
                 <div className={styles.compra}>
                   <div className={styles.preco}>
                     <div className={styles.divPreco}>
-                      <div>
-                      {fisicoDetalhe && (
-              <>
-                <span>{fisicoDetalhe.tipoLivro}</span>
-              </>
-            )}
-            {ebookDetalhe && (
-              <>
-                <span>{ebookDetalhe.tipoLivro}</span>
-              </>
-            )}
+                      {/* {isPrecoRegular ? (
+                        <div className={styles.cardOferta}>
+                          <h1 className={styles.precoAntigo}>
+                            {livro.preco.toLocaleString("pt-BR", {
+                              style: "currency",
+                              currency: "BRL",
+                            })}
+                          </h1>
+                          <h2 className={styles.precoOferta}>
+                            {livro.precoOferta.toLocaleString("pt-BR", {
+                              style: "currency",
+                              currency: "BRL",
+                            })}
+                          </h2>
+                        </div>
+                      ) : (
+                        <div className={styles.cardRegular}>
 
-                      </div>
-                      <div>
-                      {fisicoPreco && (
-                        <span>{fisicoPreco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
-                      )}
-                      {ebookPreco && (
-                        <span>{ebookPreco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
-                      )}
-                      </div>
+                          <h2 className={styles.precoRegular}>
+                            {livro.preco.toLocaleString("pt-BR", {
+                              style: "currency",
+                              currency: "BRL",
+                            })}
+                          </h2>
+                        </div>
+                      )} */}
                     </div>
                   </div>
                   <div className={styles.qtde}>
@@ -186,7 +211,21 @@ function InformacaoLivro() {
       </Container>
 
       <Footer />
-
+      {/* <ModalCarrinho
+        isOpen={modalCarrinhoOpen}
+        onClose={handleCloseModalCarrinho}
+        quantidade={quantidade}
+        imagem={livro.imagem}
+        titulo={livro.titulo}
+        preco={livro.preco}
+        autor={livro.autor}
+        sinopse={livro.sinopse}
+        anoDePublicacao={livro.anoDePublicacao}
+        editora={livro.editora}
+        genero={livro.genero}
+        precoOferta={livro.precoOferta}
+        isPrecoRegular={isPrecoRegular}
+      /> */}
     </>
   );
 }
