@@ -7,20 +7,27 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
   const [carrinho, setCarrinho] = useState([]);
 
   useEffect(() => {
-    const carrinhoSalvo = localStorage.getItem("carrinho");
+    const carrinhoSalvo = localStorage.getItem('carrinho');
     if (carrinhoSalvo) {
       setCarrinho(JSON.parse(carrinhoSalvo));
     }
   }, []);
+  
 
-  const handleIncrementQuantidade = () => {
-    setQuantidade(quantidade + 1);
+  const handleIncrementQuantidade = (id) => {
+    const item = carrinho[id];
+    item.quantidade += 1;
+    setCarrinho({ ...carrinho, [id]: item });
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
   };
 
-  const handleDecrementQuantidade = () => {
-    if (quantidade > 1) {
-      setQuantidade(quantidade - 1);
+  const handleDecrementQuantidade = (id) => {
+    const item = carrinho[id];
+    if (item.quantidade > 1) {
+      setQuantidade(item.quantidade - 1);
     }
+    setCarrinho({ ...carrinho, [id]: item });
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
   };
 
   if (!isOpen) {

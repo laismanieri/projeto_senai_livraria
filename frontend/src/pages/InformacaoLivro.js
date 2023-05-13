@@ -7,13 +7,16 @@ import Container from "../components/layout/Container";
 import Navbar from "../components/layout/NavBar";
 import Footer from "../components/layout/Footer";
 import { Link } from "react-router-dom";
-import ModalCarrinho from "../components/modals/ModalCarrinho";
+import {AiOutlineClose } from "react-icons/ai";
+import Modal from "react-modal";
 
 function InformacaoLivro() {
   const { id } = useParams();
   const [livro, setLivro] = useState(null);
   const [tipoLivroSelecionado, setTipoLivroSelecionado] = useState("FISICO");
-    
+
+  const [modalIsOpenLivroAdd, setModalIsOpenLivroAdd] = useState(false);
+
   const [carrinho, setCarrinho] = useState([]);
 
   useEffect(() => {
@@ -22,7 +25,11 @@ function InformacaoLivro() {
       .then((response) => {
         setLivro(response.data);
         // Inicializa o estado tipoLivroSelecionado com "EBOOK" se o livro não tiver detalhes físicos
-        if (!response.data.detalhes.some((detalhe) => detalhe.tipoLivro === "FISICO")) {
+        if (
+          !response.data.detalhes.some(
+            (detalhe) => detalhe.tipoLivro === "FISICO"
+          )
+        ) {
           setTipoLivroSelecionado("EBOOK");
         }
       })
@@ -42,11 +49,10 @@ function InformacaoLivro() {
     (detalhe) => detalhe.tipoLivro === "FISICO"
   );
 
-
   const ebookPreco = ebookDetalhe ? ebookDetalhe.preco : null;
   const fisicoPreco = fisicoDetalhe ? fisicoDetalhe.preco : null;
 
-  const isPrecoRegular = (livro.oferta === true) || (livro.oferta === true);
+  const isPrecoRegular = livro.oferta === true || livro.oferta === true;
 
   const fisicoEstoque = livro.detalhes.find(
     (detalhe) =>
@@ -60,10 +66,29 @@ function InformacaoLivro() {
       (detalhe.qtdeEstoque === 0 || detalhe.qtdeEstoque !== 0)
   );
 
-  const adicionarAoCarrinho = () => {
+  function adicionarAoCarrinho() {
+    setModalIsOpenLivroAdd(true);
+    
+  }
 
+  function closeModal() {
+    setModalIsOpenLivroAdd(false);
+  }
+
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+    },
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      zIndex: "9999",
+    },
   };
-  
 
   return (
     <>
@@ -91,43 +116,43 @@ function InformacaoLivro() {
                 <p className={styles.autor}>{livro.autor}</p>
                 <p className={styles.editora}>{livro.editora}</p>
                 <div className={styles.tipoLivroDetalhe}>
-                {fisicoDetalhe && fisicoDetalhe.tipoLivro && (
-                  <button
-                    className={styles.buttonTipoLivroFisico}
-                    onClick={() => setTipoLivroSelecionado("FISICO")}
-                  >
-                    {fisicoDetalhe && (
-                      <>
-                        <p>{fisicoDetalhe.tipoLivro}</p>
-                      </>
-                    )}
-                    <p>
-                      {fisicoPreco.toLocaleString("pt-BR", {
-                        style: "currency",
-                        currency: "BRL",
-                      })}
-                    </p>
-                  </button>
-                  )}
-                  {ebookDetalhe && ebookDetalhe.tipoLivro && (
-                  <button
-                    className={styles.buttonTipoLivroEbook}
-                    onClick={() => setTipoLivroSelecionado("EBOOK")}
-                  >
-                    {ebookDetalhe && (
-                      <>
-                        <p>{ebookDetalhe.tipoLivro}</p>
-                      </>
-                    )}
-                    {ebookPreco && (
+                  {fisicoDetalhe && fisicoDetalhe.tipoLivro && (
+                    <button
+                      className={styles.buttonTipoLivroFisico}
+                      onClick={() => setTipoLivroSelecionado("FISICO")}
+                    >
+                      {fisicoDetalhe && (
+                        <>
+                          <p>{fisicoDetalhe.tipoLivro}</p>
+                        </>
+                      )}
                       <p>
-                        {ebookPreco.toLocaleString("pt-BR", {
+                        {fisicoPreco.toLocaleString("pt-BR", {
                           style: "currency",
                           currency: "BRL",
                         })}
                       </p>
-                    )}
-                  </button>
+                    </button>
+                  )}
+                  {ebookDetalhe && ebookDetalhe.tipoLivro && (
+                    <button
+                      className={styles.buttonTipoLivroEbook}
+                      onClick={() => setTipoLivroSelecionado("EBOOK")}
+                    >
+                      {ebookDetalhe && (
+                        <>
+                          <p>{ebookDetalhe.tipoLivro}</p>
+                        </>
+                      )}
+                      {ebookPreco && (
+                        <p>
+                          {ebookPreco.toLocaleString("pt-BR", {
+                            style: "currency",
+                            currency: "BRL",
+                          })}
+                        </p>
+                      )}
+                    </button>
                   )}
                 </div>
                 <div className={styles.linhaHorizontalDetalhe} />
@@ -142,12 +167,13 @@ function InformacaoLivro() {
                     <div className={styles.divPreco}>
                       <ul className={styles.ulCompraInfoTipo}>
                         <li>
-                          
-                            {fisicoDetalhe && (
-                              <>
-                                <span className={styles.liCompraInfoTit}>{fisicoDetalhe.tipoLivro}</span>
-                              </>
-                            )}
+                          {fisicoDetalhe && (
+                            <>
+                              <span className={styles.liCompraInfoTit}>
+                                {fisicoDetalhe.tipoLivro}
+                              </span>
+                            </>
+                          )}
                         </li>
                       </ul>
                       <ul className={styles.ulCompraInfo}>
@@ -198,14 +224,15 @@ function InformacaoLivro() {
                   )}
                   {tipoLivroSelecionado === "EBOOK" && (
                     <div className={styles.divPreco}>
-                                          <ul className={styles.ulCompraInfoTipo}>
+                      <ul className={styles.ulCompraInfoTipo}>
                         <li>
-                          
-                            {ebookDetalhe && (
-                              <>
-                                <span className={styles.liCompraInfoTit}>{ebookDetalhe.tipoLivro}</span>
-                              </>
-                            )}
+                          {ebookDetalhe && (
+                            <>
+                              <span className={styles.liCompraInfoTit}>
+                                {ebookDetalhe.tipoLivro}
+                              </span>
+                            </>
+                          )}
                         </li>
                       </ul>
                       <ul className={styles.ulCompraInfo}>
@@ -255,12 +282,27 @@ function InformacaoLivro() {
                     </div>
                   )}
                 </div>
-                <div>
-                  <button className={styles.buttonCompra} onClick={adicionarAoCarrinho}>
+                <div >
+                  <button
+                    className={styles.buttonCompra}
+                    onClick={adicionarAoCarrinho}
+                  >
                     <h1 className={styles.h1AdicionarSacola}>
                       Adicionar à sacola
                     </h1>
                   </button>
+
+                  <Modal className={styles.modalCompra}
+                    isOpen={modalIsOpenLivroAdd}
+                    onRequestClose={closeModal}
+                    contentLabel="Livro adicionado à sacola"
+                    style={customStyles}
+                    overlayStyle={customStyles.overlay}
+                  >
+                    <button className={styles.buttonFecharModal} onClick={closeModal}>                <AiOutlineClose className={styles.imgFechar} /></button>
+                    <h2 className={styles.h2AdicionarSacola}>Livro adicionado à sacola!</h2>
+                    
+                  </Modal>
                 </div>
               </div>
             </div>
