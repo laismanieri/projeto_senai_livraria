@@ -7,33 +7,39 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
   const [carrinho, setCarrinho] = useState([]);
 
   useEffect(() => {
-    const carrinhoSalvo = localStorage.getItem('carrinho');
+    const carrinhoSalvo = localStorage.getItem("carrinho");
     if (carrinhoSalvo) {
       setCarrinho(JSON.parse(carrinhoSalvo));
     }
   }, []);
-  
 
-  const handleIncrementQuantidade = (id) => {
-    const item = carrinho[id];
-    item.quantidade += 1;
-    setCarrinho({ ...carrinho, [id]: item });
-    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  const handleIncrementQuantidade = (index) => {
+    const novoCarrinho = [...carrinho];
+    novoCarrinho[index].quantidade++;
+    setCarrinho(novoCarrinho);
+    localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
   };
 
-  const handleDecrementQuantidade = (id) => {
-    const item = carrinho[id];
-    if (item.quantidade > 1) {
-      setQuantidade(item.quantidade - 1);
+  const handleDecrementQuantidade = (index) => {
+    const novoCarrinho = [...carrinho];
+    novoCarrinho[index].quantidade--;
+    if (novoCarrinho[index].quantidade === 0) {
+      novoCarrinho.splice(index, 1);
     }
-    setCarrinho({ ...carrinho, [id]: item });
-    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    setCarrinho(novoCarrinho);
+    localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
+  };
+
+  const handleRemoveItem = (index) => {
+    const novoCarrinho = [...carrinho];
+    novoCarrinho.splice(index, 1);
+    setCarrinho(novoCarrinho);
+    localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
   };
 
   if (!isOpen) {
     return null;
   }
-
   return (
     <>
       <div className={styles.modalCarrinhoContainer}>
@@ -57,57 +63,57 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                 <AiOutlineClose className={styles.imgFechar} />
               </button>
             </div>
-          </div> 
-          {carrinho.map((livro) => (
-          <div className={styles.listaItemCarrinho}>     
-
-            <div key={livro.id}>
-
-            </div>
-            <div className={styles.containerLista}>
-              <div className={styles.gridListaImg}>
-                <div className={styles.divImg}>
-                  <img
-                    className={styles.imagemGrid}
-                    src={livro.imagem}
-                    alt={livro.titulo}
-                  />
+          </div>
+          {carrinho.map((livro, index) => (
+            <div className={styles.listaItemCarrinho}>
+              <div key={livro.id}></div>
+              <div className={styles.containerLista}>
+                <div className={styles.gridListaImg}>
+                  <div className={styles.divImg}>
+                    <img
+                      className={styles.imagemGrid}
+                      src={livro.imagem}
+                      alt={livro.titulo}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className={styles.containerListaInfo}>
-                <div className={styles.gridListaInfo}>
-                  <div className={styles.divComprarLivros}>
-                    <div className={styles.divtituloExcluir}>
-                    <p>{livro.tipoLivro}</p>
-                      <h1 className={styles.tituloItem}>
-                      {livro.titulo}
-                      </h1>
-                      <button className={styles.imgExcluirItemCarrinho}>
-                        <AiFillDelete />
-                      </button>
-                    </div>
-                    <div className={styles.divPreco}></div>
+                <div className={styles.containerListaInfo}>
+                  <div className={styles.gridListaInfo}>
+                    <div className={styles.divComprarLivros}>
+                      <div className={styles.divtituloExcluir}>
+                        <p>{livro.tipoLivro}</p>
+                        <h1 className={styles.tituloItem}>{livro.titulo}</h1>
+                        <button
+                          className={styles.imgExcluirItemCarrinho}
+                          onClick={() =>
+                            handleRemoveItem(carrinho.indexOf(livro))
+                          }
+                        >
+                          <AiFillDelete />
+                        </button>
+                      </div>
+                      <div className={styles.divPreco}></div>
 
-                    <div className={styles.qtde}>
-                      <button
-                        className={styles.buttonQtde}
-                        onClick={handleDecrementQuantidade}
-                      >
-                        -
-                      </button>
-                      <span className={styles.spanQtde}>{quantidade}</span>
-                      <button
-                        className={styles.buttonQtde}
-                        onClick={handleIncrementQuantidade}
-                      >
-                        +
-                      </button>
+                      <div className={styles.qtde}>
+                        <button
+                          className={styles.buttonQtde}
+                          onClick={() => handleDecrementQuantidade(index)}
+                        >
+                          -
+                        </button>
+                        <span className={styles.spanQtde}>{quantidade}</span>
+                        <button
+                          className={styles.buttonQtde}
+                          onClick={() => handleIncrementQuantidade(index)}
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
           ))}
           {/* <div className={styles.linhaHorizontal} /> */}
           <div className={styles.totalCarrinho}>

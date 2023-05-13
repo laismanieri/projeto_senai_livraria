@@ -19,6 +19,13 @@ function InformacaoLivro() {
 
   const [carrinho, setCarrinho] = useState([]);
 
+    useEffect(() => {
+    const carrinhoSalvo = localStorage.getItem("carrinho");
+    if (carrinhoSalvo) {
+      setCarrinho(JSON.parse(carrinhoSalvo));
+    }
+  }, []);
+
   useEffect(() => {
     axios
       .get(`http://localhost:8082/livro/${id}?_embed=detalhes`)
@@ -41,6 +48,8 @@ function InformacaoLivro() {
   if (!livro) {
     return <p>Carregando...</p>;
   }
+
+  
 
   const ebookDetalhe = livro.detalhes.find(
     (detalhe) => detalhe.tipoLivro === "EBOOK"
@@ -68,8 +77,20 @@ function InformacaoLivro() {
 
   function adicionarAoCarrinho() {
     setModalIsOpenLivroAdd(true);
-    
+    const novoItem = {
+      id: livro.id,
+      titulo: livro.titulo,
+      tipoLivro: tipoLivroSelecionado,
+      quantidade: 1,
+      imagem: livro.imagem,
+      preco: tipoLivroSelecionado === "FISICO" ? fisicoPreco : ebookPreco
+    };
+    const novoCarrinho = [...carrinho, novoItem];
+    setCarrinho(novoCarrinho);
+    localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
   }
+
+  
 
   function closeModal() {
     setModalIsOpenLivroAdd(false);
