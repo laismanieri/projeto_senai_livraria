@@ -37,6 +37,9 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
     localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
   };
 
+  const qtdeTotal = () => {};
+  const total = () => {};
+
   if (!isOpen) {
     return null;
   }
@@ -102,7 +105,10 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                               <p className={styles.precoTit}>
                                 <span className={styles.precoTit}>Preço: </span>
                                 <span className={styles.precoAntigo}>
-                                  {livro.preco}
+                                  {livro.preco.toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
                                 </span>
                               </p>
 
@@ -111,35 +117,72 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                                   Preço em Oferta:{" "}
                                 </span>
                                 <span className={styles.precoOferta}>
-                                  {livro.preco * 0.8}
+                                  {(livro.preco * 0.8).toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
                                 </span>
                               </p>
                             </div>
                           ) : (
                             <p className={styles.precoTit}>
-                            <span className={styles.precoTit}>Preço: </span>
-                            <span className={styles.precoRegular}>
-                              {livro.preco}
-                            </span>
-                          </p>
+                              <span className={styles.precoTit}>Preço: </span>
+                              <span className={styles.precoRegular}>
+                                {livro.preco.toLocaleString("pt-BR", {
+                                  style: "currency",
+                                  currency: "BRL",
+                                })}
+                              </span>
+                            </p>
                           )}
                         </div>
+
+
                         <div className={styles.qtde}>
-                          <button
-                            className={styles.buttonQtde}
-                            onClick={() => handleDecrementQuantidade(index)}
-                          >
-                            -
-                          </button>
-                          <span className={styles.spanQtde}>
-                            {livro.quantidade}
-                          </span>
-                          <button
-                            className={styles.buttonQtde}
-                            onClick={() => handleIncrementQuantidade(index)}
-                          >
-                            +
-                          </button>
+                          <div>
+                            {livro.oferta ? (
+                              <p className={styles.precoTit}>
+                                <span className={styles.precoTit}>Total: </span>
+                                <span className={styles.precoRegular}>
+                                  {(
+                                    ((livro.preco * 0.8) * livro.quantidade)
+                                  ).toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
+                                </span>
+                              </p>
+                            ) : (
+                              <p className={styles.precoTit}>
+                                <span className={styles.precoTit}>Total: </span>
+                                <span className={styles.precoRegular}>
+                                  {(
+                                    livro.preco * livro.quantidade
+                                  ).toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
+                                </span>
+                              </p>
+                            )}
+                          </div>
+                          <div>
+                            <button
+                              className={styles.buttonQtde}
+                              onClick={() => handleDecrementQuantidade(index)}
+                            >
+                              -
+                            </button>
+                            <span className={styles.spanQtde}>
+                              {livro.quantidade}
+                            </span>
+                            <button
+                              className={styles.buttonQtde}
+                              onClick={() => handleIncrementQuantidade(index)}
+                            >
+                              +
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -157,10 +200,10 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                 </li>
                 <li>
                   <span>
-                    {/* {subtotal.toLocaleString("pt-BR", {
-                        style: "currency",
-                        currency: "BRL",
-                      })} */}
+                    {qtdeTotal.toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    })}
                   </span>
                 </li>
               </ul>
@@ -170,10 +213,10 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                 </li>
                 <li>
                   <span>
-                    {/* {total.toLocaleString("pt-BR", {
-                        style: "currency",
-                        currency: "BRL",
-                      })} */}
+                    {total.toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    })}
                   </span>
                 </li>
               </ul>
