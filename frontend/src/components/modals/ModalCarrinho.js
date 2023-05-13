@@ -5,6 +5,22 @@ import { useEffect, useState } from "react";
 const ModalCarrinho = ({ isOpen, onClose }) => {
   const [quantidade, setQuantidade] = useState(1);
   const [carrinho, setCarrinho] = useState([]);
+  const [qtdeTotal, setQtdeTotal] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    let qtde = 0;
+    let valor = 0;
+    carrinho.forEach((item) => {
+      qtde += item.quantidade;
+      valor += item.oferta
+        ? item.preco * 0.8 * item.quantidade
+        : item.preco * item.quantidade;
+    });
+    setQtdeTotal(qtde);
+    setTotal(valor);
+  }, [carrinho]);
+  
 
   useEffect(() => {
     const carrinhoSalvo = localStorage.getItem("carrinho");
@@ -37,8 +53,7 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
     localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
   };
 
-  const qtdeTotal = () => {};
-  const total = () => {};
+
 
   if (!isOpen) {
     return null;
@@ -200,10 +215,7 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                 </li>
                 <li>
                   <span>
-                    {qtdeTotal.toLocaleString("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    })}
+                    {qtdeTotal}
                   </span>
                 </li>
               </ul>
