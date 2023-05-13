@@ -13,6 +13,8 @@ function InformacaoLivro() {
   const { id } = useParams();
   const [livro, setLivro] = useState(null);
   const [tipoLivroSelecionado, setTipoLivroSelecionado] = useState("FISICO");
+    
+  const [carrinho, setCarrinho] = useState([]);
 
   useEffect(() => {
     axios
@@ -40,8 +42,11 @@ function InformacaoLivro() {
     (detalhe) => detalhe.tipoLivro === "FISICO"
   );
 
+
   const ebookPreco = ebookDetalhe ? ebookDetalhe.preco : null;
   const fisicoPreco = fisicoDetalhe ? fisicoDetalhe.preco : null;
+
+  const isPrecoRegular = (livro.oferta === true) || (livro.oferta === true);
 
   const fisicoEstoque = livro.detalhes.find(
     (detalhe) =>
@@ -54,6 +59,11 @@ function InformacaoLivro() {
       detalhe.tipoLivro === "EBOOK" &&
       (detalhe.qtdeEstoque === 0 || detalhe.qtdeEstoque !== 0)
   );
+
+  const adicionarAoCarrinho = () => {
+
+  };
+  
 
   return (
     <>
@@ -246,7 +256,7 @@ function InformacaoLivro() {
                   )}
                 </div>
                 <div>
-                  <button className={styles.buttonCompra}>
+                  <button className={styles.buttonCompra} onClick={adicionarAoCarrinho}>
                     <h1 className={styles.h1AdicionarSacola}>
                       Adicionar à sacola
                     </h1>

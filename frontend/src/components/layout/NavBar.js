@@ -3,6 +3,7 @@ import Container from "./Container";
 import Search from "./Search";
 import { Link } from "react-router-dom";
 import UsuarioLogin from "./UsuarioLogin";
+import ButtonCestaCompra from "./ButtonCestaCompra";
 
 
 function Navbar() {
@@ -14,9 +15,7 @@ function Navbar() {
         </Link>
         <Search />
         <UsuarioLogin />
-        <button className={styles.navbarButton}>
-          <img src="/img/cesta-de-compras.png" alt="cesta" className={styles.navbarCesta}/>
-        </button>
+        <ButtonCestaCompra/>
       </Container>
     </nav>
   );
