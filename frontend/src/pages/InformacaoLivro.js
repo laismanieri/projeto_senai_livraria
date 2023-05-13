@@ -83,6 +83,7 @@ function InformacaoLivro() {
       tipoLivro: tipoLivroSelecionado,
       quantidade: 1,
       imagem: livro.imagem,
+      oferta: livro.oferta,
       preco: tipoLivroSelecionado === "FISICO" ? fisicoPreco : ebookPreco
     };
     const novoCarrinho = [...carrinho, novoItem];

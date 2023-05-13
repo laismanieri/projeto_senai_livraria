@@ -65,56 +65,88 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
             </div>
           </div>
           <div className={styles.bodyLista}>
-          {carrinho.map((livro, index) => (
-            <div className={styles.listaItemCarrinho}>
-              <div key={livro.id}></div>
-              <div className={styles.containerLista}>
-                <div className={styles.gridListaImg}>
-                  <div className={styles.divImg}>
-                    <img
-                      className={styles.imagemGrid}
-                      src={livro.imagem}
-                      alt={livro.titulo}
-                    />
+            {carrinho.map((livro, index) => (
+              <div className={styles.listaItemCarrinho}>
+                <div key={livro.id}></div>
+                <div className={styles.containerLista}>
+                  <div className={styles.gridListaImg}>
+                    <div className={styles.divImg}>
+                      <img
+                        className={styles.imagemGrid}
+                        src={livro.imagem}
+                        alt={livro.titulo}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className={styles.containerListaInfo}>
-                  <div className={styles.gridListaInfo}>
-                    <div className={styles.divComprarLivros}>
-                      <div className={styles.divtituloExcluir}>
-                        <p>{livro.tipoLivro}</p>
-                        <h1 className={styles.tituloItem}>{livro.titulo}</h1>
-                        <button
-                          className={styles.imgExcluirItemCarrinho}
-                          onClick={() => handleRemoveItem(index)}
-                        >
-                          <AiFillDelete />
-                        </button>
-                      </div>
-                      <div className={styles.divPreco}></div>
-                      <div className={styles.qtde}>
-                        <button
-                          className={styles.buttonQtde}
-                          onClick={() => handleDecrementQuantidade(index)}
-                        >
-                          -
-                        </button>
-                        <span className={styles.spanQtde}>
-                          {livro.quantidade}
-                        </span>
-                        <button
-                          className={styles.buttonQtde}
-                          onClick={() => handleIncrementQuantidade(index)}
-                        >
-                          +
-                        </button>
+                  <div className={styles.containerListaInfo}>
+                    <div className={styles.gridListaInfo}>
+                      <div className={styles.divComprarLivros}>
+                        <div className={styles.divTituloExcluir}>
+                          <p className={styles.tituloTipoLivro}>
+                            {livro.tipoLivro}
+                          </p>
+                          <p className={styles.tituloItem}>
+                            {livro.titulo}
+                            <button
+                              className={styles.imgExcluirItemCarrinho}
+                              onClick={() => handleRemoveItem(index)}
+                            >
+                              <AiFillDelete />
+                            </button>
+                          </p>
+                        </div>
+
+                        <div className={styles.divPreco}>
+                          {livro.oferta ? (
+                            <div className={styles.divPrecoOferta}>
+                              <p className={styles.precoTit}>
+                                <span className={styles.precoTit}>Preço: </span>
+                                <span className={styles.precoAntigo}>
+                                  {livro.preco}
+                                </span>
+                              </p>
+
+                              <p className={styles.precoTit}>
+                                <span className={styles.precoTit}>
+                                  Preço em Oferta:{" "}
+                                </span>
+                                <span className={styles.precoOferta}>
+                                  {livro.preco * 0.8}
+                                </span>
+                              </p>
+                            </div>
+                          ) : (
+                            <p className={styles.precoTit}>
+                            <span className={styles.precoTit}>Preço: </span>
+                            <span className={styles.precoRegular}>
+                              {livro.preco}
+                            </span>
+                          </p>
+                          )}
+                        </div>
+                        <div className={styles.qtde}>
+                          <button
+                            className={styles.buttonQtde}
+                            onClick={() => handleDecrementQuantidade(index)}
+                          >
+                            -
+                          </button>
+                          <span className={styles.spanQtde}>
+                            {livro.quantidade}
+                          </span>
+                          <button
+                            className={styles.buttonQtde}
+                            onClick={() => handleIncrementQuantidade(index)}
+                          >
+                            +
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
           </div>
           {/* <div className={styles.linhaHorizontal} /> */}
           <div className={styles.totalCarrinho}>
