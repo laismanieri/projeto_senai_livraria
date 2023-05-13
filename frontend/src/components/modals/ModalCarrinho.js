@@ -30,9 +30,9 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
     localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
   };
 
-  const handleRemoveItem = (index) => {
+  const handleRemoveItem = (indexToRemove) => {
     const novoCarrinho = [...carrinho];
-    novoCarrinho.splice(index, 1);
+    novoCarrinho.splice(indexToRemove, 1);
     setCarrinho(novoCarrinho);
     localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
   };
@@ -64,6 +64,7 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
               </button>
             </div>
           </div>
+          <div className={styles.bodyLista}>
           {carrinho.map((livro, index) => (
             <div className={styles.listaItemCarrinho}>
               <div key={livro.id}></div>
@@ -85,15 +86,12 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                         <h1 className={styles.tituloItem}>{livro.titulo}</h1>
                         <button
                           className={styles.imgExcluirItemCarrinho}
-                          onClick={() =>
-                            handleRemoveItem(carrinho.indexOf(livro))
-                          }
+                          onClick={() => handleRemoveItem(index)}
                         >
                           <AiFillDelete />
                         </button>
                       </div>
                       <div className={styles.divPreco}></div>
-
                       <div className={styles.qtde}>
                         <button
                           className={styles.buttonQtde}
@@ -101,7 +99,9 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                         >
                           -
                         </button>
-                        <span className={styles.spanQtde}>{quantidade}</span>
+                        <span className={styles.spanQtde}>
+                          {livro.quantidade}
+                        </span>
                         <button
                           className={styles.buttonQtde}
                           onClick={() => handleIncrementQuantidade(index)}
@@ -115,6 +115,7 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
               </div>
             </div>
           ))}
+          </div>
           {/* <div className={styles.linhaHorizontal} /> */}
           <div className={styles.totalCarrinho}>
             <div className={styles.valorCarrinho}>
