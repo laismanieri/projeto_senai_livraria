@@ -12,6 +12,7 @@ import ModalCarrinho from "../components/modals/ModalCarrinho";
 function InformacaoLivro() {
   const { id } = useParams();
   const [livro, setLivro] = useState(null);
+  const [tipoLivroSelecionado, setTipoLivroSelecionado] = useState("FISICO");
 
   useEffect(() => {
     axios
@@ -29,14 +30,26 @@ function InformacaoLivro() {
   }
 
   const ebookDetalhe = livro.detalhes.find(
-    (detalhe) => detalhe.tipoLivro === 'EBOOK'
+    (detalhe) => detalhe.tipoLivro === "EBOOK"
   );
   const fisicoDetalhe = livro.detalhes.find(
-    (detalhe) => detalhe.tipoLivro === 'FISICO'
+    (detalhe) => detalhe.tipoLivro === "FISICO"
   );
 
   const ebookPreco = ebookDetalhe ? ebookDetalhe.preco : null;
   const fisicoPreco = fisicoDetalhe ? fisicoDetalhe.preco : null;
+
+  const fisicoEstoque = livro.detalhes.find(
+    (detalhe) =>
+      detalhe.tipoLivro === "FISICO" &&
+      (detalhe.qtdeEstoque === 0 || detalhe.qtdeEstoque !== 0)
+  );
+
+  const ebookEstoque = livro.detalhes.find(
+    (detalhe) =>
+      detalhe.tipoLivro === "EBOOK" &&
+      (detalhe.qtdeEstoque === 0 || detalhe.qtdeEstoque !== 0)
+  );
 
   return (
     <>
@@ -63,71 +76,180 @@ function InformacaoLivro() {
                 <h1 className={styles.titulo}>{livro.titulo}</h1>
                 <p className={styles.autor}>{livro.autor}</p>
                 <p className={styles.editora}>{livro.editora}</p>
+                <div className={styles.tipoLivroDetalhe}>
+                  <button
+                    className={styles.buttonTipoLivroFisico}
+                    onClick={() => setTipoLivroSelecionado("FISICO")}
+                  >
+                    {fisicoDetalhe && (
+                      <>
+                        <p>{fisicoDetalhe.tipoLivro}</p>
+                      </>
+                    )}
+                    <p>
+                      {fisicoPreco.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
+                    </p>
+                  </button>
+                  <button
+                    className={`${styles.buttonTipoLivroEbook} ${
+                      tipoLivroSelecionado === "EBOOK" ? "active" : ""
+                    }`}
+                    onClick={() => setTipoLivroSelecionado("EBOOK")}
+                  >
+                    {ebookDetalhe && (
+                      <>
+                        <p>{ebookDetalhe.tipoLivro}</p>
+                      </>
+                    )}
+                    {ebookPreco && (
+                      <p>
+                        {ebookPreco.toLocaleString("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                        })}
+                      </p>
+                    )}
+                  </button>
+                </div>
+                <div className={styles.linhaHorizontalDetalhe} />
                 <p className={styles.sinopse}>{livro.sinopse}</p>
               </div>
             </div>
+
             <div className={styles.comprarLivros}>
               <div className={styles.divComprarLivros}>
                 <div className={styles.compra}>
-                  <div className={styles.preco}>
+                  {tipoLivroSelecionado === "FISICO" && (
                     <div className={styles.divPreco}>
-                      <div>
-                      {fisicoDetalhe && (
-              <>
-                <span>{fisicoDetalhe.tipoLivro}</span>
-              </>
-            )}
-            {ebookDetalhe && (
-              <>
-                <span>{ebookDetalhe.tipoLivro}</span>
-              </>
-            )}
-
-                      </div>
-                      <div>
-                      {fisicoPreco && (
-                        <span>{fisicoPreco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
-                      )}
-                      {ebookPreco && (
-                        <span>{ebookPreco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
-                      )}
-                      </div>
+                      <ul className={styles.ulCompraInfoTipo}>
+                        <li>
+                          
+                            {fisicoDetalhe && (
+                              <>
+                                <span className={styles.liCompraInfoTit}>{fisicoDetalhe.tipoLivro}</span>
+                              </>
+                            )}
+                        </li>
+                      </ul>
+                      <ul className={styles.ulCompraInfo}>
+                        <li>
+                          <span className={styles.liCompraInfoTit}>Preco:</span>
+                        </li>
+                        <li>
+                          <span className={styles.liCompraInfo}>
+                            {fisicoDetalhe.preco.toLocaleString("pt-BR", {
+                              style: "currency",
+                              currency: "BRL",
+                            })}
+                          </span>
+                        </li>
+                      </ul>
+                      <ul className={styles.ulCompraInfo}>
+                        <li>
+                          <span className={styles.liCompraInfoTit}>
+                            Preco Oferta:
+                          </span>
+                        </li>
+                        <li>
+                          <span className={styles.liCompraInfo}> 9.00</span>
+                        </li>
+                      </ul>
+                      <ul className={styles.ulCompraInfoEntrega}>
+                        <li>
+                          <span className={styles.liEntrega}>
+                            Entrega GRÁTIS:
+                          </span>
+                        </li>
+                        <li>
+                          <span className={styles.liCompraInfo}>
+                            2 dias utéis
+                          </span>
+                        </li>
+                      </ul>
+                      <ul className={styles.ulCompraInfo}>
+                        <li>
+                          <span className={styles.estoque}>
+                            {fisicoEstoque.qtdeEstoque === 0
+                              ? "Sem estoque"
+                              : "Em estoque"}
+                          </span>
+                        </li>
+                      </ul>
                     </div>
-                  </div>
-                  <div className={styles.qtde}>
-                    <button
-                      // onClick={handleDecrementQuantidade}
-                      className={styles.buttonQtde}
-                    >
-                      -
-                    </button>
-                    {/* <span className={styles.spanQtde}>{quantidade}</span> */}
-                    <button
-                      // onClick={handleIncrementQuantidade}
-                      className={styles.buttonQtde}
-                    >
-                      +
-                    </button>
-                  </div>
+                  )}
+                  {tipoLivroSelecionado === "EBOOK" && (
+                    <div className={styles.divPreco}>
+                                          <ul className={styles.ulCompraInfoTipo}>
+                        <li>
+                          
+                            {ebookDetalhe && (
+                              <>
+                                <span className={styles.liCompraInfoTit}>{ebookDetalhe.tipoLivro}</span>
+                              </>
+                            )}
+                        </li>
+                      </ul>
+                      <ul className={styles.ulCompraInfo}>
+                        <li>
+                          <span className={styles.liCompraInfoTit}>Preco:</span>
+                        </li>
+                        <li>
+                          <span className={styles.liCompraInfo}>
+                            {ebookDetalhe.preco.toLocaleString("pt-BR", {
+                              style: "currency",
+                              currency: "BRL",
+                            })}
+                          </span>
+                        </li>
+                      </ul>
+                      <ul className={styles.ulCompraInfo}>
+                        <li>
+                          <span className={styles.liCompraInfoTit}>
+                            Preco Oferta:
+                          </span>
+                        </li>
+                        <li>
+                          <span className={styles.liCompraInfo}> 9.00</span>
+                        </li>
+                      </ul>
+                      <ul className={styles.ulCompraInfoEntrega}>
+                        <li>
+                          <span className={styles.liEntrega}>
+                            Entrega GRÁTIS:
+                          </span>
+                        </li>
+                        <li>
+                          <span className={styles.liCompraInfo}>
+                            2 dias utéis
+                          </span>
+                        </li>
+                      </ul>
+                      <ul className={styles.ulCompraInfo}>
+                        <li>
+                          <span className={styles.estoque}>
+                            {ebookEstoque.qtdeEstoque === 0
+                              ? "Sem estoque"
+                              : "Em estoque"}
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
                 <div>
-                  <button
-                    className={styles.buttonCompra}
-                    // onClick={handleAddToCart}
-                  >
+                  <button className={styles.buttonCompra}>
                     <h1 className={styles.h1AdicionarSacola}>
                       Adicionar à sacola
                     </h1>
                   </button>
-                  <Link to={"/pagamento"}>
-                    <button className={styles.buttonAdicionarSacola}>
-                      <h1 className={styles.h1AdicionarSacola}>Comprar</h1>
-                    </button>
-                  </Link>
                 </div>
               </div>
             </div>
           </div>
+
           <div className={styles.linhaHorizontal} />
           <div className={styles.fichaTecnica}>
             <h1 className={styles.fichaH1}>Ficha Técnica</h1>
@@ -186,7 +308,6 @@ function InformacaoLivro() {
       </Container>
 
       <Footer />
-
     </>
   );
 }

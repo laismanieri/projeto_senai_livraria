@@ -18,3 +18,4 @@ public class LivrariaApplication implements WebMvcConfigurer{
 	}
 
 }
+

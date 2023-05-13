@@ -3,15 +3,20 @@ import styles from "../cards/Card.module.css";
 import { Link } from "react-router-dom";
 
 function Card({ livro }) {
-  const ebookDetalhe = livro.detalhes.find(
+  const ebookDetalhe = livro.detalhesDTO.find(
     (detalhe) => detalhe.tipoLivro === "EBOOK"
   );
-  const fisicoDetalhe = livro.detalhes.find(
+  const fisicoDetalhe = livro.detalhesDTO.find(
     (detalhe) => detalhe.tipoLivro === "FISICO"
   );
 
   const ebookPreco = ebookDetalhe ? ebookDetalhe.preco : null;
   const fisicoPreco = fisicoDetalhe ? fisicoDetalhe.preco : null;
+  const ebookPrecoDesc = ebookDetalhe ? ebookDetalhe.precoDesc : null;
+  const fisicoPrecoDesc = fisicoDetalhe ? fisicoDetalhe.precoDesc : null;
+
+  const isPrecoRegular = (livro.oferta === true) || (livro.oferta === true);
+
 
   return (
     <div className={styles.containerCard}>
@@ -31,38 +36,80 @@ function Card({ livro }) {
           </Link>
         </div>
         <h2 className={styles.h2TituloCard}>{livro.titulo}</h2>
-        <div className={styles.cardTitulo}>
-          <h2 className={styles.h2TituloCard}>
+        <div className={styles.cardPreco}>
             {fisicoDetalhe && (
               <>
-                <span>{fisicoDetalhe.tipoLivro}</span>
+                <p className={styles.tituloTipoLivro}>
+                  {fisicoDetalhe.tipoLivro}</p>
               </>
             )}
             {ebookDetalhe && (
               <>
-                <span>{ebookDetalhe.tipoLivro}</span>
+                <p className={styles.tituloTipoLivro}>
+                  {ebookDetalhe.tipoLivro}</p>
               </>
             )}
-          </h2>
         </div>
-        <div className={styles.cardPreco}>
-          {fisicoPreco && (
-            <span>
-              {fisicoPreco.toLocaleString("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-              })}
-            </span>
-          )}
-          {ebookPreco && (
-            <span>
-              {ebookPreco.toLocaleString("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-              })}
-            </span>
-          )}
-        </div>
+        {isPrecoRegular ? (
+          <div className={styles.cardOferta}>
+            <div className={styles.cardPreco}>
+              {fisicoPreco && (
+                <p className={styles.precoAntigo}>
+                  {fisicoPreco.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </p>
+              )}
+              {ebookPreco && (
+                <p className={styles.precoAntigo}>
+                  {ebookPreco.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </p>
+              )}
+            </div>
+            <div className={styles.cardPreco}>
+		  
+            {fisicoPrecoDesc && (
+                <p className={styles.precoOferta}>
+                  {fisicoPrecoDesc.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </p>
+              )}
+              {ebookPrecoDesc && (
+                <p className={styles.precoOferta}>
+                  {ebookPrecoDesc.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </p>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className={styles.cardPrecoRegular}>
+            {fisicoPreco && (
+              <p className={styles.precoRegular}>
+                {fisicoPreco.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </p>
+            )}
+            {ebookPreco && (
+              <p className={styles.precoRegular}>
+                {ebookPreco.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </p>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

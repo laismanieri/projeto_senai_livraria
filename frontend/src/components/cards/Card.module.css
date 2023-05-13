@@ -36,6 +36,19 @@
   margin: 0;
   display: flex;
   align-items: center;
+  height: 2em;
+}
+
+.cardPreco{
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.cardPrecoRegular{
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
 }
 
   
@@ -45,11 +58,19 @@
   width: 100%;
   color:  #033579;
   margin: 0;
+  margin-top: 10px;
 }
 
 .cardOferta h2, .cardRegular h2{
   margin: 0;
 }
+
+.tituloTipoLivro{
+  margin-top: 10px;
+  font-size:1rem;
+  color: #146b97;
+}
+
 
 .precoAntigo{
   text-decoration: line-through;
@@ -57,25 +78,17 @@
   text-align: left;
   margin: 0;
   height: 1.5em;
+  font-size: 14px;
+  font-weight: 600;
 
 }
 
 .precoOferta, .precoRegular{
   color: #146b97; 
   margin: 0;
-  font-size: 18px;
+  font-size: 17px;
+  font-weight: 600;
 }
 
 
-
-.spanRegular{
-  color: #146b97; 
-  margin: 0;
-  font-size: 14px;
-  background: whitesmoke;
-  height: 1.5em;
-}
-
-
-  
   
