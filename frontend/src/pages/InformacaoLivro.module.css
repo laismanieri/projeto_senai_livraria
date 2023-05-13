@@ -330,3 +330,16 @@
 
   }
 
+  .precoAntigo{
+    text-decoration: line-through;
+    color: brown;
+    font-size: 15px;
+  
+  }
+  
+  .precoOferta, .precoRegular, .precoTit{
+    color: #146b97; 
+    text-decoration: none;
+    font-size: 20px;
+  }
+

@@ -213,7 +213,7 @@ function InformacaoLivro() {
                               </span>
                             </li>
                             <li>
-                              <span className={styles.liCompraInfo}>
+                              <span className={styles.precoAntigo}>
                                 {fisicoDetalhe.preco.toLocaleString("pt-BR", {
                                   style: "currency",
                                   currency: "BRL",
@@ -249,7 +249,7 @@ function InformacaoLivro() {
                             </span>
                           </li>
                           <li>
-                            <span className={styles.liCompraInfo}>
+                            <span className={styles.precoRegular}>
                               {fisicoDetalhe.preco.toLocaleString("pt-BR", {
                                 style: "currency",
                                 currency: "BRL",
@@ -303,7 +303,7 @@ function InformacaoLivro() {
                               </span>
                             </li>
                             <li>
-                              <span className={styles.liCompraInfo}>
+                              <span className={styles.precoAntigo}>
                                 {ebookDetalhe.preco.toLocaleString("pt-BR", {
                                   style: "currency",
                                   currency: "BRL",
@@ -339,7 +339,7 @@ function InformacaoLivro() {
                             </span>
                           </li>
                           <li>
-                            <span className={styles.liCompraInfo}>
+                            <span className={styles.precoRegular}>
                               {ebookDetalhe.preco.toLocaleString("pt-BR", {
                                 style: "currency",
                                 currency: "BRL",
