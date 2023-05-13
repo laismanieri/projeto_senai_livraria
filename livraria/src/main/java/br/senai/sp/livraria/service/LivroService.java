@@ -1,5 +1,6 @@
 package br.senai.sp.livraria.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.senai.sp.livraria.dto.DetalheLivroDTO;
+import br.senai.sp.livraria.dto.LivroOfertaDTO;
 import br.senai.sp.livraria.model.entity.DetalheLivro;
 import br.senai.sp.livraria.model.entity.Livro;
 import br.senai.sp.livraria.model.repository.LivroRepository;
@@ -49,19 +52,49 @@ public class LivroService {
     }
     
     @Transactional()
-    public List<Livro> buscarOferta() {
+    public List<LivroOfertaDTO> buscarTambemOferta() {
     	
-    	List<Livro> listaOfertas = livroRepository.findByOferta(true);
+    	List<Livro> listaOfertas = livroRepository.findAll();
+    	
+    	List<LivroOfertaDTO> listaLivroOfertaDTO = new ArrayList<>();
+    	LivroOfertaDTO livroOfertaDTO;
+    	DetalheLivroDTO detalheLivroDTO; 
     	for (Livro livro : listaOfertas) {
-    			
+    		livroOfertaDTO = new LivroOfertaDTO();
+    		livroOfertaDTO.setId(livro.getId());
+    		livroOfertaDTO.setAutor(livro.getAutor());
+    		livroOfertaDTO.setTitulo(livro.getTitulo());
+    		livroOfertaDTO.setEditora(livro.getEditora());
+    		livroOfertaDTO.setGenero(livro.getGenero());
+    		livroOfertaDTO.setDestaque(livro.getDestaque());
+    		livroOfertaDTO.setAnoPublicacao(livro.getAnoPublicacao());
+    		livroOfertaDTO.setImagem(livro.getImagem());
+    		livroOfertaDTO.setSinopse(livro.getSinopse());
+    		livroOfertaDTO.setQtdePagina(livro.getQtdePagina());
+    		livroOfertaDTO.setOferta(livro.getOferta());
+   		
+    		
     		for (DetalheLivro detLivro : livro.getDetalhes()) {
-    			float precoComDesconto = (detLivro.getPreco() * 0.1F);
-				detLivro.setPreco(precoComDesconto);
+    			detalheLivroDTO = new DetalheLivroDTO();
+    			detalheLivroDTO.setId(detLivro.getId());
+    			detalheLivroDTO.setPreco(detLivro.getPreco());
+    			detalheLivroDTO.setQtdeEstoque(detLivro.getQtdeEstoque());
+    			detalheLivroDTO.setTipoLivro(detLivro.getTipoLivro());
+    	
+    			if (livro.getOferta()) {
+        			float precoComDesconto = (detLivro.getPreco() * 0.9F);
+        			detalheLivroDTO.setPrecoDesc(precoComDesconto);    				
+    			}else {
+    				detalheLivroDTO.setPrecoDesc(null);
+    			}
+				
+				livroOfertaDTO.getDetalhesDTO().add(detalheLivroDTO);
 			}
 			
+    		listaLivroOfertaDTO.add(livroOfertaDTO);
 		}
     	
-        return listaOfertas;
+        return listaLivroOfertaDTO;
     }
     
     @PersistenceContext

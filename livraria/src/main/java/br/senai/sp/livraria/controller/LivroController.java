@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import br.senai.sp.livraria.dto.LivroOfertaDTO;
 import br.senai.sp.livraria.dto.LivroTabelaDTO;
 import br.senai.sp.livraria.model.entity.DetalheLivro;
 import br.senai.sp.livraria.model.entity.Livro;
@@ -21,15 +22,15 @@ public class LivroController {
     private LivroService livroService;
 
     @GetMapping("")
-    public ResponseEntity<List<Livro>> listarTodos() {
-        List<Livro> livros = livroService.listarTodos();
-        
+    public ResponseEntity<List<LivroOfertaDTO>> listarTodos() {
+        //List<Livro> livros = livroService.listarTodos();
+    	List<LivroOfertaDTO> livros = livroService.buscarTambemOferta();
         return ResponseEntity.ok(livros);
     }
     
     @GetMapping("/ofertas")
     public ResponseEntity<List<Livro>> listarOfertas() {
-        List<Livro> livros = livroService.buscarOferta();
+        List<Livro> livros = null; //livroService.buscarOferta();
         
         return ResponseEntity.ok(livros);
     } 
@@ -63,7 +64,6 @@ public class LivroController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Livro> atualizar(@PathVariable Long id, @RequestBody Livro livro) {
-
     	livro.setId(id);
         Livro livroAtualizadoSalvo = livroService.salvar(livro);
         return ResponseEntity.ok(livroAtualizadoSalvo);

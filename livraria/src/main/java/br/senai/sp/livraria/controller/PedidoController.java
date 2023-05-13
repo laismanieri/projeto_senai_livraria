@@ -24,12 +24,6 @@ public class PedidoController {
     @Autowired
     private PedidoService pedidoService;
 
-    @PostMapping
-    public ResponseEntity<Pedido> criar(@RequestBody Pedido pedido) {
-        Pedido pedidoSalvo = pedidoService.salvar(pedido);
-        return ResponseEntity.status(HttpStatus.CREATED).body(pedidoSalvo);
-    }
-
     @GetMapping("")
     public ResponseEntity<List<Pedido>> listarTodos() {
         List<Pedido> pedidos = pedidoService.listarTodos();
@@ -41,15 +35,21 @@ public class PedidoController {
         Pedido pedido = pedidoService.buscarPorId(id);
         return ResponseEntity.ok(pedido);
     }
+    
+    @PostMapping
+    public ResponseEntity<Pedido> criar(@RequestBody Pedido pedido) {
+        Pedido pedidoSalvo = pedidoService.salvar(pedido);
+        return ResponseEntity.status(HttpStatus.CREATED).body(pedidoSalvo);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Pedido> atualizar(@PathVariable Long id, @RequestBody Pedido pedidoAtualizado) {
-        Pedido pedido = pedidoService.buscarPorId(id);
-        pedido.setDataPedido(pedidoAtualizado.getDataPedido());
-        pedido.setUsuario(pedidoAtualizado.getUsuario());
+        //Pedido pedido = pedidoService.buscarPorId(id);
+//        pedido.setDataPedido(pedidoAtualizado.getDataPedido());
+//        pedido.setUsuario(pedidoAtualizado.getUsuario());
 
-        Pedido PedidoAtualizadoSalvo = pedidoService.salvar(pedido);
-        return ResponseEntity.ok(PedidoAtualizadoSalvo);
+//        Pedido PedidoAtualizadoSalvo = pedidoService.salvar(pedido);
+        return ResponseEntity.ok(pedidoAtualizado);
     }
 
     @DeleteMapping("/{id}")
