@@ -7,7 +7,7 @@ import Container from "../components/layout/Container";
 import Navbar from "../components/layout/NavBar";
 import Footer from "../components/layout/Footer";
 import { Link } from "react-router-dom";
-import {AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 import Modal from "react-modal";
 
 function InformacaoLivro() {
@@ -19,7 +19,7 @@ function InformacaoLivro() {
 
   const [carrinho, setCarrinho] = useState([]);
 
-    useEffect(() => {
+  useEffect(() => {
     const carrinhoSalvo = localStorage.getItem("carrinho");
     if (carrinhoSalvo) {
       setCarrinho(JSON.parse(carrinhoSalvo));
@@ -49,8 +49,6 @@ function InformacaoLivro() {
     return <p>Carregando...</p>;
   }
 
-  
-
   const ebookDetalhe = livro.detalhes.find(
     (detalhe) => detalhe.tipoLivro === "EBOOK"
   );
@@ -66,31 +64,39 @@ function InformacaoLivro() {
   const fisicoEstoque = livro.detalhes.find(
     (detalhe) =>
       detalhe.tipoLivro === "FISICO" &&
-      (detalhe.qtdeEstoque === 0 || detalhe.qtdeEstoque !== 0)
+      (detalhe.qtdeEstoque === 0 || detalhe.qtdeEstoque > 0)
   );
 
   const ebookEstoque = livro.detalhes.find(
     (detalhe) =>
       detalhe.tipoLivro === "EBOOK" &&
-      (detalhe.qtdeEstoque === 0 || detalhe.qtdeEstoque !== 0)
+      (detalhe.qtdeEstoque === 0 || detalhe.qtdeEstoque > 0)
   );
 
   function adicionarAoCarrinho() {
-    setModalIsOpenLivroAdd(true);
-    const novoItem = {
-      id: livro.id,
-      titulo: livro.titulo,
-      tipoLivro: tipoLivroSelecionado,
-      quantidade: 1,
-      imagem: livro.imagem,
-      oferta: livro.oferta,
-      preco: tipoLivroSelecionado === "FISICO" ? fisicoPreco : ebookPreco
-    };
-    const novoCarrinho = [...carrinho, novoItem];
-    setCarrinho(novoCarrinho);
-    localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
+    if (tipoLivroSelecionado === "FISICO" && fisicoEstoque.qtdeEstoque === 0) {
+      window.alert("Livro físico sem estoque!");
+      return;
+    } else if (tipoLivroSelecionado === "EBOOK" && ebookEstoque.qtdeEstoque === 0) {
+      window.alert("Livro ebook sem estoque!");
+      return;
+    } else {
+      setModalIsOpenLivroAdd(true);
+      const novoItem = {
+        id: livro.id,
+        titulo: livro.titulo,
+        tipoLivro: tipoLivroSelecionado,
+        quantidade: 1,
+        imagem: livro.imagem,
+        oferta: livro.oferta,
+        preco: tipoLivroSelecionado === "FISICO" ? fisicoPreco : ebookPreco,
+      };
+      const novoCarrinho = [...carrinho, novoItem];
+      setCarrinho(novoCarrinho);
+      localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
+    }
   }
-
+  
   
 
   function closeModal() {
@@ -198,29 +204,60 @@ function InformacaoLivro() {
                           )}
                         </li>
                       </ul>
-                      <ul className={styles.ulCompraInfo}>
-                        <li>
-                          <span className={styles.liCompraInfoTit}>Preco:</span>
-                        </li>
-                        <li>
-                          <span className={styles.liCompraInfo}>
-                            {fisicoDetalhe.preco.toLocaleString("pt-BR", {
-                              style: "currency",
-                              currency: "BRL",
-                            })}
-                          </span>
-                        </li>
-                      </ul>
-                      <ul className={styles.ulCompraInfo}>
-                        <li>
-                          <span className={styles.liCompraInfoTit}>
-                            Preco Oferta:
-                          </span>
-                        </li>
-                        <li>
-                          <span className={styles.liCompraInfo}> 9.00</span>
-                        </li>
-                      </ul>
+                      {livro.oferta ? (
+                        <>
+                          <ul className={styles.ulCompraInfo}>
+                            <li>
+                              <span className={styles.liCompraInfoTit}>
+                                Preco:
+                              </span>
+                            </li>
+                            <li>
+                              <span className={styles.liCompraInfo}>
+                                {fisicoDetalhe.preco.toLocaleString("pt-BR", {
+                                  style: "currency",
+                                  currency: "BRL",
+                                })}
+                              </span>
+                            </li>
+                          </ul>
+
+                          <ul className={styles.ulCompraInfo}>
+                            <li>
+                              <span className={styles.liCompraInfoTit}>
+                                Preco Oferta:
+                              </span>
+                            </li>
+                            <li>
+                              <span className={styles.precoOferta}>
+                                {(fisicoDetalhe.preco * 0.8).toLocaleString(
+                                  "pt-BR",
+                                  {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  }
+                                )}
+                              </span>
+                            </li>
+                          </ul>
+                        </>
+                      ) : (
+                        <ul className={styles.ulCompraInfo}>
+                          <li>
+                            <span className={styles.liCompraInfoTit}>
+                              Preco:
+                            </span>
+                          </li>
+                          <li>
+                            <span className={styles.liCompraInfo}>
+                              {fisicoDetalhe.preco.toLocaleString("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                              })}
+                            </span>
+                          </li>
+                        </ul>
+                      )}
                       <ul className={styles.ulCompraInfoEntrega}>
                         <li>
                           <span className={styles.liEntrega}>
@@ -257,29 +294,60 @@ function InformacaoLivro() {
                           )}
                         </li>
                       </ul>
-                      <ul className={styles.ulCompraInfo}>
-                        <li>
-                          <span className={styles.liCompraInfoTit}>Preco:</span>
-                        </li>
-                        <li>
-                          <span className={styles.liCompraInfo}>
-                            {ebookDetalhe.preco.toLocaleString("pt-BR", {
-                              style: "currency",
-                              currency: "BRL",
-                            })}
-                          </span>
-                        </li>
-                      </ul>
-                      <ul className={styles.ulCompraInfo}>
-                        <li>
-                          <span className={styles.liCompraInfoTit}>
-                            Preco Oferta:
-                          </span>
-                        </li>
-                        <li>
-                          <span className={styles.liCompraInfo}> 9.00</span>
-                        </li>
-                      </ul>
+                      {livro.oferta ? (
+                        <>
+                          <ul className={styles.ulCompraInfo}>
+                            <li>
+                              <span className={styles.liCompraInfoTit}>
+                                Preco:
+                              </span>
+                            </li>
+                            <li>
+                              <span className={styles.liCompraInfo}>
+                                {ebookDetalhe.preco.toLocaleString("pt-BR", {
+                                  style: "currency",
+                                  currency: "BRL",
+                                })}
+                              </span>
+                            </li>
+                          </ul>
+
+                          <ul className={styles.ulCompraInfo}>
+                            <li>
+                              <span className={styles.liCompraInfoTit}>
+                                Preco Oferta:
+                              </span>
+                            </li>
+                            <li>
+                              <span className={styles.precoOferta}>
+                                {(ebookDetalhe.preco * 0.8).toLocaleString(
+                                  "pt-BR",
+                                  {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  }
+                                )}
+                              </span>
+                            </li>
+                          </ul>
+                        </>
+                      ) : (
+                        <ul className={styles.ulCompraInfo}>
+                          <li>
+                            <span className={styles.liCompraInfoTit}>
+                              Preco:
+                            </span>
+                          </li>
+                          <li>
+                            <span className={styles.liCompraInfo}>
+                              {ebookDetalhe.preco.toLocaleString("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                              })}
+                            </span>
+                          </li>
+                        </ul>
+                      )}
                       <ul className={styles.ulCompraInfoEntrega}>
                         <li>
                           <span className={styles.liEntrega}>
@@ -304,7 +372,7 @@ function InformacaoLivro() {
                     </div>
                   )}
                 </div>
-                <div >
+                <div>
                   <button
                     className={styles.buttonCompra}
                     onClick={adicionarAoCarrinho}
@@ -314,16 +382,24 @@ function InformacaoLivro() {
                     </h1>
                   </button>
 
-                  <Modal className={styles.modalCompra}
+                  <Modal
+                    className={styles.modalCompra}
                     isOpen={modalIsOpenLivroAdd}
                     onRequestClose={closeModal}
                     contentLabel="Livro adicionado à sacola"
                     style={customStyles}
                     overlayStyle={customStyles.overlay}
                   >
-                    <button className={styles.buttonFecharModal} onClick={closeModal}>                <AiOutlineClose className={styles.imgFechar} /></button>
-                    <h2 className={styles.h2AdicionarSacola}>Livro adicionado à sacola!</h2>
-                    
+                    <button
+                      className={styles.buttonFecharModal}
+                      onClick={closeModal}
+                    >
+                      {" "}
+                      <AiOutlineClose className={styles.imgFechar} />
+                    </button>
+                    <h2 className={styles.h2AdicionarSacola}>
+                      Livro adicionado à sacola!
+                    </h2>
                   </Modal>
                 </div>
               </div>
