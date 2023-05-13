@@ -19,6 +19,10 @@ function InformacaoLivro() {
       .get(`http://localhost:8082/livro/${id}?_embed=detalhes`)
       .then((response) => {
         setLivro(response.data);
+        // Inicializa o estado tipoLivroSelecionado com "EBOOK" se o livro não tiver detalhes físicos
+        if (!response.data.detalhes.some((detalhe) => detalhe.tipoLivro === "FISICO")) {
+          setTipoLivroSelecionado("EBOOK");
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -77,6 +81,7 @@ function InformacaoLivro() {
                 <p className={styles.autor}>{livro.autor}</p>
                 <p className={styles.editora}>{livro.editora}</p>
                 <div className={styles.tipoLivroDetalhe}>
+                {fisicoDetalhe && fisicoDetalhe.tipoLivro && (
                   <button
                     className={styles.buttonTipoLivroFisico}
                     onClick={() => setTipoLivroSelecionado("FISICO")}
@@ -93,10 +98,10 @@ function InformacaoLivro() {
                       })}
                     </p>
                   </button>
+                  )}
+                  {ebookDetalhe && ebookDetalhe.tipoLivro && (
                   <button
-                    className={`${styles.buttonTipoLivroEbook} ${
-                      tipoLivroSelecionado === "EBOOK" ? "active" : ""
-                    }`}
+                    className={styles.buttonTipoLivroEbook}
                     onClick={() => setTipoLivroSelecionado("EBOOK")}
                   >
                     {ebookDetalhe && (
@@ -113,6 +118,7 @@ function InformacaoLivro() {
                       </p>
                     )}
                   </button>
+                  )}
                 </div>
                 <div className={styles.linhaHorizontalDetalhe} />
                 <p className={styles.sinopse}>{livro.sinopse}</p>
