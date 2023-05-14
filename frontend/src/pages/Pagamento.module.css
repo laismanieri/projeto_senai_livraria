@@ -1,5 +1,4 @@
 
-
 .containerVoltar {
     /* position: fixed;
     top: 0;
@@ -18,10 +17,11 @@
   
   .containerPagto{
     display: grid;
-    grid-template-columns: 56em 20em;
+    grid-template-columns: 53em 23em;
     grid-template-rows: 50em;
     color: #146b97; 
     overflow: auto;
+    gap: 1em;
 }
 
   .linhaHorizontal {
@@ -39,8 +39,30 @@
     margin-left: 0.1em;
 }
 
+.thSecao, .thSecaoInf, .thSecaoTit, .thSecaoTitN{
+  background-color: aliceblue;
+  text-align: left;
+  vertical-align: top;
+}
+
+.thSecaoTit, .thSecaoTitN{
+  background-color: aliceblue;
+  font-weight: 700;
+  font-size: 1.2em;
+  color: #033579;
+}
+
+.thSecaoTit{
+  width: 12em;
+}
+
+.thSecaoInf{
+  width: 38em;
+}
+
 .tablePagamento{
     border-collapse: collapse;
+    width: 53em;
 }
 
 .theadPagamento, .tbodyPagamento{
@@ -151,8 +173,14 @@
   }
 
 
+  .fichaThTit{
+    font-weight: bold;
+    color: #4dbaf0;
+  }
+
   .fichaTh{
     font-weight: bold;
+
   }
 
   span{
