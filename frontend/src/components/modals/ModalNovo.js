@@ -8,20 +8,34 @@ function ModalNovo({ isOpen, onClose }) {
   const [livro, setLivro] = useState({
     titulo: "",
     autor: "",
-    editora: "",
+    anoPublicacao: "",
+    sinopse: "",
     genero: "",
-    descricao: "",
-    anoPublicacao: ""
+    editora: "",
+    qtdePagina: "",
+    oferta: "",
+    destaque: "",
+    imagem: "",
+    tipoLivro: "",
+    preco: "",
+    qtdeEstoque: "",
   });
 
   const clearForm = () => {
     setLivro({
       titulo: "",
       autor: "",
-      editora: "",
-      genero: "",
-      descricao: "",
       anoPublicacao: "",
+      sinopse: "",
+      genero: "",
+      editora: "",
+      qtdePagina: "",
+      oferta: "",
+      destaque: "",
+      imagem: "",
+      tipoLivro: "",
+      preco: "",
+      qtdeEstoque: "",
     });
   };
 
@@ -56,6 +70,7 @@ function ModalNovo({ isOpen, onClose }) {
                   name="titulo"
                   value={livro.titulo}
                   onChange={handleChange}
+                  required
                 />
 
                 <label className={styles.labelModal}> AUTOR</label>
@@ -65,6 +80,7 @@ function ModalNovo({ isOpen, onClose }) {
                   name="autor"
                   value={livro.autor}
                   onChange={handleChange}
+                  required
                 />
 
                 <label className={styles.labelModal}> EDITORA</label>
@@ -74,6 +90,7 @@ function ModalNovo({ isOpen, onClose }) {
                   name="editora"
                   value={livro.editora}
                   onChange={handleChange}
+                  required
                 />
 
                 <label className={styles.labelModal}> GÊNERO</label>
@@ -83,6 +100,7 @@ function ModalNovo({ isOpen, onClose }) {
                   name="genero"
                   value={livro.genero}
                   onChange={handleChange}
+                  required
                 />
 
                 <label className={styles.labelModal}> SINOPSE</label>
@@ -92,6 +110,7 @@ function ModalNovo({ isOpen, onClose }) {
                   name="descricao"
                   value={livro.descricao}
                   onChange={handleChange}
+                  required
                 />
 
                 <label className={styles.labelModal}> ANO DE PUBLICAÇÃO</label>
@@ -101,6 +120,7 @@ function ModalNovo({ isOpen, onClose }) {
                   name="anoPublicacao"
                   value={livro.anoPublicacao}
                   onChange={handleChange}
+                  required
                 />
 
                 <label className={styles.labelModal}> IMAGEM</label>
@@ -110,6 +130,20 @@ function ModalNovo({ isOpen, onClose }) {
                   name="imagem"
                   value={livro.imagem}
                   onChange={handleChange}
+                  required
+                />
+
+                <label className={styles.labelModal}>
+                  {" "}
+                  QUANTIDADE DE PÁGINAS
+                </label>
+
+                <input
+                  className={styles.inputModal}
+                  name="qtdePagina"
+                  value={livro.qtdePagina}
+                  onChange={handleChange}
+                  required
                 />
                 <label className={styles.labelModal}> OFERTA</label>
 
@@ -118,6 +152,7 @@ function ModalNovo({ isOpen, onClose }) {
                   name="oferta"
                   value={livro.oferta}
                   onChange={handleChange}
+                  required
                 />
                 <label className={styles.labelModal}>DESTAQUE</label>
 
@@ -126,40 +161,69 @@ function ModalNovo({ isOpen, onClose }) {
                   name="destaque"
                   value={livro.destaque}
                   onChange={handleChange}
-                />
-                <label className={styles.labelModal}>PREÇO</label>
-
-                <input
-                  className={styles.inputModal}
-                  name="preco"
-                  value={livro.preco}
-                  onChange={handleChange}
-                />
-                <label className={styles.labelModal}>ESTOQUE</label>
-
-                <input
-                  className={styles.inputModal}
-                  name="qtdeEstoque"
-                  value={livro.qtdeEstoque}
-                  onChange={handleChange}
+                  required
                 />
 
-                <label className={styles.labelModal}>TIPO LIVRO</label>              
-                  <input
-                  className={styles.inputModal}
-                  name="tipoLivro"
-                  value={livro.tipoLivro}
-                  onChange={handleChange}
-                />   
+                <div className={styles.linhaHorizontal} />
 
-                <label className={styles.labelModal}> QUANTIDADE DE PÁGINAS</label>
+                <div className={styles.containerTipoLivro}>
+                  <div className={styles.divTipoLivro}>
+                    <label className={styles.labelModal}>LIVRO FISICO</label>
 
-                <input
-                  className={styles.inputModal}
-                  name="qtdePagina"
-                  value={livro.qtdePagina}
-                  onChange={handleChange}
-                />
+                    <input
+                      className={styles.inputModal}
+                      name="fisico"
+                      value={livro.tipoLivro}
+                      onChange={handleChange}
+
+                    />
+
+                    <label className={styles.labelModal}>PREÇO</label>
+
+                    <input
+                      className={styles.inputModal}
+                      name="preco"
+                      value={livro.preco}
+                      onChange={handleChange}
+                    />
+                    <label className={styles.labelModal}>ESTOQUE</label>
+
+                    <input
+                      className={styles.inputModal}
+                      name="qtdeEstoque"
+                      value={livro.qtdeEstoque}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className={styles.divTipoLivro}>
+                    <label className={styles.labelModal}>TIPO LIVRO</label>
+                    <input
+                      className={styles.inputModal}
+                      name="tipoLivro"
+                      value={livro.tipoLivro}
+                      onChange={handleChange}
+                    />
+
+                    <label className={styles.labelModal}>PREÇO</label>
+
+                    <input
+                      className={styles.inputModal}
+                      name="preco"
+                      value={livro.preco}
+                      onChange={handleChange}
+                    />
+                    <label className={styles.labelModal}>ESTOQUE</label>
+
+                    <input
+                      className={styles.inputModal}
+                      name="qtdeEstoque"
+                      value={livro.qtdeEstoque}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+
+                <div className={styles.linhaHorizontal} />
 
                 <div className={styles.buttonContainer}>
                   <button onClick={onClose}>Fechar</button>

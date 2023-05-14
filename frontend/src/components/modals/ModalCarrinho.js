@@ -1,6 +1,7 @@
 import styles from "../modals/ModalCarrinho.module.css";
 import { AiFillDelete, AiOutlineClose } from "react-icons/ai";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const ModalCarrinho = ({ isOpen, onClose }) => {
   const [quantidade, setQuantidade] = useState(1);
@@ -20,7 +21,6 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
     setQtdeTotal(qtde);
     setTotal(valor);
   }, [carrinho]);
-  
 
   useEffect(() => {
     const carrinhoSalvo = localStorage.getItem("carrinho");
@@ -52,8 +52,6 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
     setCarrinho(novoCarrinho);
     localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
   };
-
-
 
   if (!isOpen) {
     return null;
@@ -152,7 +150,6 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                           )}
                         </div>
 
-
                         <div className={styles.qtde}>
                           <div>
                             {livro.oferta ? (
@@ -160,7 +157,9 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                                 <span className={styles.precoTit}>Total: </span>
                                 <span className={styles.precoRegular}>
                                   {(
-                                    ((livro.preco * 0.8) * livro.quantidade)
+                                    livro.preco *
+                                    0.8 *
+                                    livro.quantidade
                                   ).toLocaleString("pt-BR", {
                                     style: "currency",
                                     currency: "BRL",
@@ -214,9 +213,7 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                   <span>Subtotal:</span>
                 </li>
                 <li>
-                  <span>
-                    {qtdeTotal}
-                  </span>
+                  <span>{qtdeTotal}</span>
                 </li>
               </ul>
               <ul className={styles.valorTotal}>
@@ -232,7 +229,16 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                   </span>
                 </li>
               </ul>
-              <button className={styles.carrinhoButtonComprar}>Comprar</button>
+              <Link
+                to={{
+                  pathname: "/pagamento",
+                  state: { carrinho: carrinho },
+                }}
+              >
+                <button className={styles.carrinhoButtonComprar}>
+                  Comprar
+                </button>
+              </Link>
             </div>
           </div>
         </div>

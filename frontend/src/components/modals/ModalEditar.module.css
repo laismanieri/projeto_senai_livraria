@@ -1,5 +1,6 @@
 
-.modalBackgroundEdit{
+  
+  .modalBackgroundEdit {
     position: fixed;
     top: 0;
     right: 0;
@@ -10,14 +11,12 @@
     justify-content: center;
     align-items: center;
     z-index: 99;
-    
-}
+  }
 
-.divContainerEdit{
-    width: 50%;
+  .divContainerEdit{
     position: flex;
     width: 40%;
-    height:93%;
+    height:100%;
     justify-content: center;
     align-items: center; 
     background-color:rgb(189, 223, 253);
@@ -26,18 +25,32 @@
     font-size: 1em;
     text-align: left;
     z-index: 999;
+
+  }
+
+  .linhaHorizontal {
+    width: 85%;
+    border: 0.05px outset rgba(144, 202, 252, 0.26);
+    margin-top: 1em;
 }
 
-.buttonContainerEdit {
+  .containerTipoLivro{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    padding: 40px;
-    gap: 30px;
-} 
+  }
 
-button {
+    
+  .buttonContainerEdit {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+      gap: 30px;
+  } 
+  
+  button {
     color: white;
     padding: 5px;
     border: none;
@@ -48,24 +61,40 @@ button {
     font-size: 0.8em;
     white-space: nowrap;
     overflow: hidden;
+
   }
 
-
-.formModalEdit{
-    display: flex;
+  .formModalEdit{
     display: flex;
     flex-direction: column;
-    margin-top: 3%;
+    margin-top: 1%;
     font-weight: bold;
     justify-content: center;
     align-items: center; /* Adicionado para centralizar o formulário verticalmente */
   }
-
+  
+  .labelInputContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Adicionado para alinhar os labels com os inputs */
+  }
+  
+.labelModal{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-top: 7px;
+    color: #146b97; 
+    align-items: left;
+    font-size: 0.7em;
+  }
+  
+  
   .inputModalEdit{
     margin: 0.2em 0 0 0;
     width: 80%;
     height: 2em;
-    padding: 1px;
+    padding: 5px;
     padding-left: 10px;
     border: none;
     border-radius: 7px;
@@ -73,19 +102,14 @@ button {
     color: #033579;
     background: aliceblue;
   }
+  
+  .inputModalEdit::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  } 
+
 
   .inputModalEdit:focus {
     outline: none;
-  }
-
-  .formModalEdit .labelModal{
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    margin-top: 10px;
-    text-align: left;
-    color: #146b97; 
-    align-items: left;
-    font-size: 0.8em;
   }
   

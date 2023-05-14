@@ -9,6 +9,7 @@ import Table from "react-bootstrap/Table";
 import PaymentMethodSelect from "../components/layout/PaymentMethodSelect";
 
 function Pagamento() {
+    
   return (
     <>
       <Navbar />
@@ -55,10 +56,24 @@ function Pagamento() {
                           Método de pagamento
                         </th>
                         <th className={styles.thSecaoInf}>
-                        <div>
-      <p>Selecione o Método de Pagamento</p>
-      <PaymentMethodSelect />
-    </div>
+                          <div>
+                            <p>Selecione o Método de Pagamento</p>
+                            <PaymentMethodSelect />
+                          </div>
+                          <div>
+                            <p for="cards">
+                              Selecione as opções de parcelamento
+                            </p>
+
+                            <select name="parcelas" id="parcelas">
+                              <option value="1x sem juros">1x sem juros</option>
+                              <option value="2x sem juros">2x sem juros</option>
+                              <option value="3x sem juros">3x sem juros</option>
+                              <option value="4x sem juros">4x sem juros</option>
+                              <option value="5x sem juros">5x sem juros</option>
+                              <option value="6x sem juros">6x sem juros</option>
+                            </select>
+                          </div>
                         </th>
                         <th className={styles.thSecao}>Alterar</th>
                       </tr>
