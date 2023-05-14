@@ -48,6 +48,9 @@ function ModalEditar({ isOpenEdit, onCloseEdit, livro }) {
       });
   };
 
+  const isEbook = livro.tipoLivro === "EBOOK";
+  const isFisico = livro.tipoLivro === "FISICO";
+
   return (
     <>
       {isOpenEdit && (
@@ -129,6 +132,15 @@ function ModalEditar({ isOpenEdit, onCloseEdit, livro }) {
                 defaultValue={livro.destaque}
                 onChange={handleChangeEdit}
               />
+
+              <label className={styles.labelModal}>TIPO LIVRO</label>
+
+              <input
+                className={styles.inputModalEdit}
+                name="fisico"
+                value={livro.tipoLivro}
+                onChange={handleChangeEdit}
+              />
               <label className={styles.labelModal}>PREÇO</label>
               <input
                 className={styles.inputModalEdit}
@@ -147,65 +159,7 @@ function ModalEditar({ isOpenEdit, onCloseEdit, livro }) {
 
               <div className={styles.linhaHorizontal} />
 
-              <div className={styles.containerTipoLivro}>
-                <div className={styles.divTipoLivro}>
-                  <label className={styles.labelModal}>LIVRO FISICO</label>
-
-                  <input
-                    className={styles.inputModalEdit}
-                    name="fisico"
-                    value={livro.tipoLivro}
-                    onChange={handleChangeEdit}
-                  />
-
-                  <label className={styles.labelModal}>PREÇO</label>
-
-                  <input
-                    className={styles.inputModalEdit}
-                    name="preco"
-                    value={livro.preco}
-                    onChange={handleChangeEdit}
-                  />
-                  <label className={styles.labelModal}>ESTOQUE</label>
-
-                  <input
-                    className={styles.inputModalEdit}
-                    name="qtdeEstoque"
-                    value={livro.qtdeEstoque}
-                    onChange={handleChangeEdit}
-                  />
-                </div>
-                <div className={styles.divTipoLivro}>
-                  <label className={styles.labelModal}>TIPO LIVRO</label>
-                  <input
-                    className={styles.inputModalEdit}
-                    name="tipoLivro"
-                    value={livro.tipoLivro}
-                    onChange={handleChangeEdit}
-                  />
-
-                  <label className={styles.labelModal}>PREÇO</label>
-
-                  <input
-                    className={styles.inputModalEdit}
-                    name="preco"
-                    value={livro.preco}
-                    onChange={handleChangeEdit}
-                  />
-                  <label className={styles.labelModal}>ESTOQUE</label>
-
-                  <input
-                    className={styles.inputModalEdit}
-                    name="qtdeEstoque"
-                    value={livro.qtdeEstoque}
-                    onChange={handleChangeEdit}
-                  />
-                </div>
-              </div>
-
-              <div className={styles.linhaHorizontal} />
-
-               <div className={styles.buttonContainerEdit}>
+              <div className={styles.buttonContainerEdit}>
                 <button onClick={onCloseEdit}>Fechar</button>
                 <button type="submit">Salvar</button>
               </div>

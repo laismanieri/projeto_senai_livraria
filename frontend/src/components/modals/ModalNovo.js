@@ -196,7 +196,7 @@ function ModalNovo({ isOpen, onClose }) {
                     />
                   </div>
                   <div className={styles.divTipoLivro}>
-                    <label className={styles.labelModal}>TIPO LIVRO</label>
+                    <label className={styles.labelModal}>EBOOK</label>
                     <input
                       className={styles.inputModal}
                       name="tipoLivro"
