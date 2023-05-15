@@ -141,17 +141,6 @@ function InformacaoLivro() {
             </div>
             <div className={styles.gridItemLong}>
               <div className={styles.containerInfoLivro}>
-                <div className={styles.tituloFavorito}>
-                  <div>
-                    <p className={styles.titulo}>{livro.titulo}</p>
-                  </div>
-                  <div>
-                    <p>
-                      <AiFillHeart />
-                    </p>
-                  </div>
-                </div>
-
                 <p className={styles.autor}>{livro.autor}</p>
                 <p className={styles.editora}>{livro.editora}</p>
                 <div className={styles.tipoLivroDetalhe}>
