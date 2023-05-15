@@ -1,9 +1,9 @@
-import styles from "../modals/ModalCarrinho.module.css";
-import { AiFillDelete, AiOutlineClose } from "react-icons/ai";
+import styles from "../modals/ModalFavoritos.module.css";
+import { AiFillDelete, AiFillHeart, AiOutlineClose } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const ModalCarrinho = ({ isOpen, onClose }) => {
+const ModalFavoritos = ({ isOpen, onClose }) => {
   const [quantidade, setQuantidade] = useState(1);
   const [carrinho, setCarrinho] = useState([]);
   const [qtdeTotal, setQtdeTotal] = useState(0);
@@ -64,14 +64,12 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
           <div className={styles.navBarCarrinho}>
             <ul className={styles.navBarCarrinhoUl}>
               <li>
-                <img
-                  src="/img/cesta-compras.png"
-                  alt="cesta"
-                  className={styles.navbarCesta}
-                />
+                <p className={styles.iconFavoritos}>
+                  <AiFillHeart />
+                </p>
               </li>
               <li className={styles.navBarCarrinhoLi}>
-                <h1 className={styles.sacolaH1}>Minha Sacola</h1>
+                <h1 className={styles.sacolaH1}>Meus Favoritos</h1>
               </li>
             </ul>
             <div>
@@ -149,55 +147,6 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                             </p>
                           )}
                         </div>
-
-                        <div className={styles.qtde}>
-                          <div>
-                            {livro.oferta ? (
-                              <p className={styles.precoTit}>
-                                <span className={styles.precoTit}>Total: </span>
-                                <span className={styles.precoRegular}>
-                                  {(
-                                    livro.preco *
-                                    0.8 *
-                                    livro.quantidade
-                                  ).toLocaleString("pt-BR", {
-                                    style: "currency",
-                                    currency: "BRL",
-                                  })}
-                                </span>
-                              </p>
-                            ) : (
-                              <p className={styles.precoTit}>
-                                <span className={styles.precoTit}>Total: </span>
-                                <span className={styles.precoRegular}>
-                                  {(
-                                    livro.preco * livro.quantidade
-                                  ).toLocaleString("pt-BR", {
-                                    style: "currency",
-                                    currency: "BRL",
-                                  })}
-                                </span>
-                              </p>
-                            )}
-                          </div>
-                          <div>
-                            <button
-                              className={styles.buttonQtde}
-                              onClick={() => handleDecrementQuantidade(index)}
-                            >
-                              -
-                            </button>
-                            <span className={styles.spanQtde}>
-                              {livro.quantidade}
-                            </span>
-                            <button
-                              className={styles.buttonQtde}
-                              onClick={() => handleIncrementQuantidade(index)}
-                            >
-                              +
-                            </button>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -206,45 +155,10 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
             ))}
           </div>
           {/* <div className={styles.linhaHorizontal} /> */}
-          <div className={styles.totalCarrinho}>
-            <div className={styles.valorCarrinho}>
-              <ul className={styles.valorSubtotal}>
-                <li>
-                  <span>Quantidade Total:</span>
-                </li>
-                <li>
-                  <span>{qtdeTotal}</span>
-                </li>
-              </ul>
-              <ul className={styles.valorTotal}>
-                <li>
-                  <span>Valor Total:</span>
-                </li>
-                <li>
-                  <span>
-                    {total.toLocaleString("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    })}
-                  </span>
-                </li>
-              </ul>
-              <Link
-                to={{
-                  pathname: "/pagamento",
-                  state: { carrinho: carrinho },
-                }}
-              >
-                <button className={styles.carrinhoButtonComprar}>
-                  Comprar
-                </button>
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
     </>
   );
 };
 
-export default ModalCarrinho;
+export default ModalFavoritos;

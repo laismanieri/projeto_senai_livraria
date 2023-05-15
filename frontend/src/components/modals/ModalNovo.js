@@ -5,6 +5,7 @@ import axios from "axios";
 import styles from "../modals/ModalNovo.module.css";
 
 function ModalNovo({ isOpen, onClose }) {
+
   const [livro, setLivro] = useState({
     titulo: "",
     autor: "",
@@ -16,10 +17,11 @@ function ModalNovo({ isOpen, onClose }) {
     oferta: "",
     destaque: "",
     imagem: "",
-    tipoLivro: "",
-    preco: "",
-    qtdeEstoque: "",
+    detalhes: [
+
+    ],
   });
+  
 
   const clearForm = () => {
     setLivro({
@@ -33,9 +35,18 @@ function ModalNovo({ isOpen, onClose }) {
       oferta: "",
       destaque: "",
       imagem: "",
-      tipoLivro: "",
-      preco: "",
-      qtdeEstoque: "",
+      detalhes: [
+        {
+          tipoLivro: "",
+          preco: "",
+          qtdeEstoque: "",
+        },
+        {
+          tipoLivro: "",
+          preco: "",
+          qtdeEstoque: "",
+        },
+      ],
     });
   };
 
@@ -70,7 +81,6 @@ function ModalNovo({ isOpen, onClose }) {
                   name="titulo"
                   value={livro.titulo}
                   onChange={handleChange}
-                  required
                 />
 
                 <label className={styles.labelModal}> AUTOR</label>
@@ -80,7 +90,6 @@ function ModalNovo({ isOpen, onClose }) {
                   name="autor"
                   value={livro.autor}
                   onChange={handleChange}
-                  required
                 />
 
                 <label className={styles.labelModal}> EDITORA</label>
@@ -90,7 +99,6 @@ function ModalNovo({ isOpen, onClose }) {
                   name="editora"
                   value={livro.editora}
                   onChange={handleChange}
-                  required
                 />
 
                 <label className={styles.labelModal}> GÊNERO</label>
@@ -100,17 +108,15 @@ function ModalNovo({ isOpen, onClose }) {
                   name="genero"
                   value={livro.genero}
                   onChange={handleChange}
-                  required
                 />
 
                 <label className={styles.labelModal}> SINOPSE</label>
 
                 <textarea
                   className={styles.inputModal}
-                  name="descricao"
-                  value={livro.descricao}
+                  name="sinopse"
+                  value={livro.sinopse}
                   onChange={handleChange}
-                  required
                 />
 
                 <label className={styles.labelModal}> ANO DE PUBLICAÇÃO</label>
@@ -120,7 +126,6 @@ function ModalNovo({ isOpen, onClose }) {
                   name="anoPublicacao"
                   value={livro.anoPublicacao}
                   onChange={handleChange}
-                  required
                 />
 
                 <label className={styles.labelModal}> IMAGEM</label>
@@ -130,7 +135,22 @@ function ModalNovo({ isOpen, onClose }) {
                   name="imagem"
                   value={livro.imagem}
                   onChange={handleChange}
-                  required
+                />
+                <label className={styles.labelModal}> OFERTA</label>
+
+                <input
+                  className={styles.inputModal}
+                  name="oferta"
+                  value={livro.oferta}
+                  onChange={handleChange}
+                />
+                <label className={styles.labelModal}>DESTAQUE</label>
+
+                <input
+                  className={styles.inputModal}
+                  name="destaque"
+                  value={livro.destaque}
+                  onChange={handleChange}
                 />
 
                 <label className={styles.labelModal}>
@@ -143,87 +163,60 @@ function ModalNovo({ isOpen, onClose }) {
                   name="qtdePagina"
                   value={livro.qtdePagina}
                   onChange={handleChange}
-                  required
                 />
-                <label className={styles.labelModal}> OFERTA</label>
 
+                {/* tipo livro  */}
+
+                <label className={styles.labelModal}>TIPO DO LIVRO</label>
+                <select
+                  className={styles.inputModal}
+                  onChange={handleChange}
+                >
+                  <option value="FISICO">FÍSICO</option>
+                  <option value="EBOOK">E-BOOK</option>
+                </select>
+
+                <label className={styles.labelModal}>PREÇO</label>
                 <input
                   className={styles.inputModal}
-                  name="oferta"
-                  value={livro.oferta}
-                  onChange={handleChange}
-                  required
+             onChange={handleChange}
                 />
-                <label className={styles.labelModal}>DESTAQUE</label>
 
+                <label className={styles.labelModal}>
+                  QUANTIDADE EM ESTOQUE
+                </label>
                 <input
                   className={styles.inputModal}
-                  name="destaque"
-                  value={livro.destaque}
+
                   onChange={handleChange}
-                  required
                 />
 
-                <div className={styles.linhaHorizontal} />
+                <label className={styles.labelModal}>TIPO DO LIVRO</label>
+                <select
+                  className={styles.inputModal}
 
-                <div className={styles.containerTipoLivro}>
-                  <div className={styles.divTipoLivro}>
-                    <label className={styles.labelModal}>LIVRO FISICO</label>
+                  onChange={handleChange}
+                >
+                                    <option value=""></option>
+                  <option value="FISICO">FÍSICO</option>
+                  <option value="EBOOK">E-BOOK</option>
+                </select>
 
-                    <input
-                      className={styles.inputModal}
-                      name="fisico"
-                      value={livro.tipoLivro}
-                      onChange={handleChange}
+                <label className={styles.labelModal}>PREÇO</label>
+                <input
+                  className={styles.inputModal}
+                  value={livro.preco}
+                  onChange={handleChange}
+                />
 
-                    />
+                <label className={styles.labelModal}>
+                  QUANTIDADE EM ESTOQUE
+                </label>
+                <input
+                  className={styles.inputModal}
 
-                    <label className={styles.labelModal}>PREÇO</label>
-
-                    <input
-                      className={styles.inputModal}
-                      name="preco"
-                      value={livro.preco}
-                      onChange={handleChange}
-                    />
-                    <label className={styles.labelModal}>ESTOQUE</label>
-
-                    <input
-                      className={styles.inputModal}
-                      name="qtdeEstoque"
-                      value={livro.qtdeEstoque}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className={styles.divTipoLivro}>
-                    <label className={styles.labelModal}>EBOOK</label>
-                    <input
-                      className={styles.inputModal}
-                      name="tipoLivro"
-                      value={livro.tipoLivro}
-                      onChange={handleChange}
-                    />
-
-                    <label className={styles.labelModal}>PREÇO</label>
-
-                    <input
-                      className={styles.inputModal}
-                      name="preco"
-                      value={livro.preco}
-                      onChange={handleChange}
-                    />
-                    <label className={styles.labelModal}>ESTOQUE</label>
-
-                    <input
-                      className={styles.inputModal}
-                      name="qtdeEstoque"
-                      value={livro.qtdeEstoque}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-
-                <div className={styles.linhaHorizontal} />
+                  onChange={handleChange}
+                />
 
                 <div className={styles.buttonContainer}>
                   <button onClick={onClose}>Fechar</button>

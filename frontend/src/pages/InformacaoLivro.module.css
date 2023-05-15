@@ -28,7 +28,7 @@
     display: grid;
     grid-template-columns: 20em 35em 20em;
     grid-template-rows: 27em;
-    gap: 1em;
+    gap: 2em;
     color: #146b97;  
   }
 
@@ -47,6 +47,11 @@
     align-items: center;
   }
 
+
+ .tituloFavorito{
+  display: flex;
+  justify-content: space-between;
+ } 
 
   .imagemLivro{
     border-radius: 10px;

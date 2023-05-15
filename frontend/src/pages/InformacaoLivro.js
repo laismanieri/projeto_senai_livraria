@@ -7,7 +7,7 @@ import Container from "../components/layout/Container";
 import Navbar from "../components/layout/NavBar";
 import Footer from "../components/layout/Footer";
 import { Link } from "react-router-dom";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiFillHeart } from "react-icons/ai";
 import Modal from "react-modal";
 
 function InformacaoLivro() {
@@ -77,7 +77,10 @@ function InformacaoLivro() {
     if (tipoLivroSelecionado === "FISICO" && fisicoEstoque.qtdeEstoque === 0) {
       window.alert("Livro físico sem estoque!");
       return;
-    } else if (tipoLivroSelecionado === "EBOOK" && ebookEstoque.qtdeEstoque === 0) {
+    } else if (
+      tipoLivroSelecionado === "EBOOK" &&
+      ebookEstoque.qtdeEstoque === 0
+    ) {
       window.alert("Livro ebook sem estoque!");
       return;
     } else {
@@ -96,8 +99,6 @@ function InformacaoLivro() {
       localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
     }
   }
-  
-  
 
   function closeModal() {
     setModalIsOpenLivroAdd(false);
@@ -140,7 +141,17 @@ function InformacaoLivro() {
             </div>
             <div className={styles.gridItemLong}>
               <div className={styles.containerInfoLivro}>
-                <h1 className={styles.titulo}>{livro.titulo}</h1>
+                <div className={styles.tituloFavorito}>
+                  <div>
+                    <p className={styles.titulo}>{livro.titulo}</p>
+                  </div>
+                  <div>
+                    <p>
+                      <AiFillHeart />
+                    </p>
+                  </div>
+                </div>
+
                 <p className={styles.autor}>{livro.autor}</p>
                 <p className={styles.editora}>{livro.editora}</p>
                 <div className={styles.tipoLivroDetalhe}>
@@ -197,9 +208,12 @@ function InformacaoLivro() {
                         <li>
                           {fisicoDetalhe && (
                             <>
-                              <span className={styles.liCompraInfoTit}>
-                                {fisicoDetalhe.tipoLivro}
-                              </span>
+                              <span></span>
+                              <>
+                                <span className={styles.liCompraInfoTit}>
+                                  {fisicoDetalhe.tipoLivro}
+                                </span>
+                              </>
                             </>
                           )}
                         </li>
@@ -392,7 +406,10 @@ function InformacaoLivro() {
                   >
                     <button
                       className={styles.buttonFecharModal}
-                      onClick={closeModal}
+                      onClick={() => {
+                        closeModal();
+                        window.location.reload();
+                      }}
                     >
                       {" "}
                       <AiOutlineClose className={styles.imgFechar} />
