@@ -14,38 +14,44 @@ function InformacaoLivroAdm() {
   const [tipoLivroSelecionado, setTipoLivroSelecionado] = useState("FISICO");
 
   function handleChangeEdit() {
-    const novoLivro = {
-      titulo: livro.titulo,
-      autor: livro.autor,
-      editora: livro.editora,
-      genero: livro.genero,
-      sinopse: livro.sinopse,
-      anoPublicacao: livro.anoPublicacao,
-      imagem: livro.imagem,
-      oferta: livro.oferta,
-      destaque: livro.destaque,
-      qtdePagina: livro.qtdePagina,
-      detalhes: [
-        {
-          preco: livro.preco,
-          qtdeEstoque: livro.qtdeEstoque,
-          tipoLivro: livro.tipoLivro,
-        },
-      ],
+    // Recupera os detalhes existentes do livro original
+    const detalhesOriginais = livro.detalhes;
+  
+    // Cria um novo objeto livro com as propriedades atualizadas
+    const livroAtualizado = {
+      ...livro,
+      titulo: document.getElementById("titulo").value,
+      autor: document.getElementById("autor").value,
+      editora: document.getElementById("editora").value,
+      genero: document.getElementById("genero").value,
+      sinopse: document.getElementById("sinopse").value,
+      anoPublicacao: document.getElementById("anoPublicacao").value,
+      imagem: document.getElementById("imagem").value,
+      oferta: document.getElementById("oferta").value,
+      destaque: document.getElementById("destaque").value,
+      qtdePagina: document.getElementById("qtdePagina").value,
+      detalhes: detalhesOriginais.map((detalhe) => {
+        return {
+          ...detalhe,
+          preco: document.getElementById("preco").value,
+          qtdeEstoque: document.getElementById("qtdeEstoque").value,
+        };
+      }),
     };
-
+  
     axios
-      .put(`http://localhost:8082/livro/${id}`, novoLivro)
+      .put(`http://localhost:8082/livro/${id}`, livroAtualizado)
       .then((response) => {
         console.log("Livro atualizado:", response.data);
         window.alert("Livro atualizado!");
         window.location.reload();
       })
       .catch((error) => {
-        console.error("Erro ao atualizar ao atualizar livro:", error);
+        console.error("Erro ao atualizar livro:", error);
         window.alert("Erro ao atualizar!");
       });
   }
+  
 
   useEffect(() => {
     axios
@@ -79,8 +85,6 @@ function InformacaoLivroAdm() {
 
   const ebookPreco = ebookDetalhe ? ebookDetalhe.preco : null;
   const fisicoPreco = fisicoDetalhe ? fisicoDetalhe.preco : null;
-
-  const isPrecoRegular = livro.oferta === true || livro.oferta === true;
 
   const fisicoEstoque =
     livro &&
@@ -132,6 +136,21 @@ function InformacaoLivroAdm() {
                 src={livro.imagem}
                 alt={livro.titulo}
               />
+                                  <ul className={styles.fichaAdm}>
+                      <li className={styles.fichaInfo}>
+                        <label htmlFor="imagem" className={styles.fichaTh}>
+                          Link da Imagem:
+                        </label>
+                      </li>
+                      <li>
+                        <textarea
+                          type="text"
+                          id="imagem"
+                          className={styles.inputAdmImagem}
+                          defaultValue={livro.imagem}
+                        />
+                      </li>
+                    </ul>
             </div>
             <div className={styles.gridItemLongAdm}>
               <div className={styles.containerInfoLivroAdm}>
@@ -266,7 +285,7 @@ function InformacaoLivroAdm() {
                         </label>
                         <input
                           type="text"
-                          id="Páginas"
+                          id="qtdePagina"
                           className={styles.inputAdm}
                           defaultValue={livro.qtdePagina}
                         />
@@ -418,10 +437,7 @@ function InformacaoLivroAdm() {
             </Link>
             <button
               className={styles.buttonCardAdm}
-              // onClick={() => {handleDeleteLivro(livro.id);
-              //   window.alert("Livro deletado!");
-              //   window.location.reload();
-              // }}
+              onClick={handleChangeEdit}
             >
               Salvar
                       </button>

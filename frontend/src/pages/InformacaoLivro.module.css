@@ -334,7 +334,7 @@
         color: #146b97;
   }
 
-  .inputAdm, .inputAdmSinopse{
+  .inputAdm, .inputAdmSinopse, .inputAdmImagem{
     margin: 0.2em 0 0 0;
     width: 100%;
     height: 2em;
@@ -348,18 +348,24 @@
   }
   
   .inputAdm::-webkit-scrollbar,   
-  .inputAdmSinopse::-webkit-scrollbar{
+  .inputAdmSinopse::-webkit-scrollbar,
+  .inputAdmImagem::-webkit-scrollbar {
     width: 0px;
     background: transparent;
   } 
 
 
-  .inputAdm:focus, .inputAdmSinopse:focus {
+  .inputAdm:focus, .inputAdmSinopse:focus, .inputAdmImagem {
     outline: none;
   }
 
   .inputAdmSinopse{
     height: 20em;
+    text-align: justify;
+  }
+
+  .inputAdmImagem{
+    height: 5.5em;
     text-align: justify;
   }
 

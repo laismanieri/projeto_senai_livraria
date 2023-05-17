@@ -13,7 +13,6 @@ import br.senai.sp.livraria.dto.LivroTabelaDTO;
 import br.senai.sp.livraria.model.entity.DetalheLivro;
 import br.senai.sp.livraria.model.entity.Livro;
 import br.senai.sp.livraria.service.LivroService;
-import br.senai.sp.livraria.service.DetalheLivroService;
 
 @RestController
 @RequestMapping("/livro")
@@ -63,41 +62,12 @@ public class LivroController {
         return ResponseEntity.status(HttpStatus.CREATED).body(livroSalvo);
     }
 
-    @Autowired
-    private DetalheLivroService detalheLivroService;
-    
     @PutMapping("/{id}")
-    public ResponseEntity<Livro> atualizar(@PathVariable Long id, @RequestBody Livro livroAtualizado) {
-        Livro livroExistente = livroService.buscarPorId(id);
-
-        livroExistente.setTitulo(livroAtualizado.getTitulo());
-        livroExistente.setAutor(livroAtualizado.getAutor());
-        livroExistente.setAnoPublicacao(livroAtualizado.getAnoPublicacao());
-        livroExistente.setSinopse(livroAtualizado.getSinopse());
-        livroExistente.setGenero(livroAtualizado.getGenero());
-        livroExistente.setEditora(livroAtualizado.getEditora());
-        livroExistente.setQtdePagina(livroAtualizado.getQtdePagina());
-        livroExistente.setOferta(livroAtualizado.getOferta());
-        livroExistente.setDestaque(livroAtualizado.getDestaque());
-        livroExistente.setImagem(livroAtualizado.getImagem());
-
-        // Atualiza os detalhes do livro
-        for (DetalheLivro detalheLivro : livroAtualizado.getDetalhes()) {
-            if (detalheLivro.getId() != null) {
-                DetalheLivro detalheExistente = detalheLivroService.buscarPorId(detalheLivro.getId());
-                detalheExistente.setTipoLivro(detalheLivro.getTipoLivro());
-                detalheExistente.setPreco(detalheLivro.getPreco());
-                detalheExistente.setQtdeEstoque(detalheLivro.getQtdeEstoque());
-            } else {
-                detalheLivro.setLivro(livroExistente);
-                livroExistente.getDetalhes().add(detalheLivro);
-            }
-        }
-
-        Livro livroAtualizadoSalvo = livroService.salvar(livroExistente);
+    public ResponseEntity<Livro> atualizar(@PathVariable Long id, @RequestBody Livro livro) {
+    	livro.setId(id);
+        Livro livroAtualizadoSalvo = livroService.salvar(livro);
         return ResponseEntity.ok(livroAtualizadoSalvo);
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
