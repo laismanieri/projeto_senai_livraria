@@ -35,7 +35,7 @@
     .gridContainerAdm {
     display: grid;
     grid-template-columns: 18em 42em 15em;
-    grid-template-rows: 55em;
+    grid-template-rows: 60em;
     gap: 1em;
     color: #146b97;  
   }
@@ -119,6 +119,13 @@
 
   }
 
+  .textoSinopse {
+    text-align: justify;
+  }
+  
+.textoDireita {
+
+  }
 
 /*   
   .buttonTipoLivroFisico:hover, .buttonTipoLivroEbook:hover{
@@ -156,6 +163,12 @@
     box-shadow: 2px 2px 12px 2px rgba(1, 23, 61, 0.22);
   }
 
+  .divTipoLivros{
+
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 2px 2px 12px 2px rgba(1, 23, 61, 0.22);
+  }
 
 
   .compra {
@@ -190,6 +203,9 @@
 
   }
 
+
+
+
   .liInfoTit{
     font-weight: 800; 
     margin-bottom: 15px; 
@@ -201,6 +217,8 @@
     color: #4dbaf0;
  
   }
+
+
 
   .estoque{
     font-weight: 800; 
@@ -278,8 +296,8 @@
 
   }
 
-  .ficha1, .ficha2 {
-    display: flex;
+  .ficha1, .ficha2, .fichaBolean, .fichaAdm {
+
     justify-content: space-between;
     padding: 7px;
     flex-wrap: nowrap;
@@ -290,12 +308,22 @@
     list-style-type: none;
   }
 
+
+  .fichaBolean {
+    display: flex;
+    justify-content: space-around;
+  }
+
   .ficha1{
     background:rgba(192, 225, 255, 0.448);
   }
 
     .ficha2{
     background:rgb(192, 225, 255);
+  }
+
+  .fichaAdm{
+
   }
 
   .fichaH1, .fichaH1Adm,.voltarHome{
@@ -306,14 +334,62 @@
         color: #146b97;
   }
 
+  .inputAdm, .inputAdmSinopse{
+    margin: 0.2em 0 0 0;
+    width: 100%;
+    height: 2em;
+    padding: 5px;
+    padding-left: 10px;
+    border: none;
+    border-radius: 7px;
+    box-sizing: border-box;
+    color: #033579;
+    background: aliceblue;
+  }
+  
+  .inputAdm::-webkit-scrollbar,   
+  .inputAdmSinopse::-webkit-scrollbar{
+    width: 0px;
+    background: transparent;
+  } 
+
+
+  .inputAdm:focus, .inputAdmSinopse:focus {
+    outline: none;
+  }
+
+  .inputAdmSinopse{
+    height: 20em;
+    text-align: justify;
+  }
+
+  .fichaInfo{
+    text-align: left;
+    /* margin-left: 20px; */
+  }
+
+  
+
   .voltarHome{
     font-size: 1em;
 
   }
 
 
-  .fichaTh{
+  li .fichaTh, label .fichaH1.fichaTh1{
     font-weight: bold;
+    text-align: left;
+  }
+
+.fichaTh1{
+    font-weight: bold;
+    text-align: left;
+    width: 100px;
+  }
+
+  .fichaTrAdm{
+    color: #146b97;
+    text-align: left;
   }
 
   span{
@@ -333,4 +409,36 @@
     text-decoration: none;
     font-size: 20px;
   }
+
+  .containerButtonAdm{
+    display: flex;
+    justify-content: center;
+
+}
+
+.buttonCardAdm{
+  color: #146b97; 
+  font-size: 20px;
+  font-weight: bold;
+  height: 2em;
+  width: 15em;
+  background:rgb(205, 231, 255);
+  margin: 5px 0px 5px 50px;
+  border: none;
+  border-radius: 7px;
+}
+
+.buttonCardAdm:hover{
+  background-color: #033579;
+  color: white;
+}
+
+
+.buttonFecharModal{
+  background:#033479d4;
+  border-radius: 50%;
+  width: 2em;
+  height: 1.7em;
+}
+  
 

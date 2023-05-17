@@ -7,15 +7,45 @@ import Container from "../components/layout/Container";
 import Navbar from "../components/layout/NavBar";
 import Footer from "../components/layout/Footer";
 import { Link } from "react-router-dom";
-import { AiOutlineClose, AiFillHeart } from "react-icons/ai";
-import Modal from "react-modal";
 
-function InformacaoLivro() {
+function InformacaoLivroAdm() {
   const { id } = useParams();
   const [livro, setLivro] = useState(null);
   const [tipoLivroSelecionado, setTipoLivroSelecionado] = useState("FISICO");
 
-  const [modalIsOpenLivroAdd, setModalIsOpenLivroAdd] = useState(false);
+  function handleChangeEdit() {
+    const novoLivro = {
+      titulo: livro.titulo,
+      autor: livro.autor,
+      editora: livro.editora,
+      genero: livro.genero,
+      sinopse: livro.sinopse,
+      anoPublicacao: livro.anoPublicacao,
+      imagem: livro.imagem,
+      oferta: livro.oferta,
+      destaque: livro.destaque,
+      qtdePagina: livro.qtdePagina,
+      detalhes: [
+        {
+          preco: livro.preco,
+          qtdeEstoque: livro.qtdeEstoque,
+          tipoLivro: livro.tipoLivro,
+        },
+      ],
+    };
+
+    axios
+      .put(`http://localhost:8082/livro/${id}`, novoLivro)
+      .then((response) => {
+        console.log("Livro atualizado:", response.data);
+        window.alert("Livro atualizado!");
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Erro ao atualizar ao atualizar livro:", error);
+        window.alert("Erro ao atualizar!");
+      });
+  }
 
   useEffect(() => {
     axios
@@ -52,35 +82,21 @@ function InformacaoLivro() {
 
   const isPrecoRegular = livro.oferta === true || livro.oferta === true;
 
-  const fisicoEstoque = livro.detalhes.find(
-    (detalhe) =>
-      detalhe.tipoLivro === "FISICO" &&
-      (detalhe.qtdeEstoque === 0 || detalhe.qtdeEstoque > 0)
-  );
+  const fisicoEstoque =
+    livro &&
+    livro.detalhes.find(
+      (detalhe) =>
+        detalhe.tipoLivro === "FISICO" &&
+        (detalhe.qtdeEstoque === 0 || detalhe.qtdeEstoque > 0)
+    );
 
-  const ebookEstoque = livro.detalhes.find(
-    (detalhe) =>
-      detalhe.tipoLivro === "EBOOK" &&
-      (detalhe.qtdeEstoque === 0 || detalhe.qtdeEstoque > 0)
-  );
-
-  // function adicionarAoCarrinho() {
-  //     setModalIsOpenLivroAdd(true);
-  //     const novoItem = {
-  //       id: livro.id,
-  //       titulo: livro.titulo,
-  //       tipoLivro: tipoLivroSelecionado,
-  //       quantidade: 1,
-  //       imagem: livro.imagem,
-  //       oferta: livro.oferta,
-  //       preco: tipoLivroSelecionado === "FISICO" ? fisicoPreco : ebookPreco,
-  //     };
-  //   }
-  // }
-
-  function closeModal() {
-    setModalIsOpenLivroAdd(false);
-  }
+  const ebookEstoque =
+    livro &&
+    livro.detalhes.find(
+      (detalhe) =>
+        detalhe.tipoLivro === "EBOOK" &&
+        (detalhe.qtdeEstoque === 0 || detalhe.qtdeEstoque > 0)
+    );
 
   const customStyles = {
     content: {
@@ -102,7 +118,7 @@ function InformacaoLivro() {
       <Navbar />
       <Container>
         <div className={styles.container}>
-          <Link to={"/"}>
+          <Link to={"/adm"}>
             <h1 className={styles.voltarHome}>
               <AiOutlineArrowLeft />
               Voltar
@@ -148,92 +164,136 @@ function InformacaoLivro() {
                 </div>
                 <div className={styles.fichaTecnica}>
                   <div className={styles.ficha}>
-                    <ul className={styles.ficha2}>
+                    <ul className={styles.fichaAdm}>
                       <li className={styles.fichaInfo}>
-                        <span className={styles.fichaTh}>Titulo:</span>
+                        <label htmlFor="titulo" className={styles.fichaTh}>
+                          Titulo:
+                        </label>
                       </li>
                       <li>
-                        <span className={styles.fichaTr}>{livro.titulo}</span>
+                        <input
+                          type="text"
+                          id="titulo"
+                          className={styles.inputAdm}
+                          defaultValue={livro.titulo}
+                        />
                       </li>
                     </ul>
-                    <ul className={styles.ficha1}>
+                    <ul className={styles.fichaAdm}>
                       <li className={styles.fichaInfo}>
-                        <span className={styles.fichaTh}>Autor(a):</span>
+                        <label htmlFor="autor" className={styles.fichaTh}>
+                          Autor(a):
+                        </label>
                       </li>
                       <li>
-                        <span className={styles.fichaTr}>{livro.autor}</span>
+                        <input
+                          type="text"
+                          id="autor"
+                          className={styles.inputAdm}
+                          defaultValue={livro.autor}
+                        />
                       </li>
                     </ul>
-                    <ul className={styles.ficha2}>
+                    <ul className={styles.fichaAdm}>
                       <li className={styles.fichaInfo}>
-                        <span className={styles.fichaTh}>Gênero:</span>
+                        <label htmlFor="genero" className={styles.fichaTh}>
+                          Gênero:
+                        </label>
                       </li>
                       <li>
-                        <span className={styles.fichaTr}>{livro.genero}</span>
+                        <input
+                          type="text"
+                          id="genero"
+                          className={styles.inputAdm}
+                          defaultValue={livro.genero}
+                        />
                       </li>
                     </ul>
-                    <ul className={styles.ficha1}>
+                    <ul className={styles.fichaAdm}>
                       <li className={styles.fichaInfo}>
-                        <span className={styles.fichaTh}>Editora:</span>
+                        <label htmlFor="editora" className={styles.fichaTh}>
+                          Editora:
+                        </label>
                       </li>
                       <li>
-                        <span className={styles.fichaTr}>{livro.editora}</span>
+                        <input
+                          type="text"
+                          id="editora"
+                          className={styles.inputAdm}
+                          defaultValue={livro.editora}
+                        />
                       </li>
                     </ul>
-                    <ul className={styles.ficha2}>
+                    <ul className={styles.fichaBolean}>
                       <li className={styles.fichaInfo}>
-                        <span className={styles.fichaTh}>
-                          Ano de Publicacao:
-                        </span>
+                        <label htmlFor="oferta" className={styles.fichaTh}>
+                          Oferta:
+                        </label>
+                        <input
+                          type="text"
+                          id="oferta"
+                          className={styles.inputAdm}
+                          defaultValue={livro.oferta}
+                        />
+                      </li>
+                      <li className={styles.fichaInfo}>
+                        <label htmlFor="destaque" className={styles.fichaTh}>
+                          Destaque:
+                        </label>
+                        <input
+                          type="text"
+                          id="destaque"
+                          className={styles.inputAdm}
+                          defaultValue={livro.destaque}
+                        />
+                      </li>
+                    </ul>
+                    <ul className={styles.fichaBolean}>
+                      <li className={styles.fichaInfo}>
+                        <label htmlFor="anoPublicacao" className={styles.fichaTh}>
+                        Ano Publicação:
+                        </label>
+                        <input
+                          type="text"
+                          id="anoPublicacao"
+                          className={styles.inputAdm}
+                          defaultValue={livro.anoPublicacao}
+                        />
+                      </li>
+                      <li className={styles.fichaInfo}>
+                        <label htmlFor="qtdePagina" className={styles.fichaTh}>
+                        Páginas:
+                        </label>
+                        <input
+                          type="text"
+                          id="Páginas"
+                          className={styles.inputAdm}
+                          defaultValue={livro.qtdePagina}
+                        />
+                      </li>
+                    </ul>
+                    <ul className={styles.fichaAdm}>
+                      <li className={styles.fichaInfo}>
+                        <label htmlFor="sinopse" className={styles.fichaTh}>
+                          Sinopse:
+                        </label>
                       </li>
                       <li>
-                        <span className={styles.fichaTr}>
-                          {livro.anoPublicacao}
-                        </span>
+                        <textarea
+                          type="textarea"
+                          id="sinopse"
+                          className={styles.inputAdmSinopse}
+                          defaultValue={livro.sinopse}
+                        />
                       </li>
                     </ul>
-                    <ul className={styles.ficha1}>
-                      <li className={styles.fichaInfo}>
-                        <span className={styles.fichaTh}>
-                          Quantidade de Páginas:
-                        </span>
-                      </li>
-                      <li>
-                        <span className={styles.fichaTr}>
-                          {livro.qtdePagina}
-                        </span>
-                      </li>
-                    </ul>
-                    <ul className={styles.ficha2}>
-                      <li className={styles.fichaInfo}>
-                        <span className={styles.fichaTh}>Oferta:</span>
-                        <span className={styles.fichaTr}>
-                          {livro.oferta ? "Sim" : "Não"}
-                        </span>
-                      </li>
-                      <li>
-                        <span className={styles.fichaTh}>Destaque:</span>
-                        <span className={styles.fichaTr}>
-                          {livro.destaque ? "Sim" : "Não"}
-                        </span>
-                      </li>
-                    </ul>
-                    <ul className={styles.ficha1}>
-                      <li className={styles.fichaInfo}>
-                        <span className={styles.fichaTh}>Sinopse:</span>
-                      </li>
-                      <li>
-                        <span className={styles.fichaTr}>{livro.sinopse}</span>
-                      </li>
-                    </ul>
-
                   </div>
                 </div>
               </div>
             </div>
 
             <div className={styles.comprarLivros}>
-              <div className={styles.divComprarLivros}>
+              <div className={styles.divTipoLivros}>
                 <div className={styles.compra}>
                   {tipoLivroSelecionado === "FISICO" && (
                     <div className={styles.divPreco}>
@@ -241,43 +301,49 @@ function InformacaoLivro() {
                         <li>
                           {fisicoDetalhe && (
                             <>
-                            <span className={styles.liInfoTit}>
-                              {fisicoDetalhe.tipoLivro}
-                            </span>
-                          </>
+                              <label className={styles.liInfoTit}>
+                                {fisicoDetalhe.tipoLivro}
+                              </label>
+                            </>
                           )}
                         </li>
                       </ul>
                       <ul className={styles.ulCompraInfo}>
                         <li>
-                          <span className={styles.liInfoTit}>Preco:</span>
+                          <label className={styles.liInfoTit}>Preco:</label>
                         </li>
                         <li>
-                          <span className={styles.precoRegular}>
-                            {fisicoDetalhe.preco.toLocaleString("pt-BR", {
-                              style: "currency",
-                              currency: "BRL",
-                            })}
-                          </span>
-                        </li>
-                      </ul>
-                      <ul className={styles.ulCompraInfo}>
-                        <li>
-                          <span className={styles.liInfoTit}>Estoque:</span>
-                        </li>
-                        <li>
-                          <span className={styles.precoRegular}>
-                            {fisicoEstoque.qtdeEstoque}
-                          </span>
+                          <input
+                            type="text"
+                            id="preco"
+                            className={styles.inputAdm}
+                            defaultValue={fisicoPreco}
+                          />
                         </li>
                       </ul>
                       <ul className={styles.ulCompraInfo}>
                         <li>
-                          <span className={styles.estoque}>
-                            {fisicoEstoque.qtdeEstoque === 0
+                          <label className={styles.liInfoTit}>Estoque:</label>
+                        </li>
+                        <li>
+                          <input
+                            type="text"
+                            id="qtdeEstoque"
+                            className={styles.inputAdm}
+                            defaultValue={(fisicoEstoque.qtdeEstoque)}
+                          />
+                        </li>
+                      </ul>
+                      <ul className={styles.ulCompraInfo}>
+                        <li>
+                          <p
+                            type="text"
+                            id="qtdeEstoque"
+                            className={styles.estoque}
+                         
+                          >{fisicoEstoque.qtdeEstoque === 0
                               ? "Sem estoque"
-                              : "Em estoque"}
-                          </span>
+                              : "Em estoque"}</p>
                         </li>
                       </ul>
                     </div>
@@ -288,78 +354,78 @@ function InformacaoLivro() {
                         <li>
                           {ebookDetalhe && (
                             <>
-                              <span className={styles.liInfoTit}>
+                              <label className={styles.liInfoTit}>
                                 {ebookDetalhe.tipoLivro}
-                              </span>
+                              </label>
                             </>
                           )}
                         </li>
                       </ul>
-                        <ul className={styles.ulCompraInfo}>
-                          <li>
-                            <span className={styles.liInfoTit}>
-                              Preco:
-                            </span>
-                          </li>
-                          <li>
-                            <span className={styles.precoRegular}>
-                              {ebookDetalhe.preco.toLocaleString("pt-BR", {
-                                style: "currency",
-                                currency: "BRL",
-                              })}
-                            </span>
-                          </li>
-                        </ul>
-                        <ul className={styles.ulCompraInfo}>
+                      <ul className={styles.ulCompraInfo}>
                         <li>
-                          <span className={styles.liInfoTit}>Estoque:</span>
+                          <label className={styles.liInfoTit}>Preco:</label>
                         </li>
                         <li>
-                          <span className={styles.precoRegular}>
-                            {ebookEstoque.qtdeEstoque}
-                          </span>
+                          <input
+                            type="text"
+                            id="preco"
+                            className={styles.inputAdm}
+                            defaultValue={ebookPreco}
+                          />
                         </li>
                       </ul>
                       <ul className={styles.ulCompraInfo}>
                         <li>
-                          <span className={styles.estoque}>
-                            {ebookEstoque.qtdeEstoque === 0
+                          <label className={styles.liInfoTit}>Estoque:</label>
+                        </li>
+                        <li>
+                          <input
+                            type="text"
+                            id="qtdeEstoque"
+                            className={styles.inputAdm}
+                            defaultValue={(ebookEstoque.qtdeEstoque)}
+                          />
+                        </li>
+                      </ul>
+                      <ul className={styles.ulCompraInfo}>
+                        <li>
+                          <p
+                            type="text"
+                            id="qtdeEstoque"
+                            className={styles.estoque}
+                         
+                          >{ebookEstoque.qtdeEstoque === 0
                               ? "Sem estoque"
-                              : "Em estoque"}
-                          </span>
+                              : "Em estoque"}</p>
                         </li>
                       </ul>
                     </div>
                   )}
-                </div>
-                <div>
-                  <Modal
-                    className={styles.modalCompra}
-                    isOpen={modalIsOpenLivroAdd}
-                    onRequestClose={closeModal}
-                    contentLabel="Livro editado com sucesso!"
-                    style={customStyles}
-                    overlayStyle={customStyles.overlay}
-                  >
-                    <button
-                      className={styles.buttonFecharModal}
-                      onClick={() => {
-                        closeModal();
-                        window.location.reload();
-                      }}
-                    >
-                      <AiOutlineClose className={styles.imgFechar} />
-                    </button>
-                    <h2 className={styles.h2AdicionarSacola}>
-                      Livro editado com sucesso!
-                    </h2>
-                  </Modal>
                 </div>
               </div>
             </div>
           </div>
 
           <div className={styles.linhaHorizontal} />
+          <div className={styles.containerButtonAdm}>
+            <Link
+              to={{
+                pathname: '/adm',
+                state: { livro, detalhelivro: [ebookDetalhe, fisicoDetalhe] },
+              }}
+            >
+              <button className={styles.buttonCardAdm}>Cancelar</button>
+            </Link>
+            <button
+              className={styles.buttonCardAdm}
+              // onClick={() => {handleDeleteLivro(livro.id);
+              //   window.alert("Livro deletado!");
+              //   window.location.reload();
+              // }}
+            >
+              Salvar
+                      </button>
+          </div>
         </div>
       </Container>
 
@@ -368,4 +434,4 @@ function InformacaoLivro() {
   );
 }
 
-export default InformacaoLivro;
+export default InformacaoLivroAdm;

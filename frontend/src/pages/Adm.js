@@ -10,6 +10,7 @@ import styles from "./Adm.module.css";
 
 function Adm() {
   const [livros, setLivros] = useState([]);
+  const [modalIsOpenLivroAdd, setModalIsOpenLivroAdd] = useState(false);
 
   useEffect(() => {
     axios

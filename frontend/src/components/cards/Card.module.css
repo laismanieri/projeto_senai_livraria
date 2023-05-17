@@ -126,4 +126,12 @@
   background-color: #033579;
   color: white;
 }
+
+
+.buttonFecharModal{
+  background:#033479d4;
+  border-radius: 50%;
+  width: 2em;
+  height: 1.7em;
+}
   
