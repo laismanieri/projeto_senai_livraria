@@ -3,7 +3,8 @@ import Container from "./Container";
 import Search from "./Search";
 import { Link } from "react-router-dom";
 import UsuarioLogin from "./UsuarioLogin";
-import ButtonCestaCompra from "./ButtonCestaCompra";
+import ButtonCestaCompra from "../buttons/ButtonCestaCompra";
+import ButtonFavoritos from "../buttons/ButtonFavoritos";
 
 
 function Navbar() {
@@ -15,6 +16,7 @@ function Navbar() {
         </Link>
         <Search />
         <UsuarioLogin />
+        <ButtonFavoritos/>
         <ButtonCestaCompra/>
       </Container>
     </nav>

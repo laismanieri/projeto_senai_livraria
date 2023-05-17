@@ -1,6 +1,6 @@
-import CarouselBanner from '../components/carousel/Banner';
+import Banner from '../components/carousel/Banner';
 import Navbar from '../components/layout/NavBar';
-import styles from './Home.module.css';
+
 import Container from '../components/layout/Container';
 import Footer from '../components/layout/Footer';
 import Destaque from "../components/carousel/Destaque";
@@ -27,7 +27,7 @@ function Home() {
   return (
     <>
       <Navbar />
-      <CarouselBanner />
+      <Banner />
       <Container>
         <Destaque livros={livrosDestaque} />
         <Oferta livros={livrosOferta} />

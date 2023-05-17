@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Cadastro from "./pages/Cadastro";
 import Contact from "./pages/Contact"
 import InformacaoLivro from "./pages/InformacaoLivro";
+import InformacaoLivroAdm from "./pages/InformacaoLivroAdm";
 import Pagamento from "./pages/Pagamento";
 import Adm from "./pages/Adm";
 
@@ -20,6 +21,7 @@ function App() {
           <Route element={<Cadastro />} path="/cadastro" />
           <Route element={<ResultadosPesquisa />} path="/resultados-pesquisa"></Route>
           <Route element={<Contact />} path="/contact" />
+          <Route element={<InformacaoLivroAdm />} path="/informacao-livro-adm/:id" />
           <Route element={<InformacaoLivro />} path="/informacao-livro/:id" />
           <Route element={<Pagamento />} path="/pagamento" />
         </Routes>

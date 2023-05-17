@@ -3,8 +3,17 @@
   color: #146b97;
 }
 
+.containerLivro, .containerOferta, .containerDestaque{
+  display: inline;
+}
+
 .container{
+  margin-top: 100px;
   position: relative;
+}
+
+.containerLivro{
+  margin-top: 100px;
 }
 
 .linhaHorizontal {
@@ -71,4 +80,3 @@
   .slick-next-alt {
     right: -60px;
   }
-  

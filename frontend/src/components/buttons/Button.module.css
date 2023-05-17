@@ -1,0 +1,14 @@
+
+.navbarButton, .navbarButtonFav {
+    background: #033579;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    width: 4vh;
+    height: 4vh;
+  }
+  
+.iconFavorito{
+    font-size: 1.5em;
+}

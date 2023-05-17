@@ -27,8 +27,16 @@
   .gridContainer {
     display: grid;
     grid-template-columns: 20em 35em 20em;
-    grid-template-rows: 27em;
+    grid-template-rows: 40em;
     gap: 2em;
+    color: #146b97;  
+  }
+
+    .gridContainerAdm {
+    display: grid;
+    grid-template-columns: 18em 42em 15em;
+    grid-template-rows: 55em;
+    gap: 1em;
     color: #146b97;  
   }
 
@@ -40,12 +48,27 @@
     overflow: auto;
   }
 
+  .gridItemLongAdm {
+    font-size: 30px;
+    text-align: center;
+    color: #146b97;  
+    overflow: auto;
+  }
+
+
     .containerInfoLivro {
     max-height: 700px;
     overflow: auto;
     justify-content: center;
     align-items: center;
   }
+
+  .containerInfoLivro {
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+  }
+
 
 
  .tituloFavorito{
@@ -63,7 +86,7 @@
     color: #146b97;
     font-size: 25px;
     margin: 0;
-
+    margin-bottom: 1em;
   }
 
   .autor{
@@ -91,6 +114,8 @@
     width: 15em;
     background:rgb(205, 231, 255);
     margin: 5px 0 5px 0;
+    border: none;
+    border-radius: 7px;
 
   }
 
@@ -139,7 +164,7 @@
     align-items: center;
   }
 
-  .ulCompraInfo, .ulCompraInfoEntrega, .ulCompraInfoTipo{
+  .ulCompraInfo, .ulCompraInfoEntrega, .ulCompraInfoTipo, .ulCompraInfoAdm{
     display: flex;
     justify-content: space-between;
     padding: 2px;
@@ -150,10 +175,8 @@
     list-style-type: none;
 
   }
- 
-  .ulCompraInfoEntrega{
-    margin-top: 20px; 
-  }
+
+
   
   .ulCompraInfoTipo{
     font-weight: 800; 
@@ -165,6 +188,12 @@
     font-weight: 800; 
     margin-bottom: 15px;  
 
+  }
+
+  .liInfoTit{
+    font-weight: 800; 
+    margin-bottom: 15px; 
+    font-size: 20px; 
   }
 
   .liEntrega {
@@ -235,50 +264,6 @@
     margin: 0;
   }
     
- 
-  .qtde {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #146b97;
-    font-weight: 700;
-    margin: 0;
-    font-size: 30px;
-    font-weight: 700;
-    
-  }
-
-
-  .buttonQtde{
-    border: none;
-    width: 30px;
-    text-align: center;
-    border-radius: 5px;
-    color: #146b97;
-  }
-
-  .buttonQtde:hover{
-    cursor: pointer;
-    background-color: #d2d2d2d8;
-    text-decoration: none;
-    color: rgb(255, 255, 255)
-  }
-
-  .spanQtde {
-    max-width: 3rem; 
-    padding: 0.1rem 0.9rem; 
-    background-color: rgb(242, 244, 246);
-    border-radius: 5px; 
-    color: #146b97; 
-    font-size: 15px;
-  }
-
-  .close{
-    color: #146b97; 
-    cursor: pointer;
-  }
-
 
 
 
@@ -289,6 +274,7 @@
     text-align: center;
     padding: 20px;
     box-shadow: 1px 1px 20px 1px rgba(1, 23, 61, 0.042);
+    margin: 20px;
 
   }
 
@@ -312,7 +298,7 @@
     background:rgb(192, 225, 255);
   }
 
-  .fichaH1, .voltarHome{
+  .fichaH1, .fichaH1Adm,.voltarHome{
         text-align: left;
         font-size: 1.3em;
         margin-left: 0.2em;

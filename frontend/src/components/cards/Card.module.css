@@ -1,42 +1,53 @@
 
-.containerCard{
+.containerCard, .containerCardAdm{
   display: inline-block;   
   justify-content: center;
-  text-decoration: none;
+  text-decoration: none;  
+
 }
 
 
-
   
-.card{
+.card,.cardAdm{
   border-radius: 12px;
   box-shadow: 5px 5px 15px 5px rgba(1, 23, 61, 0.22);
-  padding: 25px;
+  padding: 30px;
   transition: all 0,3s ease-out;
   background: whitesmoke;
   width: 200PX;
   text-align: center; 
   text-align: center;
-  margin: 20px;
+
 }
 
-.card:hover{
+.containerCardAdm{
+ max-height: 370px;
+ margin: 20px;
+
+}
+
+.cardAdm {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.card, .cardAdm:hover{
   transform: translateY(-5px);
   cursor: pointer;
 }
 
 .cardImageLivro {
   width: 100%;
+  max-height: 200px;
 }
 
-.cardTitulo{
+.cardTitulo, .cardTituloAdm{
   height: 7vh;
   text-align: center;
-  margin-bottom: 5px;
-  margin: 0;
+  margin-top: 10px;
   display: flex;
   align-items: center;
-  height: 2em;
 }
 
 .cardPreco{
@@ -52,14 +63,13 @@
 }
 
   
-.h2TituloCard{
+.h2TituloCard, .h2TituloCardAdm{
   font-size: 1rem;
-  margin-bottom: 0.5rem;
   width: 100%;
   color:  #033579;
   margin: 0;
-  margin-top: 10px;
 }
+
 
 .cardOferta h2, .cardRegular h2{
   margin: 0;
@@ -89,6 +99,31 @@
   font-size: 17px;
   font-weight: 600;
 }
+.containerButtonAdm{
+ display: flex;
+ justify-content: space-around;
+ margin-top: 0.3em;
 
+}
+.buttonCardAdm{
+  width: 4em;
+}
 
+.buttonCardAdm{
+  color: #146b97; 
+  font-size: 14px;
+  font-weight: bold;
+  height: 2em;
+  width: 4.5em;
+  background:rgb(205, 231, 255);
+  margin: 5px 0 5px 0;
+  border: none;
+  border-radius: 7px;
+
+}
+
+.buttonCardAdm:hover{
+  background-color: #033579;
+  color: white;
+}
   
