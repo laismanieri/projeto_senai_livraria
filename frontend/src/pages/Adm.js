@@ -7,6 +7,7 @@ import Container from "../components/layout/Container";
 import DestaqueAdm from "../components/carousel/DestaqueAdm";
 import LivroAdm from "../components/carousel/LivroAdm";
 import styles from "./Adm.module.css";
+import CadastroLivro from "../components/carousel/CadastroLivro";
 
 function Adm() {
   const [livros, setLivros] = useState([]);
@@ -32,6 +33,9 @@ function Adm() {
 
       <Container>
         <div className={styles.containerAdm}>
+          <div className={styles.containerAdmSecao}>
+            <CadastroLivro/>
+          </div>
           <div className={styles.containerAdmSecao}>
             <LivroAdm livros={livro} />
           </div>
