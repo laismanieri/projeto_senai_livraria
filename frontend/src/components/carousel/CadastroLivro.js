@@ -1,8 +1,7 @@
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
-import styles from "./CadastroLivro.module.css"
-
+import styles from "./CadastroLivro.module.css";
 
 function CadastroLivro() {
   const [titulo, setTitulo] = useState("");
@@ -71,138 +70,145 @@ function CadastroLivro() {
         <div className="linhaHorizontal" />
         <div className="containerDestaque">
           <Form onSubmit={handleSubmit}>
+            <div className={styles.containerSmall}>
+              <Row>
+                <Col>
+                  <Form.Group controlId="formTitulo">
+                    <Form.Label>Título</Form.Label>
+                    <Form.Control
+                      className={styles.inputCadastrar}
+                      type="text"
+                      placeholder="Digite o título do livro"
+                      value={titulo}
+                      onChange={(e) => setTitulo(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
 
-          <div className={styles.containerSmall}>
-            <Row>
-              <Col>
-                <Form.Group controlId="formTitulo">
-                  <Form.Label>Título</Form.Label>
-                  <Form.Control className={styles.inputCadastrar}
-                    type="text"
-                    placeholder="Digite o título do livro"
-                    value={titulo}
-                    onChange={(e) => setTitulo(e.target.value)}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
-
-            <Row>
-              <Col>
-                <Form.Group controlId="formAutor">
-                  <Form.Label>Autor</Form.Label>
-                  <Form.Control className={styles.inputCadastrar}
-                    type="text"
-                    placeholder="Digite o nome do autor"
-                    value={autor}
-                    onChange={(e) => setAutor(e.target.value)}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
-
-          </div>
-
-          <div className={styles.containerSmall}>
-            <Row>
-              <Col>
-                <Form.Group controlId="formGenero">
-                  <Form.Label>Gênero</Form.Label>
-                  <Form.Control className={styles.inputCadastrar}
-                    type="text"
-                    rows={3}
-                    placeholder="Digite a descrição do livro"
-                    value={genero}
-                    onChange={(e) => setGenero(e.target.value)}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
-
-            <Row>
-              <Col>
-                <Form.Group controlId="formEditora">
-                  <Form.Label>Editora</Form.Label>
-                  <Form.Control className={styles.inputCadastrar}
-                    type="text"
-                    rows={3}
-                    placeholder="Digite a descrição do livro"
-                    value={editora}
-                    onChange={(e) => setEditora(e.target.value)}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
+              <Row>
+                <Col>
+                  <Form.Group controlId="formAutor">
+                    <Form.Label>Autor</Form.Label>
+                    <Form.Control
+                      className={styles.inputCadastrar}
+                      type="text"
+                      placeholder="Digite o nome do autor"
+                      value={autor}
+                      onChange={(e) => setAutor(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
             </div>
 
             <div className={styles.containerSmall}>
+              <Row>
+                <Col>
+                  <Form.Group controlId="formGenero">
+                    <Form.Label>Gênero</Form.Label>
+                    <Form.Control
+                      className={styles.inputCadastrar}
+                      type="text"
+                      rows={3}
+                      placeholder="Digite a descrição do livro"
+                      value={genero}
+                      onChange={(e) => setGenero(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
 
-            <Row>
-              <Col>
-                <Form.Group controlId="formAnoPublicacao">
-                  <Form.Label>Ano de Publicação</Form.Label>
-                  <Form.Control className={styles.inputCadastrar}
-                    type="text"
-                    rows={3}
-                    placeholder="Digite a descrição do livro"
-                    value={anoPublicacao}
-                    onChange={(e) => setAnoPublicacao(e.target.value)}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
+              <Row>
+                <Col>
+                  <Form.Group controlId="formEditora">
+                    <Form.Label>Editora</Form.Label>
+                    <Form.Control
+                      className={styles.inputCadastrar}
+                      type="text"
+                      rows={3}
+                      placeholder="Digite a descrição do livro"
+                      value={editora}
+                      onChange={(e) => setEditora(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+            </div>
 
-            <Row>
-              <Col>
-                <Form.Group controlId="formPaginas">
-                  <Form.Label>Páginas</Form.Label>
-                  <Form.Control className={styles.inputCadastrar}
-                    type="text"
-                    rows={3}
-                    placeholder="Digite a descrição do livro"
-                    value={qtdePagina}
-                    onChange={(e) => setQtdePagina(e.target.value)}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
+            <div className={styles.containerSmall}>
+              <Row>
+                <Col>
+                  <Form.Group controlId="formAnoPublicacao">
+                    <Form.Label>Ano de Publicação</Form.Label>
+                    <Form.Control
+                      className={styles.inputCadastrar}
+                      type="text"
+                      rows={3}
+                      placeholder="Digite a descrição do livro"
+                      value={anoPublicacao}
+                      onChange={(e) => setAnoPublicacao(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group controlId="formPaginas">
+                    <Form.Label>Páginas</Form.Label>
+                    <Form.Control
+                      className={styles.inputCadastrar}
+                      type="text"
+                      rows={3}
+                      placeholder="Digite a descrição do livro"
+                      value={qtdePagina}
+                      onChange={(e) => setQtdePagina(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+            </div>
 
-            <Row>
-              <Col>
-                <Form.Group controlId="formOferta">
-                  <Form.Label>Oferta</Form.Label>
-                  <Form.Control className={styles.inputCadastrar}
-                    type="text"
-                    rows={3}
-                    placeholder="Digite a descrição do livro"
-                    value={oferta}
-                    onChange={(e) => setOferta(e.target.value)}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
+            <div className={styles.containerSmall}>
+              <Row>
+                <Col>
+                  <Form.Group controlId="formOferta">
+                    <Form.Label>Oferta</Form.Label>
+                    <Form.Control
+                      className={styles.inputCadastrar}
+                      type="text"
+                      rows={3}
+                      placeholder="Digite a descrição do livro"
+                      value={oferta}
+                      onChange={(e) => setOferta(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
 
-            <Row>
-              <Col>
-                <Form.Group controlId="formDestaque">
-                  <Form.Label>Destaque</Form.Label>
-                  <Form.Control className={styles.inputCadastrar} 
-                    type="text"
-                    rows={3}
-                    placeholder="Digite a descrição do livro"
-                    value={destaque}
-                    onChange={(e) => setDestaque(e.target.value)}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
+              <Row>
+                <Col>
+                  <Form.Group controlId="formDestaque">
+                    <Form.Label>Destaque</Form.Label>
+                    <Form.Control
+                      className={styles.inputCadastrar}
+                      type="text"
+                      rows={3}
+                      placeholder="Digite a descrição do livro"
+                      value={destaque}
+                      onChange={(e) => setDestaque(e.target.value)}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
             </div>
 
             <Row>
               <Col>
                 <Form.Group controlId="formImagem">
                   <Form.Label>Imagem</Form.Label>
-                  <Form.Control className={styles.inputImagemCadastrar} 
+                  <Form.Control
+                    className={styles.inputImagemCadastrar}
                     type="text"
                     rows={3}
                     placeholder="Digite a descrição do livro"
@@ -213,12 +219,12 @@ function CadastroLivro() {
               </Col>
             </Row>
 
-            
             <Row>
               <Col>
                 <Form.Group controlId="formSinopse">
                   <Form.Label>Sinopse</Form.Label>
-                  <Form.Control className={styles.inputSinopseCadastrar} 
+                  <Form.Control
+                    className={styles.inputSinopseCadastrar}
                     type="textarea"
                     rows={20}
                     placeholder="Digite a descrição do livro"
@@ -229,7 +235,11 @@ function CadastroLivro() {
               </Col>
             </Row>
 
-            <Button className={styles.buttonCadastrar} variant="primary" type="submit">
+            <Button
+              className={styles.buttonCadastrar}
+              variant="primary"
+              type="submit"
+            >
               Cadastrar
             </Button>
           </Form>
