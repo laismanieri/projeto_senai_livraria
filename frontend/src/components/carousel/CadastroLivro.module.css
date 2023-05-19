@@ -1,3 +1,45 @@
+.containerCadastroLivro{
+  margin-top: 150px;
+  justify-content: space-between;
+  width: 100%;
+
+}
+
+
+.tituloCadastroLivro{
+  color: #146b97;
+}
+
+.linhaHorizontalCadastro {
+  width: 100%;
+  border: 0.05px outset rgba(144, 202, 252, 0.26);
+  margin-top: 1em;
+}
+
+.buttonExpandir, .buttonCadastrar{
+  color: #146b97; 
+  font-size: 20px;
+  font-weight: bold;
+  height: 2em;
+  width: 15em;
+  background:rgb(205, 231, 255);
+  margin-top: 20px;
+  border: none;
+  border-radius: 7px;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.buttonExpandir:hover, .buttonCadastrar:hover{
+  background-color: #033579;
+  color: white;
+}
+
+.labelCadastro{
+  color: #146b97;
+  font-weight: bold;
+}
+
 .containerSmall, .containerLong {
     display: flex;
     flex-wrap: wrap;
@@ -46,25 +88,6 @@
     text-align: justify;
   }
 
-  
-.buttonCadastrar{
-    color: #146b97; 
-    font-size: 20px;
-    font-weight: bold;
-    height: 2em;
-    width: 15em;
-    background:rgb(205, 231, 255);
-    margin: 5px 0px 5px 50px;
-    border: none;
-    border-radius: 7px;
-    justify-content: center;
-  }
-  
-  .buttonCadastrar:hover{
-    background-color: #033579;
-    color: white;
-  }
 
-    
   
   

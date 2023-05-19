@@ -12,6 +12,11 @@
   position: relative;
 }
 
+
+.carouselWrapper {
+  height: 1000px; /* Defina a largura desejada para o carrossel */
+  margin: 0 auto; /* Centraliza o carrossel horizontalmente */
+}
 .containerLivro{
   margin-top: 100px;
 }
@@ -25,7 +30,7 @@
 
 .carousel-wrapper {
     max-width: 1200px;
-    margin: 7vh auto;
+    margin: 10vh auto;
     position: relative;
     margin-top: 120px;
     z-index: 2;

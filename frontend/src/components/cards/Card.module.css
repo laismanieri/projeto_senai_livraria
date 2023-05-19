@@ -3,6 +3,8 @@
   display: inline-block;   
   justify-content: center;
   text-decoration: none;  
+  max-height: 700px;
+  margin: 20px;
 
 }
 
@@ -17,20 +19,10 @@
   width: 200PX;
   text-align: center; 
   text-align: center;
+  height: 400px;
 
 }
 
-.containerCardAdm{
- max-height: 370px;
- margin: 20px;
-
-}
-
-.cardAdm {
-  display: flex;
-  flex-direction: column;
-
-}
 
 .card, .cardAdm:hover{
   transform: translateY(-5px);

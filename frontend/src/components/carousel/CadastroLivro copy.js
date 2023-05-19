@@ -69,27 +69,35 @@ function CadastroLivro() {
 
   return (
     <>
-      <div className={styles.containerCadastroLivro}>
-        <h2 className={styles.tituloCadastroLivro}>Cadastrar Livros</h2>
-        <div className="linhaHorizontal" />
-        <Button
-          className={styles.buttonExpandir}
-          variant="secondary"
-          onClick={handleToggleExpand}
-        >
-          {isExpanded ? "Recolher" : "Expandir"} Formulário
-        </Button>
-        {isExpanded && (
-          <>
+      <div className="containerLivro">
+        <div className="container">
+          <div className="tituloCarousel">
+            <h2>Cadastrar Livros</h2>    
+
+          </div>
+        </div>
+        <div className="containerCadastro">
+          <Button
+            className={styles.buttonExpandir}
+            variant="secondary"
+            onClick={handleToggleExpand}
+          >
+            {isExpanded ? "Recolher" : "Expandir"} Formulário
+          </Button>
+      
+          <div className="containerLivroForm">
+          {isExpanded && (
+
+            <>
+                        <div className="linhaHorizontal" />
             <Form onSubmit={handleSubmit}>
-              <br />
+            <br/>
               <div className={styles.containerSmall}>
+
                 <Row>
                   <Col>
                     <Form.Group controlId="formTitulo">
-                      <Form.Label className={styles.labelCadastro}>
-                        Título
-                      </Form.Label>
+                      <Form.Label className={styles.labelCadastro}>Título</Form.Label>
                       <Form.Control
                         className={styles.inputCadastrar}
                         type="text"
@@ -104,9 +112,7 @@ function CadastroLivro() {
                 <Row>
                   <Col>
                     <Form.Group controlId="formAutor">
-                      <Form.Label className={styles.labelCadastro}>
-                        Autor
-                      </Form.Label>
+                      <Form.Label className={styles.labelCadastro}>Autor</Form.Label>
                       <Form.Control
                         className={styles.inputCadastrar}
                         type="text"
@@ -123,9 +129,7 @@ function CadastroLivro() {
                 <Row>
                   <Col>
                     <Form.Group controlId="formGenero">
-                      <Form.Label className={styles.labelCadastro}>
-                        Gênero
-                      </Form.Label>
+                      <Form.Label className={styles.labelCadastro}>Gênero</Form.Label>
                       <Form.Control
                         className={styles.inputCadastrar}
                         type="text"
@@ -141,9 +145,7 @@ function CadastroLivro() {
                 <Row>
                   <Col>
                     <Form.Group controlId="formEditora">
-                      <Form.Label className={styles.labelCadastro}>
-                        Editora
-                      </Form.Label>
+                      <Form.Label className={styles.labelCadastro}>Editora</Form.Label>
                       <Form.Control
                         className={styles.inputCadastrar}
                         type="text"
@@ -161,9 +163,7 @@ function CadastroLivro() {
                 <Row>
                   <Col>
                     <Form.Group controlId="formAnoPublicacao">
-                      <Form.Label className={styles.labelCadastro}>
-                        Ano de Publicação
-                      </Form.Label>
+                      <Form.Label className={styles.labelCadastro}>Ano de Publicação</Form.Label>
                       <Form.Control
                         className={styles.inputCadastrar}
                         type="text"
@@ -178,9 +178,7 @@ function CadastroLivro() {
                 <Row>
                   <Col>
                     <Form.Group controlId="formPaginas">
-                      <Form.Label className={styles.labelCadastro}>
-                        Páginas
-                      </Form.Label>
+                      <Form.Label className={styles.labelCadastro}>Páginas</Form.Label>
                       <Form.Control
                         className={styles.inputCadastrar}
                         type="text"
@@ -198,13 +196,9 @@ function CadastroLivro() {
                 <Row>
                   <Col>
                     <Form.Group controlId="formOferta" as={Row}>
-                      <Form.Label
-                        column
-                        sm="12"
-                        className={styles.labelCadastro}
-                      >
+                      <Form.Label column sm="12" className={styles.labelCadastro}>
                         Oferta
-                      </Form.Label>
+                      </Form.Label >
                       <Col sm="12">
                         <Form.Control
                           className={styles.inputCadastrar}
@@ -223,11 +217,7 @@ function CadastroLivro() {
                 <Row>
                   <Col>
                     <Form.Group controlId="formDestaque" as={Row}>
-                      <Form.Label
-                        column
-                        sm="12"
-                        className={styles.labelCadastro}
-                      >
+                    <Form.Label column sm="12" className={styles.labelCadastro}>
                         Destaque
                       </Form.Label>
                       <Col sm="12">
@@ -250,9 +240,7 @@ function CadastroLivro() {
               <Row>
                 <Col>
                   <Form.Group controlId="formImagem">
-                    <Form.Label className={styles.labelCadastro}>
-                      Imagem
-                    </Form.Label>
+                    <Form.Label className={styles.labelCadastro}>Imagem</Form.Label>
                     <Form.Control
                       className={styles.inputImagemCadastrar}
                       type="text"
@@ -268,9 +256,7 @@ function CadastroLivro() {
               <Row>
                 <Col>
                   <Form.Group controlId="formSinopse">
-                    <Form.Label className={styles.labelCadastro}>
-                      Sinopse
-                    </Form.Label>
+                    <Form.Label className={styles.labelCadastro}>Sinopse</Form.Label>
                     <Form.Control
                       className={styles.inputSinopseCadastrar}
                       type="textarea"
@@ -291,10 +277,11 @@ function CadastroLivro() {
                 Cadastrar
               </Button>
             </Form>
-          </>
-        )}
+            </>
+          )}
+          </div>
+        </div>
       </div>
-
       <div className="linhaHorizontal" />
     </>
   );

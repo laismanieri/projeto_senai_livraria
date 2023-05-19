@@ -32,20 +32,10 @@ function Adm() {
       <NavbarAdm />
 
       <Container>
-        <div className={styles.containerAdm}>
-          <div className={styles.containerAdmSecao}>
             <CadastroLivro/>
-          </div>
-          <div className={styles.containerAdmSecao}>
             <LivroAdm livros={livro} />
-          </div>
-          <div className={styles.containerAdmSecao}>
             <DestaqueAdm livros={livrosDestaque} />
-          </div>
-          <div className={styles.containerAdmSecao}>
             <OfertaAdm livros={livrosOferta} />
-          </div>
-        </div>
       </Container>
       <Footer />
     </>
