@@ -18,6 +18,8 @@ function CadastroLivro() {
   const [preco, setPreco] = useState("");
   const [qtdeEstoque, setQtdeEstoque] = useState("");
 
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -111,7 +113,7 @@ function CadastroLivro() {
                       className={styles.inputCadastrar}
                       type="text"
                       rows={3}
-                      placeholder="Digite a descrição do livro"
+                      placeholder="Digite o genero do livro"
                       value={genero}
                       onChange={(e) => setGenero(e.target.value)}
                     />
@@ -127,7 +129,7 @@ function CadastroLivro() {
                       className={styles.inputCadastrar}
                       type="text"
                       rows={3}
-                      placeholder="Digite a descrição do livro"
+                      placeholder="Digite a editora do livro"
                       value={editora}
                       onChange={(e) => setEditora(e.target.value)}
                     />
@@ -145,7 +147,7 @@ function CadastroLivro() {
                       className={styles.inputCadastrar}
                       type="text"
                       rows={3}
-                      placeholder="Digite a descrição do livro"
+                      placeholder="Digite a ano de publicação do livro"
                       value={anoPublicacao}
                       onChange={(e) => setAnoPublicacao(e.target.value)}
                     />
@@ -160,7 +162,7 @@ function CadastroLivro() {
                       className={styles.inputCadastrar}
                       type="text"
                       rows={3}
-                      placeholder="Digite a descrição do livro"
+                      placeholder="Digite a quantidade de páginas do livro"
                       value={qtdePagina}
                       onChange={(e) => setQtdePagina(e.target.value)}
                     />
@@ -170,37 +172,49 @@ function CadastroLivro() {
             </div>
 
             <div className={styles.containerSmall}>
+            <Row>
+                <Col>
+                  <Form.Group controlId="formOferta" as={Row}>
+                    <Form.Label column sm="12">
+                      Oferta
+                    </Form.Label>
+                    <Col sm="12">
+                      <Form.Control
+                        className={styles.inputCadastrar}
+                        as="select"
+                        value={oferta}
+                        onChange={(e) => setOferta(e.target.value)}
+                      >
+                        <option value="">Selecione uma opção</option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                      </Form.Control>
+                    </Col>
+                  </Form.Group>
+                </Col>
+              </Row>
               <Row>
                 <Col>
-                  <Form.Group controlId="formOferta">
-                    <Form.Label>Oferta</Form.Label>
-                    <Form.Control
-                      className={styles.inputCadastrar}
-                      type="text"
-                      rows={3}
-                      placeholder="Digite a descrição do livro"
-                      value={oferta}
-                      onChange={(e) => setOferta(e.target.value)}
-                    />
+                  <Form.Group controlId="formDestaque" as={Row}>
+                    <Form.Label column sm="12">
+                      Destaque
+                    </Form.Label>
+                    <Col sm="12">
+                      <Form.Control
+                        className={styles.inputCadastrar}
+                        as="select"
+                        value={destaque}
+                        onChange={(e) => setDestaque(e.target.value)}
+                      >
+                        <option value="">Selecione uma opção</option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                      </Form.Control>
+                    </Col>
                   </Form.Group>
                 </Col>
               </Row>
 
-              <Row>
-                <Col>
-                  <Form.Group controlId="formDestaque">
-                    <Form.Label>Destaque</Form.Label>
-                    <Form.Control
-                      className={styles.inputCadastrar}
-                      type="text"
-                      rows={3}
-                      placeholder="Digite a descrição do livro"
-                      value={destaque}
-                      onChange={(e) => setDestaque(e.target.value)}
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
             </div>
 
             <Row>
@@ -211,7 +225,7 @@ function CadastroLivro() {
                     className={styles.inputImagemCadastrar}
                     type="text"
                     rows={3}
-                    placeholder="Digite a descrição do livro"
+                    placeholder="Digite a imagem do livro"
                     value={imagem}
                     onChange={(e) => setImagem(e.target.value)}
                   />
@@ -227,7 +241,7 @@ function CadastroLivro() {
                     className={styles.inputSinopseCadastrar}
                     type="textarea"
                     rows={20}
-                    placeholder="Digite a descrição do livro"
+                    placeholder="Digite a sinopse do livro"
                     value={sinopse}
                     onChange={(e) => setSinopse(e.target.value)}
                   />

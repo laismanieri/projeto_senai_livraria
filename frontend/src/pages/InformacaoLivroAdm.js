@@ -31,14 +31,22 @@ function InformacaoLivroAdm() {
     destaque: document.getElementById("destaque").value,
     qtdePagina: document.getElementById("qtdePagina").value,
     detalhes: detalhesOriginais.map((detalhe) => {
-      return {
-        ...detalhe,
-        tipoLivroSelecionado: document.getElementById("tipoLivro").value,
-        preco: document.getElementById("preco").value,
-        qtdeEstoque: document.getElementById("qtdeEstoque").value,
-      };
+
+      if(detalhe.tipoLivro == tipoLivroSelecionado){
+          return {
+          ...detalhe,
+          preco: Number(document.getElementById("preco").value),
+          qtdeEstoque: Number(document.getElementById("qtdeEstoque").value),
+        };
+      }else{
+        return {
+          ...detalhe,
+        };
+      }
     }),
   };
+  console.log(livroAtualizado);
+
 
   axios
     .put(`http://localhost:8082/livro/${id}`, livroAtualizado)
