@@ -2,8 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import "./Carousel.css";
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import "../styles/Carousel.css";
 
 const Banner = () => {
   const sliderRef = React.useRef(null);

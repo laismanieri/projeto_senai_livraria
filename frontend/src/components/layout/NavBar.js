@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import UsuarioLogin from "./UsuarioLogin";
 import ButtonCestaCompra from "../buttons/ButtonCestaCompra";
 import ButtonFavoritos from "../buttons/ButtonFavoritos";
+import SearchAdm from "../adm/SearchAdm";
 
 
 function Navbar() {

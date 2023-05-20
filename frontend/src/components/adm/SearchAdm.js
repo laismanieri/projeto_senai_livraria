@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "../layout/Search.module.css";
 import {FaSearch} from 'react-icons/fa';
 
-function Search() {
+function SearchAdm() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ function Search() {
         });
       });
       setSearchResults(filteredResults);
-      navigate(`/resultados-pesquisa?term=${searchTerm}`, {
+      navigate(`/resultados-pesquisa-adm?term=${searchTerm}`, {
         state: { results: filteredResults, term: searchTerm },
       });
     } catch (error) {
@@ -65,4 +65,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default SearchAdm;

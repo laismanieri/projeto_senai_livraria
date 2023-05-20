@@ -1,8 +1,8 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Card from "../cards/Card";
-import "./Carousel.css"
+import Card from "../../cards/Card";
+import "../styles/Carousel.css";
 
 function Oferta({livros}) {
 

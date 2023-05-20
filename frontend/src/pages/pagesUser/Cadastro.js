@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import logoIMG from './assets/logo.png'
-import './login.css'
+import logoIMG from '../assets/logo.png'
+import '../styles/login.css'
 import cadastrar from './Cadastrar';
 
 function Cadastro() {

@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import styles from "./InformacaoLivro.module.css";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import Container from "../components/layout/Container";
-import Navbar from "../components/layout/NavBar";
-import Footer from "../components/layout/Footer";
-import { Link } from "react-router-dom";
 import { AiOutlineClose, AiFillHeart } from "react-icons/ai";
+import { useParams, Link } from "react-router-dom";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import Modal from "react-modal";
+
+import Container from "../../components/layout/Container";
+import Navbar from "../../components/layout/NavBar";
+import Footer from "../../components/layout/Footer";
+
+import styles from "../styles/InformacaoLivro.module.css";
 
 function InformacaoLivro() {
   const { id } = useParams();

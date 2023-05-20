@@ -1,13 +1,14 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import Home from './pages/Home';
-import ResultadosPesquisa from "./pages/ResultadosPesquisa";
-import Login from "./pages/Login";
-import Cadastro from "./pages/Cadastro";
-import Contact from "./pages/Contact"
-import InformacaoLivro from "./pages/InformacaoLivro";
-import InformacaoLivroAdm from "./pages/InformacaoLivroAdm";
-import Pagamento from "./pages/Pagamento";
-import Adm from "./pages/Adm";
+import Home from './pages/pagesUser/Home';
+import ResultadosPesquisa from "./pages/pagesUser/ResultadosPesquisa";
+import ResultadosPesquisaAdm from "./pages/pagesAdm/ResultadosPesquisaAdm";
+import Login from "./pages/pagesUser/Login";
+import Cadastro from "./pages/pagesUser/Cadastro";
+import Contact from "./pages/pagesUser/Contact"
+import InformacaoLivro from "./pages/pagesUser/InformacaoLivro";
+import InformacaoLivroAdm from "./pages/pagesAdm/InformacaoLivroAdm";
+import Pagamento from "./pages/pagesUser/Pagamento";
+import Adm from "./pages/pagesAdm/Adm";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route element={<Login />} path="/login" />
           <Route element={<Cadastro />} path="/cadastro" />
           <Route element={<ResultadosPesquisa />} path="/resultados-pesquisa"></Route>
+          <Route element={<ResultadosPesquisaAdm />} path="/resultados-pesquisa-adm"></Route>
           <Route element={<Contact />} path="/contact" />
           <Route element={<InformacaoLivroAdm />} path="/informacao-livro-adm/:id" />
           <Route element={<InformacaoLivro />} path="/informacao-livro/:id" />

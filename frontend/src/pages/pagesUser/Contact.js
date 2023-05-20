@@ -1,10 +1,13 @@
 import React from "react";
-import styles from "./Contact.module.css";
-import Footer from "../components/layout/Footer";
-import Navbar from "../components/layout/NavBar";
 import { Link } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import Container from "../components/layout/Container";
+
+import styles from "../styles/Contact.module.css";
+
+import Footer from "../../components/layout/Footer";
+import Navbar from "../../components/layout/NavBar";
+
+import Container from "../../components/layout/Container";
 
 function Contact() {
   return (

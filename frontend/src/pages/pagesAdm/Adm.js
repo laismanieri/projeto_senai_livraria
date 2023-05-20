@@ -1,17 +1,15 @@
-import Footer from "../components/layout/Footer";
-import NavbarAdm from "../components/adm/NavBarAdm";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import OfertaAdm from "../components/carousel/OfertaAdm";
-import Container from "../components/layout/Container";
-import DestaqueAdm from "../components/carousel/DestaqueAdm";
-import LivroAdm from "../components/carousel/LivroAdm";
-import styles from "./Adm.module.css";
-import CadastroLivro from "../components/carousel/CadastroLivro";
+import OfertaAdm from "../../components/carousel/carouselAdm/OfertaAdm";
+import Container from "../../components/layout/Container";
+import DestaqueAdm from "../../components/carousel/carouselAdm/DestaqueAdm";
+import LivroAdm from "../../components/carousel/carouselAdm/LivroAdm";
+import CadastroLivro from "../../components/adm/CadastroLivro";
+import Footer from "../../components/layout/Footer";
+import NavbarAdm from "../../components/adm/NavBarAdm";
 
 function Adm() {
   const [livros, setLivros] = useState([]);
-  const [modalIsOpenLivroAdd, setModalIsOpenLivroAdd] = useState(false);
 
   useEffect(() => {
     axios

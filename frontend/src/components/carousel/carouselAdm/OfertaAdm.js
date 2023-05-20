@@ -1,10 +1,11 @@
+import CardAdm from "../../cards/CardAdm";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Card from "../cards/Card";
-import "./Carousel.css"
+import "../styles/Carousel.css"
 
-function Destaque({ livros }) {
+function OfertaAdm({livros}) {
+
   const settings = {
     dots: true,
     infinite: true,
@@ -13,16 +14,17 @@ function Destaque({ livros }) {
     slidesToScroll: 1
   };
 
+
   return (
     <div className="container">
       <div className="tituloCarousel">
-        <h2>Destaques</h2>
+        <h2>Gerenciar Oferta</h2>
       </div>
       <div className="linhaHorizontal"/>
       <Slider {...settings}>
         {livros.map((livro) => (
           <div key={livro.id}>
-            <Card livro={livro} />
+            <CardAdm livro={livro} />
           </div>
         ))}
       </Slider>
@@ -31,4 +33,4 @@ function Destaque({ livros }) {
 }
 
 
-export default Destaque;
+export default OfertaAdm;

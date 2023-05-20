@@ -1,10 +1,10 @@
-import Banner from '../components/carousel/Banner';
-import Navbar from '../components/layout/NavBar';
+import Banner from '../../components/carousel/carouselUser/Banner';
+import Navbar from '../../components/layout/NavBar';
 
-import Container from '../components/layout/Container';
-import Footer from '../components/layout/Footer';
-import Destaque from "../components/carousel/Destaque";
-import Oferta from '../components/carousel/Oferta';
+import Container from '../../components/layout/Container';
+import Footer from '../../components/layout/Footer';
+import Destaque from "../../components/carousel/carouselUser/Destaque";
+import Oferta from '../../components/carousel/carouselUser/Oferta';
 import axios from "axios";
 import { useState, useEffect } from "react";
 

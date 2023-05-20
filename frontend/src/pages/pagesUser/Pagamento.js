@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import Container from "../components/layout/Container";
-import Footer from "../components/layout/Footer";
-import Navbar from "../components/layout/NavBar";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { AiFillDelete } from "react-icons/ai";
-import styles from "./Pagamento.module.css";
-import Table from "react-bootstrap/Table";
-import PaymentMethodSelect from "../components/layout/PaymentMethodSelect";
+import Container from "../../components/layout/Container";
+import Footer from "../../components/layout/Footer";
+import Navbar from "../../components/layout/NavBar";
+import PaymentMethodSelect from "../../components/layout/PaymentMethodSelect";
+import styles from "../styles/Pagamento.module.css";
+
 
 function Pagamento() {
     

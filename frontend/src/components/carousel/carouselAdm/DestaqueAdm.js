@@ -1,23 +1,23 @@
-import CardAdm from "../cards/CardAdm";
+import CardAdm from "../../cards/CardAdm";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./Carousel.css"
-function LivroAdm({livro, livros}) {
+import "../styles/Carousel.css"
+
+function DestaqueAdm({livros}) {
 
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 5,
     slidesToScroll: 1
   };
-
 
   return (
     <div className="container">
       <div className="tituloCarousel">
-        <h2>Gerenciar Livros</h2>
+        <h2>Gerenciar Destaques</h2>
       </div>
       <div className="linhaHorizontal"/>
       <Slider {...settings}>
@@ -31,4 +31,4 @@ function LivroAdm({livro, livros}) {
   );
 }
 
-export default LivroAdm;
+export default DestaqueAdm;

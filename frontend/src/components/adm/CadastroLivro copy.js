@@ -5,23 +5,31 @@ import styles from "./CadastroLivro.module.css";
 
 function CadastroLivro() {
   const [isExpanded, setIsExpanded] = useState(false);
-
+  const [listaLivros, setListaLivros] = useState([]);
   const [titulo, setTitulo] = useState("");
-  const [anoPublicacao, setAnoPublicacao] = useState("");
   const [autor, setAutor] = useState("");
+  const [anoPublicacao, setAnoPublicacao] = useState("");
   const [sinopse, setSinopse] = useState("");
   const [genero, setGenero] = useState("");
   const [editora, setEditora] = useState("");
   const [qtdePagina, setQtdePagina] = useState("");
-  const [oferta, setOferta] = useState("");
-  const [destaque, setDestaque] = useState("");
+  const [oferta, setOferta] = useState(false);
+  const [destaque, setDestaque] = useState(false);
   const [imagem, setImagem] = useState("");
-  const [tipoLivro, setTipoLivro] = useState("");
+  const [tipoLivro, setTipoLivro] = useState("FISICO");
   const [preco, setPreco] = useState("");
   const [qtdeEstoque, setQtdeEstoque] = useState("");
+  const [precoEbook, setPrecoEbook] = useState("");
+  const [qtdeEstoqueEbook, setQtdeEstoqueEbook] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const detalheLivro = {
+      tipoLivro: tipoLivro,
+      preco: tipoLivro === "FISICO" ? preco : precoEbook,
+      qtdeEstoque: tipoLivro === "FISICO" ? qtdeEstoque : qtdeEstoqueEbook,
+    };
 
     const novoLivro = {
       titulo: titulo,
@@ -34,20 +42,21 @@ function CadastroLivro() {
       oferta: oferta,
       destaque: destaque,
       imagem: imagem,
-      // detalhes: [
-      //   {
-      //     tipoLivro: tipoLivro,
-      //     preco: preco,
-      //     qtdeEstoque: qtdeEstoque
-      // },
-      // ],
+      detalhes: [detalheLivro], // Cria um array com o detalheLivro
     };
+
+    const novaListaLivros = [...listaLivros, novoLivro];
+
+    console.log(novoLivro);
 
     axios
       .post("http://localhost:8082/livro", novoLivro)
       .then((response) => {
         console.log("Livro cadastrado com sucesso:", response.data);
         // Resetar os campos do formulário
+        setListaLivros(novaListaLivros);
+
+        // Limpar os campos do formulário
         setTitulo("");
         setAutor("");
         setAnoPublicacao("");
@@ -57,9 +66,18 @@ function CadastroLivro() {
         setQtdePagina("");
         setOferta("");
         setDestaque("");
+        setImagem("");
+        setTipoLivro("");
+        setPreco("");
+        setQtdeEstoque("");
+        setPrecoEbook("");
+        setQtdeEstoqueEbook("");
+
+        window.alert("Livro cadastrado!", novoLivro);
       })
       .catch((error) => {
         console.error("Erro ao cadastrar livro:", error);
+        window.alert("Erro ao cadastrar livro!");
       });
   };
 
@@ -69,35 +87,27 @@ function CadastroLivro() {
 
   return (
     <>
-      <div className="containerLivro">
-        <div className="container">
-          <div className="tituloCarousel">
-            <h2>Cadastrar Livros</h2>    
-
-          </div>
-        </div>
-        <div className="containerCadastro">
-          <Button
-            className={styles.buttonExpandir}
-            variant="secondary"
-            onClick={handleToggleExpand}
-          >
-            {isExpanded ? "Recolher" : "Expandir"} Formulário
-          </Button>
-      
-          <div className="containerLivroForm">
-          {isExpanded && (
-
-            <>
-                        <div className="linhaHorizontal" />
+      <div className={styles.containerCadastroLivro}>
+        <h2 className={styles.tituloCadastroLivro}>Cadastrar Livros</h2>
+        <div className="linhaHorizontal" />
+        <Button
+          className={styles.buttonExpandir}
+          variant="secondary"
+          onClick={handleToggleExpand}
+        >
+          {isExpanded ? "Recolher" : "Expandir"} Formulário
+        </Button>
+        {isExpanded && (
+          <>
             <Form onSubmit={handleSubmit}>
-            <br/>
+              <br />
               <div className={styles.containerSmall}>
-
                 <Row>
                   <Col>
                     <Form.Group controlId="formTitulo">
-                      <Form.Label className={styles.labelCadastro}>Título</Form.Label>
+                      <Form.Label className={styles.labelCadastro}>
+                        Título
+                      </Form.Label>
                       <Form.Control
                         className={styles.inputCadastrar}
                         type="text"
@@ -112,7 +122,9 @@ function CadastroLivro() {
                 <Row>
                   <Col>
                     <Form.Group controlId="formAutor">
-                      <Form.Label className={styles.labelCadastro}>Autor</Form.Label>
+                      <Form.Label className={styles.labelCadastro}>
+                        Autor
+                      </Form.Label>
                       <Form.Control
                         className={styles.inputCadastrar}
                         type="text"
@@ -129,7 +141,9 @@ function CadastroLivro() {
                 <Row>
                   <Col>
                     <Form.Group controlId="formGenero">
-                      <Form.Label className={styles.labelCadastro}>Gênero</Form.Label>
+                      <Form.Label className={styles.labelCadastro}>
+                        Gênero
+                      </Form.Label>
                       <Form.Control
                         className={styles.inputCadastrar}
                         type="text"
@@ -145,7 +159,9 @@ function CadastroLivro() {
                 <Row>
                   <Col>
                     <Form.Group controlId="formEditora">
-                      <Form.Label className={styles.labelCadastro}>Editora</Form.Label>
+                      <Form.Label className={styles.labelCadastro}>
+                        Editora
+                      </Form.Label>
                       <Form.Control
                         className={styles.inputCadastrar}
                         type="text"
@@ -163,7 +179,9 @@ function CadastroLivro() {
                 <Row>
                   <Col>
                     <Form.Group controlId="formAnoPublicacao">
-                      <Form.Label className={styles.labelCadastro}>Ano de Publicação</Form.Label>
+                      <Form.Label className={styles.labelCadastro}>
+                        Ano de Publicação
+                      </Form.Label>
                       <Form.Control
                         className={styles.inputCadastrar}
                         type="text"
@@ -178,7 +196,9 @@ function CadastroLivro() {
                 <Row>
                   <Col>
                     <Form.Group controlId="formPaginas">
-                      <Form.Label className={styles.labelCadastro}>Páginas</Form.Label>
+                      <Form.Label className={styles.labelCadastro}>
+                        Páginas
+                      </Form.Label>
                       <Form.Control
                         className={styles.inputCadastrar}
                         type="text"
@@ -196,9 +216,13 @@ function CadastroLivro() {
                 <Row>
                   <Col>
                     <Form.Group controlId="formOferta" as={Row}>
-                      <Form.Label column sm="12" className={styles.labelCadastro}>
+                      <Form.Label
+                        column
+                        sm="12"
+                        className={styles.labelCadastro}
+                      >
                         Oferta
-                      </Form.Label >
+                      </Form.Label>
                       <Col sm="12">
                         <Form.Control
                           className={styles.inputCadastrar}
@@ -217,7 +241,11 @@ function CadastroLivro() {
                 <Row>
                   <Col>
                     <Form.Group controlId="formDestaque" as={Row}>
-                    <Form.Label column sm="12" className={styles.labelCadastro}>
+                      <Form.Label
+                        column
+                        sm="12"
+                        className={styles.labelCadastro}
+                      >
                         Destaque
                       </Form.Label>
                       <Col sm="12">
@@ -240,7 +268,9 @@ function CadastroLivro() {
               <Row>
                 <Col>
                   <Form.Group controlId="formImagem">
-                    <Form.Label className={styles.labelCadastro}>Imagem</Form.Label>
+                    <Form.Label className={styles.labelCadastro}>
+                      Imagem
+                    </Form.Label>
                     <Form.Control
                       className={styles.inputImagemCadastrar}
                       type="text"
@@ -256,7 +286,9 @@ function CadastroLivro() {
               <Row>
                 <Col>
                   <Form.Group controlId="formSinopse">
-                    <Form.Label className={styles.labelCadastro}>Sinopse</Form.Label>
+                    <Form.Label className={styles.labelCadastro}>
+                      Sinopse
+                    </Form.Label>
                     <Form.Control
                       className={styles.inputSinopseCadastrar}
                       type="textarea"
@@ -269,6 +301,79 @@ function CadastroLivro() {
                 </Col>
               </Row>
 
+              <div className={styles.containerTtipoLivro}>
+                {tipoLivro === "FISICO" && (
+                  <div>
+                  <Row>
+                    <Col>
+                      <Form.Group controlId="formTipoLivro" as={Row}>
+                        <Form.Label
+                          column
+                          sm="12"
+                          className={styles.labelCadastro}
+                        >
+                          Tipo do Livro
+                        </Form.Label>
+                        <Col sm="12">
+                          <Form.Control
+                            className={styles.inputCadastrar}
+                            as="select"
+                            value={tipoLivro}
+                            onChange={(e) => setTipoLivro(e.target.value)}
+                          >
+                            <option value="">Selecione uma opção</option>
+                            <option value="true">FISICO</option>
+                            <option value="false">EBOOK</option>
+                          </Form.Control>
+                        </Col>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <Form.Group controlId="formPaginas">
+                        <Form.Label className={styles.labelCadastro}>
+                          Preço
+                        </Form.Label>
+                        <Form.Control
+                          className={styles.inputCadastrar}
+                          type="number"
+                          rows={4}
+                          placeholder=""
+                          value={preco}
+                          onChange={(e) => setPreco(e.target.value)}
+                        />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <Form.Group controlId="formPaginas">
+                        <Form.Label className={styles.labelCadastro}>
+                          Estoque
+                        </Form.Label>
+                        <Form.Control
+                          className={styles.inputCadastrar}
+                          type="number"
+                          rows={4}
+                          placeholder=""
+                          value={qtdeEstoque}
+                          onChange={(e) => setQtdeEstoque(e.target.value)}
+                        />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  </div>
+                )}
+                {tipoLivro === "EBOOK" && (
+                  <div>
+                    {/* Renderizar campos específicos para e-books */}
+                    {/* Por exemplo, campos para formato, tamanho do arquivo, etc. */}
+                  </div>
+                )}
+                
+              </div>
+
               <Button
                 className={styles.buttonCadastrar}
                 variant="primary"
@@ -277,11 +382,10 @@ function CadastroLivro() {
                 Cadastrar
               </Button>
             </Form>
-            </>
-          )}
-          </div>
-        </div>
+          </>
+        )}
       </div>
+
       <div className="linhaHorizontal" />
     </>
   );

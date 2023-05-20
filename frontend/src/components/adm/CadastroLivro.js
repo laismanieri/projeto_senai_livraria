@@ -1,7 +1,7 @@
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
-import styles from "./CadastroLivro.module.css";
+import styles from "../adm/CadastroLivro.module.css";
 
 function CadastroLivro() {
 const [isExpanded, setIsExpanded] = useState(false);

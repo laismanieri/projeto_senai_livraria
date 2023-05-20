@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import styles from "./InformacaoLivro.module.css";
+import { useParams, Link } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import Container from "../components/layout/Container";
-import Navbar from "../components/layout/NavBar";
-import Footer from "../components/layout/Footer";
-import { Link } from "react-router-dom";
+
+import styles from "../styles/InformacaoLivro.module.css";
+
+import Container from "../../components/layout/Container";
+import Footer from "../../components/layout/Footer";
+import NavbarAdm from "../../components/adm/NavBarAdm";
 
 function InformacaoLivroAdm() {
   const { id } = useParams();
@@ -128,7 +129,7 @@ function InformacaoLivroAdm() {
 
   return (
     <>
-      <Navbar />
+      <NavbarAdm />
       <Container>
         <div className={styles.container}>
           <Link to={"/adm"}>

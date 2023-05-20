@@ -1,19 +1,21 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import Navbar from "../components/layout/NavBar";
-import styles from "./ResultadoPesquisa.module.css";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import Card from "../components/cards/Card";
-import Footer from "../components/layout/Footer";
-import Container from "../components/layout/Container";
 
-function ResultadosPesquisa() {
+import styles from "../styles/ResultadoPesquisa.module.css";
+
+import Footer from "../../components/layout/Footer";
+import Container from "../../components/layout/Container";
+import NavbarAdm from "../../components/adm/NavBarAdm";
+import CardAdm from "../../components/cards/CardAdm";
+
+function ResultadosPesquisaAdm() {
   const location = useLocation();
   const { results } = location.state || [];
 
   return (
     <>
-      <Navbar />
+      <NavbarAdm />
       <Container>
         <div className={styles.containerResultadoPesquisa}>
           <section className={styles.tituloResultadoContainer}>
@@ -37,7 +39,7 @@ function ResultadosPesquisa() {
           {/* <div className={styles.linhaHorizontal}/> */}
 
           {location.state.results.map((livro) => (
-          <Card key={livro.idLivro} livro={livro} />
+          <CardAdm key={livro.idLivro} livro={livro} />
         ))}
 
           {!results && (
@@ -50,4 +52,4 @@ function ResultadosPesquisa() {
   );
 }
 
-export default ResultadosPesquisa;
+export default ResultadosPesquisaAdm;

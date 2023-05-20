@@ -41,14 +41,141 @@
 
 
 
-
 @media only screen and (max-width: 768px) {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
     padding: 10px;
   }
-
+  
+  .navbarButtons {
+    margin-top: 10px;
+  }
+  
+  .navbarInput {
+    margin-left: 0;
+    margin-top: 10px;
+  }
 }
 
+@media only screen and (max-width: 576px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+  
+  .navbarLogo {
+    margin-bottom: 10px;
+  }
+  
+  .navbarButtons {
+    flex-direction: column;
+    margin-left: 0;
+  }
+  
+  .navbarInput {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .navbar {
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .navbarLogo {
+    margin-right: 10px;
+  }
+  
+  .navbarButtons {
+    margin-left: auto;
+  }
+  
+  .navbarInput {
+    margin-left: 20px;
+    margin-right: 10px;
+  }
+}
+
+
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+  .navbar {
+    padding: 10px;
+  }
+  
+  .navbarLogo {
+    margin-right: 10px;
+  }
+  
+  .navbarButtons {
+    margin-left: auto;
+  }
+  
+  .navbarInput {
+    margin-left: 20px;
+    margin-right: 10px;
+  }
+}
+
+
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+  .navbar {
+    padding: 10px;
+  }
+  
+  .navbarLogo {
+    margin-right: 10px;
+  }
+  
+  .navbarButtons {
+    margin-left: auto;
+  }
+  
+  .navbarInput {
+    margin-left: 20px;
+    margin-right: 10px;
+  }
+}
+
+@media only screen and (min-width: 1201px) {
+  .navbar {
+    padding: 10px 20px;
+  }
+  
+  .navbarLogo {
+    margin-right: 20px;
+  }
+  
+  .navbarButtons {
+    margin-left: 20px;
+  }
+  
+  .navbarInput {
+    margin-left: 20px;
+    margin-right: 10px;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .navbar {
+    padding: 10px;
+  }
+  
+  .navbarLogo {
+    margin-right: 10px;
+  }
+  
+  .navbarButtons {
+    margin-left: auto;
+  }
+  
+  .navbarInput {
+    margin-left: 20px;
+    margin-right: 10px;
+  }
+}
 
