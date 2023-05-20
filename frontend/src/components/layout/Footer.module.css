@@ -1,4 +1,8 @@
+footer{
+width: 100%;
+background: #033579;
 
+}
 .containerFooter {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -114,27 +118,54 @@ a:link {text-decoration: none;}
 }
 
 @media only screen and (max-width: 768px) {
-  
+    .containerFooter {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: 20px;
+    }
   }
-
+  
   @media only screen and (max-width: 576px) {
-    /* Estilos para telas menores ou iguais a 576px */
+    .socialListFooter {
+      flex-direction: column;
+    }
+  
+    .socialListLi {
+      margin: 2% auto;
+    }
+  
+    .footerFaleConoscoDiv {
+      margin-top: 1em;
+    }
+  
+    .pagamentoListDiv {
+      margin: 0 20% 0 20%;
+    }
+  }
+  
+  
+  @media only screen and (max-width: 768px) {
+    .containerFooter {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+    }
+  }
+  
+  @media only screen and (max-width: 576px) {
+    .socialListLi {
+      margin: 2% 2%;
+    }
   }
   
   @media only screen and (min-width: 577px) and (max-width: 768px) {
-    /* Estilos para telas entre 577px e 768px */
+    .socialListLi {
+      margin: 2% 10%;
+    }
   }
   
-  @media only screen and (min-width: 769px) and (max-width: 992px) {
-    /* Estilos para telas entre 769px e 992px */
-  }
-  
-  @media only screen and (min-width: 993px) and (max-width: 1200px) {
-    /* Estilos para telas entre 993px e 1200px */
-  }
   
   @media only screen and (min-width: 1201px) {
-    /* Estilos para telas maiores que 1201px */
+
   }
   
 

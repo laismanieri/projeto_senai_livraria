@@ -1,8 +1,7 @@
 import styles from "../layout/NavBar.module.css";
 import Container from "../layout/Container";
-import Search from "./SearchAdm";
 import { Link } from "react-router-dom";
-import SearchAdm from "./SearchAdm";
+import SearchAdm from "../adm/SearchAdm";
 
 
 function NavbarAdm() {

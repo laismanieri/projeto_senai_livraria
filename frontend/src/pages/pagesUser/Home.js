@@ -28,10 +28,10 @@ function Home() {
     <>
       <Navbar />
       <Banner />
-      <Container>
+
         <Destaque livros={livrosDestaque} />
         <Oferta livros={livrosOferta} />
-      </Container>
+
       <Footer />
     </>
   );
