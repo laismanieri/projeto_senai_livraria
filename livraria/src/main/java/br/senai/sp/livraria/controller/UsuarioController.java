@@ -1,6 +1,7 @@
 package br.senai.sp.livraria.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,12 +18,20 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
-
+//
+//    @PostMapping
+//    public ResponseEntity<Usuario> criar(@RequestBody Usuario usuario) {
+//        Usuario usuarioSalvo = usuarioService.salvar(usuario);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioSalvo);
+//    }
+//    
+    
     @PostMapping
     public ResponseEntity<Usuario> criar(@RequestBody Usuario usuario) {
-        Usuario usuarioSalvo = usuarioService.salvar(usuario);
+        Usuario usuarioSalvo = usuarioService.salvarUsuarioComEndereco(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioSalvo);
     }
+
 
     @GetMapping("")
     public ResponseEntity<List<Usuario>> listarTodos() {

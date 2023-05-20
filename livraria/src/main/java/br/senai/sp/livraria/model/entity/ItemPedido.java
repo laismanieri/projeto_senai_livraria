@@ -3,6 +3,8 @@ package br.senai.sp.livraria.model.entity;
 import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +18,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@JsonSerialize
 @Entity
 @Table( name = "item_pedido")
 @Builder
@@ -28,19 +31,19 @@ public class ItemPedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_detalhe_livro")
-	private DetalheLivro detalheLivro;
-	
-	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name = "id_pedido")
-	private Pedido pedido;
-	
 	private BigDecimal valorUnid;
 	
 	private BigDecimal valorTotal;
 	
     private int qtdeItens;
+	
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "pedido_id")
+	private Pedido pedido;
+    
+    @ManyToOne
+	@JoinColumn(name = "id_detalhe_livro")
+	private DetalheLivro detalheLivro;
 
 }

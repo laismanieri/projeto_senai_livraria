@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.senai.sp.livraria.dto.PedidoDTO;
+import br.senai.sp.livraria.model.entity.ItemPedido;
 import br.senai.sp.livraria.model.entity.Pedido;
 import br.senai.sp.livraria.service.PedidoService;
 
@@ -36,11 +38,18 @@ public class PedidoController {
         return ResponseEntity.ok(pedido);
     }
     
+//    @PostMapping
+//    public ResponseEntity<Pedido> criar(@RequestBody Pedido pedido) {
+//        Pedido pedidoSalvo = pedidoService.salvar(pedido);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(pedidoSalvo);
+//    }
     @PostMapping
-    public ResponseEntity<Pedido> criar(@RequestBody Pedido pedido) {
-        Pedido pedidoSalvo = pedidoService.salvar(pedido);
+    public ResponseEntity<Pedido> criarPedido(@RequestBody PedidoDTO pedidoDTO) {
+    	System.out.println("Cheguei");
+        Pedido pedidoSalvo = pedidoService.salvar(pedidoDTO.getPedido());
         return ResponseEntity.status(HttpStatus.CREATED).body(pedidoSalvo);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Pedido> atualizar(@PathVariable Long id, @RequestBody Pedido pedidoAtualizado) {
