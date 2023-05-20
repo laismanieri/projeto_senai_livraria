@@ -4,7 +4,6 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 
 import Card from "../../components/cards/Card";
 import Footer from "../../components/layout/Footer";
-import Container from "../../components/layout/Container";
 import Navbar from "../../components/layout/NavBar";
 
 import styles from "../styles/ResultadoPesquisa.module.css";
@@ -16,7 +15,7 @@ function ResultadosPesquisa() {
   return (
     <>
       <Navbar />
-      <Container>
+      <div className={styles.container}>
         <div className={styles.containerResultadoPesquisa}>
           <section className={styles.tituloResultadoContainer}>
             <Link to={"/"}>
@@ -46,7 +45,7 @@ function ResultadosPesquisa() {
             <p className={styles.semResultado}>Nenhum resultado encontrado.</p>
           )}
         </div>
-      </Container>
+      </div>
       <Footer />
     </>
   );

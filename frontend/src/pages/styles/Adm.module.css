@@ -5,6 +5,9 @@
 
 }
 
+.container{
+  margin: 0 18% 0 18%;
+}
 
 .containerAdmSecao{
   display: inline-block;

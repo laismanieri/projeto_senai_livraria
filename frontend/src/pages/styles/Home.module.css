@@ -1,0 +1,24 @@
+.containerCarousel{
+    margin: 0 18% 0 18%;
+}
+
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+    .containerCarousel{
+        margin: 0 5% 0 5%;
+    }
+
+}
+
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+    .containerCarousel{
+        margin: 0 5% 0 5%;
+    }
+
+}
+
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+
+    .containerCarousel{
+        margin: 0 5% 0 5%;
+    }
+}

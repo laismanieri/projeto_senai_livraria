@@ -13,9 +13,19 @@
   z-index: 3;
 
 }
+.navbarContainerLogo{
+    margin-left: 18%;
+}
+
+.navbarContainerCompra{
+  margin-right: 18%;
+}
+
+
 
 .navbarLogo {
   height: 50px;
+
 }
 
 .navbarInput {
@@ -40,40 +50,63 @@
 }
 
 
-
+/* Responsividade da Navbar */
 @media only screen and (max-width: 768px) {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
     padding: 10px;
   }
-  
+
   .navbarButtons {
     margin-top: 10px;
   }
-  
+
   .navbarInput {
     margin-left: 0;
     margin-top: 10px;
   }
-}
 
-@media only screen and (max-width: 576px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
-  }
-  
   .navbarLogo {
     margin-bottom: 10px;
   }
-  
+
+  .navbarContainerLogo{
+    margin-left: 0%;
+}
+
+.navbarContainerCompra{
+  margin-right: 0%;
+}
+
+
+}
+
+@media only screen and (min-width: 320px) and (max-width: 576px) {
+  .navbar {
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .navbarContainerLogo{
+    margin-left: 0%;
+}
+
+.navbarContainerCompra{
+  margin-right: 0%;
+}
+
+
+  .navbarLogo {
+    margin-bottom: 10px;
+  }
+
   .navbarButtons {
     flex-direction: column;
     margin-left: 0;
   }
-  
+
   .navbarInput {
     margin-left: 0;
     margin-top: 10px;
@@ -86,74 +119,89 @@
     align-items: center;
     padding: 10px;
   }
-  
+
   .navbarLogo {
     margin-right: 10px;
   }
-  
+
   .navbarButtons {
     margin-left: auto;
   }
-  
+
   .navbarInput {
     margin-left: 20px;
     margin-right: 10px;
   }
 }
-
 
 @media only screen and (min-width: 769px) and (max-width: 992px) {
   .navbar {
     padding: 10px;
   }
-  
+
   .navbarLogo {
     margin-right: 10px;
   }
-  
+
   .navbarButtons {
     margin-left: auto;
   }
-  
+
   .navbarInput {
     margin-left: 20px;
     margin-right: 10px;
   }
+
+  .navbarContainerLogo{
+    margin-left: 0%;
 }
 
+.navbarContainerCompra{
+  margin-right: 0%;
+}
+}
 
 @media only screen and (min-width: 993px) and (max-width: 1200px) {
   .navbar {
     padding: 10px;
   }
-  
+
   .navbarLogo {
     margin-right: 10px;
   }
-  
+
   .navbarButtons {
     margin-left: auto;
   }
-  
+
   .navbarInput {
     margin-left: 20px;
     margin-right: 10px;
   }
+
+  .navbarContainerLogo{
+    margin-left: 5%;
+}
+
+.navbarContainerCompra{
+  margin-right: 5%;
+}
+
 }
 
 @media only screen and (min-width: 1201px) {
   .navbar {
     padding: 10px 20px;
   }
-  
+
   .navbarLogo {
     margin-right: 20px;
   }
-  
+
   .navbarButtons {
     margin-left: 20px;
   }
-  
+
   .navbarInput {
     margin-left: 20px;
     margin-right: 10px;
@@ -164,15 +212,15 @@
   .navbar {
     padding: 10px;
   }
-  
+
   .navbarLogo {
     margin-right: 10px;
   }
-  
+
   .navbarButtons {
     margin-left: auto;
   }
-  
+
   .navbarInput {
     margin-left: 20px;
     margin-right: 10px;

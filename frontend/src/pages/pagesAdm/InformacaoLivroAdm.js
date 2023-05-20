@@ -5,7 +5,6 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 
 import styles from "../styles/InformacaoLivro.module.css";
 
-import Container from "../../components/layout/Container";
 import Footer from "../../components/layout/Footer";
 import NavbarAdm from "../../components/adm/NavBarAdm";
 
@@ -130,8 +129,8 @@ function InformacaoLivroAdm() {
   return (
     <>
       <NavbarAdm />
-      <Container>
-        <div className={styles.container}>
+      <div className={styles.container}>
+        <div className={styles.containerInformacaoLivro}>
           <Link to={"/adm"}>
             <h1 className={styles.voltarHome}>
               <AiOutlineArrowLeft />
@@ -453,7 +452,7 @@ function InformacaoLivroAdm() {
             </button>
           </div>
         </div>
-      </Container>
+      </div>
 
       <Footer />
     </>

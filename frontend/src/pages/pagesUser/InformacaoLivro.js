@@ -5,7 +5,6 @@ import { useParams, Link } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Modal from "react-modal";
 
-import Container from "../../components/layout/Container";
 import Navbar from "../../components/layout/NavBar";
 import Footer from "../../components/layout/Footer";
 
@@ -123,8 +122,9 @@ function InformacaoLivro() {
   return (
     <>
       <Navbar />
-      <Container>
-        <div className={styles.container}>
+      <div>
+      <div className={styles.containerCarousel}>
+        <div className={styles.containerInformacaoLivro}>
           <Link to={"/"}>
             <h1 className={styles.voltarHome}>
               <AiOutlineArrowLeft />
@@ -468,7 +468,8 @@ function InformacaoLivro() {
             </div>
           </div>
         </div>
-      </Container>
+      </div>
+      </div>
 
       <Footer />
     </>

@@ -26,4 +26,91 @@
     color:#ffffff;
     text-decoration: none;
   }
-  
+
+  /* Ajustes para telas entre 769px e 992px */
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+  .imgUser {
+    margin-right: 20px;
+    margin-top: 10px;
+  }
+
+  .boasVindas {
+    font-size: 18px;
+    margin-top: 7px;
+  }
+
+  .entre {
+    font-size: 18px;
+  }
+}
+
+/* Ajustes para telas entre 577px e 768px */
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .imgUser {
+    margin-right: 7px;
+    margin-top: 8px;
+    margin-left: 20px;
+  }
+
+  .boasVindas {
+    font-size: 10px;
+    margin-top: 5px;
+  }
+
+  .entre {
+    font-size: 10px;
+  }
+}
+
+
+@media only screen and (min-width: 320px) and (max-width: 576px) {
+  .imgUser {
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-left: 15px;
+  }
+
+  .boasVindas {
+    font-size: 12px;
+    margin-top: 9px;
+  }
+
+  .entre {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 426px) {
+  .imgUser {
+    margin-right: 20px;
+    margin-left: 15px;
+  }
+
+  .boasVindas {
+    font-size: 12px;
+    margin-top: 18px;
+  }
+
+  .entre {
+    font-size: 15px;
+  }
+}
+
+
+/* Ajustes para telas entre 993px e 1200px */
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+  .imgUser {
+    margin-right: 20px;
+    margin-top: 15px;
+    margin-left: 15px;
+  }
+
+  .boasVindas {
+    font-size: 10px;
+    margin-top: 9px;
+  }
+
+  .entre {
+    font-size: 12px;
+  }
+}

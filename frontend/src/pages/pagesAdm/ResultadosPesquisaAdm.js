@@ -5,7 +5,6 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import styles from "../styles/ResultadoPesquisa.module.css";
 
 import Footer from "../../components/layout/Footer";
-import Container from "../../components/layout/Container";
 import NavbarAdm from "../../components/adm/NavBarAdm";
 import CardAdm from "../../components/cards/CardAdm";
 
@@ -16,7 +15,7 @@ function ResultadosPesquisaAdm() {
   return (
     <>
       <NavbarAdm />
-      <Container>
+      <div className={styles.containerCarousel}>
         <div className={styles.containerResultadoPesquisa}>
           <section className={styles.tituloResultadoContainer}>
             <Link to={"/"}>
@@ -46,7 +45,7 @@ function ResultadosPesquisaAdm() {
             <p className={styles.semResultado}>Nenhum resultado encontrado.</p>
           )}
         </div>
-      </Container>
+      </div>
       <Footer />
     </>
   );

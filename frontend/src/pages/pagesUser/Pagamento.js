@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { AiFillDelete } from "react-icons/ai";
-import Container from "../../components/layout/Container";
 import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/NavBar";
 import PaymentMethodSelect from "../../components/layout/PaymentMethodSelect";
@@ -14,7 +13,7 @@ function Pagamento() {
     <>
       <Navbar />
 
-      <Container>
+      <div className={styles.container}>
         <div>
           <div className={styles.containerVoltar}>
             <Link to={"/"}>
@@ -169,7 +168,7 @@ function Pagamento() {
             </div>
           </div>
         </div>
-      </Container>
+      </div>
 
       <Footer />
     </>

@@ -1,18 +1,17 @@
 import styles from "../layout/NavBar.module.css";
-import Container from "../layout/Container";
 import { Link } from "react-router-dom";
 import SearchAdm from "../adm/SearchAdm";
-
 
 function NavbarAdm() {
   return (
     <nav className={styles.navbar}>
-      <Container>
+      <div className={styles.navbarContainerLogo}>
         <Link to="/">
           <img src="/img/logo.png" alt="Logo" className={styles.navbarLogo} />
-        </Link>
-        <SearchAdm />
-      </Container>
+        </Link>{" "}
+      </div>
+      <SearchAdm />
+      <div className={styles.marginRight}></div>
     </nav>
   );
 }

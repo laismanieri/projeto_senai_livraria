@@ -3,6 +3,10 @@
   text-decoration: none;
 }
 
+.container{
+  margin: 0 18% 0 18%;
+}
+
 
 a:link {text-decoration: none;}
 

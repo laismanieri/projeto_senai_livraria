@@ -7,13 +7,11 @@ import styles from "../styles/Contact.module.css";
 import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/NavBar";
 
-import Container from "../../components/layout/Container";
-
 function Contact() {
   return (
     <>
       <Navbar />
-      <Container>
+      <div className={styles.containerCarousel}>
       <Link to={"/"}>
         <h1 className={styles.voltarHome}>
           <AiOutlineArrowLeft />
@@ -74,7 +72,7 @@ function Contact() {
           Enviar
         </button>
       </form>
-      </Container>
+      </div>
       <Footer />
     </>
   );

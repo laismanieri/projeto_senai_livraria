@@ -3,11 +3,11 @@
     align-items: center;
     justify-content: center;
     width: 45vh;
-    margin-top: 1vh;
+    margin-top: 0.5vh;
   }
   
   .searchForm{
-    height: 4vh;
+    height: 3.2vh;
     width: 100%;
     max-width: 45vh;
     background:white;
@@ -38,25 +38,19 @@
   }
 
   .searchFormButton svg{
-    font-size: 2em;
+    font-size: 2vh;
     color: grey;
     margin-right: 5px;
   }
 
 
-  @media only screen and (max-width: 768px) {
-
-    .searchForm{
-      height: 4vh;
+  @media only screen and (min-width: 320px) and (max-width: 768px) {
+    .searchFormContainer {
+      width: 60%;
+      margin-top: 10px;
     }
   
-  }
-  
-  @media only screen and (max-width: 1440px) {
-
-    .searchForm{
-      height: 5vh;
+    .searchForm {
+      max-width: 100%;
     }
-  
   }
-  

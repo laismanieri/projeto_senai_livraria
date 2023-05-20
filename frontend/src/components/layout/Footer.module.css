@@ -117,59 +117,62 @@ a:link {text-decoration: none;}
     text-align: center;
 }
 
-@media only screen and (max-width: 768px) {
-    .containerFooter {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto;
-      gap: 20px;
-    }
+/* Ajustes para telas menores que 576px */
+@media only screen and (max-width: 576px) {
+  .containerFooter {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
-  
-  @media only screen and (max-width: 576px) {
-    .socialListFooter {
-      flex-direction: column;
-    }
-  
-    .socialListLi {
-      margin: 2% auto;
-    }
-  
-    .footerFaleConoscoDiv {
-      margin-top: 1em;
-    }
-  
-    .pagamentoListDiv {
-      margin: 0 20% 0 20%;
-    }
+
+  .socialListLi {
+    margin: 2% 10%;
   }
-  
-  
-  @media only screen and (max-width: 768px) {
-    .containerFooter {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto auto auto;
-    }
+
+  .pagamentoListDiv {
+    margin: 0 20%;
   }
-  
-  @media only screen and (max-width: 576px) {
-    .socialListLi {
-      margin: 2% 2%;
-    }
+}
+
+/* Ajustes para telas entre 577px e 768px */
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .containerFooter {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
-  
-  @media only screen and (min-width: 577px) and (max-width: 768px) {
-    .socialListLi {
-      margin: 2% 10%;
-    }
+
+  .socialListLi {
+    margin: 2% 10%;
   }
+
+  .pagamentoListDiv {
+    margin: 0 20%;
+  }
+}
+
+/* Ajustes para telas entre 769px e 992px */
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+  .containerFooter {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .socialListLi {
+    margin: 2% 10%;
+  }
+
+  .pagamentoListDiv {
+    margin: 0 20%;
+  }
+}
+
   
   
-  @media only screen and (min-width: 1201px) {
+@media only screen and (min-width: 993px) and (max-width: 1200) {
 
   }
   
 
-  @media only screen and (max-width: 1440px) {
+  @media only screen and (min-width: 1201) and (max-width: 1440px) {
 
  
   }

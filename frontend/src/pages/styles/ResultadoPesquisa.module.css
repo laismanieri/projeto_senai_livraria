@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+.container{
+    margin: 0 18% 0 18%;
+}
+
 .containerResultadoPesquisa{
     margin: 5vh 0 5vh 0;
 }

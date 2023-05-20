@@ -5,6 +5,7 @@
   text-decoration: none;  
   max-height: 700px;
   margin: 20px;
+  height: auto;
 
 }
 
@@ -19,7 +20,8 @@
   width: 200PX;
   text-align: center; 
   text-align: center;
-  height: 400px;
+  height: auto;
+  max-height: 400px;
 
 }
 
@@ -127,3 +129,145 @@
   height: 1.7em;
 }
   
+
+@media only screen and (min-width: 577) and (max-width: 768px) {
+  .card, .cardAdm {
+    width: 100%;
+  }
+
+  .containerCard, .containerCardAdm{
+    display: inline-block;   
+    justify-content: center;
+    text-decoration: none;  
+    max-height: 700px;
+    margin: 20px;
+    height: auto;
+  
+  }
+
+
+}
+
+@media only screen and (min-width: 1201px) and (max-width: 1440px) {
+
+  .card, .cardAdm {
+    width: 80%;
+  }
+
+  .containerCard, .containerCardAdm{
+    margin: 20px;
+
+  }
+
+    
+.h2TituloCard, .h2TituloCardAdm{
+  font-size: 0.9rem;
+}
+
+.tituloTipoLivro{
+  margin-top: 10px;
+  font-size:0.7rem;
+  color: #146b97;
+}
+
+
+.precoAntigo{
+  margin: 0 5px;
+  height: 1em;
+  font-size: 12px;
+  font-weight: 600;
+
+}
+
+.precoOferta, .precoRegular{
+  color: #146b97; 
+  margin: 0 5px;
+  font-size: 14px;
+}
+ 
+}
+
+ 
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+
+  .card, .cardAdm {
+    width: 70%;
+  }
+
+  .containerCard, .containerCardAdm{
+    margin: 20px;
+
+  }
+
+    
+.h2TituloCard, .h2TituloCardAdm{
+  font-size: 0.8rem;
+  
+}
+
+.tituloTipoLivro{
+  font-size:0.6rem;
+  color: #146b97;
+  margin: 0 7px;
+}
+
+
+.precoAntigo{
+  margin: 0 5px;
+  height: 0.9em;
+  font-size: 12px;
+
+}
+
+.precoOferta, .precoRegular{
+  margin: 0 7px;
+  font-size: 12px;
+}
+
+
+}
+
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+
+
+
+
+}
+
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+
+  .card, .cardAdm {
+    width: 80%;
+  }
+
+  .containerCard, .containerCardAdm{
+    margin: 20px;
+
+  }
+
+    
+.h2TituloCard, .h2TituloCardAdm{
+  font-size: 0.9rem;
+}
+
+.tituloTipoLivro{
+  margin-top: 10px;
+  font-size:0.7rem;
+  color: #146b97;
+}
+
+
+.precoAntigo{
+  margin: 0 5px;
+  height: 1em;
+  font-size: 12px;
+
+}
+
+.precoOferta, .precoRegular{
+  margin: 0 5px;
+  font-size: 14px;
+}
+
+
+}

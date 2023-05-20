@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import OfertaAdm from "../../components/carousel/carouselAdm/OfertaAdm";
-import Container from "../../components/layout/Container";
 import DestaqueAdm from "../../components/carousel/carouselAdm/DestaqueAdm";
 import LivroAdm from "../../components/carousel/carouselAdm/LivroAdm";
 import CadastroLivro from "../../components/adm/CadastroLivro";
 import Footer from "../../components/layout/Footer";
 import NavbarAdm from "../../components/adm/NavBarAdm";
+
+import styles from "../styles/Adm.module.css"
 
 function Adm() {
   const [livros, setLivros] = useState([]);
@@ -29,12 +30,12 @@ function Adm() {
     <>
       <NavbarAdm />
 
-      <Container>
+      <div className={styles.container}>
             <CadastroLivro/>
             <LivroAdm livros={livro} />
             <DestaqueAdm livros={livrosDestaque} />
             <OfertaAdm livros={livrosOferta} />
-      </Container>
+      </div>
       <Footer />
     </>
   );

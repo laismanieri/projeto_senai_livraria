@@ -5,15 +5,21 @@ import "slick-carousel/slick/slick-theme.css";
 import "../styles/Carousel.css"
 
 function OfertaAdm({livros}) {
-
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 5,
-    slidesToScroll: 1
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 576, // Largura de tela em que as configurações serão alteradas
+        settings: {
+          slidesToShow: 1, // Exibir apenas 1 card
+        },
+      },
+    ],
   };
-
 
   return (
     <div className="container">

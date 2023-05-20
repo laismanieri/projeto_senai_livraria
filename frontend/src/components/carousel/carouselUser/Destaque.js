@@ -10,7 +10,15 @@ function Destaque({ livros }) {
     infinite: true,
     speed: 500,
     slidesToShow: 5,
-    slidesToScroll: 1
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 576, // Largura de tela em que as configurações serão alteradas
+        settings: {
+          slidesToShow: 1, // Exibir apenas 1 card
+        },
+      },
+    ],
   };
 
   return (
