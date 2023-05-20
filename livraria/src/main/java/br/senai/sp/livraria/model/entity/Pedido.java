@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -21,7 +22,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+@JsonSerialize
 @Entity
 @Table( name = "pedido")
 @Builder
@@ -41,15 +42,13 @@ public class Pedido {
 	}
 	
 	@JsonManagedReference
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "pedido_id")
 	private Usuario usuario;
 	
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "pedido_id")
-	private List<ItemPedido> itens;
-
-
+	private List<ItemPedido> itens;	
 
 }

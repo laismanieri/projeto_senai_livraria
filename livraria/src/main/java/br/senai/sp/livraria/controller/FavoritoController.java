@@ -46,8 +46,8 @@ public class FavoritoController {
     @PutMapping("/{id}")
     public ResponseEntity<Favorito> atualizar(@PathVariable Long id, @RequestBody Favorito favoritoAtualizado) {
     	Favorito favorito = favoritoService.buscarPorId(id);
-    	favorito.setLivro(favoritoAtualizado.getLivro());
-    	favorito.setUsuario(favoritoAtualizado.getUsuario());
+//    	favorito.setLivro(favoritoAtualizado.getLivro());
+//    	favorito.setUsuario(favoritoAtualizado.getUsuario());
     	Favorito favoritoAtualizadoSalvo = favoritoService.salvar(favorito);
         return ResponseEntity.ok(favoritoAtualizadoSalvo);
     }

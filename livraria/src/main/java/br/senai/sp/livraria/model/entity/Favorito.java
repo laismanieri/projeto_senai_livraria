@@ -1,4 +1,6 @@
 package br.senai.sp.livraria.model.entity;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +13,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@JsonSerialize
 @Entity
 @Table( name = "favorito")
 @Builder

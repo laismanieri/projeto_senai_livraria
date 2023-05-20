@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import br.senai.sp.livraria.model.entity.Endereco;
 import br.senai.sp.livraria.model.repository.EnderecoRepository;
 
-
 @Service
 public class EnderecoService {
 
@@ -28,11 +27,11 @@ public class EnderecoService {
 
     @Transactional(readOnly = true)
     public Endereco buscarPorId(Long id) {
-        return enderecoRepository.findById(id).orElseThrow(() -> new RuntimeException("Endereco não encontrado"));
+        return enderecoRepository.findById(id).orElseThrow(() -> new RuntimeException("Endereço não encontrado"));
     }
 
     @Transactional
     public void excluir(Long id) {
-    	enderecoRepository.deleteById(id);
+        enderecoRepository.deleteById(id);
     }
 }

@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.senai.sp.livraria.model.entity.Endereco;
 import br.senai.sp.livraria.model.entity.Usuario;
 import br.senai.sp.livraria.model.repository.UsuarioRepository;
-
 
 @Service
 public class UsuarioService {
@@ -28,11 +28,24 @@ public class UsuarioService {
 
     @Transactional(readOnly = true)
     public Usuario buscarPorId(Long id) {
-        return usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
+        return usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
     }
 
     @Transactional
     public void excluir(Long id) {
-    	usuarioRepository.deleteById(id);
+        usuarioRepository.deleteById(id);
     }
+    
+    
+    @Transactional
+    public Usuario salvarUsuarioComEndereco(Usuario usuario) {
+        List<Endereco> enderecos = usuario.getEnderecos();
+        if (enderecos != null) {
+            for (Endereco endereco : enderecos) {
+                endereco.setUsuario(usuario);
+            }
+        }
+        return usuarioRepository.save(usuario);
+    }
+
 }

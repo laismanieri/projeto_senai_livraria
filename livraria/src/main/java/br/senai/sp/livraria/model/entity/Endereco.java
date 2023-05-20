@@ -1,6 +1,10 @@
 package br.senai.sp.livraria.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,6 +17,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@JsonSerialize
 @Entity
 @Table( name = "endereco")
 @Builder
@@ -39,8 +44,8 @@ public class Endereco {
 		
 	private String cep;
 	
+	@JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
-
+	
 }

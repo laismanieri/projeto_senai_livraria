@@ -53,7 +53,7 @@ public class EnderecoController {
         endereco.setNumero(enderecoAtualizado.getNumero());
         endereco.setComplemento(enderecoAtualizado.getComplemento());
         endereco.setCep(enderecoAtualizado.getCep());
-        endereco.setUsuario(enderecoAtualizado.getUsuario());
+//        endereco.setUsuario(enderecoAtualizado.getUsuario());
         Endereco enderecoAtualizadoSalvo = enderecoService.salvar(endereco);
         return ResponseEntity.ok(enderecoAtualizadoSalvo);
     }
