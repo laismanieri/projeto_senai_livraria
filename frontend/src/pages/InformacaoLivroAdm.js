@@ -14,52 +14,52 @@ function InformacaoLivroAdm() {
   const [tipoLivroSelecionado, setTipoLivroSelecionado] = useState("FISICO");
 
   function handleChangeEdit() {
-  // Recupera os detalhes existentes do livro original
-  const detalhesOriginais = livro.detalhes;
+    // Recupera os detalhes existentes do livro original
+    const detalhesOriginais = livro.detalhes;
 
-  // Cria um novo objeto livro com as propriedades atualizadas
-  const livroAtualizado = {
-    ...livro,
-    titulo: document.getElementById("titulo").value,
-    autor: document.getElementById("autor").value,
-    editora: document.getElementById("editora").value,
-    genero: document.getElementById("genero").value,
-    sinopse: document.getElementById("sinopse").value,
-    anoPublicacao: document.getElementById("anoPublicacao").value,
-    imagem: document.getElementById("imagem").value,
-    oferta: document.getElementById("oferta").value,
-    destaque: document.getElementById("destaque").value,
-    qtdePagina: document.getElementById("qtdePagina").value,
-    detalhes: detalhesOriginais.map((detalhe) => {
+    // Cria um novo objeto livro com as propriedades atualizadas
+    const livroAtualizado = {
+      ...livro,
+      titulo: document.getElementById("titulo").value,
+      autor: document.getElementById("autor").value,
+      editora: document.getElementById("editora").value,
+      genero: document.getElementById("genero").value,
+      sinopse: document.getElementById("sinopse").value,
+      anoPublicacao: document.getElementById("anoPublicacao").value,
+      imagem: document.getElementById("imagem").value,
+      oferta: document.getElementById("oferta").value,
+      destaque: document.getElementById("destaque").value,
+      qtdePagina: document.getElementById("qtdePagina").value,
+      detalhes: detalhesOriginais.map((detalhe) => {
 
-      if(detalhe.tipoLivro == tipoLivroSelecionado){
+        if (detalhe.tipoLivro === tipoLivroSelecionado) {
           return {
-          ...detalhe,
-          preco: Number(document.getElementById("preco").value),
-          qtdeEstoque: Number(document.getElementById("qtdeEstoque").value),
-        };
-      }else{
-        return {
-          ...detalhe,
-        };
-      }
-    }),
-  };
-  console.log(livroAtualizado);
+            ...detalhe,
+            preco: Number(document.getElementById("preco").value),
+            qtdeEstoque: Number(document.getElementById("qtdeEstoque").value),
+          };
+        } else {
+          return {
+            ...detalhe,
+          };
+        }
+      }),
+    };
+    console.log(livroAtualizado);
 
 
-  axios
-    .put(`http://localhost:8082/livro/${id}`, livroAtualizado)
-    .then((response) => {
-      console.log("Livro atualizado:", response.data);
-      window.alert("Livro atualizado!");
-      window.location.reload();
-    })
-    .catch((error) => {
-      console.error("Erro ao atualizar livro:", error);
-      window.alert("Erro ao atualizar!");
-    });
-}
+    axios
+      .put(`http://localhost:8082/livro/${id}`, livroAtualizado)
+      .then((response) => {
+        console.log("Livro atualizado:", response.data);
+        window.alert("Livro atualizado!");
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Erro ao atualizar livro:", error);
+        window.alert("Erro ao atualizar!");
+      });
+  }
 
 
   useEffect(() => {
@@ -145,21 +145,21 @@ function InformacaoLivroAdm() {
                 src={livro.imagem}
                 alt={livro.titulo}
               />
-                                  <ul className={styles.fichaAdm}>
-                      <li className={styles.fichaInfo}>
-                        <label htmlFor="imagem" className={styles.fichaTh}>
-                          Link da Imagem:
-                        </label>
-                      </li>
-                      <li>
-                        <textarea
-                          type="text"
-                          id="imagem"
-                          className={styles.inputAdmImagem}
-                          defaultValue={livro.imagem}
-                        />
-                      </li>
-                    </ul>
+              <ul className={styles.fichaAdm}>
+                <li className={styles.fichaInfo}>
+                  <label htmlFor="imagem" className={styles.fichaTh}>
+                    Link da Imagem:
+                  </label>
+                </li>
+                <li>
+                  <textarea
+                    type="text"
+                    id="imagem"
+                    className={styles.inputAdmImagem}
+                    defaultValue={livro.imagem}
+                  />
+                </li>
+              </ul>
             </div>
             <div className={styles.gridItemLongAdm}>
               <div className={styles.containerInfoLivroAdm}>
@@ -279,7 +279,7 @@ function InformacaoLivroAdm() {
                     <ul className={styles.fichaBolean}>
                       <li className={styles.fichaInfo}>
                         <label htmlFor="anoPublicacao" className={styles.fichaTh}>
-                        Ano Publicação:
+                          Ano Publicação:
                         </label>
                         <input
                           type="text"
@@ -290,7 +290,7 @@ function InformacaoLivroAdm() {
                       </li>
                       <li className={styles.fichaInfo}>
                         <label htmlFor="qtdePagina" className={styles.fichaTh}>
-                        Páginas:
+                          Páginas:
                         </label>
                         <input
                           type="text"
@@ -368,10 +368,10 @@ function InformacaoLivroAdm() {
                             type="text"
                             id="qtdeEstoque"
                             className={styles.estoque}
-                         
+
                           >{fisicoEstoque.qtdeEstoque === 0
-                              ? "Sem estoque"
-                              : "Em estoque"}</p>
+                            ? "Sem estoque"
+                            : "Em estoque"}</p>
                         </li>
                       </ul>
                     </div>
@@ -421,10 +421,10 @@ function InformacaoLivroAdm() {
                             type="text"
                             id="qtdeEstoque"
                             className={styles.estoque}
-                         
+
                           >{ebookEstoque.qtdeEstoque === 0
-                              ? "Sem estoque"
-                              : "Em estoque"}</p>
+                            ? "Sem estoque"
+                            : "Em estoque"}</p>
                         </li>
                       </ul>
                     </div>
@@ -449,7 +449,7 @@ function InformacaoLivroAdm() {
               onClick={handleChangeEdit}
             >
               Salvar
-                      </button>
+            </button>
           </div>
         </div>
       </Container>

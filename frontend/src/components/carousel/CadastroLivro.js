@@ -4,64 +4,70 @@ import axios from "axios";
 import styles from "./CadastroLivro.module.css";
 
 function CadastroLivro() {
-  const [isExpanded, setIsExpanded] = useState(false);
+const [isExpanded, setIsExpanded] = useState(false);
+const [tipoLivroAdd, setTipoLivroAdd] = useState(false);
 
-  const [titulo, setTitulo] = useState("");
-  const [anoPublicacao, setAnoPublicacao] = useState("");
-  const [autor, setAutor] = useState("");
-  const [sinopse, setSinopse] = useState("");
-  const [genero, setGenero] = useState("");
-  const [editora, setEditora] = useState("");
-  const [qtdePagina, setQtdePagina] = useState("");
-  const [oferta, setOferta] = useState("");
-  const [destaque, setDestaque] = useState("");
-  const [imagem, setImagem] = useState("");
-  const [tipoLivro, setTipoLivro] = useState("");
-  const [preco, setPreco] = useState("");
-  const [qtdeEstoque, setQtdeEstoque] = useState("");
+const [titulo, setTitulo] = useState("");
+const [anoPublicacao, setAnoPublicacao] = useState("");
+const [autor, setAutor] = useState("");
+const [sinopse, setSinopse] = useState("");
+const [genero, setGenero] = useState("");
+const [editora, setEditora] = useState("");
+const [qtdePagina, setQtdePagina] = useState("");
+const [oferta, setOferta] = useState("");
+const [destaque, setDestaque] = useState("");
+const [imagem, setImagem] = useState("");
+const [tipoLivro, setTipoLivro] = useState("");
+const [preco, setPreco] = useState("");
+const [qtdeEstoque, setQtdeEstoque] = useState("");
+const [detalhes, setDetalhes] = useState([]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const tipoLivroFisico = tipoLivro === "FISICO";
+const tipoLivroEbook = tipoLivro === "EBOOK";
 
-    const novoLivro = {
-      titulo: titulo,
-      autor: autor,
-      anoPublicacao: anoPublicacao,
-      sinopse: sinopse,
-      genero: genero,
-      editora: editora,
-      qtdePagina: qtdePagina,
-      oferta: oferta,
-      destaque: destaque,
-      imagem: imagem,
-      // detalhes: [
-      //   {
-      //     tipoLivro: tipoLivro,
-      //     preco: preco,
-      //     qtdeEstoque: qtdeEstoque
-      // },
-      // ],
-    };
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-    axios
-      .post("http://localhost:8082/livro", novoLivro)
-      .then((response) => {
-        console.log("Livro cadastrado com sucesso:", response.data);
-        // Resetar os campos do formulário
-        setTitulo("");
-        setAutor("");
-        setAnoPublicacao("");
-        setSinopse("");
-        setGenero("");
-        setEditora("");
-        setQtdePagina("");
-        setOferta("");
-        setDestaque("");
-      })
-      .catch((error) => {
-        console.error("Erro ao cadastrar livro:", error);
-      });
+  const novoLivro = {
+    titulo: titulo,
+    autor: autor,
+    anoPublicacao: anoPublicacao,
+    sinopse: sinopse,
+    genero: genero,
+    editora: editora,
+    qtdePagina: qtdePagina,
+    oferta: oferta,
+    destaque: destaque,
+    imagem: imagem,
+    detalhes: detalhes, 
   };
+
+  axios
+    .post("http://localhost:8082/livro", novoLivro)
+    .then((response) => {
+      console.log("Livro cadastrado com sucesso:", response.data);
+      // Resetar os campos do formulário
+      setTitulo("");
+      setAutor("");
+      setAnoPublicacao("");
+      setSinopse("");
+      setGenero("");
+      setEditora("");
+      setQtdePagina("");
+      setOferta("");
+      setDestaque("");
+      setDetalhes([]);
+      setTipoLivro("");
+      setPreco("");        
+      setQtdeEstoque("");
+
+      window.alert("Livro cadastrado!");
+    })
+    .catch((error) => {
+      console.error("Erro ao cadastrar livro:", error);
+      window.alert("Erro ao cadastrar livro!");
+    });
+};
 
   const handleToggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -282,6 +288,132 @@ function CadastroLivro() {
                   </Form.Group>
                 </Col>
               </Row>
+
+              <div className={styles.containerTtipoLivro}>
+                <div >
+                <Row>
+                    <Col>
+                      <Form.Group controlId="formTipoLivro" as={Row}>
+                        <Form.Label
+                          column
+                          sm="12"
+                          className={styles.labelCadastro}
+                        >
+                          Tipo do Livro
+                        </Form.Label>
+                        <Col sm="12">
+                          <Form.Control
+                            className={styles.inputCadastrar}
+                            as="select"
+                            value={tipoLivro}
+                            onChange={(e) => setTipoLivro(e.target.value)}
+                          >
+                            <option value="">Selecione uma opção</option>
+                            <option value="true">FISICO</option>
+                            <option value="false">EBOOK</option>
+                          </Form.Control>
+                        </Col>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <Form.Group controlId="formPaginas">
+                        <Form.Label className={styles.labelCadastro}>
+                          Preço
+                        </Form.Label>
+                        <Form.Control
+                          className={styles.inputCadastrar}
+                          type="number"
+                          rows={4}
+                          placeholder=""
+                          value={preco}
+                          onChange={(e) => setPreco(e.target.value)}
+                        />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <Form.Group controlId="formPaginas">
+                        <Form.Label className={styles.labelCadastro}>
+                          Estoque
+                        </Form.Label>
+                        <Form.Control
+                          className={styles.inputCadastrar}
+                          type="number"
+                          rows={4}
+                          placeholder=""
+                          value={qtdeEstoque}
+                          onChange={(e) => setQtdeEstoque(e.target.value)}
+                        />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                </div>
+
+                <div >
+                  <Row>
+                    <Col>
+                      <Form.Group controlId="formTipoLivro" as={Row}>
+                        <Form.Label
+                          column
+                          sm="12"
+                          className={styles.labelCadastro}
+                        >
+                          Tipo do Livro
+                        </Form.Label>
+                        <Col sm="12">
+                          <Form.Control
+                            className={styles.inputCadastrar}
+                            as="select"
+                            value={tipoLivro}
+                            onChange={(e) => setTipoLivro(e.target.value)}
+                          >
+                            <option value="">Selecione uma opção</option>
+                            <option value="true">FISICO</option>
+                            <option value="false">EBOOK</option>
+                          </Form.Control>
+                        </Col>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <Form.Group controlId="formPaginas">
+                        <Form.Label className={styles.labelCadastro}>
+                          Preço
+                        </Form.Label>
+                        <Form.Control
+                          className={styles.inputCadastrar}
+                          type="number"
+                          rows={4}
+                          placeholder=""
+                          value={preco}
+                          onChange={(e) => setPreco(e.target.value)}
+                        />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <Form.Group controlId="formPaginas">
+                        <Form.Label className={styles.labelCadastro}>
+                          Estoque
+                        </Form.Label>
+                        <Form.Control
+                          className={styles.inputCadastrar}
+                          type="number"
+                          rows={4}
+                          placeholder=""
+                          value={qtdeEstoque}
+                          onChange={(e) => setQtdeEstoque(e.target.value)}
+                        />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                </div>
+              </div>
 
               <Button
                 className={styles.buttonCadastrar}
