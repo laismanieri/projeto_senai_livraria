@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.containeUserLogin {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; 
+    grid-template-rows: 65em;
+    margin: 4%;
+   
+}
+
+.itemLoginBemVindo {
+    background-color: #ddd;
+    padding: 20px;
+    border-radius: 20px 0 0 20px;
+}
+
+.itemLoginConta {
+    background: fuchsia;
+    padding: 20px;
+    border-radius: 0 20px 20px 0;
+}

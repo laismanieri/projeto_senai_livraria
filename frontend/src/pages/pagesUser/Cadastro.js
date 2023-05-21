@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import logoIMG from '../assets/logo.png'
-import '../styles/login.css'
+// import logoIMG from '../assets/logo.png'
+// import '../styles/login.css'
 import cadastrar from './Cadastrar';
 
 function Cadastro() {
@@ -14,7 +14,7 @@ function Cadastro() {
 
   return (
    <div className="container">
-      <div className="container-login">
+      {/* <div className="container-login">
         <div className="wrap-login">
           <form className="login-form">
 
@@ -107,7 +107,7 @@ function Cadastro() {
 
           </form>
         </div>
-      </div>
+      </div> */}
    </div>
   );
 }
