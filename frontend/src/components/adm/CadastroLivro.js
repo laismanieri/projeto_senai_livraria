@@ -4,105 +4,414 @@ import axios from "axios";
 import styles from "../adm/CadastroLivro.module.css";
 
 function CadastroLivro() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   function postLivro() {
     var livro = {
-      anoPublicacao: document.getElementById('anoPublicacao').value,
-      titulo: document.getElementById('titulo').value,
-      autor: document.getElementById('autor').value,
-      genero: document.getElementById('genero').value,
-      editora: document.getElementById('editora').value,
-      sinopse: document.getElementById('sinopse').value,
-      imagem: document.getElementById('imagem').value,
-      qtdePagina: document.getElementById('qtdePagina').value,
-      oferta: document.getElementById('oferta').checked,
-      destaque: document.getElementById('destaque').checked,
+      anoPublicacao: document.getElementById("anoPublicacao").value,
+      titulo: document.getElementById("titulo").value,
+      autor: document.getElementById("autor").value,
+      genero: document.getElementById("genero").value,
+      editora: document.getElementById("editora").value,
+      sinopse: document.getElementById("sinopse").value,
+      imagem: document.getElementById("imagem").value,
+      qtdePagina: document.getElementById("qtdePagina").value,
+      oferta: document.getElementById("oferta").checked,
+      destaque: document.getElementById("destaque").checked,
       detalhes: [
         {
-          tipoLivro: 'FISICO',
-          preco: parseFloat(document.getElementById('precoFisico').value),
-          qtdeEstoque: parseInt(document.getElementById('qtdeEstoqueFisico').value),
+          tipoLivro: "FISICO",
+          preco: parseFloat(document.getElementById("precoFisico").value),
+          qtdeEstoque: parseInt(
+            document.getElementById("qtdeEstoqueFisico").value
+          ),
         },
         {
-          tipoLivro: 'EBOOK',
-          preco: parseFloat(document.getElementById('precoEbook').value),
-          qtdeEstoque: parseInt(document.getElementById('qtdeEstoqueEbook').value),
-        }
-      ]
+          tipoLivro: "EBOOK",
+          preco: parseFloat(document.getElementById("precoEbook").value),
+          qtdeEstoque: parseInt(
+            document.getElementById("qtdeEstoqueEbook").value
+          ),
+        },
+      ],
     };
-  
-    fetch('http://localhost:8082/livro', {
-      method: 'POST',
+
+    fetch("http://localhost:8082/livro", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(livro)
+      body: JSON.stringify(livro),
     })
-      .then(response => {
+      .then((response) => {
         if (response.ok) {
-          console.log('Livro cadastrado com sucesso!');
-          alert('Livro cadastrado com sucesso!');
+          console.log("Livro cadastrado com sucesso!");
+          alert("Livro cadastrado com sucesso!");
         } else {
-          console.error('Erro ao cadastrar livro.');
+          console.error("Erro ao cadastrar livro.");
         }
       })
-      .catch(error => {
-        console.error('Erro ao cadastrar livro:', error);
+      .catch((error) => {
+        console.error("Erro ao cadastrar livro:", error);
       });
   }
-  
+
+  const handleToggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   return (
     <>
-<form id="livroForm">
-  <label for="anoPublicacao">Ano de Publicação:</label>
-  <input type="text" id="anoPublicacao" name="anoPublicacao" required/><br/>
+      <div className={styles.containerCadastroLivro}>
+        <h2 className={styles.tituloCadastroLivro}>Cadastrar Livros</h2>
+        <div className="linhaHorizontal" />
+        <Button
+          className={styles.buttonExpandir}
+          variant="secondary"
+          onClick={handleToggleExpand}
+        >
+          {isExpanded ? "Recolher" : "Expandir"} Formulário
+        </Button>
+        {isExpanded && (
+          <Form id="livroForm" onSubmit={postLivro}>
+            <br />
+            <div className={styles.containerSmall}>
+              <Row>
+                <Col>
+                  <Form.Group controlId="titulo">
+                    <Form.Label className={styles.labelCadastro}>
+                      Título:
+                    </Form.Label>
+                    <Col sm="12">
+                      <Form.Control
+                        className={styles.inputCadastrar}
+                        type="text"
+                        placeholder="Digite o título do livro"
+                        name="titulo"
+                        required
+                      />
+                    </Col>
+                  </Form.Group>
+                </Col>
+              </Row>
+            
 
-  <label for="titulo">Título:</label>
-  <input type="text" id="titulo" name="titulo" required/><br/>
+              <Row>
+                <Col>
+                  <Form.Group controlId="autor">
+                    <Form.Label className={styles.labelCadastro}>
+                      Autor:
+                    </Form.Label>
+                    <Col sm="12">
+                    <Form.Control
+                      className={styles.inputCadastrar}
+                      type="text"
+                      placeholder="Digite o nome do autor"
+                      name="autor"
+                      required
+                    />
+                    </Col>
+                  </Form.Group>
+                </Col>
+              </Row>
+            </div>
 
-  <label for="autor">Autor:</label>
-  <input type="text" id="autor" name="autor" required/><br/>
+            <div className={styles.containerSmall}>
+              <Row>
+                <Col>
+                  <Form.Group controlId="genero" as={Row}>
+                    <Form.Label column sm="12" className={styles.labelCadastro}>
+                      Gênero:
+                    </Form.Label>
+                    <Col sm="12">
+                      <Form.Control
+                        className={styles.inputCadastrar}
+                        as="select"
+                        name="genero"
+                        required
+                      >
+                        <option value="">Selecione um gênero</option>
+                        <option value="Ação">Ação</option>
+                        <option value="Aventura">Aventura</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Ficção Científica">
+                          Ficção Científica
+                        </option>
+                        <option value="Fantasia">Fantasia</option>
+                        <option value="Suspense">Suspense</option>
+                        <option value="Mistério">Mistério</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Comédia">Comédia</option>
+                        <option value="Biografia">Biografia</option>
+                        <option value="Autobiografia">Autobiografia</option>
+                        <option value="História">História</option>
+                        <option value="Autoajuda">Autoajuda</option>
+                        <option value="Negócios">Negócios</option>
+                        <option value="Autoconhecimento">
+                          Autoconhecimento
+                        </option>
+                        <option value="Autores Nacionais">
+                          Autores Nacionais
+                        </option>
+                        <option value="Poesia">Poesia</option>
+                        <option value="Poesia">Outros</option>
+                      </Form.Control>
+                    </Col>
+                  </Form.Group>
+                </Col>
+              </Row>
 
-  <label for="genero">Gênero:</label>
-  <input type="text" id="genero" name="genero" required/><br/>
+              <Row>
+                <Col>
+                  <Form.Group controlId="editora">
+                    <Form.Label className={styles.labelCadastro}>
+                      Editora:
+                    </Form.Label>
+                    <Col sm="12">
+                    <Form.Control
+                      className={styles.inputCadastrar}
+                      type="text"
+                      rows={3}
+                      placeholder="Digite a editora do livro"
+                      name="editora"
+                      required
+                    />
+                    </Col>
+                  </Form.Group>
+                </Col>
+              </Row>
+            </div>
 
-  <label for="editora">Editora:</label>
-  <input type="text" id="editora" name="editora" required/><br/>
+            <div className={styles.containerSmall}>
+              <Row>
+                <Col>
+                  <Form.Group controlId="anoPublicacao">
+                    <Form.Label className={styles.labelCadastro}>
+                      Ano de Publicação:
+                    </Form.Label>
+                    <Col sm="12">
+                    <Form.Control
+                      className={styles.inputCadastrar}
+                      type="number"
+                      rows={3}
+                      placeholder="Digite a ano de publicação do livro"
+                      name="anoPublicacao"
+                      required
+                    />
+                    </Col>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group controlId="qtdePagina">
+                    <Form.Label className={styles.labelCadastro}>
+                      Quantidade de Páginas:
+                    </Form.Label>
+                    <Col sm="12">
+                    <Form.Control
+                      className={styles.inputCadastrar}
+                      type="number"
+                      rows={3}
+                      placeholder="Digite a quantidade de páginas do livro"
+                      name="qtdePagina"
+                      required
+                    />
+                    </Col>
+                  </Form.Group>
+                </Col>
+              </Row>
+            </div>
+            <br/>
 
-  <label for="sinopse">Sinopse:</label>
-  <textarea id="sinopse" name="sinopse" required></textarea><br/>
 
-  <label for="imagem">URL da Imagem:</label>
-  <input type="text" id="imagem" name="imagem" required/><br/>
+            <div className={styles.containerSmall}>
+              <Row>
+                <Col>
+                  <Form.Group controlId="oferta" as={Row}>
+                    <Col sm="12">
+                      <Form.Check
+                        label="  Oferta"
+                        type="checkbox"
+                        name="oferta"
+                        className={styles.inputCadastrar}
+                      />
+                    </Col>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group controlId="destaque" as={Row}>
+                    <Col sm="12">
+                      <Form.Check
+                        type="checkbox"
+                        name="destaque"
+                        label="  Destaque"
+                        className={styles.inputCadastrar}
+                      />
+                    </Col>
+                  </Form.Group>
+                </Col>
+              </Row>
+            </div>
+            <br/>
+            <Row>
+              <Col>
+                <Form.Group controlId="imagem">
+                  <Form.Label className={styles.labelCadastro}>
+                    URL da Imagem:
+                  </Form.Label>
+                  <Form.Control
+                    className={styles.inputImagemCadastrar}
+                    type="text"
+                    rows={3}
+                    placeholder="Digite a imagem do livro"
+                    name="imagem"
+                    required
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+<br/>
+            <Form.Group as={Row} controlId="sinopse">
+              <Form.Label column sm={2} className={styles.labelCadastro}>
+                Sinopse:
+              </Form.Label>
+              <Col sm={10}>
+                <Form.Control
+                  as="textarea"
+                  rows={10}
+                  placeholder="Digite a sinopse do livro"
+                  name="sinopse"
+                  required
+                />
+              </Col>
+            </Form.Group>
+<br/>
+            <div className={styles.containerTtipoLivro}>
+              <div>
+                <Row>
+                  <Col>
+                    <Form.Group controlId="tipoLivroFisico" as={Row}>
+                      <Form.Label
+                        column
+                        sm="12"
+                        className={styles.labelCadastro}
+                      >
+                       Livro Físico 
+                      </Form.Label>
+                      <Col sm="12"></Col>
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Form.Group controlId="precoFisico">
+                      <Form.Label className={styles.labelCadastro}>
+                        Preço:
+                      </Form.Label>
+                      <Col sm="12">
+                      <Form.Control
+                        className={styles.inputCadastrar}
+                        type="number"
+                        rows={4}
+                        step="0.01"
+                        name="precoFisico"
+                        required
+                        placeholder="0.00"
+                      />
+                      </Col>
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Form.Group controlId="qtdeEstoqueFisico">
+                      <Form.Label className={styles.labelCadastro}>
+                        Quantidade em Estoque:
+                      </Form.Label>
+                      <Col sm="12">
+                      <Form.Control
+                        className={styles.inputCadastrar}
+                        type="number"
+                        rows={4}
+                        name="qtdeEstoqueFisico"
+                        required
+                        placeholder="0"
+                      />
+                      </Col>
+                    </Form.Group>
+                  </Col>
+                </Row>
+              </div>
 
-  <label for="qtdePagina">Quantidade de Páginas:</label>
-  <input type="number" id="qtdePagina" name="qtdePagina" required/><br/>
+              <div>
+                <Row>
+                  <Col>
+                    <Form.Group controlId="tipoLivroEbook" as={Row}>
+                      <Form.Label
+                        column
+                        sm="12"
+                        className={styles.labelCadastro}
+                      >
+                        Livro Ebook
+                      </Form.Label>
+                      <Col sm="12"></Col>
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Form.Group controlId="precoEbook">
+                      <Form.Label className={styles.labelCadastro}>
+                        Preço:
+                      </Form.Label>
+                      <Col sm="12">
+                      <Form.Control
+                        className={styles.inputCadastrar}
+                        type="number"
+                        rows={4}
+                        placeholder="0.00"
+                        step="0.01"
+                        name="precoEbook"
+                        required
+                      />
+                      </Col>
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Form.Group controlId="qtdeEstoqueEbook">
+                      <Form.Label className={styles.labelCadastro}>
+                        Quantidade em Estoque:
+                      </Form.Label>
+                      <Col sm="12">
+                      <Form.Control
+                        className={styles.inputCadastrar}
+                        type="number"
+                        rows={4}
+                        placeholder="0"
+                        name="qtdeEstoqueEbook"
+                        required
+                      />
+                      </Col>
+                    </Form.Group>
+                  </Col>
+                </Row>
+              </div>
+            </div>
 
-  <label for="oferta">Oferta:</label>
-  <input type="checkbox" id="oferta" name="oferta"/><br/>
+            <Button className={styles.buttonCadastrar} type="submit">
+              Cadastrar
+            </Button>
+          </Form>
+        )}
+      </div>
 
-  <label for="destaque">Destaque:</label>
-  <input type="checkbox" id="destaque" name="destaque"/><br/>
-
-  <hr/>
-
-  <h3>Detalhes do Livro</h3>
-
-  <h4>Tipo de Livro: Físico</h4>
-  <label for="precoFisico">Preço:</label>
-  <input type="number" step="0.01" id="precoFisico" name="precoFisico" required/><br/>
-  <label for="qtdeEstoqueFisico">Quantidade em Estoque:</label>
-  <input type="number" id="qtdeEstoqueFisico" name="qtdeEstoqueFisico" required/><br/>
-
-  <h4>Tipo de Livro: Ebook</h4>
-  <label for="precoEbook">Preço:</label>
-  <input type="number" step="0.01" id="precoEbook" name="precoEbook" required/><br/>
-  <label for="qtdeEstoqueEbook">Quantidade em Estoque:</label>
-  <input type="number" id="qtdeEstoqueEbook" name="qtdeEstoqueEbook" required/><br/>
-
-  <button type="button" onClick={postLivro}>Enviar</button>
-</form>
-
+      <div className="linhaHorizontal" />
     </>
   );
 }
