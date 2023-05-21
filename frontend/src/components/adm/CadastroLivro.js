@@ -72,9 +72,10 @@ function CadastroLivro() {
         >
           {isExpanded ? "Recolher" : "Expandir"} Formulário
         </Button>
+        <br />
+        <br />
         {isExpanded && (
           <Form id="livroForm" onSubmit={postLivro}>
-            <br />
             <div className={styles.containerSmall}>
               <Row>
                 <Col>
@@ -94,7 +95,6 @@ function CadastroLivro() {
                   </Form.Group>
                 </Col>
               </Row>
-            
 
               <Row>
                 <Col>
@@ -103,13 +103,13 @@ function CadastroLivro() {
                       Autor:
                     </Form.Label>
                     <Col sm="12">
-                    <Form.Control
-                      className={styles.inputCadastrar}
-                      type="text"
-                      placeholder="Digite o nome do autor"
-                      name="autor"
-                      required
-                    />
+                      <Form.Control
+                        className={styles.inputCadastrar}
+                        type="text"
+                        placeholder="Digite o nome do autor"
+                        name="autor"
+                        required
+                      />
                     </Col>
                   </Form.Group>
                 </Col>
@@ -169,14 +169,14 @@ function CadastroLivro() {
                       Editora:
                     </Form.Label>
                     <Col sm="12">
-                    <Form.Control
-                      className={styles.inputCadastrar}
-                      type="text"
-                      rows={3}
-                      placeholder="Digite a editora do livro"
-                      name="editora"
-                      required
-                    />
+                      <Form.Control
+                        className={styles.inputCadastrar}
+                        type="text"
+                        rows={3}
+                        placeholder="Digite a editora do livro"
+                        name="editora"
+                        required
+                      />
                     </Col>
                   </Form.Group>
                 </Col>
@@ -191,14 +191,14 @@ function CadastroLivro() {
                       Ano de Publicação:
                     </Form.Label>
                     <Col sm="12">
-                    <Form.Control
-                      className={styles.inputCadastrar}
-                      type="number"
-                      rows={3}
-                      placeholder="Digite a ano de publicação do livro"
-                      name="anoPublicacao"
-                      required
-                    />
+                      <Form.Control
+                        className={styles.inputCadastrar}
+                        type="number"
+                        rows={3}
+                        placeholder="Digite a ano de publicação do livro"
+                        name="anoPublicacao"
+                        required
+                      />
                     </Col>
                   </Form.Group>
                 </Col>
@@ -210,53 +210,22 @@ function CadastroLivro() {
                       Quantidade de Páginas:
                     </Form.Label>
                     <Col sm="12">
-                    <Form.Control
-                      className={styles.inputCadastrar}
-                      type="number"
-                      rows={3}
-                      placeholder="Digite a quantidade de páginas do livro"
-                      name="qtdePagina"
-                      required
-                    />
-                    </Col>
-                  </Form.Group>
-                </Col>
-              </Row>
-            </div>
-            <br/>
-
-
-            <div className={styles.containerSmall}>
-              <Row>
-                <Col>
-                  <Form.Group controlId="oferta" as={Row}>
-                    <Col sm="12">
-                      <Form.Check
-                        label="  Oferta"
-                        type="checkbox"
-                        name="oferta"
+                      <Form.Control
                         className={styles.inputCadastrar}
-                      />
-                    </Col>
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Form.Group controlId="destaque" as={Row}>
-                    <Col sm="12">
-                      <Form.Check
-                        type="checkbox"
-                        name="destaque"
-                        label="  Destaque"
-                        className={styles.inputCadastrar}
+                        type="number"
+                        rows={3}
+                        placeholder="Digite a quantidade de páginas do livro"
+                        name="qtdePagina"
+                        required
                       />
                     </Col>
                   </Form.Group>
                 </Col>
               </Row>
             </div>
-            <br/>
+
+
+
             <Row>
               <Col>
                 <Form.Group controlId="imagem">
@@ -274,13 +243,14 @@ function CadastroLivro() {
                 </Form.Group>
               </Col>
             </Row>
-<br/>
+
             <Form.Group as={Row} controlId="sinopse">
               <Form.Label column sm={2} className={styles.labelCadastro}>
                 Sinopse:
               </Form.Label>
               <Col sm={10}>
                 <Form.Control
+                  className={styles.textArea}
                   as="textarea"
                   rows={10}
                   placeholder="Digite a sinopse do livro"
@@ -289,19 +259,51 @@ function CadastroLivro() {
                 />
               </Col>
             </Form.Group>
-<br/>
+          <br/>
+            <div className={styles.containerSmall}>
+              <Row>
+                <Col>
+                  <Form.Group controlId="oferta" as={Row}>
+                    <Col sm="12">
+                      <Form.Check
+                        label="Oferta"
+                        type="checkbox"
+                        name="oferta"
+                        className={styles.inputCadastrar}
+                      />
+                    </Col>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group controlId="destaque" as={Row}>
+                    <Col sm="12">
+                      <Form.Check
+                        type="checkbox"
+                        name="destaque"
+                        label="Destaque"
+                        className={styles.inputCadastrar}
+                      />
+                    </Col>
+                  </Form.Group>
+                </Col>
+              </Row>
+            </div>
+<div className="linhaHorizontal" /><br/>
+
             <div className={styles.containerTtipoLivro}>
               <div>
                 <Row>
                   <Col>
                     <Form.Group controlId="tipoLivroFisico" as={Row}>
-                      <Form.Label
+                      <p
                         column
                         sm="12"
-                        className={styles.labelCadastro}
+                        className={styles.tipoLivro}
                       >
-                       Livro Físico 
-                      </Form.Label>
+                        LIVRO FÍSICO
+                      </p>
                       <Col sm="12"></Col>
                     </Form.Group>
                   </Col>
@@ -313,15 +315,15 @@ function CadastroLivro() {
                         Preço:
                       </Form.Label>
                       <Col sm="12">
-                      <Form.Control
-                        className={styles.inputCadastrar}
-                        type="number"
-                        rows={4}
-                        step="0.01"
-                        name="precoFisico"
-                        required
-                        placeholder="0.00"
-                      />
+                        <Form.Control
+                          className={styles.inputCadastrar}
+                          type="number"
+                          rows={4}
+                          step="0.01"
+                          name="precoFisico"
+                          required
+                          placeholder="0.00"
+                        />
                       </Col>
                     </Form.Group>
                   </Col>
@@ -333,14 +335,14 @@ function CadastroLivro() {
                         Quantidade em Estoque:
                       </Form.Label>
                       <Col sm="12">
-                      <Form.Control
-                        className={styles.inputCadastrar}
-                        type="number"
-                        rows={4}
-                        name="qtdeEstoqueFisico"
-                        required
-                        placeholder="0"
-                      />
+                        <Form.Control
+                          className={styles.inputCadastrar}
+                          type="number"
+                          rows={4}
+                          name="qtdeEstoqueFisico"
+                          required
+                          placeholder="0"
+                        />
                       </Col>
                     </Form.Group>
                   </Col>
@@ -351,13 +353,13 @@ function CadastroLivro() {
                 <Row>
                   <Col>
                     <Form.Group controlId="tipoLivroEbook" as={Row}>
-                      <Form.Label
+                      <p
                         column
                         sm="12"
-                        className={styles.labelCadastro}
+                        className={styles.tipoLivro}
                       >
-                        Livro Ebook
-                      </Form.Label>
+                        LIVRO EBOOK
+                      </p>
                       <Col sm="12"></Col>
                     </Form.Group>
                   </Col>
@@ -369,15 +371,15 @@ function CadastroLivro() {
                         Preço:
                       </Form.Label>
                       <Col sm="12">
-                      <Form.Control
-                        className={styles.inputCadastrar}
-                        type="number"
-                        rows={4}
-                        placeholder="0.00"
-                        step="0.01"
-                        name="precoEbook"
-                        required
-                      />
+                        <Form.Control
+                          className={styles.inputCadastrar}
+                          type="number"
+                          rows={4}
+                          placeholder="0.00"
+                          step="0.01"
+                          name="precoEbook"
+                          required
+                        />
                       </Col>
                     </Form.Group>
                   </Col>
@@ -389,14 +391,14 @@ function CadastroLivro() {
                         Quantidade em Estoque:
                       </Form.Label>
                       <Col sm="12">
-                      <Form.Control
-                        className={styles.inputCadastrar}
-                        type="number"
-                        rows={4}
-                        placeholder="0"
-                        name="qtdeEstoqueEbook"
-                        required
-                      />
+                        <Form.Control
+                          className={styles.inputCadastrar}
+                          type="number"
+                          rows={4}
+                          placeholder="0"
+                          name="qtdeEstoqueEbook"
+                          required
+                        />
                       </Col>
                     </Form.Group>
                   </Col>
