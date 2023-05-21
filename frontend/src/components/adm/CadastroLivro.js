@@ -302,23 +302,21 @@ function CadastroLivro() {
                 </Col>
               </Row>
 
-              <Row>
-                <Col>
-                  <Form.Group controlId="formSinopse">
-                    <Form.Label className={styles.labelCadastro}>
-                      Sinopse
-                    </Form.Label>
-                    <Form.Control
-                      className={styles.inputSinopseCadastrar}
-                      type="textarea"
-                      rows={20}
-                      placeholder="Digite a sinopse do livro"
-                      value={sinopse}
-                      onChange={(e) => setSinopse(e.target.value)}
-                    />
-                  </Form.Group>
+              <Form.Group as={Row} controlId="formSinopse">
+                <Form.Label column sm={2} className={styles.labelCadastro}>
+                  Sinopse
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Control
+                    as="textarea"
+                    rows={10}
+                    placeholder="Digite a sinopse do livro"
+                    value={sinopse}
+                    onChange={(e) => setSinopse(e.target.value)}
+                    className={styles.textArea}
+                  />
                 </Col>
-              </Row>
+              </Form.Group>
 
               <div className={styles.containerTtipoLivro}>
                 <div>
