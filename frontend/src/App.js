@@ -7,7 +7,6 @@ import Cadastro from "./pages/pagesUser/Cadastro";
 import Contact from "./pages/pagesUser/Contact"
 import InformacaoLivro from "./pages/pagesUser/InformacaoLivro";
 import InformacaoLivroAdm from "./pages/pagesAdm/InformacaoLivroAdm";
-import Pagamento from "./pages/pagesUser/Pagamento";
 import Adm from "./pages/pagesAdm/Adm";
 
 
@@ -25,8 +24,7 @@ function App() {
           <Route element={<Contact />} path="/contact" />
           <Route element={<InformacaoLivroAdm />} path="/informacao-livro-adm/:id" />
           <Route element={<InformacaoLivro />} path="/informacao-livro/:id" />
-          <Route element={<Pagamento />} path="/pagamento" />
-        </Routes>
+     </Routes>
       </BrowserRouter>  
     </div>
   );

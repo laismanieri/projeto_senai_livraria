@@ -1,17 +1,18 @@
-*{
+* {
   scroll-behavior: smooth;
   text-decoration: none;
 }
 
-.container{
-  margin: 0 18% 0 18%;
+.container {
+  margin: 0 18%;
 }
 
+a:link {
+  text-decoration: none;
+}
 
-a:link {text-decoration: none;}
-
-.voltarHome{
-  color: #146b97; 
+.voltarHome {
+  color: #146b97;
   cursor: pointer;
   margin-top: 12vh;
   margin-left: 0.5vh;
@@ -24,34 +25,34 @@ a:link {text-decoration: none;}
   margin-top: 2em;
 }
 
-
-
 .formContact {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start; /* Alinhar os labels à esquerda */
   justify-content: center;
   border-radius: 0.5rem;
   border-color: #146b97;
   margin: 50px auto;
   padding: 20px;
   color: #146b97;
-  background:rgb(199, 229, 255);
-  width: 100vh;
+  background: rgb(207, 233, 255);
+  width: 100%;
 
+  /* Responsividade */
+  max-width: 500px; /* Defina o tamanho máximo para evitar que o formulário fique muito largo */
 }
 
-.formContactLabel{
+.formContactLabel {
   margin-bottom: 0.5rem;
   text-align: left;
   font-size: 1.2rem;
   line-height: 2rem;
   font-weight: bold;
   border-color: #146b97;
-
 }
 
-.formContactInput, .formContactTextArea {
+.formContactInput,
+.formContactTextArea {
   width: 100%;
   border-radius: 0.25rem;
   border: 1px solid #146b97;
@@ -61,23 +62,16 @@ a:link {text-decoration: none;}
   background: aliceblue;
 }
 
+.formContactInput {
+  background-color: white;
+}
 
-.formContactInput:focus::-webkit-input-placeholder {
-  color: transparent;
-  }
-
-.formContactInput:focus:-moz-placeholder { /* Firefox 18- */
-    color: transparent;  
-    }
-    
-.formContactInput:focus::-moz-placeholder {  /* Firefox 19+ */
-    color: transparent;  
-    }
-    
-.formContactInput:focus:-ms-input-placeholder {  
-    color: transparent;  
-    }
-    
+.formContactInput:focus,
+.formContactTextArea:focus,
+.inputAdmImagem {
+  outline: none;
+  background-color: white;
+}
 
 .formContactButton {
   padding: 0.5rem 1rem;
@@ -91,9 +85,7 @@ a:link {text-decoration: none;}
   font-weight: bold;
 }
 
-
-.formContactButton:hover{
+.formContactButton:hover {
   color: #fbf4f4;
   background-color: rgb(144, 202, 252);
 }
-

@@ -1,9 +1,7 @@
 import styles from "../modals/ModalCarrinho.module.css";
-import { AiFillDelete, AiOutlineClose, AiFillEdit } from "react-icons/ai";
+import { AiFillDelete, AiOutlineClose } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-import PaymentMethodSelect from "../../components/layout/PaymentMethodSelect";
 
 const ModalCarrinho = ({ isOpen, onClose }) => {
   const [quantidade, setQuantidade] = useState(1);
@@ -83,13 +81,6 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
             </div>
           </div>
           <div className={styles.bodyLista}>
-            <br></br>
-            <table className={styles.tableSecao}>
-              <tr>
-                <th className={styles.thSecaoTitN}>1</th>
-                <th className={styles.thSecaoTit}>Revisar itens</th>
-              </tr>
-            </table>
             {carrinho.map((livro, index) => (
               <div className={styles.listaItemCarrinho}>
                 <div key={livro.id}></div>
@@ -214,84 +205,17 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
               </div>
             ))}
           </div>
-
-          <div className={styles.linhaHorizontal} />
-
-          <div className={styles.containerEndereco}>
-            <table className={styles.tableSecao}>
-              <tr>
-                <th className={styles.thSecaoTitN}>2</th>
-                <th className={styles.thSecaoTit}>Endereço de entrega</th>
-                <th className={styles.thSecaoInf}>
-                  <p>Nome do usuario</p>
-                  <p>Rua, Numero</p>
-                  <p>Complemento</p>
-                  <p>Bairro</p>
-                  <p>Cidade, UF, CEP</p>
-                </th>
-                <th className={styles.thSecao}>              <AiFillEdit/></th>
-              </tr>
-            </table>
-          </div>
-
-          <div className={styles.linhaHorizontal} />
-
-          <div className={styles.containerFormaPgto}>
-            <table className={styles.tableSecao}>
-              <tr>
-                <th className={styles.thSecaoTitN}>3</th>
-                <th className={styles.thSecaoTit}>Método de pagamento</th>
-                <th className={styles.thSecaoInf}>
-                  <div>
-                    <p>Selecione o Método de Pagamento</p>
-                    <PaymentMethodSelect />
-                  </div>
-                  <div>
-                    <p for="cards">Selecione as opções de parcelamento</p>
-
-                    <select name="parcelas" id="parcelas">
-                      <option value="1x sem juros">1x sem juros</option>
-                      <option value="2x sem juros">2x sem juros</option>
-                      <option value="3x sem juros">3x sem juros</option>
-                      <option value="4x sem juros">4x sem juros</option>
-                      <option value="5x sem juros">5x sem juros</option>
-                      <option value="6x sem juros">6x sem juros</option>
-                    </select>
-                  </div>
-                </th>
-                <th className={styles.thSecao}><AiFillEdit/></th>
-              </tr>
-            </table>
-          </div>
-
-          <div className={styles.linhaHorizontal} />
           {/* <div className={styles.linhaHorizontal} /> */}
           <div className={styles.totalCarrinho}>
             <div className={styles.valorCarrinho}>
               <ul className={styles.valorSubtotal}>
                 <li>
-                  <span>Resumo do Pedido</span>
-                </li>
-              </ul>
-              <div className={styles.linhaHorizontal} />
-              <ul className={styles.valorSubtotal}>
-                <li>
-                  <span>Entrega GRÁTIS:</span>
-                </li>
-                <li>
-                  <span>2 dias úteis</span>
-                </li>
-              </ul>
-              
-              <ul className={styles.valorSubtotal}>
-                <li>
-                  <span>Total de Livros:</span>
+                  <span>Quantidade Total:</span>
                 </li>
                 <li>
                   <span>{qtdeTotal}</span>
                 </li>
               </ul>
-              <div className={styles.linhaHorizontal} />
               <ul className={styles.valorTotal}>
                 <li>
                   <span>Valor Total:</span>
@@ -312,7 +236,7 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                 }}
               >
                 <button className={styles.carrinhoButtonComprar}>
-                  Finalizar Pedido
+                  Comprar
                 </button>
               </Link>
             </div>

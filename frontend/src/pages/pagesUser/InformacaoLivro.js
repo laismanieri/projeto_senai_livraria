@@ -122,9 +122,7 @@ function InformacaoLivro() {
   return (
     <>
       <Navbar />
-      <div>
-      <div className={styles.containerCarousel}>
-        <div className={styles.containerInformacaoLivro}>
+        <div className={styles.container}>
           <Link to={"/"}>
             <h1 className={styles.voltarHome}>
               <AiOutlineArrowLeft />
@@ -142,6 +140,7 @@ function InformacaoLivro() {
             </div>
             <div className={styles.gridItemLong}>
               <div className={styles.containerInfoLivro}>
+              <p className={styles.titulo}>{livro.titulo}</p>
                 <p className={styles.autor}>{livro.autor}</p>
                 <p className={styles.editora}>{livro.editora}</p>
                 <div className={styles.tipoLivroDetalhe}>
@@ -198,8 +197,7 @@ function InformacaoLivro() {
                         <li>
                           {fisicoDetalhe && (
                             <>
-                              <span></span>
-                              <>
+                             <>
                                 <span className={styles.liCompraInfoTit}>
                                   {fisicoDetalhe.tipoLivro}
                                 </span>
@@ -468,9 +466,6 @@ function InformacaoLivro() {
             </div>
           </div>
         </div>
-      </div>
-      </div>
-
       <Footer />
     </>
   );

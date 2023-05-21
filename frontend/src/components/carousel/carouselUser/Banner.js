@@ -17,24 +17,6 @@ const Banner = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
-    // prevArrow: (
-    //   <button
-    //     type="button"
-    //     className="slick-prev"
-    //     onClick={() => sliderRef.current?.slickPrev()}
-    //   >
-    //     <FaArrowLeft />
-    //   </button>
-    // ),
-    // nextArrow: (
-    //   <button
-    //     type="button"
-    //     className="slick-next"
-    //     onClick={() => sliderRef.current?.slickNext()}
-    //   >
-    //     <FaArrowRight />
-    //   </button>
-    // ),
   };
 
   return (

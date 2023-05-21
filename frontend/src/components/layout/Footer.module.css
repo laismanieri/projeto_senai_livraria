@@ -118,19 +118,24 @@ a:link {text-decoration: none;}
 }
 
 /* Ajustes para telas menores que 576px */
-@media only screen and (max-width: 576px) {
+@media only screen and (min-width: 320px) and (max-width: 576px) {
   .containerFooter {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
   }
 
   .socialListLi {
-    margin: 2% 10%;
+    margin: 2% 7%;
   }
 
   .pagamentoListDiv {
     margin: 0 20%;
   }
+
+  .footerPagamentoH1, .footerFaleConosco{
+    font-size: 0.5em;
+    width: 100%;
+}
 }
 
 /* Ajustes para telas entre 577px e 768px */
