@@ -2,6 +2,7 @@ import styles from "../modals/ModalCarrinho.module.css";
 import { AiFillDelete, AiOutlineClose, AiFillEdit } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Modal from "react-modal";
 
 import PaymentMethodSelect from "../../components/layout/PaymentMethodSelect";
 
@@ -10,6 +11,8 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
   const [carrinho, setCarrinho] = useState([]);
   const [qtdeTotal, setQtdeTotal] = useState(0);
   const [total, setTotal] = useState(0);
+
+  const [modalIsOpenLivroAdd, setModalIsOpenLivroAdd] = useState(false);
 
   useEffect(() => {
     let qtde = 0;
@@ -58,6 +61,31 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
   if (!isOpen) {
     return null;
   }
+
+  const onFinalizarPedido = () => {
+    // Lógica para finalizar o pedido
+    // ...
+  };
+
+  function closeModal() {
+    setModalIsOpenLivroAdd(false);
+  }
+
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+    },
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      zIndex: "9999",
+    },
+  };
+
   return (
     <>
       <div className={styles.modalCarrinhoContainer}>
@@ -229,7 +257,10 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                   <p>Bairro</p>
                   <p>Cidade, UF, CEP</p>
                 </th>
-                <th className={styles.thSecao}>              <AiFillEdit/></th>
+                <th className={styles.thSecao}>
+                  {" "}
+                  <AiFillEdit />
+                </th>
               </tr>
             </table>
           </div>
@@ -259,7 +290,9 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                     </select>
                   </div>
                 </th>
-                <th className={styles.thSecao}><AiFillEdit/></th>
+                <th className={styles.thSecao}>
+                  <AiFillEdit />
+                </th>
               </tr>
             </table>
           </div>
@@ -282,7 +315,7 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                   <span>2 dias úteis</span>
                 </li>
               </ul>
-              
+
               <ul className={styles.valorSubtotal}>
                 <li>
                   <span>Total de Livros:</span>
@@ -305,16 +338,39 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                   </span>
                 </li>
               </ul>
-              <Link
-                to={{
-                  pathname: "/pagamento",
-                  state: { carrinho: carrinho },
-                }}
-              >
-                <button className={styles.carrinhoButtonComprar}>
+              <div>
+                <button
+                  className={styles.carrinhoButtonComprar}
+                  onClick={() => {
+                    setModalIsOpenLivroAdd(true); // Abre o modal
+                    onFinalizarPedido(); // Realiza a ação de finalizar o pedido
+                  }}
+                >
                   Finalizar Pedido
                 </button>
-              </Link>
+
+                <Modal
+                  className={styles.modalCompra}
+                  isOpen={modalIsOpenLivroAdd}
+                  onRequestClose={closeModal}
+                  contentLabel="Pedido realizado com sucesso!"
+                  style={customStyles}
+                  overlayStyle={customStyles.overlay}
+                >
+                  <button
+                    className={styles.buttonFecharModal}
+                    onClick={() => {
+                      closeModal();
+                      window.location.reload();
+                    }}
+                  >
+                    <AiOutlineClose className={styles.imgFechar} />
+                  </button>
+                  <h2 className={styles.h2AdicionarSacola}>
+                    Pedido realizado com sucesso!
+                  </h2>
+                </Modal>
+              </div>
             </div>
           </div>
         </div>

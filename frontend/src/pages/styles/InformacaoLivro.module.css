@@ -251,12 +251,17 @@
     border-radius: 50%;
     width: 2em;
     height: 1.7em;
+    border: none;
   }
 
   .buttonCompra:hover{
     background: #033479d4;
   }
 
+  .imgFechar{
+    color: aliceblue;
+    margin-top: 4px;
+  }
 
 
 

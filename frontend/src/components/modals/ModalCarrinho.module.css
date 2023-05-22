@@ -373,6 +373,49 @@ span{
 /* Para versões mais recentes do Firefox, é necessário usar uma solução alternativa com JavaScript */
 
 
+.buttonCompra{
+  width: 100%;
+  height: 2.3em;
+  border-radius: 10px;
+  background: #033579;
+  border: none;
+  margin-top: 15px;   
+  cursor: pointer;
+}
+
+.h1AdicionarSacola{
+  font-size: 12px;
+  text-align: center;  
+  font-weight: bold;
+  margin: 0;
+  color: #ffff;
+}
+
+
+.h2AdicionarSacola{
+  color: #033479d4; 
+ text-align: center;  
+  font-weight: bold;
+}
+
+.buttonFecharModal{
+  background:#033479d4;
+  border-radius: 50%;
+  width: 2em;
+  height: 1.7em;
+  border: none;
+}
+
+.buttonCompra:hover{
+  background: #033479d4;
+}
+
+.imgFechar{
+  color: aliceblue;
+  margin-top: 4px;
+}
+
+
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .modalCarrinho {
