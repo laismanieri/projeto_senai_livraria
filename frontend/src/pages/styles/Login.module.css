@@ -12,6 +12,15 @@
    
 }
 
+
+.containeUserLoginEntrar {
+    display: grid;
+    grid-template-columns:60% 40% ; 
+    grid-template-rows: 40em;
+    margin: 10% 20%;
+   
+}
+
 .itemLoginBemVindo {
     background-color: #015a80;
     padding: 20px;
@@ -22,6 +31,51 @@
     justify-content: center;
     text-align: center;
 }
+
+
+.itemLoginContaEntrar {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px 0 0 20px;
+  }
+
+  .itemLoginMsg {
+    background-color: #015a80;
+    padding: 20px;
+    border-radius: 0 20px 20px 0;
+    color: aliceblue;    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+ 
+.itemLoginMsg h1 {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .loginInfoMsg{
+    width: 70%;
+
+  }
+  
+  .loginInfoMsgH2 {
+    font-size: 16px;
+    font-weight: 100;
+  }
+
+  .loginInfoMsgp{
+    color:aqua;
+    font-weight: 500;
+  }
+
 
 
   .loginLogo{
@@ -62,6 +116,7 @@
     color: white;
     background-color: #015a80;
     padding: 8px 30px;
+    text-align: center;
   }
 
   .buttonLoginCadastrar:hover {
@@ -73,6 +128,12 @@
     color: #015a80e5;
     background-color: rgb(196, 228, 255);
   }
+
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+  }
+  
   
 
 .itemLoginConta {
@@ -118,6 +179,13 @@
     outline: none;
   }
 
+
+  
+  .alternarSenha svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
 
   
 @media only screen and (min-width: 577px) and (max-width: 768px) {

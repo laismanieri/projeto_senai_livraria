@@ -8,6 +8,7 @@ import Contact from "./pages/pagesUser/Contact"
 import InformacaoLivro from "./pages/pagesUser/InformacaoLivro";
 import InformacaoLivroAdm from "./pages/pagesAdm/InformacaoLivroAdm";
 import Adm from "./pages/pagesAdm/Adm";
+import LoginEntrar from "./pages/pagesUser/LoginEntrar";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route element={<Home />} path="/" exact></Route>
           <Route element={<Adm/>} path="/adm" />
           <Route element={<Login />} path="/login" />
+          <Route element={<LoginEntrar/>} path="/login-entrar" />
           <Route element={<Cadastro />} path="/cadastro" />
           <Route element={<ResultadosPesquisa />} path="/resultados-pesquisa"></Route>
           <Route element={<ResultadosPesquisaAdm />} path="/resultados-pesquisa-adm"></Route>
