@@ -1,121 +1,98 @@
-footer{
-width: 100%;
-background: #033579;
-
-}
 .containerFooter {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 10vh 15vh;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
   background: #033579;
   justify-content: space-around;
   margin-top: 100px;
-
+  padding: 20px;
 }
 
-.containerFooter > div {
+.footerLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footerLogoImg {
+  width: 20%;
+  height: auto;
+}
+
+.socialList {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.socialListLi {
+  margin: 0 10px;
+  font-size: 1.5em;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.socialListLi:hover {
+  color: rgb(144, 202, 252);
+}
+
+.footerFaleConosco {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
   text-align: center;
-  padding: 20px 0;
-  font-size: 30px;
 }
 
-
-
-.socialListFooter{
-    display:flex;
-    list-style-type: none;
-    text-decoration: none;
-    justify-content: space-around;
-    color: #ffffff;
-
+.footerFaleConosco:hover {
+  color: rgb(144, 202, 252);
 }
 
-.socialList{
-    display: flex;
-    justify-content: center;
-    list-style-type: none;
-    text-decoration: none;
-    text-align: center;
-    cursor: pointer;
-    padding: 0;
-    margin: 0;
-
+.footerDiversos,
+.footerPagamento {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-
-.socialListLi:hover{
-    color:rgb(144, 202, 252);
-
-}
-
-.socialListLi{
-    margin: 2% 15% 2% 15%;
-    font-size: 1em;  
-    background: #03347997; 
-}
-
-
-.footerFaleConosco{
-    font-size: 18px;
-    font-weight: bold;
-    color: #ffffff;
-    text-align: center;
-}
-
-.footerFaleConosco:hover{
-    color:rgb(144, 202, 252);
-
-}
-
-a:link {text-decoration: none;}
-
-.footerPagamento{
-    margin: 0;
-    background: #03347997;
-}
-
-
-.footerFaleConoscoDiv{
-    margin-top: 0.5em;
-
-}
-.footerPagamentoH1, .footerFaleConosco{
-    font-size: 0.7em;
-    font-weight: bold;
-    color: #ffffff;
+.footerPagamentoH1,
+.footerFaleConosco {
+  font-size: 0.7em;
+  font-weight: bold;
+  color: #ffffff;
 }
 
 .pagamentoListDiv {
-    margin: 0 35% 0 35%;
-    padding: 1em;
-
-} 
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
 
 .pagamentoList {
-    display: flex;
-    list-style-type: none;
-    text-decoration: none;
-    text-align: center;
-    justify-content: space-around;
-    margin: 0;
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
-
-.footerCopyRight{
-
-    /* background: #03347948; */
-    padding: 1em;
-    background: #03347997;
+.pagamentoList li {
+  margin: 0 5px;
 }
 
-.footerCopyP{
-    color: #033579;
-    font-size: large;
-    color: #ffffffc4 ;
-    margin: 0;   
-    padding: 20px; 
-    text-align: center;
+.footerCopyRight {
+  background: #03347997;
+  padding: 20px;
+  text-align: center;
 }
+
+.footerCopyP {
+  color: #ffffffc4;
+  font-size: large;
+  margin: 0;
+}
+
 
 @media only screen and (min-width: 320px){
   .containerFooter{

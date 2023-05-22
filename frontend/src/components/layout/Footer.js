@@ -8,6 +8,9 @@ import {
 } from "react-icons/fa";
 
 function Footer() {
+
+  const currentYear = new Date().getFullYear();
+
   return (
     <>
       <div className={styles.containerFooter}>
@@ -45,7 +48,8 @@ function Footer() {
         <div className={styles.footerPagamento}>
           {" "}
           <div className={styles.footerPagamento}>
-            <h1 className={styles.footerPagamentoH1}>Formas de pagamento</h1>
+          
+
             <div className={styles.pagamentoListDiv}>
               <ul className={styles.pagamentoList}>
                 <li>
@@ -79,7 +83,7 @@ function Footer() {
       </div>
       <div className={styles.footerCopyRight}>
         <p className={styles.footerCopyP}>
-          <span>Universo dos Livros &copy; 2023</span>
+           <span>Universo dos Livros &copy; {currentYear}</span>
         </p>
       </div>
     </>

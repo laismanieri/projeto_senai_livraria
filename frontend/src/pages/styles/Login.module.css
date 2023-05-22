@@ -6,20 +6,188 @@
 
 .containeUserLogin {
     display: grid;
-    grid-template-columns: 1fr 1.5fr; 
-    grid-template-rows: 65em;
-    margin: 4%;
+    grid-template-columns: 40% 60%; 
+    grid-template-rows: 40em;
+    margin: 10% 20%;
    
 }
 
 .itemLoginBemVindo {
-    background-color: #ddd;
+    background-color: #015a80;
     padding: 20px;
     border-radius: 20px 0 0 20px;
+    color: aliceblue;    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
+
+  .loginLogo{
+    margin-bottom: 20px;
+  }
+  
+  .itemLoginBemVindo div {
+    margin-bottom: 10px;
+  }
+  
+  .itemLoginBemVindo h1 {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .loginInfo{
+    width: 50%;
+
+  }
+  
+  .loginInfoH2 {
+    font-size: 16px;
+    font-weight: 100;
+  }
+  
+  .buttonLoginEntrar, .buttonLoginCadastrar {
+    padding: 7px 40px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 10%;
+    color: #015a80;
+    background-color: aliceblue;
+    cursor: pointer;
+  }
+  
+  .buttonLoginCadastrar {
+    color: white;
+    background-color: #015a80;
+    padding: 8px 30px;
+  }
+
+  .buttonLoginCadastrar:hover {
+    color: rgb(240, 248, 255);
+    background-color: #015a80e5;
+  }
+
+  .buttonLoginEntrar:hover {
+    color: #015a80e5;
+    background-color: rgb(196, 228, 255);
+  }
+  
+
 .itemLoginConta {
-    background: fuchsia;
+    background-color: #f2f2f2;
     padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border-radius: 0 20px 20px 0;
-}
+  }
+  
+  
+  .loginContaH2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #015a80;
+  }
+  
+  .iconContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: #ccc ;
+    border-radius: 5px;
+    width: 20em;
+  }
+  
+  .iconFormLogin {
+    margin: 0 15px;
+  }
+  
+  .inputFormLogin {
+    padding: 10px;
+    border: none;
+    border: 1px solid #ccc;
+    width: 20em;
+    background-color: #ccc;
+  }
+
+  .inputFormLogin:focus{
+    outline: none;
+  }
+
+
+  
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+
+    .loginLogo{
+        margin-bottom: 20px;
+        width: 80%;
+      }
+      
+
+    .iconContainer {
+        width: 13em;
+    }
+    .inputFormLogin {
+        padding: 7px;
+        width: 10em;
+        margin: 0 15px;
+      }
+
+      .iconFormLogin {
+        margin: 0 10px;
+      }
+   
+    }
+   
+  
+  
+  @media only screen and (min-width: 769px) and (max-width: 992px) {
+    
+  }
+  
+  @media only screen and (min-width: 993px) and (max-width: 1200px) {
+        
+
+  
+  }
+  
+  
+  @media only screen and (min-width: 1201px) and (max-width: 1440px) {
+  
+    }
+  
+
+    @media only screen and (min-width: 320px) and (max-width: 576px) {
+        .containeUserLogin {
+          margin: 10% 5%;
+          grid-template-columns: 1fr;
+          grid-template-rows: auto;
+        }
+        
+        .itemLoginBemVindo {
+          border-radius: 20px;
+          grid-row: 1;
+          margin-bottom: 20px;
+        }
+        
+        .loginInfo {
+          width: 100%;
+        }
+        
+        .itemLoginConta {
+          border-radius: 20px;
+        }
+        
+        .iconContainer {
+          width: 100%;
+        }
+        
+        .inputFormLogin {
+          width: 100%;
+        }
+      }
+      

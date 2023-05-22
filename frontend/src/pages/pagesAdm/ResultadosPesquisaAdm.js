@@ -15,9 +15,7 @@ function ResultadosPesquisaAdm() {
   return (
     <>
       <NavbarAdm />
-      <div className={styles.containerCarousel}>
-        <div className={styles.containerResultadoPesquisa}>
-          <section className={styles.tituloResultadoContainer}>
+      <div className={styles.container}>          <section className={styles.tituloResultadoContainer}>
             <Link to={"/"}>
               <h1 className={styles.voltarHome}>
                 <AiOutlineArrowLeft />
@@ -34,8 +32,8 @@ function ResultadosPesquisaAdm() {
             </h3>
 
           </section>
+        <div className={styles.containerResultadoPesquisa}>
 
-          {/* <div className={styles.linhaHorizontal}/> */}
 
           {location.state.results.map((livro) => (
           <CardAdm key={livro.idLivro} livro={livro} />
