@@ -1,5 +1,6 @@
 import styles from "../modals/ModalCarrinho.module.css";
 import { AiFillDelete, AiOutlineClose, AiFillEdit } from "react-icons/ai";
+import { FaShoppingCart } from 'react-icons/fa';
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
@@ -94,14 +95,13 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
           <div className={styles.navBarCarrinho}>
             <ul className={styles.navBarCarrinhoUl}>
               <li>
-                <img
-                  src="/img/cesta-compras.png"
+                <FaShoppingCart
                   alt="cesta"
                   className={styles.navbarCesta}
                 />
               </li>
               <li className={styles.navBarCarrinhoLi}>
-                <h1 className={styles.sacolaH1}>Minha Sacola</h1>
+                <h1 className={styles.sacolaH1}>Meu Carrinho</h1>
               </li>
             </ul>
             <div>

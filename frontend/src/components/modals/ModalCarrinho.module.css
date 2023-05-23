@@ -37,6 +37,18 @@
   z-index: 999;
 }
 
+.navbarCesta, .sacolaH1{
+  color: aliceblue;
+  font-size: 1.3em;
+  margin: 4px 0 0 0;
+}
+
+.sacolaH1{
+  margin: 0 0 0 10px;
+  font-size: 1.3em;
+
+}  
+
   
 .navBarCarrinho{
   background:  #033579;
@@ -124,11 +136,7 @@ select:focus {
 }
 
 
-.sacolaH1{
-  margin: 4px 0 0 10px;
-  color: aliceblue;
-  font-size: 18px;
-}  
+
 
 .imgFechar{
   color: aliceblue;

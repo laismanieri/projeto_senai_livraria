@@ -25,9 +25,9 @@
 
     .gridContainerAdm {
     display: grid;
-    grid-template-columns: 25% 42% 27%;
+    grid-template-columns: 25% 55% 20%;
     grid-template-rows: 60em;
-    gap: 1em;
+
     color: #146b97;  
   }
 

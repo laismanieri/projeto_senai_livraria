@@ -1,4 +1,11 @@
 import { useState } from "react";
+import { FaShoppingCart } from 'react-icons/fa';
+
+import { GiShoppingBag } from 'react-icons/gi';
+
+import { AiOutlineShopping } from 'react-icons/ai';
+
+import { IoCartOutline } from 'react-icons/io5';
 
 import ModalCarrinho from "../modals/ModalCarrinho";
 import styles from "./Button.module.css";
@@ -19,7 +26,7 @@ const ButtonCestaCompra = () => {
     return(
         <>
         <button className={styles.navbarButton} onClick={handleOpenModal} >
-          <img src="/img/cesta-de-compras.png" alt="cesta" className={styles.navbarCesta}/>
+          <FaShoppingCart alt="cesta" className={styles.navbarCesta}/>
         </button>
         <ModalCarrinho isOpen={modalOpen} onClose={handleCloseModal}/>
       </>
