@@ -1,23 +1,40 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
+import { FaEnvelope, FaLock, FaEyeSlash, FaEye } from "react-icons/fa";
+
 import styles from "../styles/Login.module.css";
-import { Link } from "react-router-dom";
-import { FaEnvelope, FaUser, FaLock, FaEyeSlash, FaEye } from "react-icons/fa";
-import axios from "axios";
+import { AuthContext } from "../../components/layout/AuthContext";
 
 function LoginEntrar() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const alternarMostrarSenha = () => {
     setMostrarSenha(!mostrarSenha);
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await login(email, senha);
+
+      alert("Login efetuado com sucesso");
+      navigate("/");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   return (
     <div className={styles.containeUserLoginEntrar}>
-
       <div className={styles.itemLoginContaEntrar}>
-        <h2 className={styles.loginContaH2}>Login </h2>
-        <Form>
+        <h2 className={styles.loginContaH2}>Login</h2>
+        <Form onSubmit={handleSubmit}>
           <Form.Group as={Row} controlId="formEmail">
             <div className={styles.iconContainer}>
               <Form.Label column sm={2}>
@@ -27,6 +44,8 @@ function LoginEntrar() {
                 className={styles.inputFormLogin}
                 type="email"
                 placeholder="E-mail"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
               />
             </div>
           </Form.Group>
@@ -40,6 +59,8 @@ function LoginEntrar() {
                 className={styles.inputFormLogin}
                 type={mostrarSenha ? "text" : "password"}
                 placeholder="Senha"
+                value={senha}
+                onChange={(event) => setSenha(event.target.value)}
               />
 
               <div

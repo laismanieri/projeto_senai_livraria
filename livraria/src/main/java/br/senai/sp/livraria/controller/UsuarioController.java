@@ -1,6 +1,7 @@
 package br.senai.sp.livraria.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,20 @@ public class UsuarioController {
 //        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioSalvo);
 //    }
 //    
+    
+    @PostMapping("/login")
+    public ResponseEntity<Usuario> fazerLogin(@RequestBody Map<String, String> loginData) {
+        String email = loginData.get("email");
+        String senha = loginData.get("senha");
+        
+        Usuario usuario = usuarioService.fazerLogin(email, senha);
+        if (usuario != null) {
+            return ResponseEntity.ok(usuario);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
     
     @PostMapping
     public ResponseEntity<Usuario> criar(@RequestBody Usuario usuario) {

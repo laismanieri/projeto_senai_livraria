@@ -47,5 +47,15 @@ public class UsuarioService {
         }
         return usuarioRepository.save(usuario);
     }
+    
+    @Transactional(readOnly = true)
+    public Usuario fazerLogin(String email, String senha) {
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        if (usuario != null && usuario.getSenha().equals(senha)) {
+            return usuario;
+        }
+        return null;
+    }
+
 
 }
