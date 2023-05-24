@@ -5,8 +5,7 @@ const options = [
   { value: "Visa", label: "Visa", image: "https://http2.mlstatic.com/storage/logos-api-admin/a5f047d0-9be0-11ec-aad4-c3381f368aaf-m.svg"  },
   { value: "Mastercard", label: "Mastercard", image: "https://http2.mlstatic.com/storage/logos-api-admin/aa2b8f70-5c85-11ec-ae75-df2bef173be2-m.svg"  },
   { value: "Elo", label: "Elo", image: "https://http2.mlstatic.com/storage/logos-api-admin/b2c93a40-f3be-11eb-9984-b7076edb0bb7-m.svg" },
-  { value: "Hipercard", label: "Hipercard", image: "https://http2.mlstatic.com/storage/logos-api-admin/ed8d6fd0-f3bd-11eb-9984-b7076edb0bb7-m.svg"  },
-  { value: "Nubank", label: "Nubank", image: "https://http2.mlstatic.com/storage/logos-api-admin/ddf23a60-f3bd-11eb-a186-1134488bf456-m.svg" },
+  { value: "Hipercard", label: "Hipercard", image: "https://http2.mlstatic.com/storage/logos-api-admin/ddf23a60-f3bd-11eb-a186-1134488bf456-m.svg"  },
 ];
 
 const customStyles = {
