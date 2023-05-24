@@ -1,4 +1,6 @@
 import { useState } from "react";
+import "react-toastify/dist/ReactToastify.css"
+import { toast } from "react-toastify";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import styles from "../styles/Login.module.css";
 import { Link } from "react-router-dom";
@@ -26,9 +28,10 @@ function Login() {
       .post("http://localhost:8082/usuario", usuario)
       .then((response) => {
         if (response.status >= 200 && response.status < 300) {
-          console.log("Cadastro efetuado com sucesso!");
+          toast.success("Cadastro efetuado com sucesso")
           window.alert("Cadastro efetuado com sucesso!");
         } else {
+          toast.success("Erro ao cadastrar-se")
           console.error("Erro ao cadastrar-se.");
         }
         limparFormulario();

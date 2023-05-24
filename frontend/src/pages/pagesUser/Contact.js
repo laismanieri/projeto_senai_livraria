@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import "react-toastify/dist/ReactToastify.css"
+import { toast } from "react-toastify";
 
 import styles from "../styles/Contact.module.css";
 
@@ -10,8 +12,20 @@ import Navbar from "../../components/layout/NavBar";
 function Contact() {
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert("Mensagem enviada com sucesso!");
+   
+    toast.success("Mensagem enviada com sucesso!", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 3000, // Tempo de exibição da mensagem em milissegundos (3 segundos)
+      onClose: () => {
+        setTimeout(() => {
+          window.location.reload(); // Reload após o tempo de exibição da mensagem
+        }, 3000); // Tempo de espera antes de fazer o reload em milissegundos (3 segundos)
+      }
+    });
   };
+;
+
+
 
   return (
     <>

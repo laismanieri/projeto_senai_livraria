@@ -24,10 +24,13 @@ function LoginEntrar() {
 
     try {
       await login(email, senha);
-      toast.success("Login efetuado com sucesso")
+      toast.success("Livro ebook sem estoque!", {
+        position: toast.POSITION.TOP_CENTER, // Posição centralizada na parte superior
+      });
+      
       navigate("/");
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
   };
 

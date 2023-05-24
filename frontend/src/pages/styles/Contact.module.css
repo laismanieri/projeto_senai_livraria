@@ -60,6 +60,7 @@ a:link {
   font-size: inherit;
   color: #033579;
   background: aliceblue;
+  padding: 10px;
 }
 
 .formContactInput {

@@ -1,6 +1,8 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./components/layout/AuthContext";
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import "./pages/styles/toastify-theme.css"; 
 
 import Home from './pages/pagesUser/Home';
 import ResultadosPesquisa from "./pages/pagesUser/ResultadosPesquisa";
@@ -17,7 +19,7 @@ function App() {
     <div className="App">
 
       <BrowserRouter>
-      <ToastContainer autoClose={1500}/>      
+      <ToastContainer autoClose={3000}/>      
         <AuthProvider>
           <Routes>
             <Route element={<Home />} path="/" exact></Route>

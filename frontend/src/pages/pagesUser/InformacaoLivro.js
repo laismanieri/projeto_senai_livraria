@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "react-toastify/dist/ReactToastify.css"
+import { toast } from "react-toastify";
 import { AiOutlineClose, AiFillHeart } from "react-icons/ai";
 import { useParams, Link } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -75,13 +77,13 @@ function InformacaoLivro() {
 
   function adicionarAoCarrinho() {
     if (tipoLivroSelecionado === "FISICO" && fisicoEstoque.qtdeEstoque === 0) {
-      window.alert("Livro físico sem estoque!");
+      toast.error("Livro físico sem estoque!");
       return;
     } else if (
       tipoLivroSelecionado === "EBOOK" &&
       ebookEstoque.qtdeEstoque === 0
     ) {
-      window.alert("Livro ebook sem estoque!");
+      toast.error("Livro ebook sem estoque!");
       return;
     } else {
       setModalIsOpenLivroAdd(true);
