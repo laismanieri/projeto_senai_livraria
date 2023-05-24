@@ -9,6 +9,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [nome, setNome] = useState("");
   const [senha, setSenha] = useState("");
+  const [cpf, setCpf] = useState("");
   const [mostrarSenha, setMostrarSenha] = useState(false);
 
   const handleFormSubmit = (event) => {
@@ -18,6 +19,7 @@ function Login() {
       email,
       nome,
       senha,
+      cpf,
     };
 
     axios
@@ -41,6 +43,7 @@ function Login() {
     setEmail("");
     setNome("");
     setSenha("");
+    setCpf("");
   };
 
   const alternarMostrarSenha = () => {
@@ -85,6 +88,21 @@ function Login() {
                 placeholder="Nome"
                 value={nome}
                 onChange={(event) => setNome(event.target.value)}
+                required
+              />
+            </div>
+          </Form.Group>
+          <Form.Group as={Row} controlId="formCpf">
+            <div className={styles.iconContainer}>
+              <Form.Label column sm={2}>
+                <FaUser className={styles.iconFormLogin} />
+              </Form.Label>
+              <Form.Control
+                className={styles.inputFormLogin}
+                type="text"
+                placeholder="Cpf"
+                value={cpf}
+                onChange={(event) => setCpf(event.target.value)}
                 required
               />
             </div>

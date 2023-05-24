@@ -64,8 +64,45 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
   }
 
   const onFinalizarPedido = () => {
-    // Lógica para finalizar o pedido
-    // ...
+    
+    // Criar objeto com os dados do pedido
+    const pedido = {
+      id: -1,
+      dataPedido: new Date().toISOString().slice(0, 10),
+      usuario_id: 1,
+      itensDTO: carrinho.map((livro) => ({
+        id: -1,
+        valorUnid: livro.oferta ? livro.preco * 0.8 : livro.preco,
+        valorTotal: livro.oferta
+          ? livro.preco * 0.8 * livro.quantidade
+          : livro.preco * livro.quantidade,
+        qtdeItens: livro.quantidade,
+        detalhe_livro_id: livro.id,
+      })),
+    };
+
+    // Transformar objeto em JSON
+    const pedidoJSON = JSON.stringify(pedido);
+
+    // Enviar pedidoJSON para a API gravar no banco
+    // Exemplo de envio de dados para uma API usando o método POST
+    fetch("http://localhost:8082/pedido", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: pedidoJSON,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Pedido gravado no banco:", data);
+        // Limpar carrinho após finalizar o pedido
+        setCarrinho([]);
+        localStorage.removeItem("carrinho");
+      })
+      .catch((error) => {
+        console.error("Erro ao gravar pedido no banco:", error);
+      });
   };
 
   function closeModal() {
