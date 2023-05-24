@@ -13,6 +13,41 @@
   z-index: 3;
 
 }
+
+.userMenuWrapper {
+  position: relative;
+  background-color: #033579;
+  width: 15%;
+}
+
+.menuUsuario {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  background-color: #033579;
+  width: 100%;
+  font-size: 1em ;
+  list-style: none;
+  text-align: justify;
+  color: aliceblue;
+
+}
+
+.menuUsuarioLista{
+  padding: 15px 0 15px 15px;
+  font-weight: 300;
+  
+}
+
+
+
+.userButton{
+  background-color: #033579;
+  border: none;
+  font-size: 1em ;
+  margin: 0 5px;
+}
 .navbarContainerLogo{
     margin-left: 18%;
 }

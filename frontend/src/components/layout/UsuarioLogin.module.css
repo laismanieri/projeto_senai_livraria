@@ -5,11 +5,16 @@
   
   .loginUser {
     display: flex;
+
   }
   
+  .login{
+    padding: 0 20px;
+  }
+
   .imgUser {
-    margin-right: 2vh;
-    margin-top: 0.99vh;
+    margin-top: 0.5vh;
+    margin-left: 15px;
   }
 
 

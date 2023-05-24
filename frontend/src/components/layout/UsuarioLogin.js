@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import styles from "../layout/UsuarioLogin.module.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
-import UsuarioMenu from "./UsuarioMenu";
 
 function UsuarioLogin() {
   const { user } = useContext(AuthContext);
@@ -11,7 +10,12 @@ function UsuarioLogin() {
     return (
       <div className={styles.loginUser}>
         <div className={styles.divImgUser}>
-<UsuarioMenu/>
+        <img
+            className={styles.imgUser}
+            title="Login"
+            src="/img/perfil-de-usuario.png"
+            alt="ícone de usuário"
+          />
         </div>
 
         <div className={styles.login}>

@@ -1,5 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css"
+import { toast } from "react-toastify";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { FaEnvelope, FaLock, FaEyeSlash, FaEye } from "react-icons/fa";
 
@@ -22,8 +24,7 @@ function LoginEntrar() {
 
     try {
       await login(email, senha);
-
-      alert("Login efetuado com sucesso");
+      toast.success("Login efetuado com sucesso")
       navigate("/");
     } catch (error) {
       alert(error.message);
