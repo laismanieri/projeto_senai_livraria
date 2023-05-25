@@ -15,7 +15,7 @@ function Login() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const [enderecos, setEnderecos] = useState({
+  const [endereco, setEndereco] = useState({
     uf: "",
     cidade: "",
     logradouro: "",
@@ -39,7 +39,7 @@ function Login() {
       .get(`https://viacep.com.br/ws/${cep}/json/`)
       .then((response) => {
         const data = response.data;
-        setEnderecos(data);
+        setEndereco(data);
         setUf(data.uf);
         setCidade(data.localidade);
         setBairro(data.bairro);
@@ -58,7 +58,7 @@ function Login() {
       nome,
       senha,
       cpf,
-      enderecos,
+      enderecos: [endereco]
     };
 
     axios
@@ -91,6 +91,14 @@ function Login() {
     setNome("");
     setSenha("");
     setCpf("");
+    setCep("");
+    setUf("");
+    setCidade("");
+    setBairro("");
+    setLogradouro("");
+    setNumero("");
+    setComplemento("")
+
   };
 
   const alternarMostrarSenha = () => {
@@ -319,9 +327,7 @@ function Login() {
                             placeholder="Número"
                             name="numero"
                             value={numero}
-                            onChange={(event) =>
-                              setNumero(event.target.value)
-                            }
+                            onChange={(event) => setNumero(event.target.value)}
                             required
                           />
                         </Col>
