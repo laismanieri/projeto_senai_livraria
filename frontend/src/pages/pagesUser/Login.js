@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "react-toastify/dist/ReactToastify.css"
+import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import styles from "../styles/Login.module.css";
@@ -13,6 +13,42 @@ function Login() {
   const [senha, setSenha] = useState("");
   const [cpf, setCpf] = useState("");
   const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const [enderecos, setEnderecos] = useState({
+    uf: "",
+    cidade: "",
+    logradouro: "",
+    bairro: "",
+    numero: "",
+    complemento: "",
+    cep: ""
+  });
+  
+  const [cep, setCep] = useState("");
+  const [uf, setUf] = useState("");
+  const [cidade, setCidade] = useState("");
+  const [bairro, setBairro] = useState("");
+  const [logradouro, setLogradouro] = useState("");
+  const [numero, setNumero] = useState("");
+  const [complemento, setComplemento] = useState("");
+
+
+  const buscarEndereco = (cep) => {
+    axios
+      .get(`https://viacep.com.br/ws/${cep}/json/`)
+      .then((response) => {
+        const data = response.data;
+        setEnderecos(data);
+        setUf(data.uf);
+        setCidade(data.localidade);
+        setBairro(data.bairro);
+        setLogradouro(data.logradouro);
+      })
+      .catch((error) => {
+        console.error("Erro ao obter dados do endereço.", error);
+      });
+  };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -22,6 +58,7 @@ function Login() {
       nome,
       senha,
       cpf,
+      enderecos,
     };
 
     axios
@@ -49,7 +86,6 @@ function Login() {
       });
   };
 
-
   const limparFormulario = () => {
     setEmail("");
     setNome("");
@@ -59,6 +95,10 @@ function Login() {
 
   const alternarMostrarSenha = () => {
     setMostrarSenha(!mostrarSenha);
+  };
+
+  const handleToggleExpand = () => {
+    setIsExpanded(!isExpanded);
   };
 
   return (
@@ -78,10 +118,9 @@ function Login() {
           </h2>
         </div>
         <div>
-        <Link to="/login-entrar">
-        <button className={styles.buttonLoginEntrar}>Entrar</button>
-        </Link>
-
+          <Link to="/login-entrar">
+            <button className={styles.buttonLoginEntrar}>Entrar</button>
+          </Link>
         </div>
       </div>
 
@@ -156,6 +195,163 @@ function Login() {
               </div>
             </div>
           </Form.Group>
+
+          <div>
+            <Button
+              className={styles.buttonExpandirEndereco}
+              variant="secondary"
+              onClick={handleToggleExpand}
+            >
+              {isExpanded ? "Recolher" : "Expandir"} Cadastro de Endereço
+            </Button>
+
+            {isExpanded && (
+              <Form id="livroForm">
+                <div className={styles.containerEndereco}>
+                  <Row>
+                    <Col>
+                      <Form.Group controlId="cep">
+                        <Col sm="12">
+                          <Form.Control
+                            className={styles.inputCadastrarEndereco}
+                            type="text"
+                            placeholder="Cep"
+                            name="uf"
+                            required
+                            value={cep}
+                            onChange={(event) => {
+                              const cepValue = event.target.value;
+                              setCep(cepValue);
+                              if (cepValue.length === 8) {
+                                buscarEndereco(cepValue);
+                              }
+                            }}
+                          />
+                        </Col>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                </div>
+                <div className={styles.containerEndereco}>
+                  <Row>
+                    <Col>
+                      <Form.Group controlId="uf">
+                        <Col sm="12">
+                          <Form.Control
+                            className={styles.inputCadastrarEndereco}
+                            type="text"
+                            placeholder="Estado"
+                            name="uf"
+                            required
+                            value={uf}
+                            onChange={(event) => setUf(event.target.value)}
+                          />
+                        </Col>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                </div>
+                <div className={styles.containerEndereco}>
+                  <Row>
+                    <Col>
+                      <Form.Group controlId="cidade">
+                        <Col sm="12">
+                          <Form.Control
+                            className={styles.inputCadastrarEndereco}
+                            type="text"
+                            placeholder="Cidade"
+                            name="cidade"
+                            value={cidade}
+                            onChange={(event) => setCidade(event.target.value)}
+                            required
+                          />
+                        </Col>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                </div>
+                <div className={styles.containerEndereco}>
+                  <Row>
+                    <Col>
+                      <Form.Group controlId="logradouro">
+                        <Col sm="12">
+                          <Form.Control
+                            className={styles.inputCadastrarEndereco}
+                            type="text"
+                            placeholder="Rua"
+                            name="logradouro"
+                            value={logradouro}
+                            onChange={(event) => setLogradouro(event.target.value)}
+                            required
+                          />
+                        </Col>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                </div>
+                <div className={styles.containerEndereco}>
+                  <Row>
+                    <Col>
+                      <Form.Group controlId="bairro">
+                        <Col sm="12">
+                          <Form.Control
+                            className={styles.inputCadastrarEndereco}
+                            type="text"
+                            placeholder="Bairro"
+                            name="bairro"
+                            value={bairro}
+                            onChange={(event) => setBairro(event.target.value)}
+                            required
+                          />
+                        </Col>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                </div>
+                <div className={styles.containerEndereco}>
+                  <Row>
+                    <Col>
+                      <Form.Group controlId="numero">
+                        <Col sm="12">
+                          <Form.Control
+                            className={styles.inputCadastrarEndereco}
+                            type="text"
+                            placeholder="Número"
+                            name="numero"
+                            value={numero}
+                            onChange={(event) =>
+                              setNumero(event.target.value)
+                            }
+                            required
+                          />
+                        </Col>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                </div>
+                <div className={styles.containerEndereco}>
+                  <Row>
+                    <Col>
+                      <Form.Group controlId="complemento">
+                        <Col sm="12">
+                          <Form.Control
+                            className={styles.inputCadastrarEndereco}
+                            type="text"
+                            placeholder="Complemento"
+                            name="complemento"
+                            value={complemento}
+                            onChange={(event) =>
+                              setComplemento(event.target.value)
+                            }
+                          />
+                        </Col>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                </div>
+              </Form>
+            )}
+          </div>
 
           <div className={styles.buttonContainer}>
             <Button type="submit" className={styles.buttonLoginCadastrar}>

@@ -1,6 +1,6 @@
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useState } from "react";
-import "react-toastify/dist/ReactToastify.css"
+import "react-toastify/dist/ReactToastify.css";
 import "../../pages/styles/toastify-theme.css";
 import { toast } from "react-toastify";
 import styles from "../adm/CadastroLivro.module.css";
@@ -226,8 +226,6 @@ function CadastroLivro() {
               </Row>
             </div>
 
-
-
             <Row>
               <Col>
                 <Form.Group controlId="imagem">
@@ -261,7 +259,7 @@ function CadastroLivro() {
                 />
               </Col>
             </Form.Group>
-          <br/>
+            <br />
             <div className={styles.containerSmall}>
               <Row>
                 <Col>
@@ -292,18 +290,15 @@ function CadastroLivro() {
                 </Col>
               </Row>
             </div>
-<div className="linhaHorizontal" /><br/>
+            <div className="linhaHorizontal" />
+            <br />
 
             <div className={styles.containerTtipoLivro}>
               <div>
                 <Row>
                   <Col>
                     <Form.Group controlId="tipoLivroFisico" as={Row}>
-                      <p
-                        column
-                        sm="12"
-                        className={styles.tipoLivro}
-                      >
+                      <p column sm="12" className={styles.tipoLivro}>
                         LIVRO FÍSICO
                       </p>
                       <Col sm="12"></Col>
@@ -355,11 +350,7 @@ function CadastroLivro() {
                 <Row>
                   <Col>
                     <Form.Group controlId="tipoLivroEbook" as={Row}>
-                      <p
-                        column
-                        sm="12"
-                        className={styles.tipoLivro}
-                      >
+                      <p column sm="12" className={styles.tipoLivro}>
                         LIVRO EBOOK
                       </p>
                       <Col sm="12"></Col>

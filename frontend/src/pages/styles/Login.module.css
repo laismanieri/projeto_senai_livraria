@@ -7,8 +7,8 @@
 .containeUserLogin {
     display: grid;
     grid-template-columns: 40% 60%; 
-    grid-template-rows: 40em;
-    margin: 10% 20%;
+    grid-template-rows: 50em;
+    margin: 5% 20%;
    
 }
 
@@ -101,7 +101,7 @@
     font-weight: 100;
   }
   
-  .buttonLoginEntrar, .buttonLoginCadastrar {
+  .buttonLoginEntrar, .buttonLoginCadastrar, .buttonExpandirEndereco {
     padding: 7px 40px;
     font-size: 18px;
     border-radius: 5px;
@@ -112,14 +112,20 @@
     cursor: pointer;
   }
   
-  .buttonLoginCadastrar {
+  .buttonLoginCadastrar, .buttonExpandirEndereco {
     color: white;
     background-color: #015a80;
     padding: 8px 30px;
     text-align: center;
   }
 
-  .buttonLoginCadastrar:hover {
+  .buttonExpandirEndereco {
+    margin: 5% 0;
+    font-size: 0.9em;
+    padding: 8px 59px;
+  }
+
+  .buttonLoginCadastrar:hover, .buttonExpandirEndereco:hover{
     color: rgb(240, 248, 255);
     background-color: #015a80e5;
   }
@@ -167,16 +173,22 @@
     margin: 0 15px;
   }
   
-  .inputFormLogin {
-    padding: 10px;
+  .inputFormLogin, .inputCadastrarEndereco {
+    padding: 8px;
     border: none;
     border: 1px solid #ccc;
     width: 20em;
     background-color: #ccc;
   }
 
-  .inputFormLogin:focus{
+  .inputFormLogin:focus, .inputCadastrarEndereco:focus{
     outline: none;
+  }
+
+  .inputCadastrarEndereco {
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 24em;
   }
 
 
@@ -224,6 +236,12 @@
   .imgFechar{
     color: aliceblue;
     margin-top: 4px;
+  }
+
+  .containerEndereco {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
   
   
