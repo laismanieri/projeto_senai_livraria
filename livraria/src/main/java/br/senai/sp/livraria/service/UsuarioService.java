@@ -1,6 +1,9 @@
 package br.senai.sp.livraria.service;
 
 import java.util.List;
+import br.com.caelum.stella.ValidationMessage;
+import br.com.caelum.stella.validation.CPFValidator;
+import br.com.caelum.stella.validation.InvalidStateException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,9 +39,25 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
     
+    private boolean validarCpf(String cpf) {
+        CPFValidator cpfValidator = new CPFValidator();
+        try {
+            cpfValidator.assertValid(cpf);
+            return true;
+        } catch (InvalidStateException e) {
+            List<ValidationMessage> errors = e.getInvalidMessages();
+            // Lógica para lidar com os erros de validação (opcional)
+            return false;
+        }
+    }
     
     @Transactional
     public Usuario salvarUsuarioComEndereco(Usuario usuario) {
+    	
+        String cpf = usuario.getCpf();
+        if (!validarCpf(cpf)) {
+            throw new IllegalArgumentException("CPF inválido");
+        }
         // Verificar se já existe um usuário com o mesmo CPF
         Usuario usuarioExistenteCPF = usuarioRepository.findByCpf(usuario.getCpf());
         if (usuarioExistenteCPF != null) {
