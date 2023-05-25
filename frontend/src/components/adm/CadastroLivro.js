@@ -1,6 +1,8 @@
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useState } from "react";
-import axios from "axios";
+import "react-toastify/dist/ReactToastify.css"
+import "../../pages/styles/toastify-theme.css";
+import { toast } from "react-toastify";
 import styles from "../adm/CadastroLivro.module.css";
 
 function CadastroLivro() {

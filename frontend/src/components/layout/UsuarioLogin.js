@@ -38,8 +38,14 @@ function UsuarioLogin() {
 
         <div className={styles.login}>
           <h1 className={styles.boasVindas}>Boas-vindas!</h1>
+          <Link to="/login-entrar" className={styles.loginAcesso}>
+            <span className={styles.entre}>Entre</span>
+            
+          </Link>
+          <span className={styles.ou}>ou</span>
           <Link to="/login" className={styles.loginAcesso}>
-            <p className={styles.entre}>Entre ou cadastre-se</p>
+            <span className={styles.cadastreSe}>Cadastre-se</span>
+            
           </Link>
         </div>
       </div>

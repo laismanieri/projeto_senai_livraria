@@ -6,7 +6,7 @@ function NavbarAdm() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarContainerLogo}>
-        <Link to="/">
+        <Link to="/adm">
           <img src="/img/logo.png" alt="Logo" className={styles.navbarLogo} />
         </Link>{" "}
       </div>

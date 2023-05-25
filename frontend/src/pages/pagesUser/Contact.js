@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import "react-toastify/dist/ReactToastify.css"
+import "../styles/toastify-theme.css";
 import { toast } from "react-toastify";
 
 import styles from "../styles/Contact.module.css";

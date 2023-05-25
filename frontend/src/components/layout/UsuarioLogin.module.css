@@ -10,6 +10,7 @@
   
   .login{
     padding: 0 20px;
+    text-align: left;
   }
 
   .imgUser {
@@ -24,12 +25,26 @@
     text-decoration: none;
     margin: 0;
     margin-top: 0.5vh;
-    font-size: 1em;
+    font-size: 0.8em;
   }
   
-  .entre {
+  .entre, .cadastreSe {
     font-weight: bolder;
     color:#ffffff;
+    text-decoration: none;
+    font-size: 0.8em;
+    margin: 0;
+  }
+
+  .ou{
+    color:#ffffff;
+    font-size: 0.8em;
+    margin: 0 4px;
+  }
+
+  .entre:hover, .cadastreSe:hover{
+    font-weight: bolder;
+    color:rgb(14, 200, 225);
     text-decoration: none;
   }
 
@@ -43,6 +58,7 @@
   .boasVindas {
     font-size: 18px;
     margin-top: 7px;
+
   }
 
   .entre {

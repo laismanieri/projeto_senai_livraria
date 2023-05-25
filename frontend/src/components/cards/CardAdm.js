@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styles from "../cards/Card.module.css";
 import { Link } from "react-router-dom";
-import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import "react-toastify/dist/ReactToastify.css"
+import { toast } from "react-toastify";
 import axios from "axios";
 
 function CardAdm({ livro }) {
@@ -49,8 +50,9 @@ function CardAdm({ livro }) {
           <button
             className={styles.buttonCardAdm}
             onClick={() => {handleDeleteLivro(livro.id); 
-              window.alert("Livro deletado!");
-              window.location.reload();
+              toast.success("Livro excluído com sucesso!", {
+                position: toast.POSITION.TOP_CENTER, // Posição centralizada na parte superior
+              });
             }}
           >
             Deletar

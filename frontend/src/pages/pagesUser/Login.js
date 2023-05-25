@@ -29,7 +29,7 @@ function Login() {
       .then((response) => {
         if (response.status >= 200 && response.status < 300) {
           toast.success("Cadastro efetuado com sucesso")
-          window.alert("Cadastro efetuado com sucesso!");
+          
         } else {
           toast.success("Erro ao cadastrar-se")
           console.error("Erro ao cadastrar-se.");

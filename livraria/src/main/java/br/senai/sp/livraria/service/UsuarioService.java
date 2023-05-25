@@ -39,6 +39,18 @@ public class UsuarioService {
     
     @Transactional
     public Usuario salvarUsuarioComEndereco(Usuario usuario) {
+        // Verificar se já existe um usuário com o mesmo CPF
+        Usuario usuarioExistenteCPF = usuarioRepository.findByCpf(usuario.getCpf());
+        if (usuarioExistenteCPF != null) {
+            throw new RuntimeException("Já existe um usuário com o mesmo CPF.");
+        }
+
+        // Verificar se já existe um usuário com o mesmo e-mail
+        Usuario usuarioExistenteEmail = usuarioRepository.findByEmail(usuario.getEmail());
+        if (usuarioExistenteEmail != null) {
+            throw new RuntimeException("Já existe um usuário com o mesmo e-mail.");
+        }
+
         List<Endereco> enderecos = usuario.getEnderecos();
         if (enderecos != null) {
             for (Endereco endereco : enderecos) {
@@ -47,6 +59,7 @@ public class UsuarioService {
         }
         return usuarioRepository.save(usuario);
     }
+
     
     @Transactional(readOnly = true)
     public Usuario fazerLogin(String email, String senha) {

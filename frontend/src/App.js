@@ -19,7 +19,7 @@ function App() {
     <div className="App">
 
       <BrowserRouter>
-      <ToastContainer autoClose={3000}/>      
+      <ToastContainer autoClose={2000}/>      
         <AuthProvider>
           <Routes>
             <Route element={<Home />} path="/" exact></Route>

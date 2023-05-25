@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import "react-toastify/dist/ReactToastify.css"
+import "../../pages/styles/toastify-theme.css";
+import { toast } from "react-toastify";
 
 import styles from "../styles/InformacaoLivro.module.css";
 
@@ -52,12 +55,19 @@ function InformacaoLivroAdm() {
       .put(`http://localhost:8082/livro/${id}`, livroAtualizado)
       .then((response) => {
         console.log("Livro atualizado:", response.data);
-        window.alert("Livro atualizado!");
-        window.location.reload();
+        toast.success("Livro atualizado com sucesso!", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000, // Tempo de exibição da mensagem em milissegundos (3 segundos)
+          onClose: () => {
+            setTimeout(() => {
+              window.location.reload(); // Reload após o tempo de exibição da mensagem
+            }, 3000); // Tempo de espera antes de fazer o reload em milissegundos (3 segundos)
+          }
+        });
       })
       .catch((error) => {
         console.error("Erro ao atualizar livro:", error);
-        window.alert("Erro ao atualizar!");
+        toast.error("Erro ao atualizar!");
       });
   }
 
