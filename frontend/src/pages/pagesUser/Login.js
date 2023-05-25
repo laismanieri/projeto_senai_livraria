@@ -23,24 +23,23 @@ function Login() {
       senha,
       cpf,
     };
-
     axios
-      .post("http://localhost:8082/usuario", usuario)
-      .then((response) => {
-        if (response.status >= 200 && response.status < 300) {
-          toast.success("Cadastro efetuado com sucesso")
-          
-        } else {
-          toast.success("Erro ao cadastrar-se")
-          console.error("Erro ao cadastrar-se.");
-        }
+    .post("http://localhost:8082/usuario", usuario)
+    .then((response) => {
+      if (response.status === 201) {
+        toast.success("Cadastro efetuado com sucesso");
         limparFormulario();
-      })
-      .catch((error) => {
-        // Lógica para manipular a resposta em caso de erro
-        console.error(error);
-      });
-  };
+      }
+    })
+    .catch((error) => {
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Erro ao cadastrar-se");
+        console.error("Erro ao cadastrar-se.", error);
+      }
+    });
+};
 
   const limparFormulario = () => {
     setEmail("");

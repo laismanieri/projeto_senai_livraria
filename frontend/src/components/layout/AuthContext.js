@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import "react-toastify/dist/ReactToastify.css"
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 
@@ -26,6 +28,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     // Remove os dados do usuário do localStorage
     localStorage.removeItem("userData");
+    toast.success("Logout efetuado com sucesso");
 
     setUser(null);
   };

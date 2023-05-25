@@ -24,7 +24,7 @@ function LoginEntrar() {
 
     try {
       await login(email, senha);
-      toast.success("Livro ebook sem estoque!", {
+      toast.success("Login efetuado com sucesso!", {
         position: toast.POSITION.TOP_CENTER, // Posição centralizada na parte superior
       });
       
