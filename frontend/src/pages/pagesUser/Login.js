@@ -23,23 +23,32 @@ function Login() {
       senha,
       cpf,
     };
+
     axios
-    .post("http://localhost:8082/usuario", usuario)
-    .then((response) => {
-      if (response.status === 201) {
-        toast.success("Cadastro efetuado com sucesso");
-        limparFormulario();
-      }
-    })
-    .catch((error) => {
-      if (error.response && error.response.data && error.response.data.message) {
-        toast.error(error.response.data.message);
-      } else {
-        toast.error("Erro ao cadastrar-se");
-        console.error("Erro ao cadastrar-se.", error);
-      }
-    });
-};
+      .post("http://localhost:8082/usuario", usuario)
+      .then((response) => {
+        if (response.status === 201) {
+          toast.success("Cadastro efetuado com sucesso");
+          limparFormulario();
+        }
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 500) {
+          const errorMessage = error.response.data.message;
+          if (errorMessage.includes("cpf")) {
+            toast.error("Já existe um usuário com o mesmo CPF");
+          } else if (errorMessage.includes("email")) {
+            toast.error("Já existe um usuário com o mesmo e-mail");
+          } else {
+            toast.error(errorMessage);
+          }
+        } else {
+          toast.error("Erro ao cadastrar-se");
+          console.error("Erro ao cadastrar-se.", error);
+        }
+      });
+  };
+
 
   const limparFormulario = () => {
     setEmail("");
