@@ -39,11 +39,19 @@ function Login() {
       .get(`https://viacep.com.br/ws/${cep}/json/`)
       .then((response) => {
         const data = response.data;
-        setEndereco(data);
-        setUf(data.uf);
-        setCidade(data.localidade);
-        setBairro(data.bairro);
-        setLogradouro(data.logradouro);
+        setEndereco({
+          uf: data.uf,
+          cidade: data.localidade,
+          logradouro: data.logradouro,
+          bairro: data.bairro,
+          numero: endereco.numero,  // Manter o número do endereço anterior
+          complemento: endereco.complemento,  // Manter o complemento do endereço anterior
+          cep: cep
+        });
+        // setUf(data.uf);
+        // setCidade(data.localidade);
+        // setBairro(data.bairro);
+        // setLogradouro(data.logradouro);
       })
       .catch((error) => {
         console.error("Erro ao obter dados do endereço.", error);
@@ -66,6 +74,7 @@ function Login() {
       .then((response) => {
         if (response.status === 201) {
           toast.success("Cadastro efetuado com sucesso");
+          console.log(usuario)
           limparFormulario();
         }
       })
@@ -91,13 +100,15 @@ function Login() {
     setNome("");
     setSenha("");
     setCpf("");
-    setCep("");
-    setUf("");
-    setCidade("");
-    setBairro("");
-    setLogradouro("");
-    setNumero("");
-    setComplemento("")
+    setEndereco({
+      uf: "",
+      cidade: "",
+      logradouro: "",
+      bairro: "",
+      numero: "",
+      complemento: "",
+      cep: ""
+    });
 
   };
 
@@ -224,16 +235,17 @@ function Login() {
                             className={styles.inputCadastrarEndereco}
                             type="text"
                             placeholder="Cep"
-                            name="uf"
-                            required
-                            value={cep}
-                            onChange={(event) => {
-                              const cepValue = event.target.value;
-                              setCep(cepValue);
-                              if (cepValue.length === 8) {
-                                buscarEndereco(cepValue);
-                              }
+                            name="cep"
+                            value={endereco.cep}
+                            onChange={(e) => {
+                              const cep = e.target.value;
+                              setEndereco((prevState) => ({
+                                ...prevState,
+                                cep: cep
+                              }));
+                              buscarEndereco(cep);
                             }}
+                            required
                           />
                         </Col>
                       </Form.Group>
@@ -250,9 +262,15 @@ function Login() {
                             type="text"
                             placeholder="Estado"
                             name="uf"
+                            value={endereco.uf}
+                            onChange={(e) => {
+                              const uf = e.target.value;
+                              setEndereco((prevState) => ({
+                                ...prevState,
+                                uf: uf
+                              }));
+                            }}
                             required
-                            value={uf}
-                            onChange={(event) => setUf(event.target.value)}
                           />
                         </Col>
                       </Form.Group>
@@ -269,8 +287,14 @@ function Login() {
                             type="text"
                             placeholder="Cidade"
                             name="cidade"
-                            value={cidade}
-                            onChange={(event) => setCidade(event.target.value)}
+                            value={endereco.cidade}
+                            onChange={(e) => {
+                              const cidade = e.target.value;
+                              setEndereco((prevState) => ({
+                                ...prevState,
+                                cidade: cidade
+                              }));
+                            }}
                             required
                           />
                         </Col>
@@ -286,10 +310,16 @@ function Login() {
                           <Form.Control
                             className={styles.inputCadastrarEndereco}
                             type="text"
-                            placeholder="Rua"
+                            placeholder="Logradouro"
                             name="logradouro"
-                            value={logradouro}
-                            onChange={(event) => setLogradouro(event.target.value)}
+                            value={endereco.logradouro}
+                            onChange={(e) => {
+                              const logradouro = e.target.value;
+                              setEndereco((prevState) => ({
+                                ...prevState,
+                                logradouro: logradouro
+                              }));
+                            }}
                             required
                           />
                         </Col>
@@ -307,8 +337,14 @@ function Login() {
                             type="text"
                             placeholder="Bairro"
                             name="bairro"
-                            value={bairro}
-                            onChange={(event) => setBairro(event.target.value)}
+                            value={endereco.bairro}
+                            onChange={(e) => {
+                              const bairro = e.target.value;
+                              setEndereco((prevState) => ({
+                                ...prevState,
+                                bairro: bairro
+                              }));
+                            }}
                             required
                           />
                         </Col>
@@ -326,8 +362,14 @@ function Login() {
                             type="text"
                             placeholder="Número"
                             name="numero"
-                            value={numero}
-                            onChange={(event) => setNumero(event.target.value)}
+                            value={endereco.numero}
+                            onChange={(e) => {
+                              const numero = e.target.value;
+                              setEndereco((prevState) => ({
+                                ...prevState,
+                                numero: numero
+                              }));
+                            }}
                             required
                           />
                         </Col>
@@ -345,10 +387,14 @@ function Login() {
                             type="text"
                             placeholder="Complemento"
                             name="complemento"
-                            value={complemento}
-                            onChange={(event) =>
-                              setComplemento(event.target.value)
-                            }
+                            value={endereco.complemento}
+                            onChange={(e) => {
+                              const complemento = e.target.value;
+                              setEndereco((prevState) => ({
+                                ...prevState,
+                                complemento: complemento
+                              }));
+                            }}
                           />
                         </Col>
                       </Form.Group>
