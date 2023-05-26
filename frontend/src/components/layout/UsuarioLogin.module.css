@@ -1,54 +1,55 @@
 * {
-    margin: 0;
-    padding: 0;
-  }
-  
-  .loginUser {
-    display: flex;
+  margin: 0;
+  padding: 0;
+}
 
-  }
-  
-  .login{
-    padding: 0 20px;
-    text-align: left;
-  }
+.loginUser {
+  display: flex;
+}
 
-  .imgUser {
-    margin-top: 0.5vh;
-    margin-left: 15px;
-  }
+.login {
+  padding: 0 20px;
+  text-align: left;
 
+}
 
-  .boasVindas {
-    font-weight: bolder;
-    color:#ffffff;
-    text-decoration: none;
-    margin: 0;
-    margin-top: 0.5vh;
-    font-size: 0.8em;
-  }
-  
-  .entre, .cadastreSe {
-    font-weight: bolder;
-    color:#ffffff;
-    text-decoration: none;
-    font-size: 0.8em;
-    margin: 0;
-  }
+.imgUser {
+  margin-top: 0.5vh;
+  margin-left: 15px;
+}
 
-  .ou{
-    color:#ffffff;
-    font-size: 0.8em;
-    margin: 0 4px;
-  }
+.boasVindas {
+  font-weight: bolder;
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0;
+  margin-top: 0.5vh;
+  font-size: 0.8em;
+}
 
-  .entre:hover, .cadastreSe:hover{
-    font-weight: bolder;
-    color:rgb(14, 200, 225);
-    text-decoration: none;
-  }
+.entre,
+.cadastreSe {
+  font-weight: bolder;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.8em;
+  margin: 0;
+}
 
-  /* Ajustes para telas entre 769px e 992px */
+.ou {
+  color: #ffffff;
+  font-size: 0.8em;
+  margin: 0 4px;
+}
+
+.entre:hover,
+.cadastreSe:hover {
+  font-weight: bolder;
+  color: rgb(14, 200, 225);
+  text-decoration: none;
+}
+
+/* Ajustes para telas entre 769px e 992px */
 @media only screen and (min-width: 769px) and (max-width: 992px) {
   .imgUser {
     margin-right: 20px;
@@ -58,7 +59,6 @@
   .boasVindas {
     font-size: 18px;
     margin-top: 7px;
-
   }
 
   .entre {
@@ -84,55 +84,76 @@
   }
 }
 
-
+/* Ajustes para telas entre 320px e 576px */
 @media only screen and (min-width: 320px) and (max-width: 576px) {
+
+  .login{
+    width: 200px;
+  }
+
   .imgUser {
-    margin-right: 20px;
-    margin-top: 20px;
+    margin-right: 10px;
+    margin-top: 10px;
     margin-left: 15px;
   }
 
   .boasVindas {
-    font-size: 12px;
-    margin-top: 9px;
+    font-size: 15px;
+    margin-top: 10px;
   }
 
   .entre {
-    font-size: 15px;
-  }
-}
-
-@media only screen and (min-width: 320px) and (max-width: 426px) {
-  .imgUser {
-    margin-right: 20px;
-    margin-left: 15px;
-  }
-
-  .boasVindas {
     font-size: 12px;
-    margin-top: 18px;
-  }
-
-  .entre {
-    font-size: 15px;
   }
 }
-
 
 /* Ajustes para telas entre 993px e 1200px */
 @media only screen and (min-width: 993px) and (max-width: 1200px) {
+
+  .login{
+    width: 200px;
+  }
+
   .imgUser {
-    margin-right: 20px;
-    margin-top: 15px;
+    margin-right: 10px;
+    margin-top: 10px;
     margin-left: 15px;
   }
 
   .boasVindas {
-    font-size: 10px;
-    margin-top: 9px;
+    font-size: 15px;
+    margin-top: 10px;
   }
 
   .entre {
     font-size: 12px;
   }
 }
+
+
+@media only screen and (min-width: 1201px) and (max-width: 1440px) {
+  .login{
+    width: 200px;
+  }
+
+  .imgUser {
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-left: 15px;
+  }
+
+  .boasVindas {
+    font-size: 15px;
+    margin-top: 10px;
+  }
+
+  .entre {
+    font-size: 12px;
+  }
+}
+
+
+@media only screen and (min-width: 1441px) {
+
+}
+

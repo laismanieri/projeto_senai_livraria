@@ -1,17 +1,18 @@
-.navbar {  
+/* Estilos padrão da NavBar */
+
+.navbar {
   position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #033579;
   box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
-  padding: 10px 20px;
+  padding: 1.5% 3%;
   width: 100%;
   top: 0;
   left: 0;
   right: 0;
   z-index: 3;
-
 }
 
 .userMenuWrapper {
@@ -31,235 +32,189 @@
   list-style: none;
   text-align: justify;
   color: aliceblue;
-
 }
 
-.menuUsuarioLista{
+.menuUsuarioLista {
   padding: 15px 0 15px 15px;
   font-weight: 300;
-  
 }
 
-
-
-.userButton{
+.userButton {
   background-color: #033579;
   border: none;
   font-size: 1em ;
   margin: 0 5px;
 }
-.navbarContainerLogo{
-    margin-left: 18%;
+
+.navbarContainerLogo {
+  margin-left: 10%;
 }
 
-.navbarContainerCompra{
-  margin-right: 18%;
+.navbarContainerCompra {
+  margin-right: 10%;
+
 }
-
-
 
 .navbarLogo {
-  height: 50px;
-
+  height: 2.5em;
 }
 
 .navbarInput {
   border: none;
   border-radius: 5px;
-  padding: 5px 10px;
-  margin-left: 20px;
+  padding: 0.5em 1em;
+  margin-left: 2em;
 }
-
 
 .navbarSpan {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
-  width: 50px;
+  height: 2.5em;
+  width: 2.5em;
   background-color: #555;
   color: #fff;
   border-radius: 50%;
-  margin-left: 20px;
+  margin-left: 2em;
   cursor: pointer;
 }
 
+/* Estilos responsivos para a NavBar */
 
-/* Responsividade da Navbar */
-@media only screen and (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
-  }
-
-  .navbarButtons {
-    margin-top: 10px;
-  }
-
-  .navbarInput {
-    margin-left: 0;
-    margin-top: 10px;
-  }
-
-  .navbarLogo {
-    margin-bottom: 10px;
-  }
-
-  .navbarContainerLogo{
-    margin-left: 0%;
-}
-
-.navbarContainerCompra{
-  margin-right: 0%;
-}
-
-
-}
 
 @media only screen and (min-width: 320px) and (max-width: 576px) {
   .navbar {
-    padding: 10px;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    padding: 5%;
   }
 
-  .navbarContainerLogo{
-    margin-left: 0%;
-}
-
-.navbarContainerCompra{
-  margin-right: 0%;
-}
-
+  .navbarContainerLogo,
+  .navbarContainerCompra {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+  }
 
   .navbarLogo {
-    margin-bottom: 10px;
-  }
-
-  .navbarButtons {
-    flex-direction: column;
-    margin-left: 0;
+    margin-bottom: 1em;
   }
 
   .navbarInput {
-    margin-left: 0;
-    margin-top: 10px;
+    margin: 1em 0;
   }
 }
+
 
 @media only screen and (min-width: 577px) and (max-width: 768px) {
   .navbar {
-    flex-direction: row;
-    align-items: center;
-    padding: 10px;
+    flex-wrap: wrap;
+    padding: 3%;
+  }
+
+  .navbarContainerLogo,
+  .navbarContainerCompra {
+    margin: 0;
+    width: 100%;
+    text-align: center;
   }
 
   .navbarLogo {
-    margin-right: 10px;
-  }
-
-  .navbarButtons {
-    margin-left: auto;
+    margin-bottom: 1em;
   }
 
   .navbarInput {
-    margin-left: 20px;
-    margin-right: 10px;
+    margin: 1em 0;
   }
 }
+
 
 @media only screen and (min-width: 769px) and (max-width: 992px) {
   .navbar {
-    padding: 10px;
+    padding: 1% 2%;
+  }
+
+  .navbarContainerLogo,
+  .navbarContainerCompra {
+    margin: 0;
+    width: 30%;
+    text-align: center;
   }
 
   .navbarLogo {
-    margin-right: 10px;
-  }
-
-  .navbarButtons {
-    margin-left: auto;
+    margin-bottom: 0.5em;
+    height: 2em;
   }
 
   .navbarInput {
-    margin-left: 20px;
-    margin-right: 10px;
+    margin: 0.5em 0;
   }
-
-  .navbarContainerLogo{
-    margin-left: 0%;
-}
-
-.navbarContainerCompra{
-  margin-right: 0%;
-}
 }
 
 @media only screen and (min-width: 993px) and (max-width: 1200px) {
-  
   .navbar {
-    padding: 10px;
+    padding: 1% 2%;
+  }
+
+  .navbarContainerLogo,
+  .navbarContainerCompra {
+    margin: 0;
+    width: 25%;
+    text-align: center;
   }
 
   .navbarLogo {
-    margin-right: 10px;
-  }
-
-  .navbarButtons {
-    margin-left: auto;
+    margin-bottom: 0.5em;
+    height: 2em;
   }
 
   .navbarInput {
-    margin-left: 20px;
-    margin-right: 10px;
+    margin: 0.5em 0;
+  }
+}
+
+
+@media only screen and (min-width: 1201px) and (max-width: 1440px) {
+  .navbar {
+    padding: 1% 2%;
   }
 
-  .navbarContainerLogo{
-    margin-left: 5%;
-}
-
-.navbarContainerCompra{
-  margin-right: 5%;
-}
-
-}
-
-@media only screen and (min-width: 1201px) {
-  .navbar {
-    padding: 10px 20px;
+  .navbarContainerLogo,
+  .navbarContainerCompra {
+    margin: 0;
+    width: 15%;
+    text-align: center;
   }
 
   .navbarLogo {
-    margin-right: 20px;
-  }
-
-  .navbarButtons {
-    margin-left: 20px;
+    margin-bottom: 0.5em;
+    height: 2em;
   }
 
   .navbarInput {
-    margin-left: 20px;
-    margin-right: 10px;
+    margin: 0.5em 0;
   }
 }
 
-@media only screen and (max-width: 1440px) {
+@media only screen and (min-width: 1441px) {
   .navbar {
-    padding: 10px;
+    padding: 1% 2%;
+  }
+
+  .navbarContainerLogo,
+  .navbarContainerCompra {
+    margin: 0;
+    width: 15%;
+    text-align: center;
   }
 
   .navbarLogo {
-    margin-right: 10px;
-  }
-
-  .navbarButtons {
-    margin-left: auto;
+    margin-bottom: 0.5em;
+    height: 2em;
   }
 
   .navbarInput {
-    margin-left: 20px;
-    margin-right: 10px;
+    margin: 0.5em 0;
   }
 }
+
 

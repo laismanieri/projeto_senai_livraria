@@ -1,34 +1,96 @@
-.footer {
+.containerFooter {
   display: grid;
-  grid-template-rows: repeat(3, auto);
-  /* Adicione qualquer estilo adicional para o footer aqui */
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  background: #033579;
+  justify-content: space-around;
+  margin-top: 100px;
+  padding: 20px;
 }
 
-.row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.column {
+.footerLogo {
+  display: flex;
+  align-items: center;
   justify-content: center;
+}
+
+.footerLogoImg {
+  width: 20%;
+  height: auto;
+}
+
+.socialList {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.socialListLi {
+  margin: 0 10px;
+  font-size: 1.5em;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.socialListLi:hover {
+  color: rgb(144, 202, 252);
+}
+
+.footerFaleConosco {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
   text-align: center;
 }
 
-.socialListLi svg{
-  font-size: 1em;
-
+.footerFaleConosco:hover {
+  color: rgb(144, 202, 252);
 }
 
-.containerSocialList{
-  margin: 5%;
+.footerDiversos,
+.footerPagamento {
   display: flex;
-  justify-content: space-around;
-
+  align-items: center;
+  justify-content: center;
 }
 
-.fullWidth {
-  grid-column: 1 / span 2;
-  background-color: #ffffff;
+.footerPagamentoH1,
+.footerFaleConosco {
+  font-size: 0.7em;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.pagamentoListDiv {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.pagamentoList {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pagamentoList li {
+  margin: 0 5px;
+}
+
+.footerCopyRight {
+  background: #03347997;
+  padding: 20px;
+  text-align: center;
+}
+
+.footerCopyP {
+  color: #ffffffc4;
+  font-size: large;
+  margin: 0;
 }
 
 
