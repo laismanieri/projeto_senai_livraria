@@ -8,6 +8,7 @@ import Footer from "../../components/layout/Footer";
 import NavbarAdm from "../../components/adm/NavBarAdm";
 
 import styles from "../styles/Adm.module.css"
+import ListaPedido from "../../components/adm/ListaPedido";
 
 function Adm() {
   const [livros, setLivros] = useState([]);
@@ -32,6 +33,7 @@ function Adm() {
 
       <div className={styles.container}>
             <CadastroLivro/>
+            <ListaPedido/>
             <LivroAdm livros={livro} />
             <DestaqueAdm livros={livrosDestaque} />
             <OfertaAdm livros={livrosOferta} />
