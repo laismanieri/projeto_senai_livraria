@@ -29,7 +29,7 @@
 }
 
 .containerCadastroLivro {
-    margin: 20px;
+    margin: 0;
   }
   
   .tituloListarPedido {
@@ -46,19 +46,19 @@
     margin-bottom: 10px;
   }
   
-  table {
+  .tableListarPedido {
     width: 100%;
     border-collapse: collapse;
     color: #146b97;
   }
   
-  th, td {
+  .thListarPedido, .tdListarPedido {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #146b97;
   }
   
-  th {
+ .thListarPedido {
     background-color: aliceblue;
   }
   
@@ -68,7 +68,7 @@
     padding: 0;
   }
   
-  li {
+  .ulListarPedido {
     margin-bottom: 5px;
   }
   

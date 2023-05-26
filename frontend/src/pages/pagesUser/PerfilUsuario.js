@@ -17,22 +17,35 @@ import {
 } from "react-icons/fa";
 
 function PerfilUsuario() {
-  const [selectedItem, setSelectedItem] = useState("");
+  const [activeItem, setActiveItem] = useState("Dados Pessoais");
 
   const handleItemClick = (item) => {
-    setSelectedItem(item);
+    setActiveItem(item);
+  };
+
+  const handleLogout = () => {
+    // Lógica para executar o logout
+    // Por exemplo, redirecionar o usuário para a página de login
+    // ou limpar o token de autenticação, se aplicável
   };
 
   const renderForm = () => {
-    switch (selectedItem) {
+    switch (activeItem) {
       case "Dados Pessoais":
-        return <FormDadosPessoais />;
+        return <FormDadosPessoais active={activeItem === "Dados Pessoais"} />;
       case "Endereço":
-        return <FormEndereco />;
+        return <FormEndereco active={activeItem === "Endereço"} />;
       case "Pedidos":
-        return <FormPedidos />;
+        return <FormPedidos active={activeItem === "Pedidos"} />;
       case "Sair":
-        return <FormSair />;
+        return (
+          <div className={styles.formSair}>
+            <Button onClick={handleLogout} className={styles.buttonSair}>
+              Sair
+            </Button>
+          </div>
+        );
+  
       default:
         return null;
     }
@@ -56,32 +69,32 @@ function PerfilUsuario() {
           <div className={styles.gridPerfil}>
             <ul className={styles.gridPerfilLista}>
               <li
-                className={styles.gridPerfilListaItem}
+                className={`${styles.gridPerfilListaItem} ${activeItem === "Olá" ? styles.active : ""}`}
                 onClick={() => handleItemClick("Olá")}
               >
                 <FaUserCircle className={styles.imagemPerfil} />
                 <span>Olá</span>
               </li>
               <li
-                className={styles.gridPerfilListaItem}
+                className={`${styles.gridPerfilListaItem} ${activeItem === "Dados Pessoais" ? styles.active : ""}`}
                 onClick={() => handleItemClick("Dados Pessoais")}
               >
-                Dados Pessoais e Autenticação
+                Dados Pessoais
               </li>
               <li
-                className={styles.gridPerfilListaItem}
+                className={`${styles.gridPerfilListaItem} ${activeItem === "Endereço" ? styles.active : ""}`}
                 onClick={() => handleItemClick("Endereço")}
               >
                 Endereço
               </li>
               <li
-                className={styles.gridPerfilListaItem}
+                className={`${styles.gridPerfilListaItem} ${activeItem === "Pedidos" ? styles.active : ""}`}
                 onClick={() => handleItemClick("Pedidos")}
               >
                 Pedidos
               </li>
               <li
-                className={styles.gridPerfilListaItem}
+                className={`${styles.gridPerfilListaItem} ${activeItem === "Sair" ? styles.active : ""}`}
                 onClick={() => handleItemClick("Sair")}
               >
                 Sair
@@ -99,7 +112,7 @@ function PerfilUsuario() {
 }
 
 // Componentes de formulário de exemplo
-function FormDadosPessoais() {
+function FormDadosPessoais({ active }) {
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -112,8 +125,10 @@ function FormDadosPessoais() {
   };
 
   return (
-    <div>
-      <h1>Editar Dados Pessoais e Autenticação</h1>
+    <div className={active ? `${styles.active}` : ""}>
+      <li className={`${styles.gridPerfilListaItem} ${active ? styles.active : ""}`}>
+        Dados Pessoais
+      </li>
       <div className={styles.linhaHorizontal} />
       <Form>
         <Form.Group as={Row} controlId="formNome">
@@ -367,11 +382,6 @@ function FormEndereco() {
 }
 
 function FormPedidos() {
-  return <div>Formulário de Pedidos</div>;
+  return <div>Pedidos</div>;
 }
-
-function FormSair() {
-  return <div>Formulário de Sair</div>;
-}
-
 export default PerfilUsuario;

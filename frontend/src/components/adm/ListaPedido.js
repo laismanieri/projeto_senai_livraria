@@ -32,39 +32,39 @@ function ListaPedido() {
         <br />
         <br />
         {isExpanded && (
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Data do Pedido</th>
-                <th>Usuário ID</th>
-                <th>Usuário Nome</th>
-                <th>CPF</th>
-                <th>Itens</th>
+          <table  className={styles.tableListarPedido}> 
+            <thead  className={styles.theadListarPedido}>
+              <tr className={styles.trListarPedido}>
+                <th className={styles.thListarPedido}>ID</th>
+                <th className={styles.thListarPedido}>Data do Pedido</th>
+                <th className={styles.thListarPedido}>Usuário ID</th>
+                <th className={styles.thListarPedido}>Usuário Nome</th>
+                <th className={styles.thListarPedido}>CPF</th>
+                <th className={styles.thListarPedido}>Itens</th>
               </tr>
             </thead>
             <tbody>
               {pedidos.length > 0 ? (
                 pedidos.map((pedido) => (
-                  <tr key={pedido.id}>
-                    <td>{pedido.id}</td>
-                    <td>{pedido.dataPedido}</td>
-                    <td>{pedido.usuario.id}
+                  <tr key={pedido.id} className={styles.trListarPedido}>
+                    <td className={styles.tdListarPedido}>{pedido.id}</td>
+                    <td className={styles.tdListarPedido}>{pedido.dataPedido}</td>
+                    <td className={styles.tdListarPedido}>{pedido.usuario.id}
                     </td>
-                    <td>{pedido.usuario.nome}
+                    <td className={styles.tdListarPedido}>{pedido.usuario.nome}
                     </td>
-                    <td>{pedido.usuario.cpf}
+                    <td className={styles.tdListarPedido}>{pedido.usuario.cpf}
                     </td>
-                    <td>
+                    <td className={styles.tdListarPedido}>
                       {pedido.itens && pedido.itens.length > 0 ? (
                         <ul>
                           {pedido.itens.map((item) => (
-                            <li key={item.id}>
-                              <ul>
-                              <li>Valor Total: {item.valorTotal}</li>
-                              <li>Valor Unitário: {item.valorUnid}</li>
-                              <li>Quantidade: {item.qtdeItens}</li>
-                                <li>Tipo de Livro: {item.detalheLivro.tipoLivro}</li>
+                            <li key={item.id} className={styles.liListarPedido}>
+                              <ul className={styles.ulListarPedido}>
+                              <li className={styles.liListarPedido}>Valor Total: {item.valorTotal}</li>
+                              <li className={styles.liListarPedido}>Valor Unitário: {item.valorUnid}</li>
+                              <li className={styles.liListarPedido}>Quantidade: {item.qtdeItens}</li>
+                                <li className={styles.liListarPedido}>Tipo de Livro: {item.detalheLivro.tipoLivro}</li>
                               </ul>
                             </li>
                           ))}
