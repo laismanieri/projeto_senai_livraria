@@ -13,6 +13,7 @@ import InformacaoLivro from "./pages/pagesUser/InformacaoLivro";
 import InformacaoLivroAdm from "./pages/pagesAdm/InformacaoLivroAdm";
 import Adm from "./pages/pagesAdm/Adm";
 import LoginEntrar from "./pages/pagesUser/LoginEntrar";
+import PerfilUsuario from "./pages/pagesUser/PerfilUsuario";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route element={<Contact />} path="/contact" />
             <Route element={<InformacaoLivroAdm />} path="/informacao-livro-adm/:id" />
             <Route element={<InformacaoLivro />} path="/informacao-livro/:id" />
+            <Route element={<PerfilUsuario />} path="/perfil-usuario" />
           </Routes>        
         </AuthProvider>
 

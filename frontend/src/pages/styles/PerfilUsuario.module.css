@@ -1,0 +1,119 @@
+.container{
+    margin: 7% 18% 0 18%;      
+    justify-content: center;
+    align-items: center;
+        z-index: 1;      
+        text-shadow: 5px 5px 15px rgba(1, 23, 61, 0.22)
+  }
+     
+  .linhaHorizontal {
+        width: 100%;
+        border: 0.05px outset rgba(144, 202, 252, 0.26);
+        margin-top: 1em;
+        margin-bottom: 1.5em;
+    }
+
+    .voltarHome {
+        color: #146b97;
+        cursor: pointer;
+        margin-top: 12vh;
+        margin-left: 0.5vh;
+        font-size: 1em;
+      }
+      
+.containerGridPerfil{
+    display: grid;
+    grid-template-columns: 30% 65%; 
+    grid-template-rows: 42em;
+    gap: 5%;
+    color: #146b97;
+    max-width: 100%;
+
+}
+
+.gridPerfil{
+    padding: 8% 10%;
+    background-color:aliceblue;
+}
+
+.gridPerfilLista{
+    list-style: none;
+
+}
+
+.gridPerfilListaItem{
+    background-color:aliceblue;
+    padding: 5%;
+}
+
+.gridPerfilForm{
+    background-color:aliceblue;
+    padding: 8% 15%;
+    border-radius: 10px;
+}
+
+.iconContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5%;
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+
+  }
+  
+  .iconFormLogin {
+    margin: 0 15px;
+    border-radius: 5px;
+  }
+  
+  .imagemPerfil{
+    font-size: 7vh;
+  }
+  
+  .inputFormLogin, .inputCadastrarEndereco {
+    padding: 2.5%;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    background-color: white;
+  }
+
+  .inputFormLogin:focus, .inputCadastrarEndereco:focus{
+    outline: none;
+  }
+
+  .inputCadastrarEndereco {
+    border-radius: 5px;
+    margin-bottom: 3%;
+
+
+  }
+
+
+  
+  .alternarSenha svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  
+  .buttonSalvarPerfil, .buttonExpandirSenha {
+    color: white;
+    background-color: #015a80;
+    padding: 8px 50px;
+    text-align: center;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+  }
+
+  .buttonSalvarPerfil:hover, .buttonExpandirSenha{
+    color: rgb(240, 248, 255);
+    background-color: #015a80e5;
+  }
+
+  .buttonExpandirSenha{
+    margin-bottom: 5%;
+  }
