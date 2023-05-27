@@ -33,7 +33,7 @@ function Navbar() {
       </div>
 
       <Search />
-      <div className={styles.userMenuWrapper}>
+      <div className={`${styles.userMenuWrapper} ${styles.center}`}>
         <button onClick={handleMenuToggle} className={styles.userButton}>
           <UsuarioLogin />
         </button>

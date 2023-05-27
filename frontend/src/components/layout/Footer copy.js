@@ -43,7 +43,8 @@ function Footer() {
           <div className={styles.footerFaleConoscoDiv}>
             <Link to="/Contact">
               <h1 className={styles.footerFaleConosco}>Fale Conosco</h1>
-            </Link></div>
+            </Link>
+            </div>
         </div>
         <div className={styles.footerPagamento}>
           {" "}

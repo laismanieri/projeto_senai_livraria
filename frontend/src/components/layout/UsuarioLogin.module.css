@@ -69,7 +69,7 @@
 /* Ajustes para telas entre 577px e 768px */
 @media only screen and (min-width: 577px) and (max-width: 768px) {
   .imgUser {
-    margin-right: 7px;
+
     margin-top: 8px;
     margin-left: 20px;
   }
@@ -79,8 +79,20 @@
     margin-top: 5px;
   }
 
-  .entre {
+  .entre, .cadastreSe {
     font-size: 10px;
+  }
+
+  .loginUser {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login {
+    padding: 0 10px;
+    text-align: left;
+  
   }
 }
 
@@ -89,12 +101,13 @@
 
   .login{
     width: 200px;
+    padding: 0 10px; 
   }
 
   .imgUser {
-    margin-right: 10px;
+    margin-right: 5px;
     margin-top: 10px;
-    margin-left: 15px;
+    margin-left: 80px;
   }
 
   .boasVindas {
@@ -102,8 +115,9 @@
     margin-top: 10px;
   }
 
-  .entre {
+  .entre, .cadastreSe {
     font-size: 12px;
+
   }
 }
 
