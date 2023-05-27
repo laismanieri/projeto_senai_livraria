@@ -7,7 +7,7 @@ import Search from "../layout/Search";
 import { AuthContext } from "./AuthContext";
 import React, { useContext, useState } from "react";
 import { GiShoppingBag } from 'react-icons/gi'
-import { FaUser, FaSignOutAlt  } from "react-icons/fa";
+import { FaUser, FaSignOutAlt } from "react-icons/fa";
 
 function Navbar() {
 
@@ -37,18 +37,16 @@ function Navbar() {
         <button onClick={handleMenuToggle} className={styles.userButton}>
           <UsuarioLogin />
         </button>
-        {menuOpen &&  user && (
+        {menuOpen && user && (
           <ul className={styles.menuUsuario}>
             <li className={styles.menuUsuarioLista}>
-              <span><FaUser /></span>
-              <span>Alterar Perfil</span>
-            </li>
-            <li className={styles.menuUsuarioLista}>
-              <span><GiShoppingBag /></span>
-              <span>Meus Pedidos</span>
+              <Link to="/perfil-usuario">
+                <span><FaUser /></span>
+                <span>Minha Conta</span>
+              </Link>
             </li>
             <li className={styles.menuUsuarioLista} onClick={handleLogout}>
-            <span><FaSignOutAlt /></span>
+              <span><FaSignOutAlt /></span>
               <span>Sair</span>
             </li>
           </ul>

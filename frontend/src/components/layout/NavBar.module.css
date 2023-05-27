@@ -50,6 +50,11 @@
   font-weight: 300;
 }
 
+.menuUsuarioLista a {
+  color: white; /* Altere para a cor desejada */
+  text-decoration: none; /* Remova a decoração de sublinhado, se desejado */
+}
+
 .userButton {
   background-color: #033579;
   border: none;
