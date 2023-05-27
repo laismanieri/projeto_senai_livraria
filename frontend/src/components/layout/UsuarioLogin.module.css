@@ -71,7 +71,7 @@
   .imgUser {
 
     margin-top: 8px;
-    margin-left: 20px;
+    margin-left: 10px;
   }
 
   .boasVindas {
@@ -92,7 +92,7 @@
   .login {
     padding: 0 10px;
     text-align: left;
-  
+    width: 130px;
   }
 }
 
