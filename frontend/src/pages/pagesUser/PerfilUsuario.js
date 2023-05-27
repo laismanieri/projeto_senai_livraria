@@ -3,10 +3,11 @@ import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/NavBar";
 import styles from "../styles/PerfilUsuario.module.css";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { Form, Button, Row, Col } from "react-bootstrap";
+import { AuthContext } from "../../components/layout/AuthContext";
 import {
   FaEnvelope,
   FaEye,
@@ -18,6 +19,29 @@ import {
 
 function PerfilUsuario() {
   const [activeItem, setActiveItem] = useState("Dados Pessoais");
+  const { user, setUser } = useContext(AuthContext);
+
+  <FormDadosPessoais
+  active={activeItem === "Dados Pessoais"}
+  user={user}
+/>
+
+  useEffect(() => {
+    // Lógica para buscar os dados do usuário logado
+    // e atualizar o estado "user" com os dados do usuário
+    const fetchUserData = async () => {
+      try {
+        // Faça uma requisição ao servidor para buscar os dados do usuário
+        const response = await fetch("http://localhost:8082/usuario"); // substitua "/api/user" pela rota correta para buscar os dados do usuário
+        const userData = await response.json();
+        setUser(userData);
+      } catch (error) {
+        console.error("Erro ao buscar os dados do usuário:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleItemClick = (item) => {
     setActiveItem(item);
@@ -29,10 +53,39 @@ function PerfilUsuario() {
     // ou limpar o token de autenticação, se aplicável
   };
 
+  const handleFormSubmit = async (updatedUserData) => {
+    try {
+      const response = await fetch("http://localhost:8082/usuario", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedUserData),
+      });
+
+      if (response.ok) {
+        toast.success("Dados atualizados com sucesso!");
+        // Atualizar o estado "user" com os dados atualizados
+        setUser(updatedUserData);
+      } else {
+        toast.error("Erro ao atualizar os dados do usuário.");
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar os dados do usuário:", error);
+      toast.error("Erro ao atualizar os dados do usuário.");
+    }
+  };
+
+
   const renderForm = () => {
     switch (activeItem) {
       case "Dados Pessoais":
-        return <FormDadosPessoais active={activeItem === "Dados Pessoais"} />;
+        return (
+          <FormDadosPessoais
+            active={activeItem === "Dados Pessoais"}
+            user={user} // Passe o objeto "user" do contexto de autenticação
+          />
+        );
       case "Endereço":
         return <FormEndereco active={activeItem === "Endereço"} />;
       case "Pedidos":
@@ -50,10 +103,11 @@ function PerfilUsuario() {
         return null;
     }
   };
-
+ 
   return (
     <>
       <Navbar />
+        {/* {renderForm()} */}
 
       <div className={styles.container}>
         <Link to={"/"}>
@@ -112,7 +166,8 @@ function PerfilUsuario() {
 }
 
 // Componentes de formulário de exemplo
-function FormDadosPessoais({ active }) {
+function FormDadosPessoais({ active, user }) {
+  const authContext = useContext(AuthContext); 
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -124,13 +179,18 @@ function FormDadosPessoais({ active }) {
     setIsExpanded(!isExpanded);
   };
 
+  
+  if (!authContext.user) {
+    return null; // Renderiza null se o objeto user for nulo
+  }
+
   return (
     <div className={active ? `${styles.active}` : ""}>
       <li className={`${styles.gridPerfilListaItem} ${active ? styles.active : ""}`}>
         Dados Pessoais
       </li>
       <div className={styles.linhaHorizontal} />
-      <Form>
+      <Form handleFormSubmit>
         <Form.Group as={Row} controlId="formNome">
           <div className={styles.iconContainer}>
             <Form.Label column sm={2}>
@@ -140,7 +200,8 @@ function FormDadosPessoais({ active }) {
               className={styles.inputFormLogin}
               type="text"
               placeholder="Nome"
-              // value={nome}
+              defaultValue={user.nome}
+              readOnly
               // onChange={(event) => setNome(event.target.value)}
               // required
             />
@@ -156,7 +217,7 @@ function FormDadosPessoais({ active }) {
               type="text"
               placeholder="CPF"
               readOnly
-              // value={cpf}
+              defaultValue={user.cpf}
               // onChange={(event) => setCpf(event.target.value)}
             />
           </div>
@@ -170,7 +231,7 @@ function FormDadosPessoais({ active }) {
               className={styles.inputFormLogin}
               type="email"
               placeholder="E-mail"
-              // value={email}
+              defaultValue={user.email}
               // onChange={(event) => setEmail(event.target.value)}
               // required
             />
@@ -197,7 +258,7 @@ function FormDadosPessoais({ active }) {
                     className={styles.inputFormLogin}
                     type={mostrarSenha ? "text" : "password"}
                     placeholder="Senha"
-                    // value={senha}
+                    // value={user.senha}
                     // onChange={(event) => setSenha(event.target.value)}
                     // required
                   />
