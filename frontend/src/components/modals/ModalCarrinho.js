@@ -33,6 +33,7 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
     if (carrinhoSalvo) {
       setCarrinho(JSON.parse(carrinhoSalvo));
     }
+    console.log(carrinhoSalvo);
   }, []);
 
   const handleIncrementQuantidade = (index) => {
@@ -78,9 +79,11 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
           : livro.preco * livro.quantidade,
         qtdeItens: livro.quantidade,
         detalhe_livro_id: livro.id,
+        detalhe_id: livro.idDetalhe
       })),
     };
 
+    console.log(pedido)
     // Transformar objeto em JSON
     const pedidoJSON = JSON.stringify(pedido);
 
