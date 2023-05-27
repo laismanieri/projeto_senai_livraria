@@ -1,11 +1,11 @@
-.searchFormContainer {
+  .searchFormContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 45vh;
-  margin-top: 0.5vh;
+  width: 50vh;
+  margin: 0.5vh 8vh;
 }
-
+ 
 .searchForm {
   height: 3.2vh;
   width: 100%;
@@ -54,7 +54,7 @@
     height: 4vh;
     max-width: 100%;
     border-radius: 5px;
-    width: 30vh
+    width: 35vh
   }
 
   .searchFormInput {

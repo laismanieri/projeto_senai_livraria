@@ -15,11 +15,22 @@
   z-index: 3;
 }
 
+.container{
+  margin: 0 18%;
+}
+
 .userMenuWrapper {
   position: relative;
   background-color: #033579;
-  width: 15%;
+  width: 25%;
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .menuUsuario {
   position: absolute;
@@ -47,16 +58,16 @@
 }
 
 .navbarContainerLogo {
-  margin-left: 10%;
+  margin-left: 15%;
 }
 
 .navbarContainerCompra {
-  margin-right: 10%;
+  margin: 0;
 
 }
 
 .navbarLogo {
-  height: 2.5em;
+  height: 100%;
 }
 
 .navbarInput {
@@ -97,6 +108,7 @@
 
   .navbarLogo {
     margin-bottom: 1em;
+    width: 40%;
   }
 
   .navbarInput {
@@ -108,7 +120,6 @@
 @media only screen and (min-width: 577px) and (max-width: 768px) {
   .navbar {
     flex-wrap: wrap;
-    padding: 3%;
   }
 
   .navbarContainerLogo,
@@ -119,11 +130,15 @@
   }
 
   .navbarLogo {
-    margin-bottom: 1em;
+    width: 20%;
   }
 
   .navbarInput {
     margin: 1em 0;
+  }
+
+  .userMenuWrapper {
+    width: 100%;
   }
 }
 
@@ -135,15 +150,16 @@
 
   .navbarContainerLogo,
   .navbarContainerCompra {
-    margin: 0;
+padding: 0;
     width: 30%;
     text-align: center;
   }
 
-  .navbarLogo {
-    margin-bottom: 0.5em;
-    height: 2em;
-  }
+  
+
+.navbarLogo {
+  height: 100%;
+}
 
   .navbarInput {
     margin: 0.5em 0;
@@ -163,7 +179,7 @@
   }
 
   .navbarLogo {
-    margin-bottom: 0.5em;
+    margin: 0.5em;
     height: 2em;
   }
 
@@ -180,14 +196,14 @@
 
   .navbarContainerLogo,
   .navbarContainerCompra {
-    margin: 0;
+    margin: 0 5%;
     width: 15%;
     text-align: center;
+    padding: 0;
   }
 
   .navbarLogo {
-    margin-bottom: 0.5em;
-    height: 2em;
+    height: 50px;
   }
 
   .navbarInput {
@@ -208,10 +224,8 @@
   }
 
   .navbarLogo {
-    margin-bottom: 0.5em;
-    height: 2em;
+    height: 100%;
   }
-
   .navbarInput {
     margin: 0.5em 0;
   }
