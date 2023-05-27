@@ -119,7 +119,7 @@
 
 @media only screen and (min-width: 577px) and (max-width: 768px) {
   .navbar {
-    flex-wrap: wrap;
+    
   }
 
   .navbarContainerLogo,
@@ -130,7 +130,7 @@
   }
 
   .navbarLogo {
-    width: 20%;
+    width: 100%;
   }
 
   .navbarInput {
