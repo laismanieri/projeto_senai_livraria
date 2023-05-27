@@ -7,7 +7,7 @@ import "./pages/styles/toastify-theme.css";
 import Home from './pages/pagesUser/Home';
 import ResultadosPesquisa from "./pages/pagesUser/ResultadosPesquisa";
 import ResultadosPesquisaAdm from "./pages/pagesAdm/ResultadosPesquisaAdm";
-import Login from "./pages/pagesUser/Login";
+import LoginCadastrar from "./pages/pagesUser/LoginCadastrar";
 import Contact from "./pages/pagesUser/Contact"
 import InformacaoLivro from "./pages/pagesUser/InformacaoLivro";
 import InformacaoLivroAdm from "./pages/pagesAdm/InformacaoLivroAdm";
@@ -25,7 +25,7 @@ function App() {
           <Routes>
             <Route element={<Home />} path="/" exact></Route>
             <Route element={<Adm/>} path="/adm" />
-            <Route element={<Login />} path="/login" />
+            <Route element={<LoginCadastrar />} path="/login-cadastrar" />
             <Route element={<LoginEntrar/>} path="/login-entrar" />
             <Route element={<ResultadosPesquisa />} path="/resultados-pesquisa"></Route>
             <Route element={<ResultadosPesquisaAdm />} path="/resultados-pesquisa-adm"></Route>

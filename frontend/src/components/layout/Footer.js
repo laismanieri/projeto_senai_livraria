@@ -48,28 +48,28 @@ function Footer() {
           <div className={styles.pagamentoListDiv}>
             <ul className={styles.pagamentoList}>
               <li className={styles.pagamentoListLi}>
-                <img src="https://http2.mlstatic.com/storage/logos-api-admin/a5f047d0-9be0-11ec-aad4-c3381f368aaf-m.svg" />
+                <img src="https://http2.mlstatic.com/storage/logos-api-admin/a5f047d0-9be0-11ec-aad4-c3381f368aaf-m.svg" alt="" />
               </li>
               <li className={styles.pagamentoListLi}>
-                <img src="https://http2.mlstatic.com/storage/logos-api-admin/aa2b8f70-5c85-11ec-ae75-df2bef173be2-m.svg" />
+                <img src="https://http2.mlstatic.com/storage/logos-api-admin/aa2b8f70-5c85-11ec-ae75-df2bef173be2-m.svg" alt="" />
               </li>
               <li className={styles.pagamentoListLi}>
-                <img src="https://http2.mlstatic.com/storage/logos-api-admin/b2c93a40-f3be-11eb-9984-b7076edb0bb7-m.svg" />
+                <img src="https://http2.mlstatic.com/storage/logos-api-admin/b2c93a40-f3be-11eb-9984-b7076edb0bb7-m.svg" alt="" />
               </li>
               <li className={styles.pagamentoListLi}>
-                <img src="https://http2.mlstatic.com/storage/logos-api-admin/ed8d6fd0-f3bd-11eb-9984-b7076edb0bb7-m.svg" />
+                <img src="https://http2.mlstatic.com/storage/logos-api-admin/ed8d6fd0-f3bd-11eb-9984-b7076edb0bb7-m.svg" alt="" />
               </li>
               <li className={styles.pagamentoListLi}>
-                <img src="https://http2.mlstatic.com/storage/logos-api-admin/ddf23a60-f3bd-11eb-a186-1134488bf456-m.svg" />
+                <img src="https://http2.mlstatic.com/storage/logos-api-admin/ddf23a60-f3bd-11eb-a186-1134488bf456-m.svg" alt="" />
               </li>
               <li className={styles.pagamentoListLi}>
-                <img src="https://http2.mlstatic.com/storage/logos-api-admin/48b25b30-6265-11ec-813c-8542a9aff8ea-m.svg" />
+                <img src="https://http2.mlstatic.com/storage/logos-api-admin/48b25b30-6265-11ec-813c-8542a9aff8ea-m.svg" alt="" />
               </li>
               <li className={styles.pagamentoListLi}>
-                <img src="https://http2.mlstatic.com/storage/logos-api-admin/200454b0-13c2-11eb-a75e-3f6b552aa946-m.svg" />
+                <img src="https://http2.mlstatic.com/storage/logos-api-admin/200454b0-13c2-11eb-a75e-3f6b552aa946-m.svg" alt="" />
               </li>
               <li className={styles.pagamentoListLi}>
-                <img src="https://http2.mlstatic.com/storage/logos-api-admin/00174300-571e-11e8-8364-bff51f08d440-m.svg" />
+                <img src="https://http2.mlstatic.com/storage/logos-api-admin/00174300-571e-11e8-8364-bff51f08d440-m.svg" alt="" />
               </li>
             </ul>
           </div>

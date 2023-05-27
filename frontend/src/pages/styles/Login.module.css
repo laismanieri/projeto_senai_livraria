@@ -22,9 +22,9 @@
 }
 
 .itemLoginBemVindo {
+    border-radius: 20px 0 0 20px;
     background-color: #015a80;
     padding: 20px;
-    border-radius: 20px 0 0 20px;
     color: aliceblue;    display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,7 +36,6 @@
 .itemLoginContaEntrar {
     background-color: #f2f2f2;
     padding: 20px;
-    border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -247,31 +246,45 @@
   
 @media only screen and (min-width: 577px) and (max-width: 768px) {
 
-    .loginLogo{
-        margin-bottom: 20px;
-        width: 80%;
-      }
-      
-
-    .iconContainer {
-        width: 13em;
-    }
-    .inputFormLogin {
-        padding: 7px;
-        width: 10em;
-        margin: 0 15px;
-      }
-
-      .iconFormLogin {
-        margin: 0 10px;
-      }
-   
-    }
-   
+  .containeUserLogin, .containeUserLoginEntrar {
+    margin: 20% 5%;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
   
-  
+  .itemLoginBemVindo{
+    border-radius: 20px 20px 0 0;
+  }
+
+  .itemLoginContaEntrar {
+    border-radius: 20px 20px 0 0;
+  }
+
+
+  .itemLoginConta, .itemLoginMsg {
+    border-radius: 0 0 20px 20px;
+  }
+}   
+
   @media only screen and (min-width: 769px) and (max-width: 992px) {
+    .containeUserLogin, .containeUserLoginEntrar {
+      margin: 20% 5%;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
     
+    .itemLoginBemVindo{
+      border-radius: 20px 20px 0 0;
+    }
+  
+    .itemLoginContaEntrar {
+      border-radius: 20px 20px 0 0;
+    }
+  
+  
+    .itemLoginConta, .itemLoginMsg {
+      border-radius: 0 0 20px 20px;
+    }
   }
   
   @media only screen and (min-width: 993px) and (max-width: 1200px) {
@@ -287,13 +300,13 @@
   
 
     @media only screen and (min-width: 320px) and (max-width: 576px) {
-        .containeUserLogin {
-          margin: 10% 5%;
+        .containeUserLogin, .containeUserLoginEntrar {
+          margin: 40% 5%;
           grid-template-columns: 1fr;
           grid-template-rows: auto;
         }
         
-        .itemLoginBemVindo {
+        .itemLoginBemVindo, .itemLoginMsg {
           border-radius: 20px;
           grid-row: 1;
           margin-bottom: 20px;
@@ -303,11 +316,11 @@
           width: 100%;
         }
         
-        .itemLoginConta {
+        .itemLoginConta, .itemLoginContaEntrar {
           border-radius: 20px;
         }
         
-        .iconContainer {
+        .iconContainer{
           width: 100%;
         }
         

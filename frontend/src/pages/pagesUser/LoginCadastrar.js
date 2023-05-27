@@ -6,14 +6,16 @@ import styles from "../styles/Login.module.css";
 import { Link } from "react-router-dom";
 import { FaEnvelope, FaUser, FaLock, FaEyeSlash, FaEye } from "react-icons/fa";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function Login() {
+function LoginCadastrar() {
   const [email, setEmail] = useState("");
   const [nome, setNome] = useState("");
   const [senha, setSenha] = useState("");
   const [cpf, setCpf] = useState("");
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const navigate = useNavigate();
 
   const [endereco, setEndereco] = useState({
     uf: "",
@@ -33,6 +35,18 @@ function Login() {
   const [numero, setNumero] = useState("");
   const [complemento, setComplemento] = useState("");
 
+  const validarEndereco = (endereco) => {
+    return (
+      endereco.uf !== "" &&
+      endereco.cidade !== "" &&
+      endereco.logradouro !== "" &&
+      endereco.bairro !== "" &&
+      endereco.numero !== "" &&
+      endereco.complemento !== "" &&
+      endereco.cep !== ""
+    );
+  };
+  
 
   const buscarEndereco = (cep) => {
     axios
@@ -61,6 +75,13 @@ function Login() {
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
+    const enderecoValido = validarEndereco(endereco);
+
+    if (!enderecoValido) {
+      toast.error("Preencha o endereço para concluir o cadastro");
+      return;
+    }
+
     const usuario = {
       email,
       nome,
@@ -73,9 +94,10 @@ function Login() {
       .post("http://localhost:8082/usuario", usuario)
       .then((response) => {
         if (response.status === 201) {
-          toast.success("Cadastro efetuado com sucesso");
+          toast.success("Cadastro efetuado com sucesso! Faça o login para entrar.");
           console.log(usuario)
           limparFormulario();
+          navigate("/login-entrar");
         }
       })
       .catch((error) => {
@@ -169,7 +191,7 @@ function Login() {
               <Form.Control
                 className={styles.inputFormLogin}
                 type="text"
-                placeholder="Cpf"
+                placeholder="CPF"
                 value={cpf}
                 onChange={(event) => setCpf(event.target.value)}
                 required
@@ -234,7 +256,7 @@ function Login() {
                           <Form.Control
                             className={styles.inputCadastrarEndereco}
                             type="text"
-                            placeholder="Cep"
+                            placeholder="CEP"
                             name="cep"
                             value={endereco.cep}
                             onChange={(e) => {
@@ -416,4 +438,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginCadastrar;
