@@ -24,7 +24,7 @@ function Destaque({ livros }) {
   return (
     <div className="container">
       <div className="tituloCarousel">
-        <h2>Destaques</h2>
+        <h2 className="tituloCarouselH2">Destaques</h2>
       </div>
       <div className="linhaHorizontal"/>
       <Slider {...settings}>

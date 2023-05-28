@@ -1,27 +1,28 @@
 
 .containerCard, .containerCardAdm{
   display: inline-block;   
-  justify-content: center;
+  justify-content: space-between;
   text-decoration: none;  
   max-height: 700px;
-  margin: 20px;
+  margin: 30px;
   height: auto;
-
+  margin-left: 30px;
+  max-height: 400px;
 }
 
 
   
 .card,.cardAdm{
-  border-radius: 12px;
+  border-radius: 5px;
   box-shadow: 5px 5px 15px 5px rgba(1, 23, 61, 0.22);
-  padding: 30px;
+  padding: 15px 45px;
   transition: all 0,3s ease-out;
   background: whitesmoke;
-  width: 200PX;
+  width: 250PX;
   text-align: center; 
   text-align: center;
   height: auto;
-  max-height: 400px;
+  max-height: 450px;
 
 }
 
@@ -39,29 +40,29 @@
 .cardTitulo, .cardTituloAdm{
   height: 7vh;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 20px;
   display: flex;
   align-items: center;
+
 }
 
 .cardPreco{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   text-align: center;
 }
 
-.cardPrecoRegular{
-  display: flex;
-  justify-content: space-around;
-  text-align: center;
-}
 
   
 .h2TituloCard, .h2TituloCardAdm{
-  font-size: 1rem;
+  font-size: 1.2rem;
   width: 100%;
-  color:  #033579;
+  color: #5a5a5a;
   margin: 0;
+  padding: 20px 0;
+  height: 70px;
+  text-align: left;
+  font-weight: 100;
 }
 
 
@@ -69,29 +70,30 @@
   margin: 0;
 }
 
-.tituloTipoLivro{
-  margin-top: 10px;
-  font-size:1rem;
-  color: #146b97;
+.card .tituloTipoLivro{
+  margin: 10px 0;
+  font-size: 0.9rem;
+  color: black;
+  text-align: left;
 }
 
 
-.precoAntigo{
+.card .precoAntigo{
   text-decoration: line-through;
   color: brown;
   text-align: left;
   margin: 0;
   height: 1.5em;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
+  text-align: left;
 
 }
 
 .precoOferta, .precoRegular{
-  color: #146b97; 
-  margin: 0;
-  font-size: 17px;
-  font-weight: 600;
+  height: 2.1vh;
+  text-align: left;
+  display: flex;
 }
 .containerButtonAdm{
  display: flex;

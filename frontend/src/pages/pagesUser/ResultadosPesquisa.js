@@ -16,15 +16,14 @@ function ResultadosPesquisa() {
     <>
       <Navbar />
       <div className={styles.container}>
-        <div className={styles.containerResultadoPesquisa}>
-          <section className={styles.tituloResultadoContainer}>
+      <section className={styles.tituloResultadoContainer}>
             <Link to={"/"}>
               <h1 className={styles.voltarHome}>
                 <AiOutlineArrowLeft />
                 Voltar
               </h1>
             </Link>
-            <div className={styles.linhaHorizontal}/>
+            <div className={styles.linhaHorizontal} />
             <h2 className={styles.resultadoBusca}>
               Exibindo resultados para: {location.state.term}{" "}
             </h2>
@@ -32,14 +31,15 @@ function ResultadosPesquisa() {
             <h3 className={styles.resultadoCount}>
               {results.length} livros encontrados
             </h3>
-
           </section>
+        <div className={styles.containerResultadoPesquisa}>
+
 
           {/* <div className={styles.linhaHorizontal}/> */}
 
           {location.state.results.map((livro) => (
-          <Card key={livro.idLivro} livro={livro} />
-        ))}
+            <Card key={livro.idLivro} livro={livro} />
+          ))}
 
           {!results && (
             <p className={styles.semResultado}>Nenhum resultado encontrado.</p>

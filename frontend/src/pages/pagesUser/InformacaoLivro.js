@@ -54,18 +54,17 @@ function InformacaoLivro() {
     if (!detalhe) {
       return;
     }
-  
+
     if (detalhe.qtdeEstoque > 0) {
       const itemCarrinho = {
         ...detalhe,
         quantidade: 1,
         imagem,
         titulo,
-        oferta
-
+        oferta,
       };
-      
-  console.log(itemCarrinho)
+
+      console.log(itemCarrinho);
 
       const novoCarrinho = [...carrinho, itemCarrinho];
       setCarrinho(novoCarrinho);
@@ -73,15 +72,11 @@ function InformacaoLivro() {
       toast.success("Livro adicionado ao carrinho!");
       setModalIsOpenLivroAdd(true);
 
-      console.log(novoCarrinho)
-
+      console.log(novoCarrinho);
     } else {
       toast.error("Livro sem estoque!");
     }
-    
   }
-  
-
 
   function closeModal() {
     setModalIsOpenLivroAdd(false);
@@ -152,71 +147,105 @@ function InformacaoLivro() {
           </div>
 
           <div className={styles.comprarLivros}>
-          {livro.detalhes.map((detalhe) => (
-  <div className={styles.divComprarLivros} key={detalhe.id}>
-    <div className={styles.compra}>
-      <div className={styles.divPreco}>
-        <ul className={styles.ulCompraInfoTipo}>
-          <li>
-            <span className={styles.liCompraInfoTit}>
-              {detalhe.tipoLivro} - ID: {detalhe.id}
-            </span>
-          </li>
-        </ul>
-        {livro.oferta ? (
-          <>
-            <ul className={styles.ulCompraInfo}>
-              <li>
-                <span className={styles.liCompraInfoTit}>Preço:</span>
-              </li>
-              <li>
-                <span className={styles.precoAntigo}>{detalhe.preco}</span>
-              </li>
-            </ul>
+            {livro.detalhes.map((detalhe) => (
+              <div className={styles.divComprarLivros} key={detalhe.id}>
+                <div className={styles.compra}>
+                  <div className={styles.divPreco}>
+                    <ul className={styles.ulCompraInfoTipo}>
+                      <li>
+                        <span className={styles.liCompraInfoTit}>
+                          {detalhe.tipoLivro} - ID: {detalhe.id}
+                        </span>
+                      </li>
+                    </ul>
+                    {livro.oferta ? (
+                      <>
+                        <ul className={styles.ulCompraInfo}>
+                          <li>
+                            <span className={styles.liCompraInfoTitPreco}>
+                              Preço:
+                            </span>
+                          </li>
+                          <li>
+                            <span className={styles.precoAntigo}>
+                              {detalhe.preco.toLocaleString("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                              })}
+                            </span>
+                          </li>
+                        </ul>
 
-            <ul className={styles.ulCompraInfo}>
-              <li>
-                <span className={styles.liCompraInfoTit}>Preço Oferta:</span>
-              </li>
-              <li>
-                <span className={styles.precoOferta}>
-                  {detalhe.preco * 0.8}
-                </span>
-              </li>
-            </ul>
-          </>
-        ) : (
-          <ul className={styles.ulCompraInfo}>
-            <li>
-              <span className={styles.liCompraInfoTit}>Preço:</span>
-            </li>
-            <li>
-              <span className={styles.precoRegular}>{detalhe.preco}</span>
-            </li>
-          </ul>
-        )}
-        <ul className={styles.ulCompraInfoEntrega}>
-          <li>
-            <span className={styles.liEntrega}>Entrega GRÁTIS:</span>
-          </li>
-          <li>
-            <span className={styles.liCompraInfo}>2 dias úteis</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div>
-    <button
-  className={styles.buttonCompra}
-  onClick={() => adicionarAoCarrinho(detalhe) }
->
-  <h1 className={styles.h1AdicionarSacola}>Adicionar à sacola</h1>
-</button>
-
-    </div>
-  </div>
-))}
-
+                        <ul className={styles.ulCompraInfo}>
+                          <li>
+                            <span className={styles.liCompraInfoTitPreco}>
+                              Preço Oferta:
+                            </span>
+                          </li>
+                          <li>
+                            <span className={styles.precoOferta}>
+                              {(detalhe.preco * 0.8).toLocaleString("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                              })}
+                            </span>
+                          </li>
+                        </ul>
+                      </>
+                    ) : (
+                      <>
+                        <ul className={styles.ulCompraInfo}>
+                          <li>
+                            <span className={styles.liCompraInfoTitPreco}>
+                              Preço:
+                            </span>
+                          </li>
+                          <li>
+                            <span className={styles.precoRegular}>
+                              {detalhe.preco.toLocaleString("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                              })}
+                            </span>
+                          </li>
+                        </ul>
+                      </>
+                    )}
+                    <ul className={styles.ulCompraInfoEntrega}>
+                      <li>
+                        <span className={styles.liEntrega}>
+                          Entrega GRÁTIS:
+                        </span>
+                      </li>
+                      <li>
+                        <span className={styles.liCompraInfo}>
+                          2 dias úteis
+                        </span>
+                      </li>
+                    </ul>
+                    <ul className={styles.ulCompraInfo}>
+                      <li>
+                        <span className={styles.estoque}>
+                          {detalhe.qtdeEstoque === 0
+                            ? "Sem estoque"
+                            : "Em estoque"}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <button
+                    className={styles.buttonCompra}
+                    onClick={() => adicionarAoCarrinho(detalhe)}
+                  >
+                    <h1 className={styles.h1AdicionarSacola}>
+                      Adicionar à sacola
+                    </h1>
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 

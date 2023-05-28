@@ -1,6 +1,5 @@
-.tituloCarousel{
-  margin-top: 50px;
-  color: #146b97;
+.tituloCarousel, .tituloCarouselH2{
+  color: #959595;
 }
 
 .containerLivro, .containerOferta, .containerDestaque{
@@ -8,7 +7,7 @@
 }
 
 .container{
-  margin-top: 100px;
+  margin-top: 50px;
   position: relative;
 }
 
@@ -18,13 +17,13 @@
   margin: 0 auto; /* Centraliza o carrossel horizontalmente */
 }
 .containerLivro{
-  margin-top: 100px;
+  margin-top: 20px;
 }
 
 .linhaHorizontal {
   width: 100%;
-  border: 0.05px outset rgba(144, 202, 252, 0.26);
-  margin-top: 1em;
+  border: 0.05px outset #cccccc3e;
+  margin: 1em 0;
 }
 
 
@@ -57,13 +56,12 @@
 
   .slick-dots li button:before,
   .slick-dots li.slick-active button:before {
-
-    color: #033579;
+    color: #747474;
 
 }
   .slick-prev::before,
   .slick-next::before {
-    color:#033579;
+    color:#ccc;
   }
 
   .slick-dots {

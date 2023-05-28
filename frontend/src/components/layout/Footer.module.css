@@ -2,6 +2,7 @@
   display: grid;
   grid-template-rows: repeat(3, auto);
   border: none;
+  margin-top: 8%;
   /* Adicione qualquer estilo adicional para o footer aqui */
 }
 
@@ -82,19 +83,18 @@ padding: 0;
 margin: 0;
 }
 
-.socialListLi:hover {
-color: rgb(144, 202, 252);
-}
+
 
 .socialListLi {
 margin: 2% 15% 2% 15%;
 font-size: 1em;
-background: #03347997;
+color: #ffffff;
 }
 
-.footerFaleConosco:hover {
-color: rgb(144, 202, 252);
+.socialListLi svg:hover, .footerFaleConosco:hover  {
+color: #ccc;
 }
+
 
 a:link {
 text-decoration: none;
@@ -102,7 +102,7 @@ text-decoration: none;
 
 .footerPagamento {
 margin: 0;
-background: #03347997;
+
 }
 
 .footerFaleConoscoDiv {
