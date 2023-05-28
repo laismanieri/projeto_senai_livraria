@@ -1,15 +1,42 @@
-import styles from "../modals/ModalCarrinho.module.css";
-import { AiFillDelete, AiOutlineClose, AiFillEdit } from "react-icons/ai";
-import { FaShoppingCart } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import { AiOutlineClose, AiFillHeart, AiFillDelete } from "react-icons/ai";
+import { useParams, Link } from "react-router-dom";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import Modal from "react-modal";
 
-import PaymentMethodSelect from "../../components/layout/PaymentMethodSelect";
+import Navbar from "../../components/layout/NavBar";
+import Footer from "../../components/layout/Footer";
 
-const ModalCarrinho = ({ isOpen, onClose }) => {
-  const [quantidade, setQuantidade] = useState(1);
+import styles from "../styles/InformacaoLivro.module.css";
+import ButtonCestaCompra from "../../components/buttons/ButtonCestaCompra";
+
+function InformacaoLivro() {
+  const { id } = useParams();
+  const [livro, setLivro] = useState(null);
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
+  function closeModal() {
+    setModalOpen(false);
+  }
+
   const [carrinho, setCarrinho] = useState([]);
+
+
+
+  const [quantidade, setQuantidade] = useState(1);
+
   const [qtdeTotal, setQtdeTotal] = useState(0);
   const [total, setTotal] = useState(0);
 
@@ -60,11 +87,9 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
     localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
   };
 
-  if (!isOpen) {
-    return null;
-  }
 
   const onFinalizarPedido = () => {
+    
     // Criar objeto com os dados do pedido
     const pedido = {
       id: -1,
@@ -78,11 +103,11 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
           : livro.preco * livro.quantidade,
         qtdeItens: livro.quantidade,
         detalhe_livro_id: livro.id,
-        detalhe_id: livro.idDetalhe,
+        detalhe_id: livro.idDetalhe
       })),
     };
 
-    console.log(pedido);
+    console.log(pedido)
     // Transformar objeto em JSON
     const pedidoJSON = JSON.stringify(pedido);
 
@@ -107,9 +132,69 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
       });
   };
 
-  function closeModal() {
-    setModalIsOpenLivroAdd(false);
+  
+
+
+
+  useEffect(() => {
+    const carrinhoSalvo = localStorage.getItem("carrinho");
+    if (carrinhoSalvo) {
+      setCarrinho(JSON.parse(carrinhoSalvo));
+    }
+  }, []);
+
+  useEffect(() => {
+    fetch(`http://localhost:8082/livro/${id}?_embed=detalhes`)
+      .then((response) => response.json())
+      .then((data) => setLivro(data))
+      .catch((error) => console.log(error));
+  }, [id]);
+
+  if (!livro) {
+    return <p>Carregando...</p>;
   }
+
+  const ebookDetalhe = livro.detalhes.find(
+    (detalhe) => detalhe.tipoLivro === "EBOOK"
+  );
+  const fisicoDetalhe = livro.detalhes.find(
+    (detalhe) => detalhe.tipoLivro === "FISICO"
+  );
+
+  const isPrecoRegular = livro.oferta === true || livro.oferta === true;
+
+  const adicionarAoCarrinho = (detalheId) => {
+    const detalheSelecionado = livro.detalhes.find(
+      (detalhe) => detalhe.id === detalheId
+    );
+    if (detalheSelecionado) {
+      if (detalheSelecionado.qtdeEstoque > 0) {
+        setModalOpen(true);
+
+        const novoItem = {
+          id: livro.id,
+          titulo: livro.titulo,
+          detalheSelecionado,
+          quantidade: 1,
+          imagem: livro.imagem,
+          oferta: livro.oferta,
+        };
+
+        const novoCarrinho = [...carrinho, novoItem];
+        setCarrinho(novoCarrinho);
+        localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
+
+        toast.success("Livro adicionado ao carrinho!");
+        localStorage.setItem("carrinho", JSON.stringify(carrinho));
+      } else {
+        if (detalheSelecionado.tipoLivro === "FISICO") {
+          toast.error("Livro sem estoque!");
+        } else if (detalheSelecionado.tipoLivro === "EBOOK") {
+          toast.error("Ebook sem estoque!");
+        }
+      }
+    }
+  };
 
   const customStyles = {
     content: {
@@ -126,27 +211,84 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
     },
   };
 
+  const {
+    titulo,
+    autor,
+    anoPublicacao,
+    sinopse,
+    genero,
+    editora,
+    qtdePagina,
+    oferta,
+    destaque,
+    imagem,
+    detalhes,
+  } = livro;
+
   return (
     <>
-      <div className={styles.modalCarrinhoContainer}>
-        <div className={styles.modalBackground} />
-        <div className={styles.modalCarrinho}>
-          <div className={styles.navBarCarrinho}>
-            <ul className={styles.navBarCarrinhoUl}>
-              <li>
-                <FaShoppingCart alt="cesta" className={styles.navbarCesta} />
-              </li>
-              <li className={styles.navBarCarrinhoLi}>
-                <h1 className={styles.sacolaH1}>Meu Carrinho</h1>
-              </li>
-            </ul>
-            <div>
-              <button className={styles.navBarCarrinhoButton} onClick={onClose}>
-                <AiOutlineClose className={styles.imgFechar} />
-              </button>
+      <Navbar />
+      <div className={styles.container}>
+        <Link to={"/"}>
+          <h1 className={styles.voltarHome}>
+            <AiOutlineArrowLeft />
+            Voltar
+          </h1>
+        </Link>
+        <div className={styles.linhaHorizontal} />
+
+        <div className={styles.gridContainer}>
+          <div className={styles.gridItemLong}>
+            <img
+              className={styles.imagemLivro}
+              src={livro.imagem}
+              alt={livro.titulo}
+            />
+          </div>
+          <div className={styles.gridItemLong}>
+            <div className={styles.containerInfoLivro}>
+              <p className={styles.titulo}>{titulo}</p>
+              <p className={styles.autor}>{autor}</p>
+              <p className={styles.editora}>{editora}</p>
+              <div className={styles.tipoLivroDetalhe}></div>
+              <div className={styles.linhaHorizontalDetalhe} />
+              <p className={styles.sinopse}>{sinopse}</p>
             </div>
           </div>
-          <div className={styles.bodyLista}>
+
+          <div className={styles.comprarLivros}>
+            <div className={styles.divComprarLivros}>
+              <div className={styles.compra}></div>
+              <div>
+                <h2>Detalhes do Livro:</h2>
+                {detalhes.map((detalhe) => (
+                  <div key={detalhe.id}>
+                    <p>Tipo de Livro: {detalhe.tipoLivro}</p>
+                    <p>Preço: {detalhe.preco}</p>
+                    <p>Quantidade em Estoque: {detalhe.qtdeEstoque}</p>
+                    <button onClick={() => adicionarAoCarrinho(detalhe.id)}>
+                      Comprar
+                    </button>
+
+
+                  </div>
+                ))}
+              </div>
+
+              <Modal
+                      isOpen={modalOpen}
+                      onRequestClose={handleCloseModal}
+                      contentLabel="Carrinho de Compras"
+                    >
+                      <h2>Carrinho de Compras:</h2>
+                      {detalhes.map((detalhe) => (
+                  <div key={detalhe.id}>
+                    <p>Tipo de Livro: {detalhe.tipoLivro}</p>
+                    <p>Preço: {detalhe.preco}</p>
+                    <p>Id: {detalhe.id}</p>
+
+
+                    <div className={styles.bodyLista}>
             <br></br>
             <table className={styles.tableSecao}>
               <tr>
@@ -154,18 +296,16 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                 <th className={styles.thSecaoTit}>Revisar itens</th>
               </tr>
             </table>
-          
-            {carrinho.map((livro, index) => (
+            {detalhes.map((detalhe, index) => (
               <div className={styles.listaItemCarrinho}>
                 <div key={livro.id}></div>
                 <div className={styles.containerLista}>
                   <div className={styles.gridListaImg}>
                     <div className={styles.divImg}>
-                    {livro.id}
-                                          <img
+                      <img
                         className={styles.imagemGrid}
-                        src={livro.imagem}
-                        alt={livro.titulo}
+                        src={imagem}
+                        alt={titulo}
                       />
                     </div>
                   </div>
@@ -174,13 +314,11 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                       <div className={styles.divComprarLivros}>
                         <div className={styles.divTituloExcluir}>
                           <p className={styles.tituloTipoLivro}>
-                            
-                            {livro.tipoLivro} ID detalhe:{livro.id}
-                                                        
+                            {detalhe.tipoLivro}
                           </p>
                           <p className={styles.tituloItem}>
-                            {livro.titulo}
-                                                       <button
+                            {titulo}
+                            <button
                               className={styles.imgExcluirItemCarrinho}
                               onClick={() => handleRemoveItem(index)}
                             >
@@ -195,7 +333,7 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                               <p className={styles.precoTit}>
                                 <span className={styles.precoTit}>Preço: </span>
                                 <span className={styles.precoAntigo}>
-                                  {livro.preco}
+                                  {detalhe.preco}
                                 </span>
                               </p>
 
@@ -204,7 +342,10 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                                   Preço em Oferta:{" "}
                                 </span>
                                 <span className={styles.precoOferta}>
-                                  {livro.preco * 0.8}
+                                  {(detalhe.preco * 0.8).toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
                                 </span>
                               </p>
                             </div>
@@ -212,7 +353,10 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                             <p className={styles.precoTit}>
                               <span className={styles.precoTit}>Preço: </span>
                               <span className={styles.precoRegular}>
-                                {livro.preco}
+                                {detalhe.preco.toLocaleString("pt-BR", {
+                                  style: "currency",
+                                  currency: "BRL",
+                                })}
                               </span>
                             </p>
                           )}
@@ -224,15 +368,26 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                               <p className={styles.precoTit}>
                                 <span className={styles.precoTit}>Total: </span>
                                 <span className={styles.precoRegular}>
-                                  {livro.preco * 0.8 * livro.quantidade}
+                                  {(
+                                    detalhe.preco *
+                                    0.8 *
+                                    quantidade
+                                  ).toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
                                 </span>
                               </p>
                             ) : (
                               <p className={styles.precoTit}>
                                 <span className={styles.precoTit}>Total: </span>
-
                                 <span className={styles.precoRegular}>
-                                  {livro.preco * livro.quantidade}
+                                  {(
+                                    detalhe.preco * quantidade
+                                  ).toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
                                 </span>
                               </p>
                             )}
@@ -245,7 +400,7 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                               -
                             </button>
                             <span className={styles.spanQtde}>
-                              {livro.quantidade}
+                              {quantidade}
                             </span>
                             <button
                               className={styles.buttonQtde}
@@ -259,67 +414,7 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-
-          <div className={styles.linhaHorizontal} />
-
-          <div className={styles.containerEndereco}>
-            <table className={styles.tableSecao}>
-              <tr>
-                <th className={styles.thSecaoTitN}>2</th>
-                <th className={styles.thSecaoTit}>Endereço de entrega</th>
-                <th className={styles.thSecaoInf}>
-                  <p>Nome do usuario</p>
-                  <p>Rua, Numero</p>
-                  <p>Complemento</p>
-                  <p>Bairro</p>
-                  <p>Cidade, UF, CEP</p>
-                </th>
-                <th className={styles.thSecao}>
-                  {" "}
-                  <AiFillEdit />
-                </th>
-              </tr>
-            </table>
-          </div>
-
-          <div className={styles.linhaHorizontal} />
-
-          <div className={styles.containerFormaPgto}>
-            <table className={styles.tableSecao}>
-              <tr>
-                <th className={styles.thSecaoTitN}>3</th>
-                <th className={styles.thSecaoTit}>Método de pagamento</th>
-                <th className={styles.thSecaoInf}>
-                  <div>
-                    <p>Selecione o Método de Pagamento</p>
-                    <PaymentMethodSelect />
-                  </div>
-                  <div>
-                    <p for="cards">Selecione as opções de parcelamento</p>
-
-                    <select name="parcelas" id="parcelas">
-                      <option value="1x sem juros">1x sem juros</option>
-                      <option value="2x sem juros">2x sem juros</option>
-                      <option value="3x sem juros">3x sem juros</option>
-                      <option value="4x sem juros">4x sem juros</option>
-                      <option value="5x sem juros">5x sem juros</option>
-                      <option value="6x sem juros">6x sem juros</option>
-                    </select>
-                  </div>
-                </th>
-                <th className={styles.thSecao}>
-                  <AiFillEdit />
-                </th>
-              </tr>
-            </table>
-          </div>
-
-          <div className={styles.linhaHorizontal} />
-          {/* <div className={styles.linhaHorizontal} /> */}
-          <div className={styles.totalCarrinho}>
+                          <div className={styles.totalCarrinho}>
             <div className={styles.valorCarrinho}>
               <ul className={styles.valorSubtotal}>
                 <li>
@@ -368,35 +463,83 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                 >
                   Finalizar Pedido
                 </button>
-
-                <Modal
-                  className={styles.modalCompra}
-                  isOpen={modalIsOpenLivroAdd}
-                  onRequestClose={closeModal}
-                  contentLabel="Pedido realizado com sucesso!"
-                  style={customStyles}
-                  overlayStyle={customStyles.overlay}
-                >
-                  <button
-                    className={styles.buttonFecharModal}
-                    onClick={() => {
-                      closeModal();
-                      window.location.reload();
-                    }}
-                  >
-                    <AiOutlineClose className={styles.imgFechar} />
-                  </button>
-                  <h2 className={styles.h2AdicionarSacola}>
-                    Pedido realizado com sucesso!
-                  </h2>
-                </Modal>
               </div>
             </div>
           </div>
+              </div>
+
+              
+            ))}
+          </div>
+
+
+                    
+                  </div>
+                ))}
+                      <button onClick={closeModal}>Fechar</button>
+                    </Modal>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.linhaHorizontal} />
+        <div className={styles.fichaTecnica}>
+          <h1 className={styles.fichaH1}>Ficha Técnica</h1>
+          <div className={styles.ficha}>
+            <ul className={styles.ficha2}>
+              <li className={styles.fichaInfo}>
+                <span className={styles.fichaTh}>Titulo:</span>
+              </li>
+              <li>
+                <span className={styles.fichaTr}>{titulo}</span>
+              </li>
+            </ul>
+            <ul className={styles.ficha1}>
+              <li className={styles.fichaInfo}>
+                <span className={styles.fichaTh}>Autor(a):</span>
+              </li>
+              <li>
+                <span className={styles.fichaTr}>{autor}</span>
+              </li>
+            </ul>
+            <ul className={styles.ficha2}>
+              <li className={styles.fichaInfo}>
+                <span className={styles.fichaTh}>Gênero:</span>
+              </li>
+              <li>
+                <span className={styles.fichaTr}>{genero}</span>
+              </li>
+            </ul>
+            <ul className={styles.ficha1}>
+              <li className={styles.fichaInfo}>
+                <span className={styles.fichaTh}>Editora:</span>
+              </li>
+              <li>
+                <span className={styles.fichaTr}>{editora}</span>
+              </li>
+            </ul>
+            <ul className={styles.ficha2}>
+              <li className={styles.fichaInfo}>
+                <span className={styles.fichaTh}>Ano:</span>
+              </li>
+              <li>
+                <span className={styles.fichaTr}>{anoPublicacao}</span>
+              </li>
+            </ul>
+            <ul className={styles.ficha1}>
+              <li className={styles.fichaInfo}>
+                <span className={styles.fichaTh}>Quantidade de Páginas:</span>
+              </li>
+              <li>
+                <span className={styles.fichaTr}>{qtdePagina}</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
+      <Footer />
     </>
   );
-};
+}
 
-export default ModalCarrinho;
+export default InformacaoLivro;

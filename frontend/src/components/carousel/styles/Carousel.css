@@ -29,10 +29,10 @@
 
 
 .carousel-wrapper {
-    max-width: 1200px;
+    max-width: 2050px;
     margin: 10vh auto;
     position: relative;
-    margin-top: 120px;
+    margin-top: 100px;
     z-index: 2;
   }
   

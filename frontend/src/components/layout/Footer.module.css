@@ -20,12 +20,12 @@
 .column,  .columnCopy{
   justify-content: center;
   text-align: center;
-  background-color: #033579;
+  background-color: #015a80;
   border: none;
 }
 
 .columnCopy{
-  background: #44638f;
+  background-color: #ccc;
 }
 
 
@@ -229,6 +229,15 @@ margin: 0;
    
   .footerCopyP{
     padding: 20px;
+  
+  }
+
+}
+
+@media only screen and (min-width: 1441px)  {
+   
+  .footerCopyP{
+    padding: 30px;
   
   }
 

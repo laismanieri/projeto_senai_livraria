@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #033579;
+  background: #015a80;
   box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
   padding: 1.5% 3%;
   width: 100%;
@@ -21,7 +21,7 @@
 
 .userMenuWrapper {
   position: relative;
-  background-color: #033579;
+  background-color: #015a80;
   width: 25%;
 }
 
@@ -37,7 +37,7 @@
   top: 100%;
   left: 0;
   z-index: 10;
-  background-color: #033579;
+  background-color: #015a80;
   width: 100%;
   font-size: 1em ;
   list-style: none;
@@ -56,7 +56,7 @@
 }
 
 .userButton {
-  background-color: #033579;
+  background-color: #015a80;
   border: none;
   font-size: 1em ;
   margin: 0 5px;

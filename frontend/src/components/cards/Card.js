@@ -5,14 +5,12 @@ import { Link } from "react-router-dom";
 function Card({ livro }) {
   const ebookDetalhe = livro.detalhesDTO.find(
     (detalhe) => detalhe.tipoLivro === "EBOOK"
-  ) && livro.detalhesDTO.find(
-    (detalhe) => detalhe.id
-  );
+  ) 
+
   const fisicoDetalhe = livro.detalhesDTO.find(
     (detalhe) => detalhe.tipoLivro === "FISICO"
-  ) && livro.detalhesDTO.find(
-    (detalhe) => detalhe.id
-  );
+  ) 
+
 
   const ebookPreco = ebookDetalhe ? ebookDetalhe.preco : null;
   const fisicoPreco = fisicoDetalhe ? fisicoDetalhe.preco : null;

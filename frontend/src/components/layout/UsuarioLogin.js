@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import styles from "../layout/UsuarioLogin.module.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
+import { MdPerson } from 'react-icons/md';
+import { AiOutlineUser } from 'react-icons/ai';
+import { FaUser, FaUserCircle } from 'react-icons/fa';
 
 function UsuarioLogin() {
   const { user } = useContext(AuthContext);
@@ -10,12 +13,7 @@ function UsuarioLogin() {
     return (
       <div className={styles.loginUser}>
         <div className={styles.divImgUser}>
-        <img
-            className={styles.imgUser}
-            title="Login"
-            src="/img/perfil-de-usuario.png"
-            alt="ícone de usuário"
-          />
+        <MdPerson />
         </div>
 
         <div className={styles.login}>
@@ -28,12 +26,7 @@ function UsuarioLogin() {
     return (
       <div className={styles.loginUser}>
         <div className={styles.divImgUser}>
-          <img
-            className={styles.imgUser}
-            title="Login"
-            src="/img/perfil-de-usuario.png"
-            alt="ícone de usuário"
-          />
+        <FaUserCircle/>
         </div>
 
         <div className={styles.login}>
@@ -43,7 +36,7 @@ function UsuarioLogin() {
             
           </Link>
           <span className={styles.ou}>ou</span>
-          <Link to="/login" className={styles.loginAcesso}>
+          <Link to="/login-cadastrar" className={styles.loginAcesso}>
             <span className={styles.cadastreSe}>Cadastre-se</span>
             
           </Link>

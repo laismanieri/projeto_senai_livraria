@@ -1,74 +1,282 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { toast } from "react-toastify";
+import { useParams, Link } from "react-router-dom";
+import {
+  AiOutlineClose,
+  AiFillHeart,
+  AiOutlineArrowLeft,
+} from "react-icons/ai";
+import Modal from "react-modal";
+import Navbar from "../../components/layout/NavBar";
+import Footer from "../../components/layout/Footer";
+import styles from "../styles/InformacaoLivro.module.css";
+import "react-toastify/dist/ReactToastify.css";
 
 function InformacaoLivro() {
   const { id } = useParams();
   const [livro, setLivro] = useState(null);
+  const [detalheSelecionado, setDetalheSelecionado] = useState(null);
+  const [modalIsOpenLivroAdd, setModalIsOpenLivroAdd] = useState(false);
   const [carrinho, setCarrinho] = useState([]);
 
-  const [modalIsOpenLivroAdd, setModalIsOpenLivroAdd] = useState(false);
+  useEffect(() => {
+    const carrinhoSalvo = localStorage.getItem("carrinho");
+    if (carrinhoSalvo) {
+      setCarrinho(JSON.parse(carrinhoSalvo));
+    }
+  }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:8082/livro/${id}?_embed=detalhes`)
-      .then((response) => response.json())
-      .then((data) => setLivro(data))
-      .catch((error) => console.log(error));
-  }, [id]);
-  
-  const adicionarAoCarrinho = (detalheId) => {
-    const detalheSelecionado = livro.detalhes.find((detalhe) => detalhe.id === detalheId);
-    if (detalheSelecionado) {
-      if (detalheSelecionado.qtdeEstoque > 0) {
-        setCarrinho([...carrinho, detalheSelecionado]);
-        toast.success("Livro adicionado ao carrinho!");
-      } else {
-        if (detalheSelecionado.tipoLivro === "FISICO") {
-          toast.error("Livro sem estoque!");
-        } else if (detalheSelecionado.tipoLivro === "EBOOK") {
-          toast.error("Ebook sem estoque!");
+    axios
+      .get(`http://localhost:8082/livro/${id}?_embed=detalhes`)
+      .then((response) => {
+        setLivro(response.data);
+        // Inicializa o estado detalheSelecionado com o primeiro detalhe do livro
+        if (response.data.detalhes.length > 0) {
+          setDetalheSelecionado(response.data.detalhes[0].id);
         }
-      }
-    }
-  };
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [id]);
+
   if (!livro) {
-    return <div>Loading...</div>;
+    return <p>Carregando...</p>;
   }
 
-  const { titulo, autor, anoPublicacao, sinopse, genero, editora, qtdePagina, oferta, destaque, imagem, detalhes } = livro;
+  const detalheSelecionadoObj = livro.detalhes.find(
+    (detalhe) => detalhe.id === detalheSelecionado
+  );
+
+  function adicionarAoCarrinho(detalhe) {
+    if (!detalhe) {
+      return;
+    }
+  
+    if (detalhe.qtdeEstoque > 0) {
+      const itemCarrinho = {
+        ...detalhe,
+        quantidade: 1,
+        imagem,
+        titulo,
+        oferta
+
+      };
+      
+  console.log(itemCarrinho)
+
+      const novoCarrinho = [...carrinho, itemCarrinho];
+      setCarrinho(novoCarrinho);
+      localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
+      toast.success("Livro adicionado ao carrinho!");
+      setModalIsOpenLivroAdd(true);
+
+      console.log(novoCarrinho)
+
+    } else {
+      toast.error("Livro sem estoque!");
+    }
+    
+  }
+  
+
+
+  function closeModal() {
+    setModalIsOpenLivroAdd(false);
+  }
+
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+    },
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      zIndex: "9999",
+    },
+  };
+
+  const {
+    titulo,
+    autor,
+    anoPublicacao,
+    sinopse,
+    genero,
+    editora,
+    qtdePagina,
+    oferta,
+    destaque,
+    imagem,
+    detalhes,
+  } = livro;
 
   return (
-    <div>
-      <h1>{titulo}</h1>
-      <p>Autor: {autor}</p>
-      <p>Ano de Publicação: {anoPublicacao}</p>
-      <p>Sinopse: {sinopse}</p>
-      <p>Gênero: {genero}</p>
-      <p>Editora: {editora}</p>
-      <p>Quantidade de Páginas: {qtdePagina}</p>
-      <img src={imagem} alt={titulo} />
+    <>
+      <Navbar />
+      <div className={styles.container}>
+        <Link to={"/"}>
+          <h1 className={styles.voltarHome}>
+            <AiOutlineArrowLeft />
+            Voltar
+          </h1>
+        </Link>
+        <div className={styles.linhaHorizontal} />
+        <div className={styles.gridContainer}>
+          <div className={styles.gridItemLong}>
+            {livro.id}
+            <img
+              className={styles.imagemLivro}
+              src={livro.imagem}
+              alt={livro.titulo}
+            />
+          </div>
+          <div className={styles.gridItemLong}>
+            <div className={styles.containerInfoLivro}>
+              <p className={styles.titulo}>{livro.titulo}</p>
+              <p className={styles.autor}>{livro.autor}</p>
+              <p className={styles.editora}>{livro.editora}</p>
+              <div className={styles.tipoLivroDetalhe}>
+                <p>{detalhes.tipoLivro}</p>
 
-      <h2>Detalhes do Livro:</h2>
-      {detalhes.map((detalhe) => (
-        <div key={detalhe.id}>
-          <p>Tipo de Livro: {detalhe.tipoLivro}</p>
-          <p>Preço: {detalhe.preco}</p>
-          <p>Quantidade em Estoque: {detalhe.qtdeEstoque}</p>
-          <button onClick={() => adicionarAoCarrinho(detalhe.id)}>Comprar</button>
-        </div>
-      ))}
+                <p>{detalhes.preco}</p>
+              </div>
+              <div className={styles.linhaHorizontalDetalhe} />
+              <p className={styles.sinopse}>{livro.sinopse}</p>
+            </div>
+          </div>
 
-      <h2>Carrinho de Compras:</h2>
-      {carrinho.length > 0 ? (
-        <ul>
-          {carrinho.map((item) => (
-            <li key={item.id}>{item.tipoLivro} - Preço: {item.preco} id: {item.id}</li>
-          ))}
+          <div className={styles.comprarLivros}>
+          {livro.detalhes.map((detalhe) => (
+  <div className={styles.divComprarLivros} key={detalhe.id}>
+    <div className={styles.compra}>
+      <div className={styles.divPreco}>
+        <ul className={styles.ulCompraInfoTipo}>
+          <li>
+            <span className={styles.liCompraInfoTit}>
+              {detalhe.tipoLivro} - ID: {detalhe.id}
+            </span>
+          </li>
         </ul>
-      ) : (
-        <p>O carrinho está vazio.</p>
-      )}
+        {livro.oferta ? (
+          <>
+            <ul className={styles.ulCompraInfo}>
+              <li>
+                <span className={styles.liCompraInfoTit}>Preço:</span>
+              </li>
+              <li>
+                <span className={styles.precoAntigo}>{detalhe.preco}</span>
+              </li>
+            </ul>
+
+            <ul className={styles.ulCompraInfo}>
+              <li>
+                <span className={styles.liCompraInfoTit}>Preço Oferta:</span>
+              </li>
+              <li>
+                <span className={styles.precoOferta}>
+                  {detalhe.preco * 0.8}
+                </span>
+              </li>
+            </ul>
+          </>
+        ) : (
+          <ul className={styles.ulCompraInfo}>
+            <li>
+              <span className={styles.liCompraInfoTit}>Preço:</span>
+            </li>
+            <li>
+              <span className={styles.precoRegular}>{detalhe.preco}</span>
+            </li>
+          </ul>
+        )}
+        <ul className={styles.ulCompraInfoEntrega}>
+          <li>
+            <span className={styles.liEntrega}>Entrega GRÁTIS:</span>
+          </li>
+          <li>
+            <span className={styles.liCompraInfo}>2 dias úteis</span>
+          </li>
+        </ul>
+      </div>
     </div>
+    <div>
+    <button
+  className={styles.buttonCompra}
+  onClick={() => adicionarAoCarrinho(detalhe) }
+>
+  <h1 className={styles.h1AdicionarSacola}>Adicionar à sacola</h1>
+</button>
+
+    </div>
+  </div>
+))}
+
+          </div>
+        </div>
+
+        <div className={styles.linhaHorizontal} />
+        <div className={styles.fichaTecnica}>
+          <h1 className={styles.fichaH1}>Ficha Técnica</h1>
+          <div className={styles.ficha}>
+            <ul className={styles.ficha2}>
+              <li className={styles.fichaInfo}>
+                <span className={styles.fichaTh}>Titulo:</span>
+              </li>
+              <li>
+                <span className={styles.fichaTr}>{livro.titulo}</span>
+              </li>
+            </ul>
+            <ul className={styles.ficha1}>
+              <li className={styles.fichaInfo}>
+                <span className={styles.fichaTh}>Autor(a):</span>
+              </li>
+              <li>
+                <span className={styles.fichaTr}>{livro.autor}</span>
+              </li>
+            </ul>
+            <ul className={styles.ficha2}>
+              <li className={styles.fichaInfo}>
+                <span className={styles.fichaTh}>Gênero:</span>
+              </li>
+              <li>
+                <span className={styles.fichaTr}>{livro.genero}</span>
+              </li>
+            </ul>
+            <ul className={styles.ficha1}>
+              <li className={styles.fichaInfo}>
+                <span className={styles.fichaTh}>Editora:</span>
+              </li>
+              <li>
+                <span className={styles.fichaTr}>{livro.editora}</span>
+              </li>
+            </ul>
+            <ul className={styles.ficha2}>
+              <li className={styles.fichaInfo}>
+                <span className={styles.fichaTh}>Ano:</span>
+              </li>
+              <li>
+                <span className={styles.fichaTr}>{livro.anoPublicacao}</span>
+              </li>
+            </ul>
+            <ul className={styles.ficha1}>
+              <li className={styles.fichaInfo}>
+                <span className={styles.fichaTh}>Quantidade de Páginas:</span>
+              </li>
+              <li>
+                <span className={styles.fichaTr}>{livro.qtdePagina}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </>
   );
 }
 

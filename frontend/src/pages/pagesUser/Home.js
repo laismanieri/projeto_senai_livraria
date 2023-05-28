@@ -27,9 +27,9 @@ function Home() {
   return (
     <>
       <Navbar />
-
+      <Banner />
       <div className={styles.containerCarousel}>
-        <Banner />
+
         <Destaque livros={livrosDestaque} />
         <Oferta livros={livrosOferta} />
       </div>
