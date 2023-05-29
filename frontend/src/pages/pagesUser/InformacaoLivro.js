@@ -7,6 +7,7 @@ import {
   AiFillHeart,
   AiOutlineArrowLeft,
 } from "react-icons/ai";
+import { BiBook, BiCalendar, BiFile, BiBuilding, BiUser, BiBookmark } from 'react-icons/bi';
 import Modal from "react-modal";
 import Navbar from "../../components/layout/NavBar";
 import Footer from "../../components/layout/Footer";
@@ -250,7 +251,43 @@ function InformacaoLivro() {
         </div>
 
         <div className={styles.linhaHorizontal} />
-        <div className={styles.fichaTecnica}>
+
+        <div>
+          <div className={styles.gridFichaTecnica}>
+            <div className={styles.gridItemFichaTecnica}>
+            <p className={styles.tituloFichaTecnica}>Livro</p>
+            <BiBook className={styles.iconFichaTecnica}/>
+            <p className={styles.infoFichaTecnica}>{livro.titulo}</p>
+            </div>
+            <div className={styles.gridItemFichaTecnica}>
+            <p className={styles.tituloFichaTecnica}>Ano de publicação</p>
+            <BiCalendar className={styles.iconFichaTecnica}/>
+            <p className={styles.infoFichaTecnica}>{livro.anoPublicacao}</p>
+            </div>
+            <div className={styles.gridItemFichaTecnica}>
+            <p className={styles.tituloFichaTecnica}>Número de páginas</p>
+            <BiFile className={styles.iconFichaTecnica}/>
+            <p className={styles.infoFichaTecnica}>{livro.qtdePagina}</p>
+            </div>
+            <div className={styles.gridItemFichaTecnica}>
+            <p className={styles.tituloFichaTecnica}>Editora</p>
+            <BiBuilding className={styles.iconFichaTecnica}/>
+            <p className={styles.infoFichaTecnica}>{livro.editora}</p>
+            </div>
+            <div className={styles.gridItemFichaTecnica}>
+            <p className={styles.tituloFichaTecnica}>Autor</p>
+            <BiUser className={styles.iconFichaTecnica}/>
+            <p className={styles.infoFichaTecnica}>{livro.autor}</p>
+            </div>
+            <div className={styles.gridItemFichaTecnica}>
+            <p className={styles.tituloFichaTecnica}>Gênero</p>
+            <BiBookmark className={styles.iconFichaTecnica}/>
+            <p className={styles.infoFichaTecnica}>{livro.genero}</p>
+              </div>
+          </div>
+        </div>
+
+        {/* <div className={styles.fichaTecnica}>
           <h1 className={styles.fichaH1}>Ficha Técnica</h1>
           <div className={styles.ficha}>
             <ul className={styles.ficha2}>
@@ -302,7 +339,7 @@ function InformacaoLivro() {
               </li>
             </ul>
           </div>
-        </div>
+        </div> */}
       </div>
       <Footer />
     </>
