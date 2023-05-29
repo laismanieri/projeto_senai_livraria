@@ -16,6 +16,8 @@ function InformacaoLivroAdm() {
   const [livro, setLivro] = useState(null);
   const [tipoLivroSelecionado, setTipoLivroSelecionado] = useState("FISICO");
 
+
+
   function handleChangeEdit() {
     // Recupera os detalhes existentes do livro original
     const detalhesOriginais = livro.detalhes;
@@ -334,6 +336,8 @@ function InformacaoLivroAdm() {
               <div className={styles.divTipoLivros}>
                 <div className={styles.compra}>
                   {tipoLivroSelecionado === "FISICO" && (
+
+                    <>
                     <div className={styles.divPreco}>
                       <ul className={styles.ulCompraInfoTipo}>
                         <li>
@@ -385,6 +389,11 @@ function InformacaoLivroAdm() {
                         </li>
                       </ul>
                     </div>
+                    
+                      
+
+
+                  </>
                   )}
                   {tipoLivroSelecionado === "EBOOK" && (
                     <div className={styles.divPreco}>

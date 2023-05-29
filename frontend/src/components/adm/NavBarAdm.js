@@ -5,13 +5,16 @@ import SearchAdm from "../adm/SearchAdm";
 function NavbarAdm() {
   return (
     <nav className={styles.navbar}>
-      <div className={styles.navbarContainerLogo}>
-        <Link to="/adm">
+    <div className={styles.navbarContainerGridAdm}>
+      <div className={styles.navbarItemGrid}>
+        <Link to="/">
           <img src="/img/logo.png" alt="Logo" className={styles.navbarLogo} />
-        </Link>{" "}
+        </Link>
       </div>
-      <SearchAdm />
-      <div className={styles.marginRight}></div>
+      <div className={styles.navbarItemGrid}>
+        <SearchAdm />
+      </div>
+      </div>
     </nav>
   );
 }

@@ -29,6 +29,16 @@
   width: calc(100% - 16%);
 }
 
+.navbarContainerGridAdm{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 6em;
+  justify-items: center;
+  align-items: center;
+  margin: 0 8%;
+  width: calc(100% - 16%);
+}
+
 .navbarItemGrid {
   display: flex;
   justify-content: center;
