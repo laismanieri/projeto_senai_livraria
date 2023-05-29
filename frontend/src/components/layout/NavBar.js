@@ -6,11 +6,10 @@ import ButtonFavoritos from "../buttons/ButtonFavoritos";
 import Search from "../layout/Search";
 import { AuthContext } from "./AuthContext";
 import React, { useContext, useState } from "react";
-import { GiShoppingBag } from 'react-icons/gi'
+import { GiShoppingBag } from "react-icons/gi";
 import { FaUser, FaSignOutAlt } from "react-icons/fa";
 
 function Navbar() {
-
   const { user, logout } = useContext(AuthContext);
 
   const handleLogout = () => {
@@ -26,38 +25,46 @@ function Navbar() {
 
   return (
     <nav className={styles.navbar}>
-      <div className={styles.navbarContainerLogo}>
-        <Link to="/">
-          <img src="/img/logo.png" alt="Logo" className={styles.navbarLogo} />
-        </Link>
-      </div>
-
-      <Search />
-      <div className={`${styles.userMenuWrapper} ${styles.center}`}>
-        <button onClick={handleMenuToggle} className={styles.userButton}>
-          <UsuarioLogin />
-        </button>
-        {menuOpen && user && (
-          <ul className={styles.menuUsuario}>
-            <li className={styles.menuUsuarioLista}>
-              <Link to="/perfil-usuario">
-                <span><FaUser /></span>
-                <span>Minha Conta</span>
-              </Link>
-            </li>
-            <li className={styles.menuUsuarioLista} onClick={handleLogout}>
-              <span><FaSignOutAlt /></span>
-              <span>Sair</span>
-            </li>
-          </ul>
-        )}
-      </div>
-      <div className={styles.navbarContainerCompra}>
-        <ButtonCestaCompra />
+      <div className={styles.navbarContainerGrid}>
+        <div className={styles.navbarItemGrid}>
+          <Link to="/">
+            <img src="/img/logo.png" alt="Logo" className={styles.navbarLogo} />
+          </Link>
+        </div>
+        <div className={styles.navbarItemGrid}>
+          <Search />
+        </div>
+        <div className={styles.navbarItemGrid}>
+          <div className={`${styles.userMenuWrapper} ${styles.center}`}>
+            <button onClick={handleMenuToggle} className={styles.userButton}>
+              <UsuarioLogin />
+            </button>
+            {menuOpen && user && (
+              <ul className={styles.menuUsuario}>
+                <li className={styles.menuUsuarioLista}>
+                  <Link to="/perfil-usuario">
+                    <span>
+                      <FaUser />
+                    </span>
+                    <span>Minha Conta</span>
+                  </Link>
+                </li>
+                <li className={styles.menuUsuarioLista} onClick={handleLogout}>
+                  <span>
+                    <FaSignOutAlt />
+                  </span>
+                  <span>Sair</span>
+                </li>
+              </ul>
+            )}
+          </div>
+        </div>
+        <div className={styles.navbarItemGrid}>
+          <ButtonCestaCompra />
+        </div>
       </div>
     </nav>
   );
-};
-
+}
 
 export default Navbar;

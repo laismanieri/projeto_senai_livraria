@@ -13,12 +13,12 @@ function UsuarioLogin() {
     return (
       <div className={styles.loginUser}>
         <div className={styles.divImgUser}>
-        <FaUserCircle/>
+        <MdPerson />
         </div>
 
         <div className={styles.login}>
           <h1 className={styles.boasVindas}>Boas-vindas!</h1>
-          <p className={styles.entreOuCadastrase}>Olá, {user.nome}</p>
+          <p className={styles.entre}>Olá, {user.nome}</p>
         </div>
       </div>
     );
@@ -32,12 +32,12 @@ function UsuarioLogin() {
         <div className={styles.login}>
           <h1 className={styles.boasVindas}>Boas-vindas!</h1>
           <Link to="/login-entrar" className={styles.loginAcesso}>
-            <span className={styles.entreOuCadastrase}>Entre</span>
+            <span className={styles.entre}>Entre</span>
             
           </Link>
           <span className={styles.ou}>ou</span>
           <Link to="/login-cadastrar" className={styles.loginAcesso}>
-            <span className={styles.entreOuCadastrase}>Cadastre-se</span>
+            <span className={styles.cadastreSe}>Cadastre-se</span>
             
           </Link>
         </div>
