@@ -37,12 +37,13 @@
   text-decoration: none;
   font-size: 1.2em;
   margin: 0 5px 0 0;
+  cursor: pointer;
 }
 
 .entreOuCadastrase:hover {
-  font-weight: bolder;
-  color: rgb(14, 200, 225);
+  color: #ccc;
   text-decoration: none;
+  font-size: 1.3em;
 }
 
 /* Ajustes para telas entre 769px e 992px */

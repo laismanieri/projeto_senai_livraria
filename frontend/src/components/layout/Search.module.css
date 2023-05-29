@@ -1,7 +1,7 @@
 .searchFormContainer {
   flex: 1;
-  margin-left: 10px; /* ou o valor desejado para o espaçamento */
   width: 100%;
+  margin-bottom: 7px
 }
 
 .searchForm {
