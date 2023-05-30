@@ -93,7 +93,7 @@ function Card({ livro }) {
             </div>
           </div>
         ) : (
-          <div className={styles.cardPrecoRegular}>
+          <div className={styles.cardPreco}>
             {fisicoPreco && (
               <p className={styles.precoRegular}>
                 {fisicoPreco.toLocaleString("pt-BR", {
