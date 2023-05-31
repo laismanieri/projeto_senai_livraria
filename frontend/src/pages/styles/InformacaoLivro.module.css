@@ -5,6 +5,10 @@
       z-index: 1;      
       text-shadow: 5px 5px 15px rgba(1, 23, 61, 0.22)
 }
+
+.teste{
+  background: #015a80;
+}
    
 .linhaHorizontal {
   width: 100%;
@@ -108,12 +112,12 @@
 }
   
  .buttonTipoLivroFisico, .buttonTipoLivroEbook{
-    color: #146b97; 
+  color: white;
     font-size: 14px;
     font-weight: bold;
     height: 4em;
 
-    background:rgb(205, 231, 255);
+    background: #146b97b2;
     margin: 5px 0 5px 0;
     border: none;
     border-radius: 7px;
@@ -138,7 +142,7 @@
   } */
 
   .buttonTipoLivroFisico:focus, .buttonTipoLivroEbook:focus{
-    background-color: #747474;
+    background-color: #747474a2;
     color: white;
   }
 
@@ -424,19 +428,19 @@
 }
 
 .buttonCardAdm{
-  color: #146b97; 
+  color: white;
   font-size: 20px;
   font-weight: bold;
   height: 2em;
   width: 15em;
-  background:rgb(205, 231, 255);
+  background: #146b97b2;
   margin: 5px 0px 5px 50px;
   border: none;
   border-radius: 7px;
 }
 
 .buttonCardAdm:hover{
-  background-color: #033579;
+  background-color: #146b97;
   color: white;
 }
 
