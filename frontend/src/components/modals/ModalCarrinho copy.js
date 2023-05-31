@@ -20,9 +20,9 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
     let valor = 0;
     carrinho.forEach((item) => {
       qtde += item.quantidade;
-      valor += item.livro.oferta
-        ? item.detalhe.preco * 0.8 * item.quantidade
-        : item.detalhe.preco * item.quantidade;
+      valor += item.oferta
+        ? item.preco * 0.8 * item.quantidade
+        : item.preco * item.quantidade;
     });
     setQtdeTotal(qtde);
     setTotal(valor);
@@ -58,9 +58,7 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
     novoCarrinho.splice(indexToRemove, 1);
     setCarrinho(novoCarrinho);
     localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
-    window.location.reload();
   };
-  
 
   if (!isOpen) {
     return null;
@@ -72,15 +70,15 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
       id: -1,
       dataPedido: new Date().toISOString().slice(0, 10),
       usuario_id: 1,
-      itensDTO: carrinho.map((item) => ({
+      itensDTO: carrinho.map((livro) => ({
         id: -1,
-        valorUnid: item.livro.oferta ? item.detalhe.preco * 0.8 : item.detalhe.preco,
-        valorTotal: item.livro.oferta
-          ? item.detalhe.preco * 0.8 * item.quantidade
-          : item.detalhe.preco * item.quantidade,
-        qtdeItens: item.quantidade,     
-        detalhe_id: item.detalhe.id, 
-        detalhe_livro_id: item.livro.id,
+        valorUnid: livro.oferta ? livro.preco * 0.8 : livro.preco,
+        valorTotal: livro.oferta
+          ? livro.preco * 0.8 * livro.quantidade
+          : livro.preco * livro.quantidade,
+        qtdeItens: livro.quantidade,
+        detalhe_livro_id: livro.id,
+        detalhe_id: livro.id,
       })),
     };
 
@@ -157,17 +155,17 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
               </tr>
             </table>
           
-            {carrinho.map((item, index) => (
+            {carrinho.map((livro, index) => (
               <div className={styles.listaItemCarrinho}>
-                <div key={item.livro.id}></div>
+                <div key={livro.id}></div>
                 <div className={styles.containerLista}>
                   <div className={styles.gridListaImg}>
                     <div className={styles.divImg}>
-                    {item.livro.id}
+                    {livro.id}
                                           <img
                         className={styles.imagemGrid}
-                        src={item.livro.imagem}
-                        alt={item.livro.titulo}
+                        src={livro.imagem}
+                        alt={livro.titulo}
                       />
                     </div>
                   </div>
@@ -177,11 +175,11 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
                         <div className={styles.divTituloExcluir}>
                           <p className={styles.tituloTipoLivro}>
                             
-                            {item.detalhe.tipoLivro} ID detalhe:{item.detalhe.id}
+                            {livro.tipoLivro} ID detalhe:{livro.id}
                                                         
                           </p>
                           <p className={styles.tituloItem}>
-                            {item.livro.titulo}
+                            {livro.titulo}
                                                        <button
                               className={styles.imgExcluirItemCarrinho}
                               onClick={() => handleRemoveItem(index)}
@@ -192,12 +190,12 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
                         </div>
 
                         <div className={styles.divPreco}>
-                          {item.livro.oferta ? (
+                          {livro.oferta ? (
                             <div className={styles.divPrecoOferta}>
                               <p className={styles.precoTit}>
                                 <span className={styles.precoTit}>Preço: </span>
                                 <span className={styles.precoAntigo}>
-                                  {item.detalhe.preco}
+                                  {livro.preco}
                                 </span>
                               </p>
 
@@ -206,7 +204,7 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
                                   Preço em Oferta:{" "}
                                 </span>
                                 <span className={styles.precoOferta}>
-                                  {item.detalhe.preco * 0.8}
+                                  {livro.preco * 0.8}
                                 </span>
                               </p>
                             </div>
@@ -214,7 +212,7 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
                             <p className={styles.precoTit}>
                               <span className={styles.precoTit}>Preço: </span>
                               <span className={styles.precoRegular}>
-                                {item.detalhe.preco}
+                                {livro.preco}
                               </span>
                             </p>
                           )}
@@ -222,11 +220,11 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
 
                         <div className={styles.qtde}>
                           <div>
-                            {item.livro.oferta ? (
+                            {livro.oferta ? (
                               <p className={styles.precoTit}>
                                 <span className={styles.precoTit}>Total: </span>
                                 <span className={styles.precoRegular}>
-                                  {item.detalhe.preco * 0.8 * item.quantidade}
+                                  {livro.preco * 0.8 * livro.quantidade}
                                 </span>
                               </p>
                             ) : (
@@ -234,7 +232,7 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
                                 <span className={styles.precoTit}>Total: </span>
 
                                 <span className={styles.precoRegular}>
-                                  {item.detalhe.preco * item.quantidade}
+                                  {livro.preco * livro.quantidade}
                                 </span>
                               </p>
                             )}
@@ -247,7 +245,7 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
                               -
                             </button>
                             <span className={styles.spanQtde}>
-                              {item.quantidade}
+                              {livro.quantidade}
                             </span>
                             <button
                               className={styles.buttonQtde}

@@ -55,32 +55,47 @@ function InformacaoLivro() {
     if (!detalhe) {
       return;
     }
-
+  
     if (detalhe.qtdeEstoque > 0) {
       const itemCarrinho = {
-        ...detalhe,
+        livro: {
+          id: livro.id,
+          titulo: livro.titulo,
+          imagem: livro.imagem,
+          oferta: livro.oferta,
+        },
+        detalhe: {
+          id: detalhe.id,
+          tipoLivro: detalhe.tipoLivro,
+          preco: detalhe.preco,
+          qtdeEstoque: detalhe.qtdeEstoque,
+        },
         quantidade: 1,
-        imagem,
-        titulo,
-        oferta,
       };
-
+  
       console.log(itemCarrinho);
-
+  
       const novoCarrinho = [...carrinho, itemCarrinho];
       setCarrinho(novoCarrinho);
       localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
       toast.success("Livro adicionado ao carrinho!");
       setModalIsOpenLivroAdd(true);
-
+  
       console.log(novoCarrinho);
+  
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000); // Aguarde 3 segundos (3000 milissegundos) antes de recarregar a página
     } else {
       toast.error("Livro sem estoque!");
     }
   }
+  
+  
 
   function closeModal() {
     setModalIsOpenLivroAdd(false);
+    ;
   }
 
   const customStyles = {
