@@ -107,7 +107,6 @@ function PerfilUsuario() {
   return (
     <>
       <Navbar />
-        {/* {renderForm()} */}
 
       <div className={styles.container}>
         <Link to={"/"}>
@@ -201,7 +200,7 @@ function FormDadosPessoais({ active, user }) {
               type="text"
               placeholder="Nome"
               defaultValue={user.nome}
-              readOnly
+              // readOnly
               // onChange={(event) => setNome(event.target.value)}
               // required
             />

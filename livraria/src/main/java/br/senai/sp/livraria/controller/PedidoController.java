@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.senai.sp.livraria.dto.PedidoDTO;
+import br.senai.sp.livraria.dto.PedidoSelectDTO;
 import br.senai.sp.livraria.model.entity.ItemPedido;
 import br.senai.sp.livraria.model.entity.Pedido;
 import br.senai.sp.livraria.service.PedidoService;
@@ -30,6 +31,12 @@ public class PedidoController {
     public ResponseEntity<List<Pedido>> listarTodos() {
         List<Pedido> pedidos = pedidoService.listarTodos();
         return ResponseEntity.ok(pedidos);
+    }
+   
+    @GetMapping("/dto")
+    public ResponseEntity<List<PedidoSelectDTO>> listarTodosDTO() {
+        List<PedidoSelectDTO> pedidosDTO = pedidoService.listarTodosDTO();
+        return ResponseEntity.ok(pedidosDTO);
     }
 
     @GetMapping("/{id}")

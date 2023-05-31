@@ -80,6 +80,7 @@ public class LivroService {
     			detalheLivroDTO.setPreco(detLivro.getPreco());
     			detalheLivroDTO.setQtdeEstoque(detLivro.getQtdeEstoque());
     			detalheLivroDTO.setTipoLivro(detLivro.getTipoLivro());
+    			detalheLivroDTO.setLivroId(livro.getId());
     	
     			if (livro.getOferta()) {
         			float precoComDesconto = (detLivro.getPreco() * 0.9F);

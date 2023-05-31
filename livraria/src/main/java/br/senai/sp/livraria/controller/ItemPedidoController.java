@@ -45,8 +45,8 @@ public class ItemPedidoController {
     @PutMapping("/{id}")
     public ResponseEntity<ItemPedido> atualizar(@PathVariable Long id, @RequestBody ItemPedido itemPedidoAtualizado) {
         ItemPedido itemPedido = itemPedidoService.buscarPorId(id);
-//        itemPedido.setDetalheLivro(itemPedidoAtualizado.getDetalheLivro());
-//        itemPedido.setPedido(itemPedidoAtualizado.getPedido());
+        itemPedido.setDetalheLivro(itemPedidoAtualizado.getDetalheLivro());
+        itemPedido.setPedido(itemPedidoAtualizado.getPedido());
         itemPedido.setQtdeItens(itemPedidoAtualizado.getQtdeItens());
         itemPedido.setValorUnid(itemPedidoAtualizado.getValorUnid());
         itemPedido.setValorTotal(itemPedidoAtualizado.getValorTotal());
