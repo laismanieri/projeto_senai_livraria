@@ -105,10 +105,32 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
         // Limpar carrinho após finalizar o pedido
         setCarrinho([]);
         localStorage.removeItem("carrinho");
-        toast.success("Recebemos seu pedido!");
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+        // toast.success("Recebemos seu pedido!");
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 3000);
+        carrinho.forEach((item) => {
+          const detalheId = item.detalhe.id;
+          const quantidadePedida = item.quantidade;
+      
+          // Fazer uma requisição para a API atualizar a quantidade em estoque do detalheLivro
+          fetch(`http://localhost:8082/detalhelivro/${detalheId}/estoque`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(quantidadePedida),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Quantidade em estoque do detalheLivro atualizada:", data);
+            })
+            .catch((error) => {
+              console.error("Erro ao atualizar quantidade em estoque do detalheLivro:", error);
+            });
+        });
+
+
       })
       .catch((error) => {
         console.error("Erro ao gravar pedido no banco:", error);
@@ -374,7 +396,7 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                   Finalizar Pedido
                 </button>
 
-                {/* <Modal
+                <Modal
                   className={styles.modalCompra}
                   isOpen={modalIsOpenLivroAdd}
                   onRequestClose={closeModal}
@@ -394,7 +416,7 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                   <h2 className={styles.h2AdicionarSacola}>
                     Pedido realizado com sucesso!
                   </h2>
-                </Modal> */}
+                </Modal>
               </div>
             </div>
           </div>

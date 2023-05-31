@@ -9,7 +9,7 @@ function ListaPedido() {
   const [usuario, setUsuario] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8082/pedido/dto')
+    fetch("http://localhost:8082/pedido/dto")
       .then((response) => response.json())
       .then((data) => setPedidos(data))
       .catch((error) => console.log(error));
@@ -19,14 +19,12 @@ function ListaPedido() {
     setIsExpanded(!isExpanded);
   };
 
-  
   useEffect(() => {
-    fetch('http://localhost:8082/pedido')
+    fetch("http://localhost:8082/pedido")
       .then((response) => response.json())
       .then((data) => setUsuario(data))
       .catch((error) => console.log(error));
   }, []);
-
 
   return (
     <>
@@ -43,15 +41,20 @@ function ListaPedido() {
         <br />
         <br />
         {isExpanded && (
-          <table  className={styles.tableListarPedido}> 
-            <thead  className={styles.theadListarPedido}>
+          <table className={styles.tableListarPedido}>
+            <thead className={styles.theadListarPedido}>
               <tr className={styles.trListarPedido}>
-                <th className={styles.thListarPedido}>ID</th>
+                <th className={styles.thListarPedido}>ID do Pedido</th>
                 <th className={styles.thListarPedido}>Data do Pedido</th>
                 <th className={styles.thListarPedido}>Usuário ID</th>
-                <th className={styles.thListarPedido}>Usuário Nome</th>
-                <th className={styles.thListarPedido}>CPF</th>
-                <th className={styles.thListarPedido}>Itens</th>
+                <th className={styles.thListarPedido}>Valor Total</th>
+                <th className={styles.thListarPedido}>Valor Unitário</th>
+                <th className={styles.thListarPedido}>Quantidade</th>
+                <th className={styles.thListarPedido}>
+                  ID do Detalhe do Livro
+                </th>
+                <th className={styles.thListarPedido}>Tipo de Livro</th>
+                <th className={styles.thListarPedido}>ID do Livro</th>
               </tr>
             </thead>
             <tbody>
@@ -59,38 +62,49 @@ function ListaPedido() {
                 pedidos.map((pedido) => (
                   <tr key={pedido.id} className={styles.trListarPedido}>
                     <td className={styles.tdListarPedido}>{pedido.id}</td>
-                    <td className={styles.tdListarPedido}>{pedido.dataPedido}</td>
-                    <td className={styles.tdListarPedido}>{pedido.usuario_id}
-                    </td>
-                    <td className={styles.tdListarPedido}>{pedido.usuario_id.nome}
-                    </td>
-                    <td className={styles.tdListarPedido}>{pedido.usuario_id.cpf}
+                    <td className={styles.tdListarPedido}>
+                      {pedido.dataPedido}
                     </td>
                     <td className={styles.tdListarPedido}>
-                      {pedido.itensDTO && pedido.itensDTO.length > 0 ? (
-                        <ul>
-                          {pedido.itensDTO.map((item) => (
-                            <li key={item.id} className={styles.liListarPedido}>
-                              <ul className={styles.ulListarPedido}>
-                              <li className={styles.liListarPedido}>Valor Total: {item.valorTotal}</li>
-                              <li className={styles.liListarPedido}>Valor Unitário: {item.valorUnid}</li>
-                              <li className={styles.liListarPedido}>Quantidade: {item.qtdeItens}</li>
-                                <li className={styles.liListarPedido}>Id do Detalhe do Livro: {item.detalheLivroDTO.id}</li>
-                                <li className={styles.liListarPedido}>Tipo de Livro: {item.detalheLivroDTO.tipoLivro}</li>
-                                <li className={styles.liListarPedido}>Id do Livro: {item.detalheLivroDTO.livroId}</li>
-                              </ul>
-                            </li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <p>Nenhum item disponível.</p>
-                      )}
+                      {pedido.usuario_id}
                     </td>
+                    {pedido.itensDTO && pedido.itensDTO.length > 0 ? (
+                      pedido.itensDTO.map((item) => (
+                        <React.Fragment key={item.id}>
+                          <td className={styles.tdListarPedido}>
+                            {item.valorTotal}
+                          </td>
+                          <td className={styles.tdListarPedido}>
+                            {item.valorUnid}
+                          </td>
+                          <td className={styles.tdListarPedido}>
+                            {item.qtdeItens}
+                          </td>
+                          <td className={styles.tdListarPedido}>
+                            {item.detalheLivroDTO.id}
+                          </td>
+                          <td className={styles.tdListarPedido}>
+                            {item.detalheLivroDTO.tipoLivro}
+                          </td>
+                          <td className={styles.tdListarPedido}>
+                            {item.detalheLivroDTO.livroId}
+                          </td>
+                        </React.Fragment>
+                      ))
+                    ) : (
+                      <React.Fragment>
+                        <td className={styles.tdListarPedido} colSpan={4}>
+                          Nenhum item disponível.
+                        </td>
+                      </React.Fragment>
+                    )}
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan={4}>Nenhum pedido encontrado.</td>
+                  <td className={styles.tdListarPedido} colSpan={7}>
+                    Nenhum pedido encontrado.
+                  </td>
                 </tr>
               )}
             </tbody>
