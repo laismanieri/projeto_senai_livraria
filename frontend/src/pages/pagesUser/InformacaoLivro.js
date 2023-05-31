@@ -140,7 +140,6 @@ function InformacaoLivro() {
         <div className={styles.linhaHorizontal} />
         <div className={styles.gridContainer}>
           <div className={styles.gridItemLong}>
-            {livro.id}
             <img
               className={styles.imagemLivro}
               src={livro.imagem}
@@ -170,7 +169,7 @@ function InformacaoLivro() {
                     <ul className={styles.ulCompraInfoTipo}>
                       <li>
                         <span className={styles.liCompraInfoTit}>
-                          {detalhe.tipoLivro} - ID: {detalhe.id}
+                          {detalhe.tipoLivro}
                         </span>
                       </li>
                     </ul>

@@ -8,7 +8,7 @@ import Modal from "react-modal";
 import PaymentMethodSelect from "../../components/layout/PaymentMethodSelect";
 import { toast } from "react-toastify";
 
-const ModalCarrinho = ({ isOpen, onClose}) => {
+const ModalCarrinho = ({ isOpen, onClose }) => {
   const [quantidade, setQuantidade] = useState(1);
   const [carrinho, setCarrinho] = useState([]);
   const [qtdeTotal, setQtdeTotal] = useState(0);
@@ -61,7 +61,6 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
     localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
     window.location.reload();
   };
-  
 
   if (!isOpen) {
     return null;
@@ -75,7 +74,9 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
       usuario_id: 1,
       itensDTO: carrinho.map((item) => ({
         id: -1,
-        valorUnid: item.livro.oferta ? item.detalhe.preco * 0.8 : item.detalhe.preco,
+        valorUnid: item.livro.oferta
+          ? item.detalhe.preco * 0.8
+          : item.detalhe.preco,
         valorTotal: item.livro.oferta
           ? item.detalhe.preco * 0.8 * item.quantidade
           : item.detalhe.preco * item.quantidade,
@@ -104,10 +105,10 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
         // Limpar carrinho após finalizar o pedido
         setCarrinho([]);
         localStorage.removeItem("carrinho");
-        // toast.success("Recebemos seu pedido!");
-        // setTimeout(() => {
-        //   window.location.reload();
-        // },3000);
+        toast.success("Recebemos seu pedido!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       })
       .catch((error) => {
         console.error("Erro ao gravar pedido no banco:", error);
@@ -161,15 +162,14 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
                 <th className={styles.thSecaoTit}>Revisar itens</th>
               </tr>
             </table>
-          
+
             {carrinho.map((item, index) => (
               <div className={styles.listaItemCarrinho}>
                 <div key={item.livro.id}></div>
                 <div className={styles.containerLista}>
                   <div className={styles.gridListaImg}>
                     <div className={styles.divImg}>
-                    {item.livro.id}
-                                          <img
+                      <img
                         className={styles.imagemGrid}
                         src={item.livro.imagem}
                         alt={item.livro.titulo}
@@ -181,13 +181,11 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
                       <div className={styles.divComprarLivros}>
                         <div className={styles.divTituloExcluir}>
                           <p className={styles.tituloTipoLivro}>
-                            
-                            {item.detalhe.tipoLivro} ID detalhe:{item.detalhe.id}
-                                                        
+                            {item.detalhe.tipoLivro}
                           </p>
                           <p className={styles.tituloItem}>
                             {item.livro.titulo}
-                                                       <button
+                            <button
                               className={styles.imgExcluirItemCarrinho}
                               onClick={() => handleRemoveItem(index)}
                             >
@@ -376,7 +374,7 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
                   Finalizar Pedido
                 </button>
 
-                <Modal
+                {/* <Modal
                   className={styles.modalCompra}
                   isOpen={modalIsOpenLivroAdd}
                   onRequestClose={closeModal}
@@ -396,7 +394,7 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
                   <h2 className={styles.h2AdicionarSacola}>
                     Pedido realizado com sucesso!
                   </h2>
-                </Modal>
+                </Modal> */}
               </div>
             </div>
           </div>

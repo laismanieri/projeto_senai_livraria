@@ -7,7 +7,7 @@ function NavbarAdm() {
     <nav className={styles.navbar}>
     <div className={styles.navbarContainerGridAdm}>
       <div className={styles.navbarItemGrid}>
-        <Link to="/">
+        <Link to="/adm">
           <img src="/img/logo.png" alt="Logo" className={styles.navbarLogo} />
         </Link>
       </div>

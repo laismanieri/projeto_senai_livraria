@@ -6,8 +6,10 @@ function ListaPedido() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [pedidos, setPedidos] = useState([]);
 
+  const [usuario, setUsuario] = useState([]);
+
   useEffect(() => {
-    fetch('http://localhost:8082/pedido')
+    fetch('http://localhost:8082/pedido/dto')
       .then((response) => response.json())
       .then((data) => setPedidos(data))
       .catch((error) => console.log(error));
@@ -16,6 +18,15 @@ function ListaPedido() {
   const handleToggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
+
+  
+  useEffect(() => {
+    fetch('http://localhost:8082/pedido')
+      .then((response) => response.json())
+      .then((data) => setUsuario(data))
+      .catch((error) => console.log(error));
+  }, []);
+
 
   return (
     <>
@@ -49,22 +60,24 @@ function ListaPedido() {
                   <tr key={pedido.id} className={styles.trListarPedido}>
                     <td className={styles.tdListarPedido}>{pedido.id}</td>
                     <td className={styles.tdListarPedido}>{pedido.dataPedido}</td>
-                    <td className={styles.tdListarPedido}>{pedido.usuario.id}
+                    <td className={styles.tdListarPedido}>{pedido.usuario_id}
                     </td>
-                    <td className={styles.tdListarPedido}>{pedido.usuario.nome}
+                    <td className={styles.tdListarPedido}>{pedido.usuario_id.nome}
                     </td>
-                    <td className={styles.tdListarPedido}>{pedido.usuario.cpf}
+                    <td className={styles.tdListarPedido}>{pedido.usuario_id.cpf}
                     </td>
                     <td className={styles.tdListarPedido}>
-                      {pedido.itens && pedido.itens.length > 0 ? (
+                      {pedido.itensDTO && pedido.itensDTO.length > 0 ? (
                         <ul>
-                          {pedido.itens.map((item) => (
+                          {pedido.itensDTO.map((item) => (
                             <li key={item.id} className={styles.liListarPedido}>
                               <ul className={styles.ulListarPedido}>
                               <li className={styles.liListarPedido}>Valor Total: {item.valorTotal}</li>
                               <li className={styles.liListarPedido}>Valor Unitário: {item.valorUnid}</li>
                               <li className={styles.liListarPedido}>Quantidade: {item.qtdeItens}</li>
-                                <li className={styles.liListarPedido}>Tipo de Livro: {item.detalheLivro.tipoLivro}</li>
+                                <li className={styles.liListarPedido}>Id do Detalhe do Livro: {item.detalheLivroDTO.id}</li>
+                                <li className={styles.liListarPedido}>Tipo de Livro: {item.detalheLivroDTO.tipoLivro}</li>
+                                <li className={styles.liListarPedido}>Id do Livro: {item.detalheLivroDTO.livroId}</li>
                               </ul>
                             </li>
                           ))}
