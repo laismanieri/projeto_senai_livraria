@@ -7,6 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import br.senai.sp.livraria.model.entity.Livro;
 
 public interface LivroRepository extends JpaRepository<Livro, Long> {
+	
+	List<Livro> findById(String id);
+
 	List<Livro> findByGenero(String genero);
 
 	List<Livro> findByEditora(String editora);

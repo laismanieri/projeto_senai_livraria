@@ -1,6 +1,7 @@
 package br.senai.sp.livraria.dto;
 
 import br.senai.sp.livraria.model.entity.Livro;
+import br.senai.sp.livraria.model.entity.Usuario;
 import br.senai.sp.livraria.model.enums.TipoLivro;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,5 +23,8 @@ public class DetalheLivroDTO {
 	private Float precoDesc;
 	
 	private int qtdeEstoque;
+	
+	private Long livroId;
+
 
 }
