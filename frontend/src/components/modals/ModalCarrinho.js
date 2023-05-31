@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Modal from "react-modal";
 
 import PaymentMethodSelect from "../../components/layout/PaymentMethodSelect";
+import { toast } from "react-toastify";
 
 const ModalCarrinho = ({ isOpen, onClose}) => {
   const [quantidade, setQuantidade] = useState(1);
@@ -78,9 +79,9 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
         valorTotal: item.livro.oferta
           ? item.detalhe.preco * 0.8 * item.quantidade
           : item.detalhe.preco * item.quantidade,
-        qtdeItens: item.quantidade,     
-        detalhe_id: item.detalhe.id, 
-        detalhe_livro_id: item.livro.id,
+        qtdeItens: item.quantidade,
+        detalhe_id: item.detalhe.id, // Usar o ID do detalhe do livro aqui
+        detalhe_livro_id: item.detalhe.id, // Usar o ID do detalhe do livro aqui
       })),
     };
 
@@ -103,6 +104,10 @@ const ModalCarrinho = ({ isOpen, onClose}) => {
         // Limpar carrinho após finalizar o pedido
         setCarrinho([]);
         localStorage.removeItem("carrinho");
+        // toast.success("Recebemos seu pedido!");
+        // setTimeout(() => {
+        //   window.location.reload();
+        // },3000);
       })
       .catch((error) => {
         console.error("Erro ao gravar pedido no banco:", error);
