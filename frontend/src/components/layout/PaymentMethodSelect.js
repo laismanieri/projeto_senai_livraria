@@ -45,7 +45,7 @@ const PaymentMethodSelect = () => {
         </>
       )}
       getOptionValue={(option) => option.value}
-      placeholder="Selecione o Método de Pagamento"
+      placeholder="Selecione..."
     />
   );
 };

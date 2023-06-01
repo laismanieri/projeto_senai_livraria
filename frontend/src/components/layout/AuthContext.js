@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
-import "react-toastify/dist/ReactToastify.css"
+import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
@@ -11,16 +11,17 @@ export const AuthProvider = ({ children }) => {
   // Função para fazer o login do usuário
   const login = async (email, senha) => {
     try {
-      const response = await axios.post("http://localhost:8082/usuario/login", { email, senha });
+      const response = await axios.post("/usuario/login", { email, senha });
       const userData = response.data;
 
       // Armazena os dados do usuário no localStorage
       localStorage.setItem("userData", JSON.stringify(userData));
 
       setUser(userData);
+      toast.success("Login efetuado com sucesso");
     } catch (error) {
       console.error(error);
-      throw new Error("Usuário ou senha inválido");
+      toast.error("Usuário ou senha inválidos");
     }
   };
 

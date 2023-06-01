@@ -105,14 +105,14 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
         // Limpar carrinho após finalizar o pedido
         setCarrinho([]);
         localStorage.removeItem("carrinho");
-        // toast.success("Recebemos seu pedido!");
-        // setTimeout(() => {
-        //   window.location.reload();
-        // }, 3000);
+        toast.success("Recebemos seu pedido!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
         carrinho.forEach((item) => {
           const detalheId = item.detalhe.id;
           const quantidadePedida = item.quantidade;
-      
+
           // Fazer uma requisição para a API atualizar a quantidade em estoque do detalheLivro
           fetch(`http://localhost:8082/detalhelivro/${detalheId}/estoque`, {
             method: "PUT",
@@ -123,14 +123,18 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
           })
             .then((response) => response.json())
             .then((data) => {
-              console.log("Quantidade em estoque do detalheLivro atualizada:", data);
+              console.log(
+                "Quantidade em estoque do detalheLivro atualizada:",
+                data
+              );
             })
             .catch((error) => {
-              console.error("Erro ao atualizar quantidade em estoque do detalheLivro:", error);
+              console.error(
+                "Erro ao atualizar quantidade em estoque do detalheLivro:",
+                error
+              );
             });
         });
-
-
       })
       .catch((error) => {
         console.error("Erro ao gravar pedido no banco:", error);
@@ -222,7 +226,10 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                               <p className={styles.precoTit}>
                                 <span className={styles.precoTit}>Preço: </span>
                                 <span className={styles.precoAntigo}>
-                                  {item.detalhe.preco}
+                                  {item.detalhe.preco.toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
                                 </span>
                               </p>
 
@@ -231,7 +238,13 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                                   Preço em Oferta:{" "}
                                 </span>
                                 <span className={styles.precoOferta}>
-                                  {item.detalhe.preco * 0.8}
+                                  {(item.detalhe.preco * 0.8).toLocaleString(
+                                    "pt-BR",
+                                    {
+                                      style: "currency",
+                                      currency: "BRL",
+                                    }
+                                  )}
                                 </span>
                               </p>
                             </div>
@@ -251,7 +264,14 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                               <p className={styles.precoTit}>
                                 <span className={styles.precoTit}>Total: </span>
                                 <span className={styles.precoRegular}>
-                                  {item.detalhe.preco * 0.8 * item.quantidade}
+                                  {(
+                                    item.detalhe.preco *
+                                    0.8 *
+                                    item.quantidade
+                                  ).toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
                                 </span>
                               </p>
                             ) : (
@@ -396,7 +416,7 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                   Finalizar Pedido
                 </button>
 
-                <Modal
+                {/* <Modal
                   className={styles.modalCompra}
                   isOpen={modalIsOpenLivroAdd}
                   onRequestClose={closeModal}
@@ -416,7 +436,7 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                   <h2 className={styles.h2AdicionarSacola}>
                     Pedido realizado com sucesso!
                   </h2>
-                </Modal>
+                </Modal> */}
               </div>
             </div>
           </div>

@@ -5,6 +5,7 @@ import br.com.caelum.stella.ValidationMessage;
 import br.com.caelum.stella.validation.CPFValidator;
 import br.com.caelum.stella.validation.InvalidStateException;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -76,6 +77,10 @@ public class UsuarioService {
                 endereco.setUsuario(usuario);
             }
         }
+        
+        String senhaCriptografada = BCrypt.hashpw(usuario.getSenha(), BCrypt.gensalt());
+        usuario.setSenha(senhaCriptografada);
+        
         return usuarioRepository.save(usuario);
     }
 
