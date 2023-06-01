@@ -28,7 +28,6 @@ const ButtonCestaCompra = () => {
   return (
     <>
       <div>
-        {" "}
         {carrinho.length > 0 && (
           <span className={styles.cartCount}>{carrinho.length}</span>
         )}

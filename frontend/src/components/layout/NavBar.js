@@ -60,6 +60,9 @@ function Navbar() {
           </div>
         </div>
         <div className={styles.navbarItemGrid}>
+          <ButtonFavoritos className={styles.buttonCestaCompra}/>
+        </div>
+        <div className={styles.navbarItemGrid}>
           <ButtonCestaCompra  className={styles.buttonCestaCompra}/>
         </div>
       </div>

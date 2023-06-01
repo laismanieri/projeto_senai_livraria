@@ -6,7 +6,8 @@
       font-size: 1.5rem;
       padding: 0.5rem;
       width: 4vh;
-      height: 4vh;
+     height: 4vh;
+     color: white;
       
     }
 
@@ -18,7 +19,7 @@ display: flex;
 
     
   .iconFavorito{
-      font-size: 1.5em;
+      font-size: 1.2em;
   }
 
   .navbarCesta{

@@ -1,32 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import styles from "./Button.module.css";
 import { AiFillHeart } from "react-icons/ai";
 import ModalFavoritos from "../modals/ModalFavoritos";
 
 const ButtonFavoritos = () => {
+  const [livro, setLivro] = useState(null);
+  const [detalhe, setDetalhe] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [favorito, setFavorito] = useState([]);
 
-    const [modalOpen, setModalOpen] = useState(false);
+  useEffect(() => {
+    const favoritoSalvo = localStorage.getItem("favorito");
+    if (favoritoSalvo) {
+      setFavorito(JSON.parse(favoritoSalvo));
+    }
+  }, []);
 
-    const handleOpenModal = () => {
-       setModalOpen(true);
-   };
-   
-   const handleCloseModal = () => {
-       setModalOpen(false);
-   
-   };
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
 
-    return(
-        <>
-        <button className={styles.navbarButtonFav} onClick={handleOpenModal} >
-        <p>
-                      <AiFillHeart className={styles.iconFavorito} />
-                    </p>
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
+  return (
+    <>
+      <div>
+        {favorito.length > 0 && (
+          <span className={styles.cartCount}>{favorito.length}</span>
+        )}
+        <button className={styles.navbarButtonFav} onClick={handleOpenModal}>
+          <AiFillHeart className={styles.iconFavorito} />
         </button>
-        <ModalFavoritos isOpen={modalOpen} onClose={handleCloseModal}/>
-      </>
-    )
-}
+      </div>
+      <ModalFavoritos
+        livro={livro}
+        detalhe={detalhe}
+        isOpen={modalOpen}
+        onClose={handleCloseModal}
+      />
+    </>
+  );
+};
 
 export default ButtonFavoritos;
