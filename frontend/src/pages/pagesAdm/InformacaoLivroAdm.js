@@ -6,8 +6,6 @@ import "react-toastify/dist/ReactToastify.css"
 import "../../pages/styles/toastify-theme.css";
 import { toast } from "react-toastify";
 
-import { Form, Button, Row, Col } from "react-bootstrap";
-
 import styles from "../styles/InformacaoLivro.module.css";
 
 import Footer from "../../components/layout/Footer";
@@ -17,29 +15,7 @@ function InformacaoLivroAdm() {
   const { id } = useParams();
   const [livro, setLivro] = useState(null);
   const [tipoLivroSelecionado, setTipoLivroSelecionado] = useState("FISICO");
-  const [livroId, setLivroId] = useState("");
-  const [novoDetalhe, setNovoDetalhe] = useState("");
-  const [tipoLivro, setTipoLivro] = useState("");
-  const [qtdeEstoque, setQtdeEstoque] = useState("");
-  const [preco, setPreco] = useState("");
 
-  const adicionarDetalhe = () => {
-    // Aqui você pode enviar uma solicitação POST para adicionar o novo detalhe ao livro
-    axios.post(`http://localhost:8082/detalhelivro`, {
-      detalhe: {
-        tipoLivro: tipoLivro,
-        preco: preco,
-        qtdeEstoque: qtdeEstoque,
-      }
-    })
-      .then((response) => {
-        console.log("Detalhe adicionado com sucesso:", response.data);
-        // Faça qualquer ação adicional necessária, como atualizar a lista de detalhes do livro
-      })
-      .catch((error) => {
-        console.error("Erro ao adicionar detalhe:", error);
-      });
-  };
 
 
   function handleChangeEdit() {
@@ -49,7 +25,6 @@ function InformacaoLivroAdm() {
     // Cria um novo objeto livro com as propriedades atualizadas
     const livroAtualizado = {
       ...livro,
-      id: document.getElementById("id").value,
       titulo: document.getElementById("titulo").value,
       autor: document.getElementById("autor").value,
       editora: document.getElementById("editora").value,
@@ -118,18 +93,6 @@ function InformacaoLivroAdm() {
       });
   }, [id]);
 
-
-  const [isExpanded, setIsExpanded] = useState(false);
-
-
-
-  const handleToggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-
-
-
   if (!livro) {
     return <p>Carregando...</p>;
   }
@@ -159,9 +122,6 @@ function InformacaoLivroAdm() {
         detalhe.tipoLivro === "EBOOK" &&
         (detalhe.qtdeEstoque === 0 || detalhe.qtdeEstoque > 0)
     );
-
-
-
 
   const customStyles = {
     content: {
@@ -378,64 +338,62 @@ function InformacaoLivroAdm() {
                   {tipoLivroSelecionado === "FISICO" && (
 
                     <>
-                      <div className={styles.divPreco}>
-                        <ul className={styles.ulCompraInfoTipo}>
-                          <li>
-                            {fisicoDetalhe && (
-                              <>
-                                <label className={styles.liInfoTit}>
-                                  {fisicoDetalhe.tipoLivro}
-                                </label>
+                    <div className={styles.divPreco}>
+                      <ul className={styles.ulCompraInfoTipo}>
+                        <li>
+                          {fisicoDetalhe && (
+                            <>
+                              <label className={styles.liInfoTit}>
+                                {fisicoDetalhe.tipoLivro}
+                              </label>
+                            </>
+                          )}
+                        </li>
+                      </ul>
+                      <ul className={styles.ulCompraInfo}>
+                        <li>
+                          <label className={styles.liInfoTit}>Preco:</label>
+                        </li>
+                        <li>
+                          <input
+                            type="text"
+                            id="preco"
+                            className={styles.inputAdm}
+                            defaultValue={fisicoPreco}
+                          />
+                        </li>
+                      </ul>
+                      <ul className={styles.ulCompraInfo}>
+                        <li>
+                          <label className={styles.liInfoTit}>Estoque:</label>
+                        </li>
+                        <li>
+                          <input
+                            type="text"
+                            id="qtdeEstoque"
+                            className={styles.inputAdm}
+                            defaultValue={(fisicoEstoque.qtdeEstoque)}
+                          />
+                        </li>
+                      </ul>
+                      <ul className={styles.ulCompraInfo}>
+                        <li>
+                          <p
+                            type="text"
+                            id="qtdeEstoque"
+                            className={styles.estoque}
 
-                              </>
-                            )}
-                          </li>
-                        </ul>
-                        <ul className={styles.ulCompraInfo}>
-                          <li>
-                            <label className={styles.liInfoTit}>Preco:</label>
-                          </li>
-                          <li>
-                            <input
-                              type="text"
-                              id="preco"
-                              className={styles.inputAdm}
-                              defaultValue={fisicoPreco}
-                            />
-                          </li>
-                        </ul>
-                        <ul className={styles.ulCompraInfo}>
-                          <li>
-                            <label className={styles.liInfoTit}>Estoque:</label>
-                          </li>
-                          <li>
-                            <input
-                              type="text"
-                              id="qtdeEstoque"
-                              className={styles.inputAdm}
-                              defaultValue={(fisicoEstoque.qtdeEstoque)}
-                            />
-                          </li>
-                        </ul>
-                        <ul className={styles.ulCompraInfo}>
-                          <li>
-                            <p
-                              type="text"
-                              id="qtdeEstoque"
-                              className={styles.estoque}
-
-                            >{fisicoEstoque.qtdeEstoque === 0
-                              ? "Sem estoque"
-                              : "Em estoque"}</p>
-                          </li>
-                        </ul>
-                      </div>
-
-
-
+                          >{fisicoEstoque.qtdeEstoque === 0
+                            ? "Sem estoque"
+                            : "Em estoque"}</p>
+                        </li>
+                      </ul>
+                    </div>
+                    
+                      
 
 
-                    </>
+                  </>
                   )}
                   {tipoLivroSelecionado === "EBOOK" && (
                     <div className={styles.divPreco}>
@@ -495,57 +453,7 @@ function InformacaoLivroAdm() {
             </div>
           </div>
 
-
-
           <div className={styles.linhaHorizontal} />
-          <>
-            <div className={styles.containerCadastroLivro}>
-              <h2 className={styles.tituloCadastroLivro}>Cadastrar Tipo Livro</h2>
-              <div className="linhaHorizontal" />
-              <Button
-                className={styles.buttonExpandir}
-                variant="secondary"
-                onClick={handleToggleExpand}
-              >
-                {isExpanded ? "Recolher" : "Expandir"} Formulário
-              </Button>
-              <br />
-              <br />
-              {isExpanded && (
-                <div>
-                  <h2>Cadastrar Detalhe</h2>
-                  <input
-                    type="text"
-                    placeholder="ID do livro"
-                    value={livro.id}
-                    onChange={(e) => setLivroId(e.target.value)}
-                    readOnly
-                  />
-                  <input
-                    type="text"
-                    placeholder="Tipo Livro"
-                    value={tipoLivro}
-                    onChange={(e) => setTipoLivro(e.target.value)}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Preco"
-                    value={preco}
-                    onChange={(e) => setPreco(e.target.value)}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Estoque"
-                    value={qtdeEstoque}
-                    onChange={(e) => setQtdeEstoque(e.target.value)}
-                  />
-                  <button onClick={adicionarDetalhe}>Adicionar Detalhe</button>
-                </div>
-              )}
-            </div>
-
-            <div className="linhaHorizontal" />
-          </>
           <div className={styles.containerButtonAdm}>
             <Link
               to={{

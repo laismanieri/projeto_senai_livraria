@@ -7,7 +7,14 @@ import {
   AiFillHeart,
   AiOutlineArrowLeft,
 } from "react-icons/ai";
-import { BiBook, BiCalendar, BiFile, BiBuilding, BiUser, BiBookmark } from 'react-icons/bi';
+import {
+  BiBook,
+  BiCalendar,
+  BiFile,
+  BiBuilding,
+  BiUser,
+  BiBookmark,
+} from "react-icons/bi";
 import Modal from "react-modal";
 import Navbar from "../../components/layout/NavBar";
 import Footer from "../../components/layout/Footer";
@@ -55,7 +62,7 @@ function InformacaoLivro() {
     if (!detalhe) {
       return;
     }
-  
+
     if (detalhe.qtdeEstoque > 0) {
       const itemCarrinho = {
         livro: {
@@ -72,17 +79,17 @@ function InformacaoLivro() {
         },
         quantidade: 1,
       };
-  
+
       console.log(itemCarrinho);
-  
+
       const novoCarrinho = [...carrinho, itemCarrinho];
       setCarrinho(novoCarrinho);
       localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
       toast.success("Livro adicionado ao carrinho!");
       setModalIsOpenLivroAdd(true);
-  
+
       console.log(novoCarrinho);
-  
+
       setTimeout(() => {
         window.location.reload();
       }, 3000); // Aguarde 3 segundos (3000 milissegundos) antes de recarregar a página
@@ -90,12 +97,9 @@ function InformacaoLivro() {
       toast.error("Livro sem estoque!");
     }
   }
-  
-  
 
   function closeModal() {
     setModalIsOpenLivroAdd(false);
-    ;
   }
 
   const customStyles = {
@@ -147,120 +151,121 @@ function InformacaoLivro() {
             />
           </div>
           <div className={styles.gridItemLong}>
-            <div className={styles.containerInfoLivro}>
-              <p className={styles.titulo}>{livro.titulo}</p>
-              <p className={styles.autor}>{livro.autor}</p>
-              <p className={styles.editora}>{livro.editora}</p>
-              <div className={styles.tipoLivroDetalhe}>
-                <p>{detalhes.tipoLivro}</p>
-
-                <p>{detalhes.preco}</p>
+            {livro.detalhes.some((detalhe) => detalhe.preco !== 0) && (
+              <div className={styles.containerInfoLivro}>
+                <p className={styles.titulo}>{livro.titulo}</p>
+                <p className={styles.autor}>{livro.autor}</p>
+                <p className={styles.editora}>{livro.editora}</p>
+                <div className={styles.tipoLivroDetalhe}>
+                  {livro.detalhes.map(
+                    (detalhe) =>
+                      detalhe.preco !== 0 && (
+                        <p key={detalhe.id}></p>
+                      )
+                  )}
+                </div>
+                <div className={styles.linhaHorizontalDetalhe} />
+                <p className={styles.sinopse}>{livro.sinopse}</p>
               </div>
-              <div className={styles.linhaHorizontalDetalhe} />
-              <p className={styles.sinopse}>{livro.sinopse}</p>
-            </div>
+            )}
           </div>
 
           <div className={styles.comprarLivros}>
-            {livro.detalhes.map((detalhe) => (
-              <div className={styles.divComprarLivros} key={detalhe.id}>
-                <div className={styles.compra}>
-                  <div className={styles.divPreco}>
-                    <ul className={styles.ulCompraInfoTipo}>
-                      <li>
-                        <span className={styles.liCompraInfoTit}>
-                          {detalhe.tipoLivro}
-                        </span>
-                      </li>
-                    </ul>
-                    {livro.oferta ? (
-                      <>
-                        <ul className={styles.ulCompraInfo}>
+            {livro.detalhes.map(
+              (detalhe) =>
+                detalhe.preco !== 0 && (
+                  <div className={styles.divComprarLivros} key={detalhe.id}>
+                    <div className={styles.compra}>
+                      <div className={styles.divPreco}>
+                        <ul className={styles.ulCompraInfoTipo}>
                           <li>
-                            <span className={styles.liCompraInfoTitPreco}>
-                              Preço:
-                            </span>
-                          </li>
-                          <li>
-                            <span className={styles.precoAntigo}>
-                              {detalhe.preco.toLocaleString("pt-BR", {
-                                style: "currency",
-                                currency: "BRL",
-                              })}
+                            <span className={styles.liCompraInfoTit}>
+                              {detalhe.tipoLivro}
                             </span>
                           </li>
                         </ul>
+                        {livro.oferta ? (
+                          <>
+                            <ul className={styles.ulCompraInfo}>
+                              <li>
+                                <span className={styles.liCompraInfoTitPreco}>
+                                  Preço:
+                                </span>
+                              </li>
+                              <li>
+                                <span className={styles.precoAntigo}>
+                                  {detalhe.preco.toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
+                                </span>
+                              </li>
+                            </ul>
 
-                        <ul className={styles.ulCompraInfo}>
+                            <ul className={styles.ulCompraInfo}>
+                              <li>
+                                <span className={styles.liCompraInfoTitPreco}>
+                                  Preço Oferta:
+                                </span>
+                              </li>
+                              <li>
+                                <span className={styles.precoOferta}>
+                                  {(detalhe.preco * 0.8).toLocaleString(
+                                    "pt-BR",
+                                    {
+                                      style: "currency",
+                                      currency: "BRL",
+                                    }
+                                  )}
+                                </span>
+                              </li>
+                            </ul>
+                          </>
+                        ) : (
+                          <>
+                            <ul className={styles.ulCompraInfo}>
+                              <li>
+                                <span className={styles.liCompraInfoTitPreco}>
+                                  Preço:
+                                </span>
+                              </li>
+                              <li>
+                                <span className={styles.precoRegular}>
+                                  {detalhe.preco.toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
+                                </span>
+                              </li>
+                            </ul>
+                          </>
+                        )}
+                        <ul className={styles.ulCompraInfoEntrega}>
                           <li>
-                            <span className={styles.liCompraInfoTitPreco}>
-                              Preço Oferta:
+                            <span className={styles.liEntrega}>
+                              Entrega GRÁTIS:
                             </span>
                           </li>
                           <li>
-                            <span className={styles.precoOferta}>
-                              {(detalhe.preco * 0.8).toLocaleString("pt-BR", {
-                                style: "currency",
-                                currency: "BRL",
-                              })}
+                            <span className={styles.liCompraInfo}>
+                              2 dias úteis
                             </span>
                           </li>
                         </ul>
-                      </>
-                    ) : (
-                      <>
                         <ul className={styles.ulCompraInfo}>
                           <li>
-                            <span className={styles.liCompraInfoTitPreco}>
-                              Preço:
-                            </span>
-                          </li>
-                          <li>
-                            <span className={styles.precoRegular}>
-                              {detalhe.preco.toLocaleString("pt-BR", {
-                                style: "currency",
-                                currency: "BRL",
-                              })}
+                            <span className={styles.estoque}>
+                              {detalhe.qtdeEstoque === 0
+                                ? "Sem estoque"
+                                : "Em estoque"}
                             </span>
                           </li>
                         </ul>
-                      </>
-                    )}
-                    <ul className={styles.ulCompraInfoEntrega}>
-                      <li>
-                        <span className={styles.liEntrega}>
-                          Entrega GRÁTIS:
-                        </span>
-                      </li>
-                      <li>
-                        <span className={styles.liCompraInfo}>
-                          2 dias úteis
-                        </span>
-                      </li>
-                    </ul>
-                    <ul className={styles.ulCompraInfo}>
-                      <li>
-                        <span className={styles.estoque}>
-                          {detalhe.qtdeEstoque === 0
-                            ? "Sem estoque"
-                            : "Em estoque"}
-                        </span>
-                      </li>
-                    </ul>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <button
-                    className={styles.buttonCompra}
-                    onClick={() => adicionarAoCarrinho(detalhe)}
-                  >
-                    <h1 className={styles.h1AdicionarSacola}>
-                      Adicionar à sacola
-                    </h1>
-                  </button>
-                </div>
-              </div>
-            ))}
+                )
+            )}
           </div>
         </div>
 
@@ -269,35 +274,35 @@ function InformacaoLivro() {
         <div>
           <div className={styles.gridFichaTecnica}>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Livro</p>
-            <BiBook className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.titulo}</p>
+              <p className={styles.tituloFichaTecnica}>Livro</p>
+              <BiBook className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.titulo}</p>
             </div>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Ano de publicação</p>
-            <BiCalendar className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.anoPublicacao}</p>
+              <p className={styles.tituloFichaTecnica}>Ano de publicação</p>
+              <BiCalendar className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.anoPublicacao}</p>
             </div>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Número de páginas</p>
-            <BiFile className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.qtdePagina}</p>
+              <p className={styles.tituloFichaTecnica}>Número de páginas</p>
+              <BiFile className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.qtdePagina}</p>
             </div>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Editora</p>
-            <BiBuilding className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.editora}</p>
+              <p className={styles.tituloFichaTecnica}>Editora</p>
+              <BiBuilding className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.editora}</p>
             </div>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Autor</p>
-            <BiUser className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.autor}</p>
+              <p className={styles.tituloFichaTecnica}>Autor</p>
+              <BiUser className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.autor}</p>
             </div>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Gênero</p>
-            <BiBookmark className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.genero}</p>
-              </div>
+              <p className={styles.tituloFichaTecnica}>Gênero</p>
+              <BiBookmark className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.genero}</p>
+            </div>
           </div>
         </div>
 

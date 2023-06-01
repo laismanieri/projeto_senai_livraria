@@ -5,20 +5,18 @@ import { Link } from "react-router-dom";
 function Card({ livro }) {
   const ebookDetalhe = livro.detalhesDTO.find(
     (detalhe) => detalhe.tipoLivro === "EBOOK"
-  ) 
+  );
 
   const fisicoDetalhe = livro.detalhesDTO.find(
     (detalhe) => detalhe.tipoLivro === "FISICO"
-  ) 
+  );
 
+  const ebookPreco = ebookDetalhe && ebookDetalhe.preco !== 0 ? ebookDetalhe.preco : null;
+  const fisicoPreco = fisicoDetalhe && fisicoDetalhe.preco !== 0 ? fisicoDetalhe.preco : null;
+  const ebookPrecoDesc = ebookDetalhe && ebookDetalhe.precoDesc !== 0 ? ebookDetalhe.precoDesc : null;
+  const fisicoPrecoDesc = fisicoDetalhe && fisicoDetalhe.precoDesc !== 0 ? fisicoDetalhe.precoDesc : null;
 
-  const ebookPreco = ebookDetalhe ? ebookDetalhe.preco : null;
-  const fisicoPreco = fisicoDetalhe ? fisicoDetalhe.preco : null;
-  const ebookPrecoDesc = ebookDetalhe ? ebookDetalhe.precoDesc : null;
-  const fisicoPrecoDesc = fisicoDetalhe ? fisicoDetalhe.precoDesc : null;
-
-  const isPrecoRegular = (livro.oferta === true) || (livro.oferta === true);
-
+  const isPrecoRegular = livro.oferta === true || livro.oferta === true;
 
   return (
     <div className={styles.containerCard}>
@@ -39,18 +37,12 @@ function Card({ livro }) {
         </div>
         <h2 className={styles.h2TituloCard}>{livro.titulo}</h2>
         <div className={styles.cardPreco}>
-            {fisicoDetalhe && (
-              <>
-                <p className={styles.tituloTipoLivro}>
-                  {fisicoDetalhe.tipoLivro}</p>
-              </>
-            )}
-            {ebookDetalhe && (
-              <>
-                <p className={styles.tituloTipoLivro}>
-                  {ebookDetalhe.tipoLivro}</p>
-              </>
-            )}
+          {fisicoDetalhe && fisicoDetalhe.preco !== 0 && (
+            <p className={styles.tituloTipoLivro}>{fisicoDetalhe.tipoLivro}</p>
+          )}
+          {ebookDetalhe && ebookDetalhe.preco !== 0 && (
+            <p className={styles.tituloTipoLivro}>{ebookDetalhe.tipoLivro}</p>
+          )}
         </div>
         {isPrecoRegular ? (
           <div className={styles.cardOferta}>
@@ -73,8 +65,7 @@ function Card({ livro }) {
               )}
             </div>
             <div className={styles.cardPreco}>
-		  
-            {fisicoPrecoDesc && (
+              {fisicoPrecoDesc && (
                 <p className={styles.precoOferta}>
                   {fisicoPrecoDesc.toLocaleString("pt-BR", {
                     style: "currency",

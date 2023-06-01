@@ -1,15 +1,27 @@
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useState } from "react";
-import "react-toastify/dist/ReactToastify.css";
 import "../../pages/styles/toastify-theme.css";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import styles from "../adm/CadastroLivro.module.css";
 
 function CadastroLivro() {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  function postLivro() {
-    var livro = {
+
+  function postLivro(event) {
+    event.preventDefault();
+
+    const precoFisico = parseFloat(document.getElementById("precoFisico").value);
+    const qtdeEstoqueFisico = parseInt(
+      document.getElementById("qtdeEstoqueFisico").value
+    );
+    const precoEbook = parseFloat(document.getElementById("precoEbook").value);
+    const qtdeEstoqueEbook = parseInt(
+      document.getElementById("qtdeEstoqueEbook").value
+    );
+
+    const livro = {
       anoPublicacao: document.getElementById("anoPublicacao").value,
       titulo: document.getElementById("titulo").value,
       autor: document.getElementById("autor").value,
@@ -20,23 +32,36 @@ function CadastroLivro() {
       qtdePagina: document.getElementById("qtdePagina").value,
       oferta: document.getElementById("oferta").checked,
       destaque: document.getElementById("destaque").checked,
-      detalhes: [
-        {
-          tipoLivro: "FISICO",
-          preco: parseFloat(document.getElementById("precoFisico").value),
-          qtdeEstoque: parseInt(
-            document.getElementById("qtdeEstoqueFisico").value
-          ),
-        },
-        {
-          tipoLivro: "EBOOK",
-          preco: parseFloat(document.getElementById("precoEbook").value),
-          qtdeEstoque: parseInt(
-            document.getElementById("qtdeEstoqueEbook").value
-          ),
-        },
-      ],
+      detalhes: [],
     };
+  
+    if (!isNaN(precoFisico) && !isNaN(qtdeEstoqueFisico)) {
+      livro.detalhes.push({
+        tipoLivro: "FISICO",
+        preco: precoFisico,
+        qtdeEstoque: qtdeEstoqueFisico,
+      });
+    } else {
+      livro.detalhes.push({
+        tipoLivro: "FISICO",
+        preco: 0.00,
+        qtdeEstoque: 0,
+      });
+    }
+  
+    if (!isNaN(precoEbook) && !isNaN(qtdeEstoqueEbook)) {
+      livro.detalhes.push({
+        tipoLivro: "EBOOK",
+        preco: precoEbook,
+        qtdeEstoque: qtdeEstoqueEbook,
+      });
+    } else {
+      livro.detalhes.push({
+        tipoLivro: "EBOOK",
+        preco: 0.00,
+        qtdeEstoque: 0,
+      });
+    }
 
     fetch("http://localhost:8082/livro", {
       method: "POST",
@@ -46,9 +71,17 @@ function CadastroLivro() {
       body: JSON.stringify(livro),
     })
       .then((response) => {
-        if (response.ok) {
-          console.log("Livro cadastrado com sucesso!");
-          alert("Livro cadastrado com sucesso!");
+      if (response.ok) {
+        console.log("Livro cadastrado com sucesso!");
+        toast.success("Livro cadastrado com sucesso!", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+          onClose: () => {
+            setTimeout(() => {
+              window.location.reload();
+            }, 3000);
+          },
+        });
         } else {
           console.error("Erro ao cadastrar livro.");
         }
@@ -318,7 +351,6 @@ function CadastroLivro() {
                           rows={4}
                           step="0.01"
                           name="precoFisico"
-                          required
                           placeholder="0.00"
                         />
                       </Col>
@@ -337,7 +369,6 @@ function CadastroLivro() {
                           type="number"
                           rows={4}
                           name="qtdeEstoqueFisico"
-                          required
                           placeholder="0"
                         />
                       </Col>
@@ -371,7 +402,7 @@ function CadastroLivro() {
                           placeholder="0.00"
                           step="0.01"
                           name="precoEbook"
-                          required
+
                         />
                       </Col>
                     </Form.Group>
@@ -390,7 +421,7 @@ function CadastroLivro() {
                           rows={4}
                           placeholder="0"
                           name="qtdeEstoqueEbook"
-                          required
+
                         />
                       </Col>
                     </Form.Group>
