@@ -498,54 +498,6 @@ function InformacaoLivroAdm() {
 
 
           <div className={styles.linhaHorizontal} />
-          <>
-            <div className={styles.containerCadastroLivro}>
-              <h2 className={styles.tituloCadastroLivro}>Cadastrar Tipo Livro</h2>
-              <div className="linhaHorizontal" />
-              <Button
-                className={styles.buttonExpandir}
-                variant="secondary"
-                onClick={handleToggleExpand}
-              >
-                {isExpanded ? "Recolher" : "Expandir"} Formulário
-              </Button>
-              <br />
-              <br />
-              {isExpanded && (
-                <div>
-                  <h2>Cadastrar Detalhe</h2>
-                  <input
-                    type="text"
-                    placeholder="ID do livro"
-                    value={livro.id}
-                    onChange={(e) => setLivroId(e.target.value)}
-                    readOnly
-                  />
-                  <input
-                    type="text"
-                    placeholder="Tipo Livro"
-                    value={tipoLivro}
-                    onChange={(e) => setTipoLivro(e.target.value)}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Preco"
-                    value={preco}
-                    onChange={(e) => setPreco(e.target.value)}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Estoque"
-                    value={qtdeEstoque}
-                    onChange={(e) => setQtdeEstoque(e.target.value)}
-                  />
-                  <button onClick={adicionarDetalhe}>Adicionar Detalhe</button>
-                </div>
-              )}
-            </div>
-
-            <div className="linhaHorizontal" />
-          </>
           <div className={styles.containerButtonAdm}>
             <Link
               to={{

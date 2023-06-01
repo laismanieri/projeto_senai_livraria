@@ -109,6 +109,32 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
         setTimeout(() => {
           window.location.reload();
         }, 3000);
+        carrinho.forEach((item) => {
+          const detalheId = item.detalhe.id;
+          const quantidadePedida = item.quantidade;
+
+          // Fazer uma requisição para a API atualizar a quantidade em estoque do detalheLivro
+          fetch(`http://localhost:8082/detalhelivro/${detalheId}/estoque`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(quantidadePedida),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(
+                "Quantidade em estoque do detalheLivro atualizada:",
+                data
+              );
+            })
+            .catch((error) => {
+              console.error(
+                "Erro ao atualizar quantidade em estoque do detalheLivro:",
+                error
+              );
+            });
+        });
       })
       .catch((error) => {
         console.error("Erro ao gravar pedido no banco:", error);
@@ -117,6 +143,7 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
 
   function closeModal() {
     setModalIsOpenLivroAdd(false);
+
   }
 
   const customStyles = {
@@ -200,7 +227,10 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                               <p className={styles.precoTit}>
                                 <span className={styles.precoTit}>Preço: </span>
                                 <span className={styles.precoAntigo}>
-                                  {item.detalhe.preco}
+                                  {item.detalhe.preco.toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
                                 </span>
                               </p>
 
@@ -209,7 +239,13 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                                   Preço em Oferta:{" "}
                                 </span>
                                 <span className={styles.precoOferta}>
-                                  {item.detalhe.preco * 0.8}
+                                  {(item.detalhe.preco * 0.8).toLocaleString(
+                                    "pt-BR",
+                                    {
+                                      style: "currency",
+                                      currency: "BRL",
+                                    }
+                                  )}
                                 </span>
                               </p>
                             </div>
@@ -229,7 +265,14 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
                               <p className={styles.precoTit}>
                                 <span className={styles.precoTit}>Total: </span>
                                 <span className={styles.precoRegular}>
-                                  {item.detalhe.preco * 0.8 * item.quantidade}
+                                  {(
+                                    item.detalhe.preco *
+                                    0.8 *
+                                    item.quantidade
+                                  ).toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
                                 </span>
                               </p>
                             ) : (

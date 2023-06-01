@@ -2,7 +2,6 @@ import styles from "./NavBar.module.css";
 import { Link } from "react-router-dom";
 import UsuarioLogin from "./UsuarioLogin";
 import ButtonCestaCompra from "../buttons/ButtonCestaCompra";
-import ButtonFavoritos from "../buttons/ButtonFavoritos";
 import Search from "../layout/Search";
 import { AuthContext } from "./AuthContext";
 import React, { useContext, useState } from "react";
@@ -58,9 +57,6 @@ function Navbar() {
               </ul>
             )}
           </div>
-        </div>
-        <div className={styles.navbarItemGrid}>
-          <ButtonFavoritos className={styles.buttonCestaCompra}/>
         </div>
         <div className={styles.navbarItemGrid}>
           <ButtonCestaCompra  className={styles.buttonCestaCompra}/>

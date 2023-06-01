@@ -14,7 +14,7 @@ import Footer from "../../components/layout/Footer";
 import styles from "../styles/InformacaoLivro.module.css";
 import "react-toastify/dist/ReactToastify.css";
 
-function InformacaoLivro() {
+const InformacaoLivro = () => {
   const { id } = useParams();
   const [livro, setLivro] = useState(null);
   const [detalheSelecionado, setDetalheSelecionado] = useState(null);
@@ -30,7 +30,7 @@ function InformacaoLivro() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8082/livro/${id}?_embed=detalhes`)
+      .get(`http://localhost:8082/livro/${id}`)
       .then((response) => {
         setLivro(response.data);
         // Inicializa o estado detalheSelecionado com o primeiro detalhe do livro
@@ -47,42 +47,50 @@ function InformacaoLivro() {
     return <p>Carregando...</p>;
   }
 
-  const detalheSelecionadoObj = livro.detalhes.find(
-    (detalhe) => detalhe.id === detalheSelecionado
-  );
+const detalheSelecionadoObj = livro.detalhes.find(
+  (detalhe) => detalhe.id === detalheSelecionado
+);
 
-  function adicionarAoCarrinho(detalhe) {
+
+  const adicionarAoCarrinho = (detalhe) => {
     if (!detalhe) {
       return;
     }
 
     if (detalhe.qtdeEstoque > 0) {
       const itemCarrinho = {
-        ...detalhe,
+        livro: {
+          id: livro.id,
+          titulo: livro.titulo,
+          imagem: livro.imagem,
+          oferta: livro.oferta,
+        },
+        detalhe: {
+          id: detalhe.id,
+          tipoLivro: detalhe.tipoLivro,
+          preco: detalhe.preco,
+          qtdeEstoque: detalhe.qtdeEstoque,
+        },
         quantidade: 1,
-        imagem,
-        titulo,
-        oferta,
       };
-
-      console.log(itemCarrinho);
 
       const novoCarrinho = [...carrinho, itemCarrinho];
       setCarrinho(novoCarrinho);
       localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
-      toast.success("Livro adicionado ao carrinho!");
-      setModalIsOpenLivroAdd(true);
 
-      console.log(novoCarrinho);
+      setModalIsOpenLivroAdd(true);
+      toast.success("Livro adicionado ao carrinho!");
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     } else {
       toast.error("Livro sem estoque!");
     }
-  }
+  };
 
-  function closeModal() {
+  const closeModal = () => {
     setModalIsOpenLivroAdd(false);
-  }
-
+  };
   const customStyles = {
     content: {
       top: "50%",
@@ -125,7 +133,6 @@ function InformacaoLivro() {
         <div className={styles.linhaHorizontal} />
         <div className={styles.gridContainer}>
           <div className={styles.gridItemLong}>
-            {livro.id}
             <img
               className={styles.imagemLivro}
               src={livro.imagem}
@@ -133,29 +140,36 @@ function InformacaoLivro() {
             />
           </div>
           <div className={styles.gridItemLong}>
-            <div className={styles.containerInfoLivro}>
-              <p className={styles.titulo}>{livro.titulo}</p>
-              <p className={styles.autor}>{livro.autor}</p>
-              <p className={styles.editora}>{livro.editora}</p>
-              <div className={styles.tipoLivroDetalhe}>
-                <p>{detalhes.tipoLivro}</p>
-
-                <p>{detalhes.preco}</p>
+            {livro.detalhes.some((detalhe) => detalhe.preco !== 0) && (
+              <div className={styles.containerInfoLivro}>
+                <p className={styles.titulo}>{livro.titulo}</p>
+                <p className={styles.autor}>{livro.autor}</p>
+                <p className={styles.editora}>{livro.editora}</p>
+                <div className={styles.tipoLivroDetalhe}>
+                  {livro.detalhes.map(
+                    (detalhe) =>
+                      detalhe.preco !== 0 && (
+                        <p key={detalhe.id}></p>
+                      )
+                  )}
+                </div>
+                <div className={styles.linhaHorizontalDetalhe} />
+                <p className={styles.sinopse}>{livro.sinopse}</p>
               </div>
-              <div className={styles.linhaHorizontalDetalhe} />
-              <p className={styles.sinopse}>{livro.sinopse}</p>
-            </div>
+            )}
           </div>
 
           <div className={styles.comprarLivros}>
-            {livro.detalhes.map((detalhe) => (
+          {livro.detalhes.map(
+              (detalhe) =>
+                detalhe.preco !== 0 && (
               <div className={styles.divComprarLivros} key={detalhe.id}>
                 <div className={styles.compra}>
                   <div className={styles.divPreco}>
                     <ul className={styles.ulCompraInfoTipo}>
                       <li>
                         <span className={styles.liCompraInfoTit}>
-                          {detalhe.tipoLivro} - ID: {detalhe.id}
+                          {detalhe.tipoLivro}
                         </span>
                       </li>
                     </ul>

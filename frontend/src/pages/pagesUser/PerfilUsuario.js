@@ -86,8 +86,6 @@ function PerfilUsuario() {
             user={user} // Passe o objeto "user" do contexto de autenticação
           />
         );
-      case "Endereço":
-        return <FormEndereco active={activeItem === "Endereço"} />;
       case "Pedidos":
         return <FormPedidos active={activeItem === "Pedidos"} />;
       case "Sair":
@@ -134,13 +132,7 @@ function PerfilUsuario() {
               >
                 Dados Pessoais
               </li>
-              <li
-                className={`${styles.gridPerfilListaItem} ${activeItem === "Endereço" ? styles.active : ""}`}
-                onClick={() => handleItemClick("Endereço")}
-              >
-                Endereço
-              </li>
-              <li
+                           <li
                 className={`${styles.gridPerfilListaItem} ${activeItem === "Pedidos" ? styles.active : ""}`}
                 onClick={() => handleItemClick("Pedidos")}
               >
@@ -236,80 +228,6 @@ function FormDadosPessoais({ active, user }) {
             />
           </div>
         </Form.Group>
-
-        <div>
-          <Button
-            className={styles.buttonExpandirSenha}
-            variant="secondary"
-            onClick={handleToggleExpand}
-          >
-            {isExpanded ? "Recolher" : "Expandir"} Alterar Senha
-          </Button>
-
-          {isExpanded && (
-            <div>
-              <Form.Group as={Row} controlId="formSenha">
-                <div className={styles.iconContainer}>
-                  <Form.Label column sm={2}>
-                    <FaLock className={styles.iconFormLogin} />
-                  </Form.Label>
-                  <Form.Control
-                    className={styles.inputFormLogin}
-                    type={mostrarSenha ? "text" : "password"}
-                    placeholder="Senha"
-                    // value={user.senha}
-                    // onChange={(event) => setSenha(event.target.value)}
-                    // required
-                  />
-
-                  <div
-                    className={styles.alternarSenha}
-                    onClick={alternarMostrarSenha}
-                  >
-                    {mostrarSenha ? <FaEyeSlash /> : <FaEye />}
-                  </div>
-                </div>
-              </Form.Group>
-              <Form.Group as={Row} controlId="formSenha">
-                <div className={styles.iconContainer}>
-                  <Form.Label column sm={2}>
-                    <FaLock className={styles.iconFormLogin} />
-                  </Form.Label>
-                  <Form.Control
-                    className={styles.inputFormLogin}
-                    type={mostrarSenha ? "text" : "password"}
-                    placeholder="Senha"
-                    // value={senha}
-                    // onChange={(event) => setSenha(event.target.value)}
-                    // required
-                  />
-
-                  <div
-                    className={styles.alternarSenha}
-                    onClick={alternarMostrarSenha}
-                  >
-                    {mostrarSenha ? <FaEyeSlash /> : <FaEye />}
-                  </div>
-                </div>
-              </Form.Group>
-            </div>
-          )}
-        </div>
-
-        <Button type="submit" className={styles.buttonSalvarPerfil}>
-          Salvar
-        </Button>
-      </Form>
-    </div>
-  );
-}
-
-function FormEndereco() {
-  return (
-    <div>
-      <h1>Endereço</h1>
-      <div className={styles.linhaHorizontal} />
-      <Form id="livroForm">
         <Row>
           <Col>
           
@@ -434,6 +352,66 @@ function FormEndereco() {
             </Form.Group>
           </Col>
         </Row>
+
+        <div>
+          <Button
+            className={styles.buttonExpandirSenha}
+            variant="secondary"
+            onClick={handleToggleExpand}
+          >
+            {isExpanded ? "Recolher" : "Expandir"} Alterar Senha
+          </Button>
+
+          {isExpanded && (
+            <div>
+              <Form.Group as={Row} controlId="formSenha">
+                <div className={styles.iconContainer}>
+                  <Form.Label column sm={2}>
+                    <FaLock className={styles.iconFormLogin} />
+                  </Form.Label>
+                  <Form.Control
+                    className={styles.inputFormLogin}
+                    type={mostrarSenha ? "text" : "password"}
+                    placeholder="Senha"
+                    // value={user.senha}
+                    // onChange={(event) => setSenha(event.target.value)}
+                    // required
+                  />
+
+                  <div
+                    className={styles.alternarSenha}
+                    onClick={alternarMostrarSenha}
+                  >
+                    {mostrarSenha ? <FaEyeSlash /> : <FaEye />}
+                  </div>
+                </div>
+              </Form.Group>
+              <Form.Group as={Row} controlId="formSenha">
+                <div className={styles.iconContainer}>
+                  <Form.Label column sm={2}>
+                    <FaLock className={styles.iconFormLogin} />
+                  </Form.Label>
+                  <Form.Control
+                    className={styles.inputFormLogin}
+                    type={mostrarSenha ? "text" : "password"}
+                    placeholder="Senha"
+                    // value={senha}
+                    // onChange={(event) => setSenha(event.target.value)}
+                    // required
+                  />
+
+                  <div
+                    className={styles.alternarSenha}
+                    onClick={alternarMostrarSenha}
+                  >
+                    {mostrarSenha ? <FaEyeSlash /> : <FaEye />}
+                  </div>
+                </div>
+              </Form.Group>
+            </div>
+          )}
+        </div>
+
         <Button type="submit" className={styles.buttonSalvarPerfil}>
           Salvar
         </Button>

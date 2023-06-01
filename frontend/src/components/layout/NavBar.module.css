@@ -21,7 +21,7 @@
 
 .navbarContainerGrid {
   display: grid;
-  grid-template-columns: 20% 35% 25% 8% 8%;
+  grid-template-columns: 20% 35% 25% 8%;
   grid-template-rows: 6em;
   justify-items: center;
   align-items: center;

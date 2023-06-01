@@ -156,7 +156,9 @@
 
   .sinopse{
     text-align: justify;
-    font-size: 14px;
+    font-weight: 400;
+    color: #747474;
+  font-size: 0.7em; 
 
   }
 
@@ -470,20 +472,21 @@
 
 .iconFichaTecnica{
   font-size: 2em;
-  color: #747474;
+  color: #363636;
   margin-bottom: 20px;
+  
 }
 
 .tituloFichaTecnica {
   font-size: 1em;
-  font-weight: 100;
+  font-weight: 400;
   color: #747474;
   margin-bottom: 20px;
 }
 
 .infoFichaTecnica{
-  font-weight: 100;
-  color: #146b97; 
+  font-weight: 400;
+  color: #747474; 
 
 }
 

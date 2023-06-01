@@ -26,9 +26,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.mindrot.jbcrypt.BCrypt;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 @JsonSerialize
 @Entity
@@ -50,7 +47,6 @@ public class Usuario {
 
 	private String email;
 	
-	@JsonIgnore
 	private String senha;
 	
 	private LocalDate dataCadastro;

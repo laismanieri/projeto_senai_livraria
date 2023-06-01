@@ -44,10 +44,8 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity<Usuario> criar(@RequestBody Usuario usuario) {
         Usuario usuarioSalvo = usuarioService.salvarUsuarioComEndereco(usuario);
-        usuarioSalvo.setSenha(null); // Definir a senha como null na resposta JSON
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioSalvo);
     }
-
 
 
     @GetMapping("")
