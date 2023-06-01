@@ -26,7 +26,7 @@ function Navbar() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarContainerGrid}>
-        <div className={styles.navbarItemGrid}>
+      <div class={`${styles.navbarItemGrid} ${styles.center}`}>
           <Link to="/">
             <img src="/img/logo.png" alt="Logo" className={styles.navbarLogo} />
           </Link>
@@ -60,7 +60,7 @@ function Navbar() {
           </div>
         </div>
         <div className={styles.navbarItemGrid}>
-          <ButtonCestaCompra />
+          <ButtonCestaCompra  className={styles.buttonCestaCompra}/>
         </div>
       </div>
     </nav>

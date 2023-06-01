@@ -29,6 +29,7 @@
   width: calc(100% - 16%);
 }
 
+
 .navbarContainerGridAdm{
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -45,6 +46,12 @@
   align-items: center;
   text-align: center;
   border-radius: 5px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .navbarLogo {

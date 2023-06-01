@@ -143,6 +143,7 @@ const ModalCarrinho = ({ isOpen, onClose }) => {
 
   function closeModal() {
     setModalIsOpenLivroAdd(false);
+
   }
 
   const customStyles = {
