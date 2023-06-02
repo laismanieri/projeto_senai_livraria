@@ -20,28 +20,50 @@ import {
 function PerfilUsuario() {
   const [activeItem, setActiveItem] = useState("Dados Pessoais");
   const { user, setUser } = useContext(AuthContext);
+  const [endereco, setEndereco] = useState({
+    cep: "",
+    uf: "",
+    cidade: "",
+    logradouro: "",
+    bairro: "",
+    numero: "",
+    complemento: ""
+  });
+  
+
+   
 
   <FormDadosPessoais
   active={activeItem === "Dados Pessoais"}
   user={user}
+  endereco={endereco}
 />
 
-  useEffect(() => {
-    // Lógica para buscar os dados do usuário logado
-    // e atualizar o estado "user" com os dados do usuário
-    const fetchUserData = async () => {
-      try {
-        // Faça uma requisição ao servidor para buscar os dados do usuário
-        const response = await fetch("http://localhost:8082/usuario"); // substitua "/api/user" pela rota correta para buscar os dados do usuário
-        const userData = await response.json();
-        setUser(userData);
-      } catch (error) {
-        console.error("Erro ao buscar os dados do usuário:", error);
-      }
-    };
+useEffect(() => {
+  const fetchUserData = async () => {
+    try {
+      const response = await fetch("http://localhost:8082/usuario");
+      const userData = await response.json();
+      console.log(userData)
+      setUser(userData);
 
-    fetchUserData();
-  }, []);
+     // Definir o estado do endereço com base nos dados do usuário
+     setEndereco({
+      cep: userData.endereco.cep || "",
+      uf: userData.endereco.uf || "",
+      cidade: userData.endereco.cidade || "",
+      logradouro: userData.endereco.logradouro || "",
+      bairro: userData.endereco.bairro || "",
+      numero: userData.endereco.numero || "",
+      complemento: userData.endereco.complemento || "",
+    });
+  } catch (error) {
+    console.error("Erro ao buscar os dados do usuário:", error);
+  }
+};
+
+fetchUserData();
+}, []);
 
   const handleItemClick = (item) => {
     setActiveItem(item);
@@ -53,38 +75,17 @@ function PerfilUsuario() {
     // ou limpar o token de autenticação, se aplicável
   };
 
-  const handleFormSubmit = async (updatedUserData) => {
-    try {
-      const response = await fetch("http://localhost:8082/usuario", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedUserData),
-      });
-
-      if (response.ok) {
-        toast.success("Dados atualizados com sucesso!");
-        // Atualizar o estado "user" com os dados atualizados
-        setUser(updatedUserData);
-      } else {
-        toast.error("Erro ao atualizar os dados do usuário.");
-      }
-    } catch (error) {
-      console.error("Erro ao atualizar os dados do usuário:", error);
-      toast.error("Erro ao atualizar os dados do usuário.");
-    }
-  };
-
-
   const renderForm = () => {
     switch (activeItem) {
       case "Dados Pessoais":
         return (
           <FormDadosPessoais
-            active={activeItem === "Dados Pessoais"}
-            user={user} // Passe o objeto "user" do contexto de autenticação
-          />
+          active={activeItem === "Dados Pessoais"}
+          user={user}
+          endereco={endereco}
+          setEndereco={setEndereco}
+        />
+        
         );
       case "Pedidos":
         return <FormPedidos active={activeItem === "Pedidos"} />;
@@ -157,10 +158,53 @@ function PerfilUsuario() {
 }
 
 // Componentes de formulário de exemplo
-function FormDadosPessoais({ active, user }) {
+function FormDadosPessoais({ active, user, endereco,  setEndereco }) {
   const authContext = useContext(AuthContext); 
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  
+ 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      // Construir o objeto de dados do usuário atualizado
+      const dadosUsuarioAtualizados = {
+        nome: event.target.elements.formNome.value,
+        email: event.target.elements.formEmail.value,
+        endereco: {
+          cep: event.target.elements.cep.value,
+          uf: event.target.elements.uf.value,
+          cidade: event.target.elements.cidade.value,
+          logradouro: event.target.elements.logradouro.value,
+          bairro: event.target.elements.bairro.value,
+          numero: event.target.elements.numero.value,
+          complemento: event.target.elements.complemento.value,
+        },
+      };
+      console.log(dadosUsuarioAtualizados)
+      console.log(user.id)
+      // Fazer a solicitação PUT para atualizar os dados do usuário
+      const response = await fetch(`http://localhost:8082/usuario/${user.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dadosUsuarioAtualizados),
+      });
+
+      if (response.ok) {
+        toast.success("Dados atualizados com sucesso!");
+      } else {
+        toast.error("Erro ao atualizar os dados.");
+      }
+      console.log(user.id)
+    } catch (error) {
+      console.error("Erro ao atualizar os dados do usuário:", error);
+      toast.error("Erro ao atualizar os dados.");
+    }
+  };
+
 
   const alternarMostrarSenha = () => {
     setMostrarSenha(!mostrarSenha);
@@ -181,7 +225,7 @@ function FormDadosPessoais({ active, user }) {
         Dados Pessoais
       </li>
       <div className={styles.linhaHorizontal} />
-      <Form handleFormSubmit>
+      <Form onSubmit={handleSubmit}>
         <Form.Group as={Row} controlId="formNome">
           <div className={styles.iconContainer}>
             <Form.Label column sm={2}>
@@ -192,9 +236,7 @@ function FormDadosPessoais({ active, user }) {
               type="text"
               placeholder="Nome"
               defaultValue={user.nome}
-              // readOnly
-              // onChange={(event) => setNome(event.target.value)}
-              // required
+              required
             />
           </div>
         </Form.Group>
@@ -209,7 +251,7 @@ function FormDadosPessoais({ active, user }) {
               placeholder="CPF"
               readOnly
               defaultValue={user.cpf}
-              // onChange={(event) => setCpf(event.target.value)}
+              required
             />
           </div>
         </Form.Group>
@@ -223,8 +265,7 @@ function FormDadosPessoais({ active, user }) {
               type="email"
               placeholder="E-mail"
               defaultValue={user.email}
-              // onChange={(event) => setEmail(event.target.value)}
-              // required
+              required
             />
           </div>
         </Form.Group>
@@ -238,6 +279,7 @@ function FormDadosPessoais({ active, user }) {
                   type="text"
                   placeholder="CEP"
                   name="cep"
+                  defaultValue={user.enderecos[0].cep}
                 />
               </Col>
             </Form.Group>
@@ -253,9 +295,8 @@ function FormDadosPessoais({ active, user }) {
                   type="text"
                   placeholder="Estado"
                   name="uf"
-                  // required
-                  // value={uf}
-                  // onChange={(event) => setUf(event.target.value)}
+                  defaultValue={user.enderecos[0].uf}
+                  required
                 />
               </Col>
             </Form.Group>
@@ -271,9 +312,8 @@ function FormDadosPessoais({ active, user }) {
                   type="text"
                   placeholder="Cidade"
                   name="cidade"
-                  // value={cidade}
-                  // onChange={(event) => setCidade(event.target.value)}
-                  // required
+                  defaultValue={user.enderecos[0].cidade}
+                  required
                 />
               </Col>
             </Form.Group>
@@ -289,9 +329,8 @@ function FormDadosPessoais({ active, user }) {
                   type="text"
                   placeholder="Rua"
                   name="logradouro"
-                  // value={logradouro}
-                  // onChange={(event) => setLogradouro(event.target.value)}
-                  // required
+                  defaultValue={user.enderecos[0].logradouro}
+                  required
                 />
               </Col>
             </Form.Group>
@@ -307,9 +346,8 @@ function FormDadosPessoais({ active, user }) {
                   type="text"
                   placeholder="Bairro"
                   name="bairro"
-                  // value={bairro}
-                  // onChange={(event) => setBairro(event.target.value)}
-                  // required
+                  defaultValue={user.enderecos[0].bairro}
+                  required
                 />
               </Col>
             </Form.Group>
@@ -325,9 +363,8 @@ function FormDadosPessoais({ active, user }) {
                   type="text"
                   placeholder="Número"
                   name="numero"
-                  // value={numero}
-                  // onChange={(event) => setNumero(event.target.value)}
-                  // required
+                  defaultValue={user.enderecos[0].numero}
+                  required
                 />
               </Col>
             </Form.Group>
@@ -343,10 +380,8 @@ function FormDadosPessoais({ active, user }) {
                   type="text"
                   placeholder="Complemento"
                   name="complemento"
-                  // value={complemento}
-                  // onChange={(event) =>
-                  //   setComplemento(event.target.value)
-                  // }
+                  defaultValue={user.enderecos[0].complemento}
+                  required
                 />
               </Col>
             </Form.Group>
