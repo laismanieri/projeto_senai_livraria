@@ -38,6 +38,7 @@ const ModalCarrinho = ({
     const updatedCarrinho = carrinho.filter((livro) => livro.id !== item.id);
     setCarrinho(updatedCarrinho);
     localStorage.setItem("carrinho", JSON.stringify(updatedCarrinho));
+    window.location.reload();
   };
 
   const handleIncrementQuantity = (item) => {
