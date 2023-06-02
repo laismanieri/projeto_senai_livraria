@@ -1,36 +1,30 @@
-
-  .navbarButton, .navbarButtonFav {
-    background-color: #015a80;
-      border: none;
-      cursor: pointer;
-      font-size: 1.5rem;
-      padding: 0.5rem;
-      width: 4vh;
-     height: 4vh;
-     color: white;
-      
-    }
-
+.navbarButton, .navbarButtonFav {
+  background-color: #015a80;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  width: 4vh;
+  height: 4vh;
+  color: white;
+  display: flex; /* Adicionado */
+  align-items: center; /* Adicionado */
+}
     
-  .navbarButton {
-display: flex;      
-    }
+.navbarButton {
+  display: flex;
+}
 
 
-    
-  .iconFavorito{
-      font-size: 1.2em;
-  }
-
-  .navbarCesta{
-    color: aliceblue;
-    font-size: 1.3em;
-  }
-
-.cartCount{
+.cartCount {
   color: white;
   font-size: 1em;
+  margin-right: 0.2em; /* Ajuste a margem conforme necessário */
+  position: relative;
+  top: 0.9em; /* Ajuste o valor conforme necessário para mover a quantidade para cima ou para baixo */
 }
+
+
 
 /* Ajustes para telas entre 320px e 576px */
 @media only screen and (min-width: 320px) and (max-width: 576px) {

@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 
 import styles from "./Button.module.css";
 import { AiFillHeart } from "react-icons/ai";
-import ModalFavoritos from "../modals/ModalFavoritos";
+import ModalFavorito from "../modals/ModalFavorito";
+
 
 const ButtonFavoritos = () => {
   const [livro, setLivro] = useState(null);
@@ -35,11 +36,12 @@ const ButtonFavoritos = () => {
           <AiFillHeart className={styles.iconFavorito} />
         </button>
       </div>
-      <ModalFavoritos
+      <ModalFavorito
         livro={livro}
         detalhe={detalhe}
         isOpen={modalOpen}
         onClose={handleCloseModal}
+        favorito={favorito}
       />
     </>
   );

@@ -7,8 +7,14 @@ import {
   AiFillHeart,
   AiOutlineArrowLeft,
 } from "react-icons/ai";
-import { BiBook, BiCalendar, BiFile, BiBuilding, BiUser, BiBookmark } from 'react-icons/bi';
-import Modal from "react-modal";
+import {
+  BiBook,
+  BiCalendar,
+  BiFile,
+  BiBuilding,
+  BiUser,
+  BiBookmark,
+} from "react-icons/bi";
 import Navbar from "../../components/layout/NavBar";
 import Footer from "../../components/layout/Footer";
 import styles from "../styles/InformacaoLivro.module.css";
@@ -20,6 +26,7 @@ const InformacaoLivro = () => {
   const [detalheSelecionado, setDetalheSelecionado] = useState(null);
   const [modalIsOpenLivroAdd, setModalIsOpenLivroAdd] = useState(false);
   const [carrinho, setCarrinho] = useState([]);
+  const [favorito, setFavorito] = useState([]);
 
   useEffect(() => {
     const carrinhoSalvo = localStorage.getItem("carrinho");
@@ -29,10 +36,18 @@ const InformacaoLivro = () => {
   }, []);
 
   useEffect(() => {
+    const favoritoSalvo = localStorage.getItem("favorito");
+    if (favoritoSalvo) {
+      setCarrinho(JSON.parse(favoritoSalvo));
+    }
+  }, []);
+
+  useEffect(() => {
     axios
       .get(`http://localhost:8082/livro/${id}`)
       .then((response) => {
         setLivro(response.data);
+        setFavorito(response.data);
         // Inicializa o estado detalheSelecionado com o primeiro detalhe do livro
         if (response.data.detalhes.length > 0) {
           setDetalheSelecionado(response.data.detalhes[0].id);
@@ -47,10 +62,9 @@ const InformacaoLivro = () => {
     return <p>Carregando...</p>;
   }
 
-const detalheSelecionadoObj = livro.detalhes.find(
-  (detalhe) => detalhe.id === detalheSelecionado
-);
-
+  const detalheSelecionadoObj = livro.detalhes.find(
+    (detalhe) => detalhe.id === detalheSelecionado
+  );
 
   const adicionarAoCarrinho = (detalhe) => {
     if (!detalhe) {
@@ -86,6 +100,31 @@ const detalheSelecionadoObj = livro.detalhes.find(
     } else {
       toast.error("Livro sem estoque!");
     }
+  };
+
+  const adicionarAoFavorito = (livro) => {
+    if (!livro) {
+      return;
+    }
+
+    const itemFavorito = {
+      livro: {
+        id: livro.id,
+        titulo: livro.titulo,
+        imagem: livro.imagem,
+        oferta: livro.oferta,
+      },
+    };
+
+    const novoFavorito = [...carrinho, itemFavorito];
+    setCarrinho(novoFavorito);
+    localStorage.setItem("favorito", JSON.stringify(novoFavorito));
+
+    setModalIsOpenLivroAdd(true);
+    toast.success("Livro adicionado ao favorito!");
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   };
 
   const closeModal = () => {
@@ -142,15 +181,22 @@ const detalheSelecionadoObj = livro.detalhes.find(
           <div className={styles.gridItemLong}>
             {livro.detalhes.some((detalhe) => detalhe.preco !== 0) && (
               <div className={styles.containerInfoLivro}>
+                <div className={styles.divTituloFavorito}>
+                  <p
+                    className={styles.tituloFavorito}
+                    onClick={() => adicionarAoFavorito(livro)}
+                  >
+                    <AiFillHeart />
+                  </p>
+                </div>
+
                 <p className={styles.titulo}>{livro.titulo}</p>
+
                 <p className={styles.autor}>{livro.autor}</p>
                 <p className={styles.editora}>{livro.editora}</p>
                 <div className={styles.tipoLivroDetalhe}>
                   {livro.detalhes.map(
-                    (detalhe) =>
-                      detalhe.preco !== 0 && (
-                        <p key={detalhe.id}></p>
-                      )
+                    (detalhe) => detalhe.preco !== 0 && <p key={detalhe.id}></p>
                   )}
                 </div>
                 <div className={styles.linhaHorizontalDetalhe} />
@@ -160,107 +206,111 @@ const detalheSelecionadoObj = livro.detalhes.find(
           </div>
 
           <div className={styles.comprarLivros}>
-          {livro.detalhes.map(
+            {livro.detalhes.map(
               (detalhe) =>
                 detalhe.preco !== 0 && (
-              <div className={styles.divComprarLivros} key={detalhe.id}>
-                <div className={styles.compra}>
-                  <div className={styles.divPreco}>
-                    <ul className={styles.ulCompraInfoTipo}>
-                      <li>
-                        <span className={styles.liCompraInfoTit}>
-                          {detalhe.tipoLivro}
-                        </span>
-                      </li>
-                    </ul>
-                    {livro.oferta ? (
-                      <>
-                        <ul className={styles.ulCompraInfo}>
+                  <div className={styles.divComprarLivros} key={detalhe.id}>
+                    <div className={styles.compra}>
+                      <div className={styles.divPreco}>
+                        <ul className={styles.ulCompraInfoTipo}>
                           <li>
-                            <span className={styles.liCompraInfoTitPreco}>
-                              Preço:
-                            </span>
-                          </li>
-                          <li>
-                            <span className={styles.precoAntigo}>
-                              {detalhe.preco.toLocaleString("pt-BR", {
-                                style: "currency",
-                                currency: "BRL",
-                              })}
+                            <span className={styles.liCompraInfoTit}>
+                              {detalhe.tipoLivro}
                             </span>
                           </li>
                         </ul>
+                        {livro.oferta ? (
+                          <>
+                            <ul className={styles.ulCompraInfo}>
+                              <li>
+                                <span className={styles.liCompraInfoTitPreco}>
+                                  Preço:
+                                </span>
+                              </li>
+                              <li>
+                                <span className={styles.precoAntigo}>
+                                  {detalhe.preco.toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
+                                </span>
+                              </li>
+                            </ul>
 
-                        <ul className={styles.ulCompraInfo}>
+                            <ul className={styles.ulCompraInfo}>
+                              <li>
+                                <span className={styles.liCompraInfoTitPreco}>
+                                  Preço Oferta:
+                                </span>
+                              </li>
+                              <li>
+                                <span className={styles.precoOferta}>
+                                  {(detalhe.preco * 0.8).toLocaleString(
+                                    "pt-BR",
+                                    {
+                                      style: "currency",
+                                      currency: "BRL",
+                                    }
+                                  )}
+                                </span>
+                              </li>
+                            </ul>
+                          </>
+                        ) : (
+                          <>
+                            <ul className={styles.ulCompraInfo}>
+                              <li>
+                                <span className={styles.liCompraInfoTitPreco}>
+                                  Preço:
+                                </span>
+                              </li>
+                              <li>
+                                <span className={styles.precoRegular}>
+                                  {detalhe.preco.toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
+                                </span>
+                              </li>
+                            </ul>
+                          </>
+                        )}
+                        <ul className={styles.ulCompraInfoEntrega}>
                           <li>
-                            <span className={styles.liCompraInfoTitPreco}>
-                              Preço Oferta:
+                            <span className={styles.liEntrega}>
+                              Entrega GRÁTIS:
                             </span>
                           </li>
                           <li>
-                            <span className={styles.precoOferta}>
-                              {(detalhe.preco * 0.8).toLocaleString("pt-BR", {
-                                style: "currency",
-                                currency: "BRL",
-                              })}
+                            <span className={styles.liCompraInfo}>
+                              2 dias úteis
                             </span>
                           </li>
                         </ul>
-                      </>
-                    ) : (
-                      <>
                         <ul className={styles.ulCompraInfo}>
                           <li>
-                            <span className={styles.liCompraInfoTitPreco}>
-                              Preço:
-                            </span>
-                          </li>
-                          <li>
-                            <span className={styles.precoRegular}>
-                              {detalhe.preco.toLocaleString("pt-BR", {
-                                style: "currency",
-                                currency: "BRL",
-                              })}
+                            <span className={styles.estoque}>
+                              {detalhe.qtdeEstoque === 0
+                                ? "Sem estoque"
+                                : "Em estoque"}
                             </span>
                           </li>
                         </ul>
-                      </>
-                    )}
-                    <ul className={styles.ulCompraInfoEntrega}>
-                      <li>
-                        <span className={styles.liEntrega}>
-                          Entrega GRÁTIS:
-                        </span>
-                      </li>
-                      <li>
-                        <span className={styles.liCompraInfo}>
-                          2 dias úteis
-                        </span>
-                      </li>
-                    </ul>
-                    <ul className={styles.ulCompraInfo}>
-                      <li>
-                        <span className={styles.estoque}>
-                          {detalhe.qtdeEstoque === 0
-                            ? "Sem estoque"
-                            : "Em estoque"}
-                        </span>
-                      </li>
-                    </ul>
+                      </div>
+                    </div>
+                    <div>
+                      <button
+                        className={styles.buttonCompra}
+                        onClick={() => adicionarAoCarrinho(detalhe)}
+                      >
+                        <h1 className={styles.h1AdicionarSacola}>
+                          Adicionar à sacola
+                        </h1>
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <button
-                    className={styles.buttonCompra}
-                    onClick={() => adicionarAoCarrinho(detalhe)}
-                  >
-                    <h1 className={styles.h1AdicionarSacola}>
-                      Adicionar à sacola
-                    </h1>
-                  </button>
-                </div>
-              </div>
-            ))}
+                )
+            )}
           </div>
         </div>
 
@@ -269,35 +319,35 @@ const detalheSelecionadoObj = livro.detalhes.find(
         <div>
           <div className={styles.gridFichaTecnica}>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Livro</p>
-            <BiBook className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.titulo}</p>
+              <p className={styles.tituloFichaTecnica}>Livro</p>
+              <BiBook className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.titulo}</p>
             </div>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Ano de publicação</p>
-            <BiCalendar className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.anoPublicacao}</p>
+              <p className={styles.tituloFichaTecnica}>Ano de publicação</p>
+              <BiCalendar className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.anoPublicacao}</p>
             </div>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Número de páginas</p>
-            <BiFile className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.qtdePagina}</p>
+              <p className={styles.tituloFichaTecnica}>Número de páginas</p>
+              <BiFile className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.qtdePagina}</p>
             </div>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Editora</p>
-            <BiBuilding className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.editora}</p>
+              <p className={styles.tituloFichaTecnica}>Editora</p>
+              <BiBuilding className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.editora}</p>
             </div>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Autor</p>
-            <BiUser className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.autor}</p>
+              <p className={styles.tituloFichaTecnica}>Autor</p>
+              <BiUser className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.autor}</p>
             </div>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Gênero</p>
-            <BiBookmark className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.genero}</p>
-              </div>
+              <p className={styles.tituloFichaTecnica}>Gênero</p>
+              <BiBookmark className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.genero}</p>
+            </div>
           </div>
         </div>
 
@@ -358,6 +408,6 @@ const detalheSelecionadoObj = livro.detalhes.find(
       <Footer />
     </>
   );
-}
+};
 
 export default InformacaoLivro;
