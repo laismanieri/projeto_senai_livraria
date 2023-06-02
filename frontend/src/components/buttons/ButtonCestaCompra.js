@@ -41,6 +41,7 @@ const ButtonCestaCompra = () => {
         isOpen={modalOpen}
         onClose={handleCloseModal}
         carrinho={carrinho}
+        setCarrinho={setCarrinho}
       />
     </>
   );
