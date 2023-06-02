@@ -77,7 +77,6 @@ function PerfilUsuario() {
       case "Dados Pessoais":
         return (
           <FormDadosPessoais
-            active={activeItem === "Dados Pessoais"}
             user={user}
             endereco={endereco}
             setEndereco={setEndereco}
@@ -85,15 +84,6 @@ function PerfilUsuario() {
         );
       case "Pedidos":
         return <FormPedidos active={activeItem === "Pedidos"} />;
-      case "Sair":
-        return (
-          <div className={styles.formSair}>
-            <Button onClick={handleLogout} className={styles.buttonSair}>
-              Sair
-            </Button>
-          </div>
-        );
-
       default:
         return null;
     }
@@ -141,14 +131,6 @@ function PerfilUsuario() {
               >
                 Pedidos
               </li>
-              <li
-                className={`${styles.gridPerfilListaItem} ${
-                  activeItem === "Sair" ? styles.active : ""
-                }`}
-                onClick={() => handleItemClick("Sair")}
-              >
-                Sair
-              </li>
             </ul>
           </div>
 
@@ -166,6 +148,7 @@ function FormDadosPessoais({ active, user, endereco, setEndereco }) {
   const authContext = useContext(AuthContext);
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpandedEndereco, setIsExpandedEndereco] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -216,6 +199,11 @@ function FormDadosPessoais({ active, user, endereco, setEndereco }) {
     setIsExpanded(!isExpanded);
   };
 
+  const handleToggleExpandEndereco = () => {
+    setIsExpandedEndereco(!isExpandedEndereco);
+  };
+
+
   if (!authContext.user) {
     return null; // Renderiza null se o objeto user for nulo
   }
@@ -229,77 +217,20 @@ function FormDadosPessoais({ active, user, endereco, setEndereco }) {
       >
         Dados Pessoais
       </li>
-      <div className={styles.linhaHorizontal} />
+      <div className={styles.linhaHorizontalForm} />
       <Form onSubmit={handleSubmit}>
-        <Form.Group as={Row} controlId="formNome">
-          <div className={styles.iconContainer}>
-            <Form.Label column sm={2}>
-              <FaUser className={styles.iconFormLogin} />
-            </Form.Label>
-            <Form.Control
-              className={styles.inputFormLogin}
-              type="text"
-              placeholder="Nome"
-              defaultValue={user.nome}
-              required
-            />
-          </div>
-        </Form.Group>
-        <Form.Group as={Row} controlId="formCpf">
-          <div className={styles.iconContainer}>
-            <Form.Label column sm={2}>
-              <FaUser className={styles.iconFormLogin} />
-            </Form.Label>
-            <Form.Control
-              className={styles.inputFormLogin}
-              type="text"
-              placeholder="CPF"
-              readOnly
-              defaultValue={user.cpf}
-              required
-            />
-          </div>
-        </Form.Group>
-        <Form.Group as={Row} controlId="formEmail">
-          <div className={styles.iconContainer}>
-            <Form.Label column sm={2}>
-              <FaEnvelope className={styles.iconFormLogin} />
-            </Form.Label>
-            <Form.Control
-              className={styles.inputFormLogin}
-              type="email"
-              placeholder="E-mail"
-              defaultValue={user.email}
-              required
-            />
-          </div>
-        </Form.Group>
         <Row>
           <Col>
-            <Form.Group controlId="cep">
+            <Form.Group as={Row} controlId="formNome">
+              <Form.Label column sm={2}>
+                Nome:
+              </Form.Label>
               <Col sm="12">
                 <Form.Control
-                  className={styles.inputCadastrarEndereco}
+                  className={styles.inputForm}
                   type="text"
-                  placeholder="CEP"
-                  name="cep"
-                  defaultValue={user.enderecos[0].cep}
-                />
-              </Col>
-            </Form.Group>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col>
-            <Form.Group controlId="uf">
-              <Col sm="12">
-                <Form.Control
-                  className={styles.inputCadastrarEndereco}
-                  type="text"
-                  placeholder="Estado"
-                  name="uf"
-                  defaultValue={user.enderecos[0].uf}
+                  placeholder="Nome"
+                  defaultValue={user.nome}
                   required
                 />
               </Col>
@@ -309,15 +240,17 @@ function FormDadosPessoais({ active, user, endereco, setEndereco }) {
 
         <Row>
           <Col>
-            <Form.Group controlId="cidade">
+            <Form.Group as={Row} controlId="formCpf">
+              <Form.Label column sm={2}>
+                CPF:
+              </Form.Label>
               <Col sm="12">
                 <Form.Control
-                  className={styles.inputCadastrarEndereco}
+                  className={styles.inputForm}
                   type="text"
-                  placeholder="Cidade"
-                  name="cidade"
-                  defaultValue={user.enderecos[0].cidade}
-                  required
+                  placeholder="CPF"
+                  readOnly
+                  defaultValue={user.cpf}
                 />
               </Col>
             </Form.Group>
@@ -326,72 +259,172 @@ function FormDadosPessoais({ active, user, endereco, setEndereco }) {
 
         <Row>
           <Col>
-            <Form.Group controlId="logradouro">
+            <Form.Group as={Row} controlId="formEmail">
+              <Form.Label column sm={2}>
+                E-mail:
+              </Form.Label>
               <Col sm="12">
                 <Form.Control
-                  className={styles.inputCadastrarEndereco}
-                  type="text"
-                  placeholder="Rua"
-                  name="logradouro"
-                  defaultValue={user.enderecos[0].logradouro}
+                  className={styles.inputForm}
+                  type="email"
+                  placeholder="E-mail"
+                  defaultValue={user.email}
                   required
                 />
               </Col>
             </Form.Group>
           </Col>
         </Row>
+        <Button
+            className={styles.buttonExpandirSenha}
+            variant="secondary"
+            onClick={handleToggleExpandEndereco}
+          >
+            {isExpandedEndereco ? "Recolher" : "Expandir"} Alterar endereço
+          </Button>
+        {isExpandedEndereco && (
+        <div>
+          <Row>
+            <Col>
+              <Form.Group controlId="cep">
+                <Form.Label column sm={2}>
+                  CEP:
+                </Form.Label>
+                <Col sm="12">
+                  <Form.Control
+                    className={styles.inputForm}
+                    type="text"
+                    placeholder="CEP"
+                    name="cep"
+                    defaultValue={user.enderecos[0].cep}
+                    required
+                  />
+                </Col>
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Form.Group controlId="uf">
+                <Form.Label column sm={2}>
+                  Estado:
+                </Form.Label>
+                <Col sm="12">
+                  <Form.Control
+                    className={styles.inputForm}
+                    type="text"
+                    placeholder="Estado"
+                    name="uf"
+                    defaultValue={user.enderecos[0].uf}
+                    required
+                  />
+                </Col>
+              </Form.Group>
+            </Col>
+          </Row>
 
-        <Row>
-          <Col>
-            <Form.Group controlId="bairro">
-              <Col sm="12">
-                <Form.Control
-                  className={styles.inputCadastrarEndereco}
-                  type="text"
-                  placeholder="Bairro"
-                  name="bairro"
-                  defaultValue={user.enderecos[0].bairro}
-                  required
-                />
-              </Col>
-            </Form.Group>
-          </Col>
-        </Row>
+          <Row>
+            <Col>
+              <Form.Group controlId="cidade">
+                <Form.Label column sm={2}>
+                  Cidade:
+                </Form.Label>
+                <Col sm="12">
+                  <Form.Control
+                    className={styles.inputForm}
+                    type="text"
+                    placeholder="Cidade"
+                    name="cidade"
+                    defaultValue={user.enderecos[0].cidade}
+                    required
+                  />
+                </Col>
+              </Form.Group>
+            </Col>
+          </Row>
 
-        <Row>
-          <Col>
-            <Form.Group controlId="numero">
-              <Col sm="12">
-                <Form.Control
-                  className={styles.inputCadastrarEndereco}
-                  type="text"
-                  placeholder="Número"
-                  name="numero"
-                  defaultValue={user.enderecos[0].numero}
-                  required
-                />
-              </Col>
-            </Form.Group>
-          </Col>
-        </Row>
+          <Row>
+            <Col>
+              <Form.Group controlId="logradouro">
+                <Form.Label column sm={2}>
+                  Rua:
+                </Form.Label>
+                <Col sm="12">
+                  <Form.Control
+                    className={styles.inputForm}
+                    type="text"
+                    placeholder="Rua"
+                    name="logradouro"
+                    defaultValue={user.enderecos[0].logradouro}
+                    required
+                  />
+                </Col>
+              </Form.Group>
+            </Col>
+          </Row>
 
-        <Row>
-          <Col>
-            <Form.Group controlId="complemento">
-              <Col sm="12">
-                <Form.Control
-                  className={styles.inputCadastrarEndereco}
-                  type="text"
-                  placeholder="Complemento"
-                  name="complemento"
-                  defaultValue={user.enderecos[0].complemento}
-                  required
-                />
-              </Col>
-            </Form.Group>
-          </Col>
-        </Row>
+          <Row>
+            <Col>
+              <Form.Group controlId="bairro">
+                <Form.Label column sm={2}>
+                  Bairro:
+                </Form.Label>
+                <Col sm="12">
+                  <Form.Control
+                    className={styles.inputForm}
+                    type="text"
+                    placeholder="Bairro"
+                    name="bairro"
+                    defaultValue={user.enderecos[0].bairro}
+                    required
+                  />
+                </Col>
+              </Form.Group>
+            </Col>
+          </Row>
 
+          <Row>
+            <Col>
+              <Form.Group controlId="numero">
+                <Form.Label column sm={2}>
+                  Número:
+                </Form.Label>
+                <Col sm="12">
+                  <Form.Control
+                    className={styles.inputForm}
+                    type="text"
+                    placeholder="Número"
+                    name="numero"
+                    defaultValue={user.enderecos[0].numero}
+                    required
+                  />
+                </Col>
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>
+              <Form.Group controlId="complemento">
+                <Form.Label column sm={2}>
+                  Complemento:
+                </Form.Label>
+                <Col sm="12">
+                  <Form.Control
+                    className={styles.inputForm}
+                    type="text"
+                    placeholder="Complemento"
+                    name="complemento"
+                    defaultValue={user.enderecos[0].complemento}
+                    required
+                  />
+                </Col>
+              </Form.Group>
+            </Col>
+          </Row>
+        </div>
+
+        )}
         <div>
           <Button
             className={styles.buttonExpandirSenha}
@@ -403,15 +436,15 @@ function FormDadosPessoais({ active, user, endereco, setEndereco }) {
 
           {isExpanded && (
             <div>
-              <Form.Group as={Row} controlId="formSenha">
+                            <Form.Group as={Row} controlId="formSenha">
                 <div className={styles.iconContainer}>
                   <Form.Label column sm={2}>
-                    <FaLock className={styles.iconFormLogin} />
+                    <FaLock className={styles.iconFormLabel} />
                   </Form.Label>
                   <Form.Control
-                    className={styles.inputFormLogin}
+                    className={styles.inputForm}
                     type={mostrarSenha ? "text" : "password"}
-                    placeholder="Senha"
+                    placeholder="Senha Atual"
                     // value={user.senha}
                     // onChange={(event) => setSenha(event.target.value)}
                     // required
@@ -421,19 +454,41 @@ function FormDadosPessoais({ active, user, endereco, setEndereco }) {
                     className={styles.alternarSenha}
                     onClick={alternarMostrarSenha}
                   >
-                    {mostrarSenha ? <FaEyeSlash /> : <FaEye />}
+                    {mostrarSenha ? <FaEyeSlash /> : <FaEye  className={styles.iconFormLabel}/>}
                   </div>
                 </div>
               </Form.Group>
               <Form.Group as={Row} controlId="formSenha">
                 <div className={styles.iconContainer}>
                   <Form.Label column sm={2}>
-                    <FaLock className={styles.iconFormLogin} />
+                    <FaLock className={styles.iconFormLabel} />
                   </Form.Label>
                   <Form.Control
-                    className={styles.inputFormLogin}
+                    className={styles.inputForm}
                     type={mostrarSenha ? "text" : "password"}
-                    placeholder="Senha"
+                    placeholder="Nova Senha"
+                    // value={user.senha}
+                    // onChange={(event) => setSenha(event.target.value)}
+                    // required
+                  />
+
+                  <div
+                    className={styles.alternarSenha}
+                    onClick={alternarMostrarSenha}
+                  >
+                    {mostrarSenha ? <FaEyeSlash /> : <FaEye  className={styles.iconFormLabel}/>}
+                  </div>
+                </div>
+              </Form.Group>
+              <Form.Group as={Row} controlId="formSenha">
+                <div className={styles.iconContainer}>
+                  <Form.Label column sm={2}>
+                    <FaLock className={styles.iconFormLabel} />
+                  </Form.Label>
+                  <Form.Control
+                    className={styles.inputForm}
+                    type={mostrarSenha ? "text" : "password"}
+                    placeholder="Confirme a Nova Senha"
                     // value={senha}
                     // onChange={(event) => setSenha(event.target.value)}
                     // required
@@ -443,7 +498,7 @@ function FormDadosPessoais({ active, user, endereco, setEndereco }) {
                     className={styles.alternarSenha}
                     onClick={alternarMostrarSenha}
                   >
-                    {mostrarSenha ? <FaEyeSlash /> : <FaEye />}
+                    {mostrarSenha ? <FaEyeSlash /> : <FaEye  className={styles.iconFormLabel}/>}
                   </div>
                 </div>
               </Form.Group>
