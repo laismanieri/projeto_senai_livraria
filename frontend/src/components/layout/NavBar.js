@@ -5,8 +5,8 @@ import ButtonCestaCompra from "../buttons/ButtonCestaCompra";
 import Search from "../layout/Search";
 import { AuthContext } from "./AuthContext";
 import React, { useContext, useState } from "react";
-import { GiShoppingBag } from "react-icons/gi";
 import { FaUser, FaSignOutAlt } from "react-icons/fa";
+import ButtonFavoritos from "../buttons/ButtonFavoritos";
 
 function Navbar() {
   const { user, logout } = useContext(AuthContext);
@@ -57,6 +57,9 @@ function Navbar() {
               </ul>
             )}
           </div>
+        </div>
+        <div className={styles.navbarItemGrid}>
+          <ButtonFavoritos  className={styles.buttonCestaCompra}/>
         </div>
         <div className={styles.navbarItemGrid}>
           <ButtonCestaCompra  className={styles.buttonCestaCompra}/>

@@ -1,9 +1,7 @@
-import styles from "../modals/ModalCarrinho.module.css";
+import styles from "../modals/Modal.module.css";
 import { AiFillDelete, AiOutlineClose, AiFillEdit } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Modal from "react-modal";
 
 import PaymentMethodSelect from "../../components/layout/PaymentMethodSelect";
 import { toast } from "react-toastify";
