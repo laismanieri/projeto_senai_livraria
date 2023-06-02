@@ -27,43 +27,40 @@ function PerfilUsuario() {
     logradouro: "",
     bairro: "",
     numero: "",
-    complemento: ""
+    complemento: "",
   });
-  
-
-   
 
   <FormDadosPessoais
-  active={activeItem === "Dados Pessoais"}
-  user={user}
-  endereco={endereco}
-/>
+    active={activeItem === "Dados Pessoais"}
+    user={user}
+    endereco={endereco}
+  />;
 
-useEffect(() => {
-  const fetchUserData = async () => {
-    try {
-      const response = await fetch("http://localhost:8082/usuario");
-      const userData = await response.json();
-      console.log(userData)
-      setUser(userData);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("http://localhost:8082/usuario");
+        const userData = await response.json();
+        console.log(userData);
+        setUser(userData);
 
-     // Definir o estado do endereço com base nos dados do usuário
-     setEndereco({
-      cep: userData.endereco.cep || "",
-      uf: userData.endereco.uf || "",
-      cidade: userData.endereco.cidade || "",
-      logradouro: userData.endereco.logradouro || "",
-      bairro: userData.endereco.bairro || "",
-      numero: userData.endereco.numero || "",
-      complemento: userData.endereco.complemento || "",
-    });
-  } catch (error) {
-    console.error("Erro ao buscar os dados do usuário:", error);
-  }
-};
+        // Definir o estado do endereço com base nos dados do usuário
+        setEndereco({
+          cep: userData.endereco.cep || "",
+          uf: userData.endereco.uf || "",
+          cidade: userData.endereco.cidade || "",
+          logradouro: userData.endereco.logradouro || "",
+          bairro: userData.endereco.bairro || "",
+          numero: userData.endereco.numero || "",
+          complemento: userData.endereco.complemento || "",
+        });
+      } catch (error) {
+        console.error("Erro ao buscar os dados do usuário:", error);
+      }
+    };
 
-fetchUserData();
-}, []);
+    fetchUserData();
+  }, []);
 
   const handleItemClick = (item) => {
     setActiveItem(item);
@@ -80,12 +77,11 @@ fetchUserData();
       case "Dados Pessoais":
         return (
           <FormDadosPessoais
-          active={activeItem === "Dados Pessoais"}
-          user={user}
-          endereco={endereco}
-          setEndereco={setEndereco}
-        />
-        
+            active={activeItem === "Dados Pessoais"}
+            user={user}
+            endereco={endereco}
+            setEndereco={setEndereco}
+          />
         );
       case "Pedidos":
         return <FormPedidos active={activeItem === "Pedidos"} />;
@@ -97,12 +93,12 @@ fetchUserData();
             </Button>
           </div>
         );
-  
+
       default:
         return null;
     }
   };
- 
+
   return (
     <>
       <Navbar />
@@ -121,26 +117,34 @@ fetchUserData();
           <div className={styles.gridPerfil}>
             <ul className={styles.gridPerfilLista}>
               <li
-                className={`${styles.gridPerfilListaItem} ${activeItem === "Olá" ? styles.active : ""}`}
+                className={`${styles.gridPerfilListaItem} ${
+                  activeItem === "Olá" ? styles.active : ""
+                }`}
                 onClick={() => handleItemClick("Olá")}
               >
                 <FaUserCircle className={styles.imagemPerfil} />
                 <span>Olá</span>
               </li>
               <li
-                className={`${styles.gridPerfilListaItem} ${activeItem === "Dados Pessoais" ? styles.active : ""}`}
+                className={`${styles.gridPerfilListaItem} ${
+                  activeItem === "Dados Pessoais" ? styles.active : ""
+                }`}
                 onClick={() => handleItemClick("Dados Pessoais")}
               >
                 Dados Pessoais
               </li>
-                           <li
-                className={`${styles.gridPerfilListaItem} ${activeItem === "Pedidos" ? styles.active : ""}`}
+              <li
+                className={`${styles.gridPerfilListaItem} ${
+                  activeItem === "Pedidos" ? styles.active : ""
+                }`}
                 onClick={() => handleItemClick("Pedidos")}
               >
                 Pedidos
               </li>
               <li
-                className={`${styles.gridPerfilListaItem} ${activeItem === "Sair" ? styles.active : ""}`}
+                className={`${styles.gridPerfilListaItem} ${
+                  activeItem === "Sair" ? styles.active : ""
+                }`}
                 onClick={() => handleItemClick("Sair")}
               >
                 Sair
@@ -158,12 +162,11 @@ fetchUserData();
 }
 
 // Componentes de formulário de exemplo
-function FormDadosPessoais({ active, user, endereco,  setEndereco }) {
-  const authContext = useContext(AuthContext); 
+function FormDadosPessoais({ active, user, endereco, setEndereco }) {
+  const authContext = useContext(AuthContext);
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  
- 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -182,8 +185,8 @@ function FormDadosPessoais({ active, user, endereco,  setEndereco }) {
           complemento: event.target.elements.complemento.value,
         },
       };
-      console.log(dadosUsuarioAtualizados)
-      console.log(user.id)
+      console.log(dadosUsuarioAtualizados);
+      console.log(user.id);
       // Fazer a solicitação PUT para atualizar os dados do usuário
       const response = await fetch(`http://localhost:8082/usuario/${user.id}`, {
         method: "PUT",
@@ -198,13 +201,12 @@ function FormDadosPessoais({ active, user, endereco,  setEndereco }) {
       } else {
         toast.error("Erro ao atualizar os dados.");
       }
-      console.log(user.id)
+      console.log(user.id);
     } catch (error) {
       console.error("Erro ao atualizar os dados do usuário:", error);
       toast.error("Erro ao atualizar os dados.");
     }
   };
-
 
   const alternarMostrarSenha = () => {
     setMostrarSenha(!mostrarSenha);
@@ -214,14 +216,17 @@ function FormDadosPessoais({ active, user, endereco,  setEndereco }) {
     setIsExpanded(!isExpanded);
   };
 
-  
   if (!authContext.user) {
     return null; // Renderiza null se o objeto user for nulo
   }
 
   return (
     <div className={active ? `${styles.active}` : ""}>
-      <li className={`${styles.gridPerfilListaItem} ${active ? styles.active : ""}`}>
+      <li
+        className={`${styles.gridPerfilListaItem} ${
+          active ? styles.active : ""
+        }`}
+      >
         Dados Pessoais
       </li>
       <div className={styles.linhaHorizontal} />
@@ -271,7 +276,6 @@ function FormDadosPessoais({ active, user, endereco,  setEndereco }) {
         </Form.Group>
         <Row>
           <Col>
-          
             <Form.Group controlId="cep">
               <Col sm="12">
                 <Form.Control

@@ -28,6 +28,17 @@
   color: white;
 }
 
+.paginacaoButton {
+  /* Adicione os estilos desejados aqui */
+  margin-right: 5px;
+  color: white;
+  background-color: #146b97;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+
 .containerCadastroLivro {
     margin: 0;
   }
