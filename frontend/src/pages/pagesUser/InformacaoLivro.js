@@ -62,12 +62,17 @@ function adicionarAoCarrinho(detalhe) {
     const itemCarrinho = {
       ...detalhe,
       quantidade: 1,
+      oferta,
+      imagem
     };
 
     const novoCarrinho = [...carrinho, itemCarrinho];
     setCarrinho(novoCarrinho);
     localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
     toast.success("Livro adicionado ao carrinho!");
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
     setModalIsOpenLivroAdd(true);
   } else {
     toast.error("Livro sem estoque!");
@@ -280,60 +285,6 @@ function adicionarAoCarrinho(detalhe) {
               </div>
           </div>
         </div>
-
-        {/* <div className={styles.fichaTecnica}>
-          <h1 className={styles.fichaH1}>Ficha Técnica</h1>
-          <div className={styles.ficha}>
-            <ul className={styles.ficha2}>
-              <li className={styles.fichaInfo}>
-                <span className={styles.fichaTh}>Titulo:</span>
-              </li>
-              <li>
-                <span className={styles.fichaTr}>{livro.titulo}</span>
-              </li>
-            </ul>
-            <ul className={styles.ficha1}>
-              <li className={styles.fichaInfo}>
-                <span className={styles.fichaTh}>Autor(a):</span>
-              </li>
-              <li>
-                <span className={styles.fichaTr}>{livro.autor}</span>
-              </li>
-            </ul>
-            <ul className={styles.ficha2}>
-              <li className={styles.fichaInfo}>
-                <span className={styles.fichaTh}>Gênero:</span>
-              </li>
-              <li>
-                <span className={styles.fichaTr}>{livro.genero}</span>
-              </li>
-            </ul>
-            <ul className={styles.ficha1}>
-              <li className={styles.fichaInfo}>
-                <span className={styles.fichaTh}>Editora:</span>
-              </li>
-              <li>
-                <span className={styles.fichaTr}>{livro.editora}</span>
-              </li>
-            </ul>
-            <ul className={styles.ficha2}>
-              <li className={styles.fichaInfo}>
-                <span className={styles.fichaTh}>Ano:</span>
-              </li>
-              <li>
-                <span className={styles.fichaTr}>{livro.anoPublicacao}</span>
-              </li>
-            </ul>
-            <ul className={styles.ficha1}>
-              <li className={styles.fichaInfo}>
-                <span className={styles.fichaTh}>Quantidade de Páginas:</span>
-              </li>
-              <li>
-                <span className={styles.fichaTr}>{livro.qtdePagina}</span>
-              </li>
-            </ul>
-          </div>
-        </div> */}
       </div>
       <Footer />
     </>

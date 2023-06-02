@@ -236,7 +236,8 @@ const ModalCarrinho = ({
                           <div>
                             <button
                               className={styles.buttonQtde}
-                              onClick={() => handleIncrementQuantity(livro)}
+                              onClick={() => handleDecrementQuantity(livro)}
+                              
                             >
                               -
                             </button>
@@ -245,7 +246,7 @@ const ModalCarrinho = ({
                             </span>
                             <button
                               className={styles.buttonQtde}
-                              onClick={() => handleDecrementQuantity(livro)}
+                              onClick={() => handleIncrementQuantity(livro)}
                             >
                               +
                             </button>
@@ -333,7 +334,7 @@ const ModalCarrinho = ({
                   <span>Total de Livros:</span>
                 </li>
                 <li>
-                  <span>qtdeTotal</span>
+                <span>{qtdeTotal}</span>
                 </li>
               </ul>
               <div className={styles.linhaHorizontal} />
@@ -343,10 +344,10 @@ const ModalCarrinho = ({
                 </li>
                 <li>
                   <span>
-                    {/* {{getTotalPrice()}.toLocaleString("pt-BR", {
+                  {total.toLocaleString("pt-BR", {
                       style: "currency",
                       currency: "BRL",
-                    })} */}
+                    })}
                   </span>
                 </li>
               </ul>
