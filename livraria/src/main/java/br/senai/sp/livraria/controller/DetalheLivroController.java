@@ -47,6 +47,27 @@ public class DetalheLivroController {
         DetalheLivro detalheLivroAtualizadoSalvo = detalheLivroService.salvar(detalheLivro);
         return ResponseEntity.ok(detalheLivroAtualizadoSalvo);
     }
+    
+    @PutMapping("/{id}/estoque")
+    public ResponseEntity<String> atualizarQuantidadeEstoque(@PathVariable Long id, @RequestBody int quantidade) {
+        DetalheLivro detalheLivro = detalheLivroService.buscarPorId(id);
+
+        // Verifique se o detalheLivro existe
+        if (detalheLivro == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Verifique se há estoque suficiente
+        if (detalheLivro.getQtdeEstoque() < quantidade) {
+            return ResponseEntity.badRequest().body("Estoque insuficiente");
+        }
+
+        // Atualize a quantidade em estoque do detalheLivro
+        detalheLivro.setQtdeEstoque(detalheLivro.getQtdeEstoque() - quantidade);
+        detalheLivroService.salvar(detalheLivro);
+
+        return ResponseEntity.ok().build();
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {

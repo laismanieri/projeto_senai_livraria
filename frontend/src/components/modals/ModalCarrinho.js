@@ -115,6 +115,28 @@ const ModalCarrinho = ({
         setTimeout(() => {
           window.location.reload();
         }, 3000);
+
+        carrinho.forEach((livro) => {
+          const detalheId = livro.id;
+          const quantidadePedida = livro.quantidade;
+
+          // Fazer uma requisição para a API atualizar a quantidade em estoque do detalheLivro
+          fetch(`http://localhost:8082/detalhelivro/${detalheId}/estoque`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(quantidadePedida),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Quantidade em estoque do detalheLivro atualizada:", data);
+            })
+            .catch((error) => {
+              console.error("Erro ao atualizar quantidade em estoque do detalheLivro:", error);
+            });
+        });
+
       })
       .catch((error) => {
         console.error("Erro ao gravar pedido no banco:", error);
