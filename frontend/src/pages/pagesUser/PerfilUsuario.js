@@ -158,6 +158,9 @@ function FormDadosPessoais({ active, user, endereco, setEndereco }) {
       const dadosUsuarioAtualizados = {
         nome: event.target.elements.formNome.value,
         email: event.target.elements.formEmail.value,
+        cpf: event.target.elements.formCpf.value,
+        dataCadastro: event.target.elements.formDataCadastro.value,
+        senha: event.target.elements.formSenha.value,
         endereco: {
           cep: event.target.elements.cep.value,
           uf: event.target.elements.uf.value,
@@ -219,6 +222,22 @@ function FormDadosPessoais({ active, user, endereco, setEndereco }) {
       </li>
       <div className={styles.linhaHorizontalForm} />
       <Form onSubmit={handleSubmit}>
+
+        <Form.Group as={Row} controlId="formSenha">
+            <Form.Control
+              type="hidden"
+              defaultValue={user.senha}
+            />
+        </Form.Group>
+
+        <Form.Group as={Row} controlId="formDataCadastro">
+            <Form.Control
+              type="hidden"
+              defaultValue={user.dataCadastro}
+            />
+        </Form.Group>
+
+
         <Row>
           <Col>
             <Form.Group as={Row} controlId="formNome">
