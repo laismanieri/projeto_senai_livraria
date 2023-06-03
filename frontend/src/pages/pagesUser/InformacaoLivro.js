@@ -21,11 +21,19 @@ function InformacaoLivro() {
   const [modalIsOpenLivroAdd, setModalIsOpenLivroAdd] = useState(false);
 
   const [carrinho, setCarrinho] = useState([]);
+  const [favorito, setFavorito] = useState([]);
 
   useEffect(() => {
     const carrinhoSalvo = localStorage.getItem("carrinho");
     if (carrinhoSalvo) {
       setCarrinho(JSON.parse(carrinhoSalvo));
+    }
+  }, []);
+
+  useEffect(() => {
+    const favoritoSalvo = localStorage.getItem("favorito");
+    if (favoritoSalvo) {
+      setFavorito(JSON.parse(favoritoSalvo));
     }
   }, []);
   
@@ -78,6 +86,33 @@ function adicionarAoCarrinho(detalhe) {
     toast.error("Livro sem estoque!");
   }
 }
+
+const adicionarAoFavorito = (livro) => {
+  if (!livro) {
+    return;
+  }
+
+  const itemFavorito = {
+    livro: {
+      id: livro.id,
+      titulo: livro.titulo,
+      imagem: livro.imagem,
+      oferta: livro.oferta,
+    },
+  };
+
+  const novoFavorito = [...favorito, itemFavorito];
+  setFavorito(novoFavorito);
+  localStorage.setItem("favorito", JSON.stringify(novoFavorito));
+
+ toast.success("Livro adicionado ao favorito!");
+  setTimeout(() => {
+    window.location.reload();
+  }, 3000);
+};
+
+
+
   function closeModal() {
     setModalIsOpenLivroAdd(false);
   }
@@ -133,6 +168,14 @@ function adicionarAoCarrinho(detalhe) {
           </div>
           <div className={styles.gridItemLong}>
             <div className={styles.containerInfoLivro}>
+            <div className={styles.divTituloFavorito}>
+                  <p
+                    className={styles.tituloFavorito}
+                    onClick={() => adicionarAoFavorito(livro)}
+                  >
+                    <AiFillHeart />
+                  </p>
+                </div>
               <p className={styles.titulo}>{livro.titulo}</p>
               <p className={styles.autor}>{livro.autor}</p>
               <p className={styles.editora}>{livro.editora}</p>
