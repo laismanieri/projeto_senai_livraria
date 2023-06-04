@@ -19,7 +19,7 @@ public class ItemPedidoDTO {
 
 	private BigDecimal valorUnid;
 
-	private BigDecimal valorTotal;
+	private BigDecimal valorTotalItem;
 
 	private int qtdeItens;
 	
@@ -28,7 +28,7 @@ public class ItemPedidoDTO {
 	public ItemPedido getItemPedido() {
 		ItemPedido ip = new ItemPedido();
 		ip.setId(id);
-		ip.setValorTotal(this.valorTotal);
+		ip.setValorTotalItem(this.valorTotalItem);
 		ip.setValorUnid(this.valorUnid);
 		ip.setQtdeItens(this.qtdeItens);
 		DetalheLivro dt = new DetalheLivro(); dt.setId(detalhe_livro_id);

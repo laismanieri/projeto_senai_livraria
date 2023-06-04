@@ -80,10 +80,11 @@ const ModalCarrinho = ({
       id: -1,
       dataPedido: new Date().toISOString().slice(0, 10),
       usuario_id: 1,
+      valorTotal: total,
       itensDTO: carrinho.map((livro) => ({
         id: -1,
         valorUnid: livro.oferta ? livro.preco * 0.8 : livro.preco,
-        valorTotal: livro.oferta
+        valorTotalItem: livro.oferta
           ? livro.preco * 0.8 * livro.quantidade
           : livro.preco * livro.quantidade,
         qtdeItens: livro.quantidade,

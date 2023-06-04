@@ -1,5 +1,6 @@
 package br.senai.sp.livraria.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,8 @@ public class PedidoSelectDTO {
 	private Long id;
 
 	private LocalDate dataPedido = LocalDate.now();
+	
+	private BigDecimal valorTotal;
 
 	private Long usuario_id;
 

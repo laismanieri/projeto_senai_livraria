@@ -59,6 +59,7 @@ public class PedidoService {
     		pedidoSelectDTO.setId(pedido.getId());
     		pedidoSelectDTO.setUsuario_id(pedido.getUsuario().getId());
     		pedidoSelectDTO.setDataPedido(pedido.getDataPedido());
+    		pedidoSelectDTO.setValorTotal(pedido.getValorTotal());
     		
     		listaItemPedidoSelectDTO = new ArrayList<>();
     		for (ItemPedido item : pedido.getItens()) {
@@ -67,7 +68,7 @@ public class PedidoService {
     			itemPedidoSelectDTO.setId(item.getId());
     			itemPedidoSelectDTO.setQtdeItens(item.getQtdeItens());
     			itemPedidoSelectDTO.setValorUnid(item.getValorUnid());
-    			itemPedidoSelectDTO.setValorTotal(item.getValorTotal());
+    			itemPedidoSelectDTO.setValorTotal(item.getValorTotalItem());
     			
     			 //Livro livro = livroRepository.findById(item.getDetalheLivro().getLivro().getId()).orElseThrow(() -> new RuntimeException("Livro não encontrado"));
     			

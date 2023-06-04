@@ -49,7 +49,7 @@ public class ItemPedidoController {
         itemPedido.setPedido(itemPedidoAtualizado.getPedido());
         itemPedido.setQtdeItens(itemPedidoAtualizado.getQtdeItens());
         itemPedido.setValorUnid(itemPedidoAtualizado.getValorUnid());
-        itemPedido.setValorTotal(itemPedidoAtualizado.getValorTotal());
+        itemPedido.setValorTotalItem(itemPedidoAtualizado.getValorTotalItem());
         ItemPedido itemPedidoAtualizadoSalvo = itemPedidoService.salvar(itemPedido);
         return ResponseEntity.ok(itemPedidoAtualizadoSalvo);
     }

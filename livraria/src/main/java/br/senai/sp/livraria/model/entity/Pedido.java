@@ -1,5 +1,6 @@
 package br.senai.sp.livraria.model.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class Pedido {
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	private Long id;
 	private LocalDate dataPedido;
+	private BigDecimal valorTotal;
 	
 	@PrePersist
 	public void prePersist() {
