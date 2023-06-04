@@ -93,3 +93,13 @@ ul li {
 ul ul {
   margin-left: 20px;
 }
+
+.listaPedidoLi{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.listaPedidoLiDiv{
+  margin: 0 15px;
+  }

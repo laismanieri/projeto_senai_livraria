@@ -163,3 +163,7 @@ width: 100%;
 .tablePedido{
   font-size: 0.8em;
 }
+
+.listaPedidoLiDiv{
+  margin: 0 15px;
+}

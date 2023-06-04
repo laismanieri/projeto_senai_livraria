@@ -52,15 +52,15 @@ function ListaPedido() {
                     <td className={`${styles.customClass}`}>{pedido.usuario_id}</td>
                     <td className={`${styles.customClass}`}>
                       {pedido.itensDTO && pedido.itensDTO.length > 0 ? (
-                        <ul className={`${styles.customClass}`}>
+                        <ul className={styles.customClass}>
                           {pedido.itensDTO.map((item) => (
-                            <li key={item.id} className={`${styles.customClass}`}>
-                              <span>Quantidade: {item.qtdeItens}</span>
-                              <span>Valor Unitário: {item.valorUnid}</span>
-                              <span>Valor Total: {item.valorTotal}</span>
-                                <span>Tipo de Livro: {item.detalheLivroDTO.tipoLivro}</span>
-                                <span>Id do Livro: {item.detalheLivroDTO.livroId}</span>
-                                <span>Titulo do Livro: {item.detalheLivroDTO.livro.titulo}</span>
+                            <li key={item.id} className={styles.listaPedidoLi}>
+                              <div className={styles.listaPedidoLiDiv}>Quantidade: {item.qtdeItens}</div>
+                              <div className={styles.listaPedidoLiDiv}>Valor Unitário: {item.valorUnid}</div>
+                              <div className={styles.listaPedidoLiDiv}>Valor Total: {item.valorTotal}</div>
+                                <div className={styles.listaPedidoLiDiv}>Tipo de Livro: {item.detalheLivroDTO.tipoLivro}</div>
+                                <div className={styles.listaPedidoLiDiv}>Id do Livro: {item.detalheLivroDTO.livroId}</div>
+                                <div className={styles.listaPedidoLiDiv}>Titulo do Livro: {item.detalheLivroDTO.livro.titulo}</div>
                             </li>
                           ))}
                         </ul>

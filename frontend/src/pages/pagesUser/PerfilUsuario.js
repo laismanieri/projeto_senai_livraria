@@ -578,13 +578,13 @@ function FormPedidos() {
                               alt=""
                             />
                           </div>
-                          <div>Titulo: {item.detalheLivroDTO.livro.titulo}</div>
-                          <div>
+                          <div className={styles.listaPedidoLiDiv}>Titulo: {item.detalheLivroDTO.livro.titulo}</div>
+                          <div className={styles.listaPedidoLiDiv}>
                             Tipo do Livro: {item.detalheLivroDTO.tipoLivro}
                           </div>
-                          <div>Quantidade: {item.qtdeItens}</div>
-                          <div>Valor Unitário: {item.valorUnid}</div>
-                          <div>Valor Total Item: {item.valorTotal}</div>
+                          <div className={styles.listaPedidoLiDiv}>Quantidade: {item.qtdeItens}</div>
+                          <div className={styles.listaPedidoLiDiv}>Valor Unitário: {item.valorUnid}</div>
+                          <div className={styles.listaPedidoLiDiv}>Valor Total Item: {item.valorTotal}</div>
                         </li>
                       ))}
                     </ul>
