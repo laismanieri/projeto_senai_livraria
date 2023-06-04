@@ -45,7 +45,7 @@ public class Pedido {
 	
 	@JsonManagedReference
 	@OneToOne
-	@JoinColumn(name = "pedido_id")
+	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 	
 	@JsonManagedReference

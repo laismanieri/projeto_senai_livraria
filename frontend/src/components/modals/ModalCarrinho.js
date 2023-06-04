@@ -19,6 +19,7 @@ const ModalCarrinho = ({
 }) => {
 
   const { user } = useContext(AuthContext);
+  const [endereco, setEndereco] = useState();
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
@@ -44,6 +45,7 @@ const ModalCarrinho = ({
     setQtdeTotal(qtde);
     setTotal(valor);
   }, [carrinho]);
+
 
   const handleRemoveItem = (item) => {
     const updatedCarrinho = carrinho.filter((livro) => livro.id !== item.id);
@@ -306,11 +308,11 @@ const ModalCarrinho = ({
                 <th className={styles.thSecaoTitN}>2</th>
                 <th className={styles.thSecaoTit}>Endereço de entrega</th>
                 <th className={styles.thSecaoInf}>
-                  <p>Nome do usuario</p>
-                  <p>Rua, Numero</p>
-                  <p>Complemento</p>
-                  <p>Bairro</p>
-                  <p>Cidade, UF, CEP</p>
+                  <p>{user.nome}</p>
+                  <p>{user.enderecos[0].logradouro}, {user.enderecos[0].numero}</p>
+                  <p>{user.enderecos[0].complemento}</p>
+                  <p>{user.enderecos[0].bairro}</p>
+                  <p>{user.enderecos[0].cidade}, {user.enderecos[0].uf}, {user.enderecos[0].cep}</p>
                 </th>
                 <th className={styles.thSecao}>
                   {" "}

@@ -27,6 +27,6 @@ public class PedidoSelectDTO {
 
 	private Long usuario_id;
 
-	private List<ItemPedidoSelectDTO> itensDTO;
+	private List<ItemPedidoSelectDTO> itensDTO = new ArrayList<>();
 
 }

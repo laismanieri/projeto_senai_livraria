@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.senai.sp.livraria.model.entity.DetalheLivro;
 import br.senai.sp.livraria.model.entity.ItemPedido;
+import br.senai.sp.livraria.model.entity.Livro;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +27,6 @@ public class ItemPedidoSelectDTO {
 	
 	private DetalheLivroDTO detalheLivroDTO;
 	
-	
+	private Livro livro;
 
 }

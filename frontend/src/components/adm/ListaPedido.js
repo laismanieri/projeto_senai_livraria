@@ -38,6 +38,7 @@ function ListaPedido() {
                 <th className={`${styles.customClass}`}>ID</th>
                 <th className={`${styles.customClass}`}>Data do Pedido</th>
                 <th className={`${styles.customClass}`}>Valor Total do Pedido</th>
+                <th className={`${styles.customClass}`}>Usuario</th>
                 <th className={`${styles.customClass}`}>Itens</th>
               </tr>
             </thead>
@@ -48,17 +49,18 @@ function ListaPedido() {
                     <td className={`${styles.customClass}`}>{pedido.id}</td>
                     <td className={`${styles.customClass}`}>{pedido.dataPedido}</td>
                     <td className={`${styles.customClass}`}>{pedido.valorTotal}</td>
+                    <td className={`${styles.customClass}`}>{pedido.usuario_id}</td>
                     <td className={`${styles.customClass}`}>
                       {pedido.itensDTO && pedido.itensDTO.length > 0 ? (
                         <ul className={`${styles.customClass}`}>
                           {pedido.itensDTO.map((item) => (
                             <li key={item.id} className={`${styles.customClass}`}>
-                              <span>Detalhe Livro ID: {item.detalheLivroDTO.id}</span>
                               <span>Quantidade: {item.qtdeItens}</span>
                               <span>Valor Unitário: {item.valorUnid}</span>
                               <span>Valor Total: {item.valorTotal}</span>
                                 <span>Tipo de Livro: {item.detalheLivroDTO.tipoLivro}</span>
                                 <span>Id do Livro: {item.detalheLivroDTO.livroId}</span>
+                                <span>Titulo do Livro: {item.detalheLivroDTO.livro.titulo}</span>
                             </li>
                           ))}
                         </ul>

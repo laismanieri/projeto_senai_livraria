@@ -94,19 +94,21 @@ public class PedidoService {
     	        detalheEncontrado.setPrecoDesc(detalheEncontrado.getPrecoDesc());
 
     	        
-    	        /*
-				DetalheLivroDTO detDTO = new DetalheLivroDTO();
-				detDTO.setId(item.getDetalheLivro().getId());
-				detDTO.setLivroId(livroEncontrado.getId());
-				detDTO.setPreco(item.getDetalheLivro().getPreco());
-				detDTO.setQtdeEstoque(item.getDetalheLivro().getQtdeEstoque());
-				detDTO.setTipoLivro(item.getDetalheLivro().getTipoLivro());
-				detDTO.setPrecoDesc(objetoEncontrado.);
-				
-				
-				itemPedidoSelectDTO.setDetalheLivroDTO(detDTO);
-				*/
+                Livro livro = new Livro();
+                livro.setId(livroEncontrado.getId());
+                livro.setTitulo(livroEncontrado.getTitulo());
+                livro.setAutor(livroEncontrado.getAutor());
+                livro.setAnoPublicacao(livroEncontrado.getAnoPublicacao());
+                livro.setSinopse(livroEncontrado.getSinopse());
+                livro.setGenero(livroEncontrado.getGenero());
+                livro.setEditora(livroEncontrado.getEditora());
+                livro.setQtdePagina(livroEncontrado.getQtdePagina());
+                livro.setOferta(livroEncontrado.getOferta());
+                livro.setDestaque(livroEncontrado.getDestaque());
+                livro.setImagem(livroEncontrado.getImagem());
 
+                detalheEncontrado.setLivro(livro);
+                
     			itemPedidoSelectDTO.setDetalheLivroDTO(detalheEncontrado);
     			
     			listaItemPedidoSelectDTO.add(itemPedidoSelectDTO);
