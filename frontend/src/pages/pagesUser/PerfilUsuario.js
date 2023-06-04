@@ -107,12 +107,10 @@ function PerfilUsuario() {
           <div className={styles.gridPerfil}>
             <ul className={styles.gridPerfilLista}>
               <li
-                className={`${styles.gridPerfilListaItem} ${
-                  activeItem === "Olá" ? styles.active : ""
-                }`}
-                onClick={() => handleItemClick("Olá")}
+                className={styles.gridPerfilListaItem}
+  
               >
-                <FaUserCircle className={styles.imagemPerfil} />
+                <FaUserCircle className={styles.iconPerfil} />
                 <span>Olá</span>
               </li>
               <li

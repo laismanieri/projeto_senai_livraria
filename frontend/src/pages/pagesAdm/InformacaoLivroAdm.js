@@ -304,30 +304,7 @@ function InformacaoLivroAdm() {
                         />
                       </li>
                     </ul>
-                    <ul className={styles.fichaBolean}>
-                      <li className={styles.fichaInfo}>
-                        <label htmlFor="oferta" className={styles.fichaTh}>
-                          Oferta:
-                        </label>
-                        <input
-                          type="text"
-                          id="oferta"
-                          className={styles.inputAdm}
-                          defaultValue={livro.oferta}
-                        />
-                      </li>
-                      <li className={styles.fichaInfo}>
-                        <label htmlFor="destaque" className={styles.fichaTh}>
-                          Destaque:
-                        </label>
-                        <input
-                          type="text"
-                          id="destaque"
-                          className={styles.inputAdm}
-                          defaultValue={livro.destaque}
-                        />
-                      </li>
-                    </ul>
+
                     <ul className={styles.fichaBolean}>
                       <li className={styles.fichaInfo}>
                         <label htmlFor="anoPublicacao" className={styles.fichaTh}>
@@ -351,6 +328,30 @@ function InformacaoLivroAdm() {
                           defaultValue={livro.qtdePagina}
                         />
                       </li>
+                      <ul className={styles.fichaBolean}>
+                      <li className={styles.fichaInfo}>
+                        <label htmlFor="oferta" className={styles.fichaTh}>
+                          Oferta:
+                        </label>
+                        <input
+                          type="checkbox"
+                          id="oferta"
+                          className={styles.inputAdm}
+                          defaultValue={livro.oferta}
+                        />
+                      </li>
+                      <li className={styles.fichaInfo}>
+                        <label htmlFor="destaque" className={styles.fichaTh}>
+                          Destaque:
+                        </label>
+                        <input
+                          type="checkbox"
+                          id="destaque"
+                          className={styles.inputAdm}
+                          defaultValue={livro.destaque}
+                        />
+                      </li>
+                    </ul>
                     </ul>
                     <ul className={styles.fichaAdm}>
                       <li className={styles.fichaInfo}>
@@ -367,6 +368,7 @@ function InformacaoLivroAdm() {
                         />
                       </li>
                     </ul>
+                    
                   </div>
                 </div>
               </div>

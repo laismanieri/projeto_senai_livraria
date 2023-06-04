@@ -16,14 +16,46 @@ function CardAdm({ livro }) {
   const [lista, setLista] = useState([]);
 
   const handleDeleteLivro = (id) => {
+    // Verifica se há pedidos relacionados ao livro
     axios
-      .delete(`http://localhost:8082/livro/${id}`)
+      .get('http://localhost:8082/pedido/dto')
       .then((response) => {
-        // atualiza a lista de livros para excluir o livro deletado
-        setLista(lista.filter((livro) => livro.id !== id));
+        const pedidos = response.data;
+  
+        // Verifica se algum pedido contém o livro em questão
+        const livroPedido = pedidos.find(
+          (pedido) =>
+            pedido.itensDTO &&
+            pedido.itensDTO.some(
+              (item) => item.detalheLivroDTO.livroId === id
+            )
+        );
+  
+        if (livroPedido) {
+          // Exibe mensagem informando que o livro não pode ser deletado
+          console.log('Não é possível excluir o livro. Já existe um pedido relacionado a ele.');
+          toast.success("Não é possível excluir o livro. Já existe um pedido relacionado a ele.");
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
+        } else {
+          // Caso não haja pedidos relacionados, prossegue com a exclusão do livro
+          axios
+            .delete(`http://localhost:8082/livro/${id}`)
+            .then((response) => {
+              // Atualiza a lista de livros para excluir o livro deletado
+              setLista(lista.filter((livro) => livro.id !== id));
+              toast.success("Livro excluído com sucesso.");
+              setTimeout(() => {
+                window.location.reload();
+              }, 3000);
+            })
+            .catch((error) => console.log(error));
+        }
       })
       .catch((error) => console.log(error));
   };
+  
 
   return (
     <div className={styles.containerCardAdm}>
@@ -49,10 +81,7 @@ function CardAdm({ livro }) {
           </Link>
           <button
             className={styles.buttonCardAdm}
-            onClick={() => {handleDeleteLivro(livro.id); 
-              toast.success("Livro excluído com sucesso!", {
-                position: toast.POSITION.TOP_CENTER, // Posição centralizada na parte superior
-              });
+            onClick={() => {handleDeleteLivro(livro.id)
             }}
           >
             Deletar
