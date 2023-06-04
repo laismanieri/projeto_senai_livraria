@@ -5,11 +5,9 @@ import styles from "../adm/ListaPedido.module.css";
 function ListaPedido() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [pedidos, setPedidos] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(10);
 
   useEffect(() => {
-    fetch("http://localhost:8082/pedido/dto")
+    fetch('http://localhost:8082/pedido/dto')
       .then((response) => response.json())
       .then((data) => setPedidos(data))
       .catch((error) => console.log(error));
@@ -19,86 +17,13 @@ function ListaPedido() {
     setIsExpanded(!isExpanded);
   };
 
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const renderTableRows = () => {
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = pedidos.slice(indexOfFirstItem, indexOfLastItem);
-
-    if (currentItems.length === 0) {
-      return (
-        <tr>
-          <td className={styles.tdListarPedido} colSpan={9}>
-            Nenhum pedido encontrado.
-          </td>
-        </tr>
-      );
-    }
-
-    return currentItems.map((pedido) => (
-      <tr key={pedido.id} className={styles.trListarPedido}>
-        <td className={styles.tdListarPedido}>{pedido.id}</td>
-        <td className={styles.tdListarPedido}>{pedido.dataPedido}</td>
-        <td className={styles.tdListarPedido}>{pedido.usuario_id}</td>
-        {pedido.itensDTO && pedido.itensDTO.length > 0 ? (
-          pedido.itensDTO.map((item) => (
-            <React.Fragment key={item.id}>
-              <td className={styles.tdListarPedido}>{item.valorTotal}</td>
-              <td className={styles.tdListarPedido}>{item.valorUnid}</td>
-              <td className={styles.tdListarPedido}>{item.qtdeItens}</td>
-              <td className={styles.tdListarPedido}>{item.detalheLivroDTO.id}</td>
-              <td className={styles.tdListarPedido}>{item.detalheLivroDTO.tipoLivro}</td>
-              <td className={styles.tdListarPedido}>{item.detalheLivroDTO.livroId}</td>
-            </React.Fragment>
-          ))
-        ) : (
-          <React.Fragment>
-            <td className={styles.tdListarPedido} colSpan={4}>
-              Nenhum item disponível.
-            </td>
-            <td className={styles.tdListarPedido}></td>
-            <td className={styles.tdListarPedido}></td>
-            <td className={styles.tdListarPedido}></td>
-          </React.Fragment>
-        )}
-      </tr>
-    ));
-  };
-
-  const renderPaginationButtons = () => {
-    const pageNumbers = Math.ceil(pedidos.length / itemsPerPage);
-
-    if (pageNumbers === 1) {
-      return null; // Não renderizar botões de paginação se houver apenas uma página
-    }
-
-    return (
-      <div>
-        {Array.from({ length: pageNumbers }, (_, index) => index + 1).map(
-          (pageNumber) => (
-            <Button className={styles.paginacaoButton}
-              key={pageNumber}
-              variant="secondary"
-              onClick={() => handlePageChange(pageNumber)}
-            >
-              {pageNumber}
-            </Button>
-          )
-        )}
-      </div>
-    );
-  };
-
   return (
     <>
-      <div className={styles.containerCadastroLivro}>
-        <h2 className={styles.tituloListarPedido}>Listar Pedidos</h2>
-        <div className="linhaHorizontal" />
+      <div className={`${styles.containerCadastroLivro} ${styles.customClass}`}>
+        <h2 className={`${styles.tituloListarPedido} ${styles.customClass}`}>Listar Pedidos</h2>
+        <div className={`${styles.linhaHorizontal} ${styles.customClass}`} />
         <Button
-          className={styles.buttonExpandir}
+          className={`${styles.buttonExpandir} ${styles.customClass}`}
           variant="secondary"
           onClick={handleToggleExpand}
         >
@@ -107,30 +32,52 @@ function ListaPedido() {
         <br />
         <br />
         {isExpanded && (
-          <>
-            <table className={styles.tableListarPedido}>
-              <thead className={styles.theadListarPedido}>
-                <tr className={styles.trListarPedido}>
-                  <th className={styles.thListarPedido}>ID do Pedido</th>
-                  <th className={styles.thListarPedido}>Data do Pedido</th>
-                  <th className={styles.thListarPedido}>Usuário ID</th>
-                  <th className={styles.thListarPedido}>Valor Total</th>
-                  <th className={styles.thListarPedido}>Valor Unitário</th>
-                  <th className={styles.thListarPedido}>Quantidade</th>
-                  <th className={styles.thListarPedido}>
-                    ID do Detalhe do Livro
-                  </th>
-                  <th className={styles.thListarPedido}>Tipo de Livro</th>
-                  <th className={styles.thListarPedido}>ID do Livro</th>
+          <table className={`${styles.customClass}`}>
+            <thead>
+              <tr className={`${styles.customClass}`}>
+                <th className={`${styles.customClass}`}>ID</th>
+                <th className={`${styles.customClass}`}>Data do Pedido</th>
+                <th className={`${styles.customClass}`}>Valor Total do Pedido</th>
+                <th className={`${styles.customClass}`}>Itens</th>
+              </tr>
+            </thead>
+            <tbody>
+              {pedidos.length > 0 ? (
+                pedidos.map((pedido) => (
+                  <tr key={pedido.id} className={`${styles.customClass}`}>
+                    <td className={`${styles.customClass}`}>{pedido.id}</td>
+                    <td className={`${styles.customClass}`}>{pedido.dataPedido}</td>
+                    <td className={`${styles.customClass}`}>{pedido.valorTotal}</td>
+                    <td className={`${styles.customClass}`}>
+                      {pedido.itensDTO && pedido.itensDTO.length > 0 ? (
+                        <ul className={`${styles.customClass}`}>
+                          {pedido.itensDTO.map((item) => (
+                            <li key={item.id} className={`${styles.customClass}`}>
+                              <span>Detalhe Livro ID: {item.detalheLivroDTO.id}</span>
+                              <span>Quantidade: {item.qtdeItens}</span>
+                              <span>Valor Unitário: {item.valorUnid}</span>
+                              <span>Valor Total: {item.valorTotal}</span>
+                                <span>Tipo de Livro: {item.detalheLivroDTO.tipoLivro}</span>
+                                <span>Id do Livro: {item.detalheLivroDTO.livroId}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className={`${styles.customClass}`}>Nenhum item disponível.</p>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr className={`${styles.customClass}`}>
+                  <td colSpan={4} className={`${styles.customClass}`}>Nenhum pedido encontrado.</td>
                 </tr>
-              </thead>
-              <tbody>{renderTableRows()}</tbody>
-            </table>
-            {renderPaginationButtons()}
-          </>
+              )}
+            </tbody>
+          </table>
         )}
       </div>
-      <div className="linhaHorizontal" />
+      <div className={`${styles.linhaHorizontal} ${styles.customClass}`} />
     </>
   );
 }
