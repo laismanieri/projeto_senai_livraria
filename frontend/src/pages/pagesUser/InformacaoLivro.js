@@ -159,7 +159,6 @@ const adicionarAoFavorito = (livro) => {
         <div className={styles.linhaHorizontal} />
         <div className={styles.gridContainer}>
           <div className={styles.gridItemLong}>
-            {livro.id}
             <img
               className={styles.imagemLivro}
               src={livro.imagem}
@@ -197,7 +196,7 @@ const adicionarAoFavorito = (livro) => {
                     <ul className={styles.ulCompraInfoTipo}>
                       <li>
                         <span className={styles.liCompraInfoTit}>
-                          {detalhe.tipoLivro} - ID: {detalhe.id}
+                          {detalhe.tipoLivro}
                         </span>
                       </li>
                     </ul>
