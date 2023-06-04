@@ -49,7 +49,6 @@ function InformacaoLivroAdm() {
     // Cria um novo objeto livro com as propriedades atualizadas
     const livroAtualizado = {
       ...livro,
-      id: document.getElementById("id").value,
       titulo: document.getElementById("titulo").value,
       autor: document.getElementById("autor").value,
       editora: document.getElementById("editora").value,
