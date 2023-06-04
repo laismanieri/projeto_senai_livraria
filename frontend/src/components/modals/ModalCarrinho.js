@@ -1,12 +1,13 @@
 import styles from "../modals/Modal.module.css";
 import { AiFillDelete, AiOutlineClose, AiFillEdit } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import PaymentMethodSelect from "../../components/layout/PaymentMethodSelect";
 import { toast } from "react-toastify";
 
 import React from "react";
+import { AuthContext } from "../layout/AuthContext";
 
 const ModalCarrinho = ({
   livro,
@@ -16,6 +17,16 @@ const ModalCarrinho = ({
   carrinho,
   setCarrinho,
 }) => {
+
+  const { user } = useContext(AuthContext);
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      setUserId(user.id);
+    }
+  }, [user]);
+  
   const [modalIsOpenLivroAdd, setModalIsOpenLivroAdd] = useState(false);
 
   const [qtdeTotal, setQtdeTotal] = useState(0);
@@ -75,11 +86,16 @@ const ModalCarrinho = ({
   }
 
   const onFinalizarPedido = () => {
+
+    if (!userId) {
+      console.error("ID do usuário não foi obtido");
+      return;
+    }
     // Criar objeto com os dados do pedido
     const pedido = {
       id: -1,
       dataPedido: new Date().toISOString().slice(0, 10),
-      usuario_id: 1,
+      usuario_id: userId,
       valorTotal: total,
       itensDTO: carrinho.map((livro) => ({
         id: -1,
@@ -112,10 +128,10 @@ const ModalCarrinho = ({
         // Limpar carrinho após finalizar o pedido
         setCarrinho([]);
         localStorage.removeItem("carrinho");
-        toast.success("Recebemos seu pedido!");
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+        // toast.success("Recebemos seu pedido!");
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 3000);
 
         carrinho.forEach((livro) => {
           const detalheId = livro.id;
