@@ -33,7 +33,7 @@ public class ItemPedido {
 	
 	private BigDecimal valorUnid;
 	
-	private BigDecimal valorTotal;
+	private BigDecimal valorTotalItem;
 	
     private int qtdeItens;
 	
