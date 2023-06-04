@@ -38,6 +38,13 @@ public class PedidoController {
         List<PedidoSelectDTO> pedidosDTO = pedidoService.listarTodosDTO();
         return ResponseEntity.ok(pedidosDTO);
     }
+    
+    @GetMapping("/dto/{usuarioId}")
+    public ResponseEntity<List<PedidoSelectDTO>> listarPedidosPorUsuario(@PathVariable Long usuarioId) {
+        List<PedidoSelectDTO> pedidos = pedidoService.listarTodosPorUsuarioDTO(usuarioId);
+        return ResponseEntity.ok(pedidos);
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Pedido> buscarPorId(@PathVariable Long id) {

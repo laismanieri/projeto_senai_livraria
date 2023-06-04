@@ -139,6 +139,75 @@ public class PedidoService {
         return pedidoRepository.save(pedido);
     }
 
+    @Transactional(readOnly = true)
+    public List<PedidoSelectDTO> listarTodosPorUsuarioDTO(Long usuarioId) {
+        List<PedidoSelectDTO> listaRespostaPedidoSelectDTO = new ArrayList<>();
+
+        for (Pedido pedido : pedidoRepository.findAll()) {
+            if (pedido.getUsuario().getId().equals(usuarioId)) {
+                PedidoSelectDTO pedidoSelectDTO = new PedidoSelectDTO();
+                pedidoSelectDTO.setId(pedido.getId());
+                pedidoSelectDTO.setUsuario_id(pedido.getUsuario().getId());
+                pedidoSelectDTO.setDataPedido(pedido.getDataPedido());
+                pedidoSelectDTO.setValorTotal(pedido.getValorTotal());
+
+                List<ItemPedidoSelectDTO> listaItemPedidoSelectDTO = new ArrayList<>();
+                for (ItemPedido item : pedido.getItens()) {
+                    ItemPedidoSelectDTO itemPedidoSelectDTO = new ItemPedidoSelectDTO();
+                    itemPedidoSelectDTO.setId(item.getId());
+                    itemPedidoSelectDTO.setQtdeItens(item.getQtdeItens());
+                    itemPedidoSelectDTO.setValorUnid(item.getValorUnid());
+                    itemPedidoSelectDTO.setValorTotal(item.getValorTotalItem());
+
+                    List<LivroOfertaDTO> lista = livroService.buscarTambemOferta();
+
+                    LivroOfertaDTO livroEncontrado = null;
+                    for (LivroOfertaDTO livro : lista) {
+                        if (livro.getId().equals(item.getDetalheLivro().getLivro().getId())) {
+                            livroEncontrado = livro;
+                            break;
+                        }
+                    }
+
+                    DetalheLivroDTO detalheEncontrado = null;
+                    for (DetalheLivroDTO det : livroEncontrado.getDetalhesDTO()) {
+                        if (det.getId().equals(item.getDetalheLivro().getId())) {
+                            detalheEncontrado = det;
+                            break;
+                        }
+                    }
+
+                    detalheEncontrado.setLivroId(livroEncontrado.getId());
+                    detalheEncontrado.setPrecoDesc(detalheEncontrado.getPrecoDesc());
+
+                    Livro livro = new Livro();
+                    livro.setId(livroEncontrado.getId());
+                    livro.setTitulo(livroEncontrado.getTitulo());
+                    livro.setAutor(livroEncontrado.getAutor());
+                    livro.setAnoPublicacao(livroEncontrado.getAnoPublicacao());
+                    livro.setSinopse(livroEncontrado.getSinopse());
+                    livro.setGenero(livroEncontrado.getGenero());
+                    livro.setEditora(livroEncontrado.getEditora());
+                    livro.setQtdePagina(livroEncontrado.getQtdePagina());
+                    livro.setOferta(livroEncontrado.getOferta());
+                    livro.setDestaque(livroEncontrado.getDestaque());
+                    livro.setImagem(livroEncontrado.getImagem());
+
+                    detalheEncontrado.setLivro(livro);
+
+                    itemPedidoSelectDTO.setDetalheLivroDTO(detalheEncontrado);
+
+                    listaItemPedidoSelectDTO.add(itemPedidoSelectDTO);
+                }
+
+                pedidoSelectDTO.setItensDTO(listaItemPedidoSelectDTO);
+                listaRespostaPedidoSelectDTO.add(pedidoSelectDTO);
+            }
+        }
+
+        return listaRespostaPedidoSelectDTO;
+    }
+
     
     @Transactional
     public void excluir(Long id) {

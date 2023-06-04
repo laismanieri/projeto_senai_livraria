@@ -130,10 +130,10 @@ const ModalCarrinho = ({
         // Limpar carrinho após finalizar o pedido
         setCarrinho([]);
         localStorage.removeItem("carrinho");
-        // toast.success("Recebemos seu pedido!");
-        // setTimeout(() => {
-        //   window.location.reload();
-        // }, 3000);
+        toast.success("Recebemos seu pedido!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
 
         carrinho.forEach((livro) => {
           const detalheId = livro.id;
