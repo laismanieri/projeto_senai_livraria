@@ -16,23 +16,24 @@
   height: 2em;
   width: 15em;
   background: #146b97b2;
-  margin-top: 20px;
+  margin: 20px 0;
   border: none;
   border-radius: 7px;
   justify-content: center;
   cursor: pointer;
 }
 
-.buttonExpandir:hover{
+
+.buttonExpandir:hover, .paginacaoButton:hover{
   background-color: #146b97;
   color: white;
 }
 
 .paginacaoButton {
-  /* Adicione os estilos desejados aqui */
+  margin-top: 20px;
   margin-right: 5px;
   color: white;
-  background-color: #146b97;
+  background: #146b97b2;
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
@@ -54,9 +55,6 @@
   margin-bottom: 20px;
 }
 
-.buttonExpandir {
-  margin-bottom: 20px;
-}
 
 table {
   width: 100%;
