@@ -22,18 +22,18 @@ const Banner = () => {
   return (
     <div className="carousel-wrapper">
       <Slider {...settings} ref={sliderRef}>
-        {/* <div>
+        <div>
         <img 
-            src="https://static3.tcdn.com.br/img/img_prod/825130/1679926150_willow_acredita_que_a_unica_maneira_de.png" alt=""/>
-        </div> */}
+            src="https://leitura.com.br/image/cache/catalog/Maio-2023-1170x300-A-1170x300.png" alt=""/>
+        </div>
                 <div>
-          <img src="https://static3.tcdn.com.br/img/img_prod/825130/1677848614_existe_aquele_momento_em_que_voc_termina_um_livro_realmente_incrvel_e_s_precisa_de_um_segundo_para_respirar_fundo_e_absorver_todos_os_seus_sentimentos.__to_mas_to_bom_que_voc_no_consegue_expressar_c.png" alt=""/>
+          <img src="https://leitura.com.br/image/cache/catalog/Leitura.1-1170x300.png" alt=""/>
         </div>
         <div>
-          <img src="https://static3.tcdn.com.br/img/img_prod/825130/1677870219_um_estranho_nos.png" alt="" />
+          <img src="https://leitura.com.br/image/cache/catalog/Rede%20Leitura%20-%2025%20de%20maio-1170x300.jpg" alt="" />
         </div>
         <div>
-          <img src="https://static3.tcdn.com.br/img/img_prod/825130/1677706919_banner_trs_mulheres._trs_datas._um_homem_desaparecido.png" alt=""/>
+          <img src="https://leitura.com.br/image/cache/catalog/Banner%20sergio%20vaz%20-%20leitura-1170x300.jpg" alt=""/>
         </div>
 
       </Slider>

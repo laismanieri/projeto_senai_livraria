@@ -47,25 +47,25 @@
       }
     ]
   },
-    {
-    "anoPublicacao": "2021",
-    "titulo": "Coleção Especial Jane Austen - Box com 5 livrosa",
-    "autor": "Jane Austen",
-    "genero": "Romance",
-    "editora": "Principis",
-    "sinopse": "As obras de Jane Austen retratam personagens complexas da sociedade rural georgiana e marcam a crescente do romantismo. À frente do seu tempo, a autora defendia a educação liberal das mulheres em seus livros. Este kit com 5 livros: Orgulho e preconceito, Persuasão, Razão e Sensibilidade, A abadia de Northanger e Emma, exemplificam a genialidade de Jane Austen.",
-    "imagem": "https://m.media-amazon.com/images/I/611HaMIckPL._SY344_BO1,204,203,200_QL70_ML2_.jpg",
-    "qtdePagina": 1424,
+  {
+    "anoPublicacao": "2022",
+    "titulo": "Box Uma chama entre as cinzas",
+    "autor": "Sabaa Tahir",
+    "genero": "Fantasia",
+    "editora": "Verus",
+    "sinopse": "Um box incrível para fãs de histórias épicas e eletrizantes. Em Uma Chama entre as Cinzas, considerada uma das melhores séries de fantasia de todos os tempos, o leitor vai mergulhar em uma história emocionante de liberdade, coragem e esperança que vai deixá-lo ávido por iniciar o próximo livro e fazê-lo desejar que eles nunca chegassem ao fim. O box acompanha quatro marcadores temáticos e a graphic novel Um ladrão entre as árvores, uma prequel da série.",
+    "imagem": "https://m.media-amazon.com/images/I/811wnfX6j-L._SX258_BO1,204,203,200_QL70_ML2_.jpg",
+    "qtdePagina": 1792,
     "oferta": "false",
     "destaque": "true",
     "detalhes": [
       {
-        "preco": 67.42,
+        "preco": 103.99,
         "tipoLivro": "FISICO",
         "qtdeEstoque": 110
       },
       {
-        "preco": 35.91,
+        "preco": 78.33,
         "tipoLivro": "EBOOK",
         "qtdeEstoque": 180
       }
