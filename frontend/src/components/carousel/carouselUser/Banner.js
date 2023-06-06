@@ -16,7 +16,7 @@ const Banner = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 1000,
   };
 
   return (
@@ -24,7 +24,7 @@ const Banner = () => {
       <Slider {...settings} ref={sliderRef}>
         <div>
         <img 
-            src="https://leitura.com.br/image/cache/catalog/Maio-2023-1170x300-A-1170x300.png" alt=""/>
+            src="https://lojasaraivanew.vtexassets.com/assets/vtex.file-manager-graphql/images/38a56298-9f90-4e76-8cbe-ab20b2c27bec___e561c6a7dabb6efab1008cfeae880870.png" alt=""/>
         </div>
                 <div>
           <img src="https://leitura.com.br/image/cache/catalog/Leitura.1-1170x300.png" alt=""/>

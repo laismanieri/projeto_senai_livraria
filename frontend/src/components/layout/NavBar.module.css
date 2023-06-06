@@ -101,3 +101,57 @@
   color: white; /* Altere para a cor desejada */
   text-decoration: none; /* Remova a decoração de sublinhado, se desejado */
 }
+
+@media only screen and (min-width: 320px) and (max-width: 576px) {
+  .navbarContainerGrid {
+    display: grid;
+    grid-template-columns: 23% 40% 32% 7.5% 7.5%;
+    grid-template-rows: 6em;
+    justify-items: center;
+    align-items: center;
+    margin: 2%;
+    width: calc(100% - 16%);
+  }
+
+  .navbarContainerGridAdm{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 6em;
+    justify-items: center;
+    align-items: center;
+    margin: 0 8%;
+    width: calc(100% - 16%);
+  }
+  
+  
+}
+
+@media only screen and (min-width: 577) and (max-width: 768px) {
+ 
+
+}
+
+@media only screen and (min-width: 1201px) and (max-width: 1440px) {
+
+
+
+}
+
+ 
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+
+
+}
+
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+
+
+
+
+}
+
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+
+
+
+  }

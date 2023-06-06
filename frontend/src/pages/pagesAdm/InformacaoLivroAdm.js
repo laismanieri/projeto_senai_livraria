@@ -432,10 +432,6 @@ function InformacaoLivroAdm() {
                         </ul>
                       </div>
 
-
-
-
-
                     </>
                   )}
                   {tipoLivroSelecionado === "EBOOK" && (

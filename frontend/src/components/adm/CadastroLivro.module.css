@@ -147,6 +147,10 @@
     width: 100%;
   }
   
+  .buttonCadastrar {
+    width: 100%;
+  }
+  
   .inputCadastrar {
     max-width: 400px;
   }

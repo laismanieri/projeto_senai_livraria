@@ -506,11 +506,15 @@
 @media only screen and (min-width: 577px) and (max-width: 768px) {
 
   .container{
-    margin: 15% 1% 0 1%;      
+    margin: 15% 2% 0 2%;      
   }
 
   .divComprarLivros{
     padding: 3px;
+  }
+
+  .divTipoLivros{
+    padding: 10px;
   }
 
   .liEntrega {
@@ -523,7 +527,9 @@
 
 .gridContainerAdm {
     display: grid;
-    grid-template-columns: 18% 52% 25%; /* Alterado */
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows: 70em;
+    gap: 0; /* Alterado */
   }
 
 
@@ -536,11 +542,22 @@
     margin: 10px;
   }
  
+  .liInfoTit{
+    font-size: 1em;
+  }
+  .fichaBolean {
+    display: inline-block;
+    gap: 0;
+  }
+
+
   }
  
 
 
 @media only screen and (min-width: 769px) and (max-width: 992px) {
+
+  
   
 }
 
@@ -559,13 +576,28 @@
 
  
   }
+  
+  .fichaBolean {
+    display: inline-block;
+    justify-content: space-around;
+    gap: 3em;
+  }
+
+  .gridContainerAdm {
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows: 70em;
+
+    color: #146b97;  
+  }
+
+
 
 }
 
 
 @media only screen and (min-width: 1201px) and (max-width: 1440px) {
   .container {
-    margin: 7% 10% 0 10%;
+    margin: 7% 6% 0 6%;
 
   }
 
@@ -623,6 +655,11 @@
   .fichaBolean,
   .fichaAdm {
     font-size: 14px;
+  }
+
+  .fichaBolean {
+    display: inline-block;
+    gap: 0;
   }
 
   .inputAdm,
