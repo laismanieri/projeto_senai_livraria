@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import br.senai.sp.livraria.model.entity.Endereco;
 import br.senai.sp.livraria.model.entity.Usuario;
 import br.senai.sp.livraria.service.UsuarioService;
 
@@ -60,17 +61,48 @@ public class UsuarioController {
         return ResponseEntity.ok(usuario);
     }
 
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Usuario> atualizar(@PathVariable Long id, @RequestBody Usuario usuarioAtualizado) {
+//        Usuario usuario = usuarioService.buscarPorId(id);
+//        usuario.setNome(usuarioAtualizado.getNome());
+//        usuario.setCpf(usuarioAtualizado.getCpf());
+//        usuario.setEmail(usuarioAtualizado.getEmail());
+//        usuario.setSenha(usuarioAtualizado.getSenha());
+//        usuario.setDataCadastro(usuarioAtualizado.getDataCadastro());
+//        Usuario usuarioAtualizadoSalvo = usuarioService.salvar(usuario);
+//        return ResponseEntity.ok(usuarioAtualizadoSalvo);
+//    }
+    
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> atualizar(@PathVariable Long id, @RequestBody Usuario usuarioAtualizado) {
         Usuario usuario = usuarioService.buscarPorId(id);
-        usuario.setNome(usuarioAtualizado.getNome());
-        usuario.setCpf(usuarioAtualizado.getCpf());
-        usuario.setEmail(usuarioAtualizado.getEmail());
-        usuario.setSenha(usuarioAtualizado.getSenha());
-        usuario.setDataCadastro(usuarioAtualizado.getDataCadastro());
-        Usuario usuarioAtualizadoSalvo = usuarioService.salvar(usuario);
-        return ResponseEntity.ok(usuarioAtualizadoSalvo);
+        if (usuario != null) {
+            usuario.setNome(usuarioAtualizado.getNome());
+            usuario.setCpf(usuarioAtualizado.getCpf());
+            usuario.setEmail(usuarioAtualizado.getEmail());
+            usuario.setSenha(usuarioAtualizado.getSenha());
+            usuario.setDataCadastro(usuarioAtualizado.getDataCadastro());
+            
+            // Atualize o endereço do usuário
+            List<Endereco> enderecosAtualizados = usuarioAtualizado.getEnderecos();
+            if (enderecosAtualizados != null) {
+                // Defina o usuário atualizado para cada endereço
+                for (Endereco endereco : enderecosAtualizados) {
+                    endereco.setUsuario(usuario);
+                }
+                // Atualize a lista de endereços do usuário
+                usuario.setEnderecos(enderecosAtualizados);
+            }
+            
+            // Salve o usuário atualizado
+            Usuario usuarioAtualizadoSalvo = usuarioService.salvar(usuario);
+            
+            return ResponseEntity.ok(usuarioAtualizadoSalvo);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {

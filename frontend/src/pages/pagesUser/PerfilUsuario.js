@@ -159,16 +159,21 @@ function FormDadosPessoais({ active, user, endereco, setEndereco }) {
         cpf: event.target.elements.formCpf.value,
         dataCadastro: event.target.elements.formDataCadastro.value,
         senha: event.target.elements.formSenha.value,
-        endereco: {
-          cep: event.target.elements.cep.value,
-          uf: event.target.elements.uf.value,
-          cidade: event.target.elements.cidade.value,
-          logradouro: event.target.elements.logradouro.value,
-          bairro: event.target.elements.bairro.value,
-          numero: event.target.elements.numero.value,
-          complemento: event.target.elements.complemento.value,
-        },
+        enderecos: [
+          {
+            id: user.enderecos[0].id,
+            uf: event.target.elements.uf.value,
+            cidade: event.target.elements.cidade.value,
+            logradouro: event.target.elements.logradouro.value,
+            bairro: event.target.elements.bairro.value,
+            numero: event.target.elements.numero.value,
+            complemento: event.target.elements.complemento.value,
+            cep: event.target.elements.cep.value,
+          },
+        ],
       };
+      
+      
       console.log(dadosUsuarioAtualizados);
       console.log(user.id);
       // Fazer a solicitação PUT para atualizar os dados do usuário
