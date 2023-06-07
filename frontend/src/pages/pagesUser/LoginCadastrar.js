@@ -150,7 +150,7 @@ function LoginCadastrar() {
           <img src="/img/logo.png" alt="Logo" className={styles.loginLogo} />
         </div>
         <div>
-          <h1>Bem vindo de volta</h1>
+          <h1>Bem-vindo de volta</h1>
         </div>
         <div className={styles.loginInfo}>
           <h2 className={styles.loginInfoH2}>

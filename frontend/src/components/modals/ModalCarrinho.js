@@ -233,7 +233,10 @@ const ModalCarrinho = ({
                               <p className={styles.precoTit}>
                                 <span className={styles.precoTit}>Preço: </span>
                                 <span className={styles.precoAntigo}>
-                                  {livro.preco}
+                                  {livro.preco.toLocaleString("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                              })}
                                 </span>
                               </p>
 
@@ -242,7 +245,10 @@ const ModalCarrinho = ({
                                   Preço em Oferta:{" "}
                                 </span>
                                 <span className={styles.precoOferta}>
-                                  {livro.preco * 0.8}
+                                  {(livro.preco * 0.8).toLocaleString("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                              })}
                                 </span>
                               </p>
                             </div>
@@ -262,7 +268,10 @@ const ModalCarrinho = ({
                               <p className={styles.precoTit}>
                                 <span className={styles.precoTit}>Total: </span>
                                 <span className={styles.precoRegular}>
-                                  {livro.preco * 0.8 * livro.quantidade}
+                                  {(livro.preco * 0.8 * livro.quantidade).toLocaleString("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                              })}
                                 </span>
                               </p>
                             ) : (
@@ -270,7 +279,10 @@ const ModalCarrinho = ({
                                 <span className={styles.precoTit}>Total: </span>
 
                                 <span className={styles.precoRegular}>
-                                  {livro.preco * livro.quantidade}
+                                  {(livro.preco * livro.quantidade).toLocaleString("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                              })}
                                 </span>
                               </p>
                             )}

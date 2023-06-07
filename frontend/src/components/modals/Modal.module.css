@@ -185,6 +185,7 @@ select:focus {
 
 
 
+
 .imgFechar{
   color: white;
   /* background-color: white; */
@@ -240,9 +241,13 @@ select:focus {
 
 }
 
+.gridListaImg{
+  width: 6.5em;
+}
+
 .divImg{
   justify-content: center;
-  width: 10em;
+  width: 6em;
 }
 
 .imagemGrid{
