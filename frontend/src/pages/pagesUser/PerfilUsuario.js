@@ -20,6 +20,7 @@ import {
 function PerfilUsuario() {
   const [activeItem, setActiveItem] = useState("Dados Pessoais");
   const { user, setUser } = useContext(AuthContext);
+
   const [endereco, setEndereco] = useState({
     cep: "",
     uf: "",
@@ -30,10 +31,12 @@ function PerfilUsuario() {
     complemento: "",
   });
 
+
   <FormDadosPessoais
     active={activeItem === "Dados Pessoais"}
     user={user}
     endereco={endereco}
+    setEndereco={setEndereco}
   />;
 
   useEffect(() => {
@@ -80,6 +83,7 @@ function PerfilUsuario() {
             user={user}
             endereco={endereco}
             setEndereco={setEndereco}
+            setUser={setUser}
           />
         );
       case "Pedidos":
@@ -142,14 +146,35 @@ function PerfilUsuario() {
 }
 
 // Componentes de formulário de exemplo
-function FormDadosPessoais({ active, user, endereco, setEndereco }) {
+function FormDadosPessoais({ active, user, setUser}) {
   const authContext = useContext(AuthContext);
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isExpandedEndereco, setIsExpandedEndereco] = useState(false);
+  const [senhaAtual, setSenhaAtual] = useState("");
+  const [novaSenha, setNovaSenha] = useState("");
+  const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [erroSenha, setErroSenha] = useState("");
+  const[userSenha, setUserSenha] = useState(user.senha); 
+
+  const verificarSenhas = () => {
+    if (senhaAtual === user.senha) {
+      if (novaSenha === confirmarSenha && novaSenha !== "") {
+        console.log("sucesso");
+        setErroSenha("");
+        setUserSenha(novaSenha);
+      } else {
+        toast.error("As senhas não coincidem.");
+      }
+    } else {
+      toast.error("Senha atual incorreta.");
+    }
+  };
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    verificarSenhas();
 
     try {
       // Construir o objeto de dados do usuário atualizado
@@ -158,7 +183,7 @@ function FormDadosPessoais({ active, user, endereco, setEndereco }) {
         email: event.target.elements.formEmail.value,
         cpf: event.target.elements.formCpf.value,
         dataCadastro: event.target.elements.formDataCadastro.value,
-        senha: event.target.elements.formSenha.value,
+        senha: novaSenha,
         enderecos: [
           {
             id: user.enderecos[0].id,
@@ -458,6 +483,8 @@ function FormDadosPessoais({ active, user, endereco, setEndereco }) {
                       className={styles.inputForm}
                       type={mostrarSenha ? "text" : "password"}
                       placeholder="Senha Atual"
+                      onChange={(event) => setSenhaAtual(event.target.value)}
+                      // required
                       // value={user.senha}
                       // onChange={(event) => setSenha(event.target.value)}
                       // required
@@ -484,6 +511,9 @@ function FormDadosPessoais({ active, user, endereco, setEndereco }) {
                       className={styles.inputForm}
                       type={mostrarSenha ? "text" : "password"}
                       placeholder="Nova Senha"
+                      value={novaSenha}
+                      onChange={(event) => setNovaSenha(event.target.value)}
+                      required
                       // value={user.senha}
                       // onChange={(event) => setSenha(event.target.value)}
                       // required
@@ -510,6 +540,9 @@ function FormDadosPessoais({ active, user, endereco, setEndereco }) {
                       className={styles.inputForm}
                       type={mostrarSenha ? "text" : "password"}
                       placeholder="Confirme a Nova Senha"
+                      value={confirmarSenha}
+                      onChange={(event) => setConfirmarSenha(event.target.value)}
+                      required
                       // value={senha}
                       // onChange={(event) => setSenha(event.target.value)}
                       // required
@@ -531,7 +564,7 @@ function FormDadosPessoais({ active, user, endereco, setEndereco }) {
             )}
           </div>
 
-          <Button type="submit" className={styles.buttonSalvarPerfil}>
+          <Button type="submit" className={styles.buttonSalvarPerfil} onClick={verificarSenhas}>
             Salvar
           </Button>
         </Form>
