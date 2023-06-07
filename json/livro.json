@@ -266,7 +266,7 @@
     "destaque": "false",
     "detalhes": [
       {
-        "preco": 3.9,
+        "preco": 3.90,
         "tipoLivro": "EBOOK",
         "qtdeEstoque": 180
       }
@@ -285,7 +285,7 @@
     "destaque": "false",
     "detalhes": [
       {
-        "preco": 3.9,
+        "preco": 3.90,
         "tipoLivro": "EBOOK",
         "qtdeEstoque": 180
       }
@@ -304,12 +304,12 @@
     "destaque": "false",
     "detalhes": [
       {
-        "preco": 24.5,
+        "preco": 24.50,
         "tipoLivro": "FISICO",
         "qtdeEstoque": 110
       },
       {
-        "preco": 19.6,
+        "preco": 19.60,
         "tipoLivro": "EBOOK",
         "qtdeEstoque": 180
       }
@@ -333,7 +333,7 @@
         "qtdeEstoque": 110
       },
       {
-        "preco": 16.1,
+        "preco": 16.10,
         "tipoLivro": "EBOOK",
         "qtdeEstoque": 180
       }
@@ -352,7 +352,7 @@
     "destaque": "false",
     "detalhes": [
       {
-        "preco": 45.9,
+        "preco": 45.90,
         "tipoLivro": "FISICO",
         "qtdeEstoque": 110
       },
@@ -424,7 +424,7 @@
     "destaque": "false",
     "detalhes": [
       {
-        "preco": 17.0,
+        "preco": 17.00,
         "tipoLivro": "FISICO",
         "qtdeEstoque": 110
       },
@@ -449,7 +449,7 @@
     "destaque": "false",
     "detalhes": [
       {
-        "preco": 28.5,
+        "preco": 28.50,
         "tipoLivro": "FISICO",
         "qtdeEstoque": 110
       },
@@ -497,12 +497,12 @@
     "destaque": "true",
     "detalhes": [
       {
-        "preco": 35.9,
+        "preco": 35.90,
         "tipoLivro": "FISICO",
         "qtdeEstoque": 110
       },
       {
-        "preco": 34.1,
+        "preco": 34.10,
         "tipoLivro": "EBOOK",
         "qtdeEstoque": 180
       }
@@ -521,7 +521,7 @@
     "destaque": "true",
     "detalhes": [
       {
-        "preco": 42.5,
+        "preco": 42.50,
         "tipoLivro": "FISICO",
         "qtdeEstoque": 130
       },
@@ -545,7 +545,7 @@
     "destaque": "true",
     "detalhes": [
       {
-        "preco": 40.9,
+        "preco": 40.90,
         "tipoLivro": "FISICO",
         "qtdeEstoque": 120
       },
@@ -569,7 +569,7 @@
     "destaque": "true",
     "detalhes": [
       {
-        "preco": 73.5,
+        "preco": 73.50,
         "tipoLivro": "FISICO",
         "qtdeEstoque": 115
       },
@@ -612,7 +612,7 @@
     "destaque": "true",
     "detalhes": [
       {
-        "preco": 49.9,
+        "preco": 49.90,
         "tipoLivro": "FISICO",
         "qtdeEstoque": 170
       },
@@ -684,7 +684,7 @@
     "destaque": "false",
     "detalhes": [
       {
-        "preco": 44.9,
+        "preco": 44.90,
         "tipoLivro": "FISICO",
         "qtdeEstoque": 80
       },
@@ -708,12 +708,12 @@
     "destaque": "false",
     "detalhes": [
       {
-        "preco": 36.5,
+        "preco": 36.50,
         "tipoLivro": "FISICO",
         "qtdeEstoque": 105
       },
       {
-        "preco": 24.9,
+        "preco": 24.90,
         "tipoLivro": "EBOOK",
         "qtdeEstoque": 150
       }
@@ -732,7 +732,7 @@
     "destaque": "false",
     "detalhes": [
       {
-        "preco": 44.9,
+        "preco": 44.90,
         "tipoLivro": "FISICO",
         "qtdeEstoque": 110
       },
