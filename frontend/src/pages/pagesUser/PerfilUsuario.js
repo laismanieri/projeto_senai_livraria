@@ -155,7 +155,7 @@ function FormDadosPessoais({ active, user, setUser}) {
   const [novaSenha, setNovaSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [erroSenha, setErroSenha] = useState("");
-  const[userSenha, setUserSenha] = useState(user.senha); 
+  const[userSenha, setUserSenha] = useState(user?.senha); 
 
   const verificarSenhas = () => {
     if (senhaAtual === user.senha) {
