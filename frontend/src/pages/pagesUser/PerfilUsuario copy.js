@@ -157,46 +157,46 @@ function FormDadosPessoais({ active, user, setUser}) {
   const [erroSenha, setErroSenha] = useState("");
   const[userSenha, setUserSenha] = useState(user?.senha); 
 
-
+  const verificarSenhas = () => {
+    if (senhaAtual === user.senha) {
+      if (novaSenha === confirmarSenha && novaSenha !== "") {
+        console.log("sucesso");
+        setErroSenha("");
+        setUserSenha(novaSenha);
+      } else {
+        toast.error("As senhas não coincidem.");
+      }
+    } else {
+      toast.error("Senha atual incorreta.");
+    }
+  };
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-          if (senhaAtual === user.senha) {
-          console.log("Senha confirmada");
-        if (novaSenha === confirmarSenha && novaSenha !== "") {
-          console.log("Senhas conferem");
-          setErroSenha("");
-          setSenhaAtual(novaSenha);
-        } else {
-          toast.error("As senhas não coincidem.");
-        }
-      } else {
-        toast.error(novaSenha);
-      }
+    verificarSenhas();
 
     try {
-  const form = event.target; // Obtenha o formulário do evento
-
-  const dadosUsuarioAtualizados = {
-    nome: form.elements.formNome ? form.elements.formNome.value : "",
-    email: form.elements.formEmail ? form.elements.formEmail.value : "",
-    cpf: form.elements.formCpf ? form.elements.formCpf.value : "",
-    dataCadastro: form.elements.formDataCadastro ? form.elements.formDataCadastro.value : "",
-    senha: novaSenha,
-    enderecos: [
-      {
-        id: user.enderecos[0].id,
-        uf: form.elements.uf ? form.elements.uf.value : "",
-        cidade: form.elements.cidade ? form.elements.cidade.value : "",
-        logradouro: form.elements.logradouro ? form.elements.logradouro.value : "",
-        bairro: form.elements.bairro ? form.elements.bairro.value : "",
-        numero: form.elements.numero ? form.elements.numero.value : "",
-        complemento: form.elements.complemento ? form.elements.complemento.value : "",
-        cep: form.elements.cep ? form.elements.cep.value : "",
-      },
-    ],
-  };
-
+      // Construir o objeto de dados do usuário atualizado
+      const dadosUsuarioAtualizados = {
+        nome: event.target.elements.formNome.value,
+        email: event.target.elements.formEmail.value,
+        cpf: event.target.elements.formCpf.value,
+        dataCadastro: event.target.elements.formDataCadastro.value,
+        senha: novaSenha,
+        enderecos: [
+          {
+            id: user.enderecos[0].id,
+            uf: event.target.elements.uf.value,
+            cidade: event.target.elements.cidade.value,
+            logradouro: event.target.elements.logradouro.value,
+            bairro: event.target.elements.bairro.value,
+            numero: event.target.elements.numero.value,
+            complemento: event.target.elements.complemento.value,
+            cep: event.target.elements.cep.value,
+          },
+        ],
+      };
       
       
       console.log(dadosUsuarioAtualizados);
@@ -564,7 +564,7 @@ function FormDadosPessoais({ active, user, setUser}) {
             )}
           </div>
 
-          <Button type="submit" className={styles.buttonSalvarPerfil} >
+          <Button type="submit" className={styles.buttonSalvarPerfil} onClick={verificarSenhas}>
             Salvar
           </Button>
         </Form>

@@ -2,11 +2,14 @@ import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css"
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   // Função para fazer o login do usuário
   const login = async (email, senha) => {
@@ -29,7 +32,7 @@ export const AuthProvider = ({ children }) => {
     // Remove os dados do usuário do localStorage
     localStorage.removeItem("userData");
     toast.success("Logout efetuado com sucesso");
-
+    navigate("/");
     setUser(null);
   };
 
