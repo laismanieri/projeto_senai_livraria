@@ -36,6 +36,24 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const atualizarSenha = (novaSenha) => {
+    const url = `http://localhost:8082/usuario/${user.id}`;
+    axios
+      .put(url, { senha: novaSenha })
+      .then((response) => {
+        // Atualizar o estado do usuário com a nova senha
+        setUser((prevState) => ({
+          ...prevState,
+          senha: novaSenha
+        }));
+        toast.success("Senha atualizada com sucesso");
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("Ocorreu um erro ao atualizar a senha");
+      });
+  };
+
   // Verifica se existem dados do usuário armazenados no localStorage ao carregar o componente
   useEffect(() => {
     const storedUserData = localStorage.getItem("userData");
@@ -47,7 +65,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, atualizarSenha  }}>
       {children}
     </AuthContext.Provider>
   );

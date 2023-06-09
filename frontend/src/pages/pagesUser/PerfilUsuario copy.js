@@ -159,10 +159,12 @@ function FormDadosPessoais({ active, user, setUser}) {
 
   const verificarSenhas = () => {
     if (senhaAtual === user.senha) {
+      console.log("Senha correta");
       if (novaSenha === confirmarSenha && novaSenha !== "") {
-        console.log("sucesso");
+        console.log("Senha confere");
         setErroSenha("");
         setUserSenha(novaSenha);
+        console.log(novaSenha);
       } else {
         toast.error("As senhas não coincidem.");
       }

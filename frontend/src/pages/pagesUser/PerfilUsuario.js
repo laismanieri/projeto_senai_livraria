@@ -146,7 +146,7 @@ function PerfilUsuario() {
 }
 
 // Componentes de formulário de exemplo
-function FormDadosPessoais({ active, user, setUser}) {
+function FormDadosPessoais({ active, user, setUser }) {
   const authContext = useContext(AuthContext);
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -155,50 +155,54 @@ function FormDadosPessoais({ active, user, setUser}) {
   const [novaSenha, setNovaSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [erroSenha, setErroSenha] = useState("");
-  const[userSenha, setUserSenha] = useState(user?.senha); 
-
-
+  const [userSenha, setUserSenha] = useState(user?.senha);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-          if (senhaAtual === user.senha) {
-          console.log("Senha confirmada");
-        if (novaSenha === confirmarSenha && novaSenha !== "") {
-          console.log("Senhas conferem");
-          setErroSenha("");
-          setSenhaAtual(novaSenha);
-        } else {
-          toast.error("As senhas não coincidem.");
-        }
-      } else {
-        toast.error(novaSenha);
-      }
+
+      // Validar se a senha atual está correta
+  if (senhaAtual !== authContext.user.senha) {
+    toast.error("Senha atual incorreta");
+    return;
+  }
+
+  // Validar se a nova senha e a confirmação são iguais
+  if (novaSenha !== confirmarSenha) {
+    toast.error("A nova senha e a confirmação não coincidem");
+    return;
+  }
+
+  authContext.atualizarSenha(novaSenha);
 
     try {
-  const form = event.target; // Obtenha o formulário do evento
+      const form = event.target; // Obtenha o formulário do evento
 
-  const dadosUsuarioAtualizados = {
-    nome: form.elements.formNome ? form.elements.formNome.value : "",
-    email: form.elements.formEmail ? form.elements.formEmail.value : "",
-    cpf: form.elements.formCpf ? form.elements.formCpf.value : "",
-    dataCadastro: form.elements.formDataCadastro ? form.elements.formDataCadastro.value : "",
-    senha: novaSenha,
-    enderecos: [
-      {
-        id: user.enderecos[0].id,
-        uf: form.elements.uf ? form.elements.uf.value : "",
-        cidade: form.elements.cidade ? form.elements.cidade.value : "",
-        logradouro: form.elements.logradouro ? form.elements.logradouro.value : "",
-        bairro: form.elements.bairro ? form.elements.bairro.value : "",
-        numero: form.elements.numero ? form.elements.numero.value : "",
-        complemento: form.elements.complemento ? form.elements.complemento.value : "",
-        cep: form.elements.cep ? form.elements.cep.value : "",
-      },
-    ],
-  };
+      const dadosUsuarioAtualizados = {
+        nome: form.elements.formNome ? form.elements.formNome.value : "",
+        email: form.elements.formEmail ? form.elements.formEmail.value : "",
+        cpf: form.elements.formCpf ? form.elements.formCpf.value : "",
+        dataCadastro: form.elements.formDataCadastro
+          ? form.elements.formDataCadastro.value
+          : "",
+        senha: novaSenha,
+        enderecos: [
+          {
+            id: user.enderecos[0].id,
+            uf: form.elements.uf ? form.elements.uf.value : "",
+            cidade: form.elements.cidade ? form.elements.cidade.value : "",
+            logradouro: form.elements.logradouro
+              ? form.elements.logradouro.value
+              : "",
+            bairro: form.elements.bairro ? form.elements.bairro.value : "",
+            numero: form.elements.numero ? form.elements.numero.value : "",
+            complemento: form.elements.complemento
+              ? form.elements.complemento.value
+              : "",
+            cep: form.elements.cep ? form.elements.cep.value : "",
+          },
+        ],
+      };
 
-      
-      
       console.log(dadosUsuarioAtualizados);
       console.log(user.id);
       // Fazer a solicitação PUT para atualizar os dados do usuário
@@ -541,7 +545,9 @@ function FormDadosPessoais({ active, user, setUser}) {
                       type={mostrarSenha ? "text" : "password"}
                       placeholder="Confirme a Nova Senha"
                       value={confirmarSenha}
-                      onChange={(event) => setConfirmarSenha(event.target.value)}
+                      onChange={(event) =>
+                        setConfirmarSenha(event.target.value)
+                      }
                       required
                       // value={senha}
                       // onChange={(event) => setSenha(event.target.value)}
@@ -564,7 +570,7 @@ function FormDadosPessoais({ active, user, setUser}) {
             )}
           </div>
 
-          <Button type="submit" className={styles.buttonSalvarPerfil} >
+          <Button type="submit" className={styles.buttonSalvarPerfil}>
             Salvar
           </Button>
         </Form>
@@ -572,6 +578,7 @@ function FormDadosPessoais({ active, user, setUser}) {
     </div>
   );
 }
+
 
 function FormPedidos() {
   const [pedidos, setPedidos] = useState([]);
