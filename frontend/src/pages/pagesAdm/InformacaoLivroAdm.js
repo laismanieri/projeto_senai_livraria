@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import "react-toastify/dist/ReactToastify.css"
+import "react-toastify/dist/ReactToastify.css";
 import "../../pages/styles/toastify-theme.css";
 import { toast } from "react-toastify";
 
@@ -25,13 +25,14 @@ function InformacaoLivroAdm() {
 
   const adicionarDetalhe = () => {
     // Aqui você pode enviar uma solicitação POST para adicionar o novo detalhe ao livro
-    axios.post(`http://localhost:8082/detalhelivro`, {
-      detalhe: {
-        tipoLivro: tipoLivro,
-        preco: preco,
-        qtdeEstoque: qtdeEstoque,
-      }
-    })
+    axios
+      .post(`http://localhost:8082/detalhelivro`, {
+        detalhe: {
+          tipoLivro: tipoLivro,
+          preco: preco,
+          qtdeEstoque: qtdeEstoque,
+        },
+      })
       .then((response) => {
         console.log("Detalhe adicionado com sucesso:", response.data);
         // Faça qualquer ação adicional necessária, como atualizar a lista de detalhes do livro
@@ -40,7 +41,6 @@ function InformacaoLivroAdm() {
         console.error("Erro ao adicionar detalhe:", error);
       });
   };
-
 
   function handleChangeEdit() {
     // Recupera os detalhes existentes do livro original
@@ -60,7 +60,6 @@ function InformacaoLivroAdm() {
       destaque: document.getElementById("destaque").value,
       qtdePagina: document.getElementById("qtdePagina").value,
       detalhes: detalhesOriginais.map((detalhe) => {
-
         if (detalhe.tipoLivro === tipoLivroSelecionado) {
           return {
             ...detalhe,
@@ -76,7 +75,6 @@ function InformacaoLivroAdm() {
     };
     console.log(livroAtualizado);
 
-
     axios
       .put(`http://localhost:8082/livro/${id}`, livroAtualizado)
       .then((response) => {
@@ -88,7 +86,7 @@ function InformacaoLivroAdm() {
             setTimeout(() => {
               window.location.reload(); // Reload após o tempo de exibição da mensagem
             }, 3000); // Tempo de espera antes de fazer o reload em milissegundos (3 segundos)
-          }
+          },
         });
       })
       .catch((error) => {
@@ -96,7 +94,6 @@ function InformacaoLivroAdm() {
         toast.error("Erro ao atualizar!");
       });
   }
-
 
   useEffect(() => {
     axios
@@ -117,17 +114,11 @@ function InformacaoLivroAdm() {
       });
   }, [id]);
 
-
   const [isExpanded, setIsExpanded] = useState(false);
-
-
 
   const handleToggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
-
-
-
 
   if (!livro) {
     return <p>Carregando...</p>;
@@ -158,9 +149,6 @@ function InformacaoLivroAdm() {
         detalhe.tipoLivro === "EBOOK" &&
         (detalhe.qtdeEstoque === 0 || detalhe.qtdeEstoque > 0)
     );
-
-
-
 
   const customStyles = {
     content: {
@@ -217,7 +205,8 @@ function InformacaoLivroAdm() {
                 <h1 className={styles.titulo}>{livro.titulo}</h1>
                 <div className={styles.tipoLivroDetalhe}>
                   {fisicoDetalhe && fisicoDetalhe.tipoLivro && (
-                    <button id="tipoLivro"
+                    <button
+                      id="tipoLivro"
                       className={styles.buttonTipoLivroFisico}
                       onClick={() => setTipoLivroSelecionado("FISICO")}
                     >
@@ -229,7 +218,8 @@ function InformacaoLivroAdm() {
                     </button>
                   )}
                   {ebookDetalhe && ebookDetalhe.tipoLivro && (
-                    <button id="tipoLivro"
+                    <button
+                      id="tipoLivro"
                       className={styles.buttonTipoLivroEbook}
                       onClick={() => setTipoLivroSelecionado("EBOOK")}
                     >
@@ -306,7 +296,10 @@ function InformacaoLivroAdm() {
 
                     <ul className={styles.fichaBolean}>
                       <li className={styles.fichaInfo}>
-                        <label htmlFor="anoPublicacao" className={styles.fichaTh}>
+                        <label
+                          htmlFor="anoPublicacao"
+                          className={styles.fichaTh}
+                        >
                           Ano Publicação:
                         </label>
                         <input
@@ -328,29 +321,29 @@ function InformacaoLivroAdm() {
                         />
                       </li>
                       <ul className={styles.fichaBolean}>
-                      <li className={styles.fichaInfo}>
-                        <label htmlFor="oferta" className={styles.fichaTh}>
-                          Oferta:
-                        </label>
-                        <input
-                          type="checkbox"
-                          id="oferta"
-                          className={styles.inputAdm}
-                          defaultValue={livro.oferta}
-                        />
-                      </li>
-                      <li className={styles.fichaInfo}>
-                        <label htmlFor="destaque" className={styles.fichaTh}>
-                          Destaque:
-                        </label>
-                        <input
-                          type="checkbox"
-                          id="destaque"
-                          className={styles.inputAdm}
-                          defaultValue={livro.destaque}
-                        />
-                      </li>
-                    </ul>
+                        <li className={styles.fichaInfo}>
+                          <label htmlFor="oferta" className={styles.fichaTh}>
+                            Oferta:
+                          </label>
+                          <input
+                            type="checkbox"
+                            id="oferta"
+                            className={styles.inputAdm}
+                            defaultChecked={livro.oferta}
+                          />
+                        </li>
+                        <li className={styles.fichaInfo}>
+                          <label htmlFor="destaque" className={styles.fichaTh}>
+                            Destaque:
+                          </label>
+                          <input
+                            type="checkbox"
+                            id="destaque"
+                            className={styles.inputAdm}
+                            defaultChecked={livro.destaque}
+                          />
+                        </li>
+                      </ul>
                     </ul>
                     <ul className={styles.fichaAdm}>
                       <li className={styles.fichaInfo}>
@@ -367,7 +360,6 @@ function InformacaoLivroAdm() {
                         />
                       </li>
                     </ul>
-                    
                   </div>
                 </div>
               </div>
@@ -377,7 +369,6 @@ function InformacaoLivroAdm() {
               <div className={styles.divTipoLivros}>
                 <div className={styles.compra}>
                   {tipoLivroSelecionado === "FISICO" && (
-
                     <>
                       <div className={styles.divPreco}>
                         <ul className={styles.ulCompraInfoTipo}>
@@ -387,7 +378,6 @@ function InformacaoLivroAdm() {
                                 <label className={styles.liInfoTit}>
                                   {fisicoDetalhe.tipoLivro}
                                 </label>
-
                               </>
                             )}
                           </li>
@@ -414,7 +404,7 @@ function InformacaoLivroAdm() {
                               type="text"
                               id="qtdeEstoque"
                               className={styles.inputAdm}
-                              defaultValue={(fisicoEstoque.qtdeEstoque)}
+                              defaultValue={fisicoEstoque.qtdeEstoque}
                             />
                           </li>
                         </ul>
@@ -424,14 +414,14 @@ function InformacaoLivroAdm() {
                               type="text"
                               id="qtdeEstoque"
                               className={styles.estoque}
-
-                            >{fisicoEstoque.qtdeEstoque === 0
-                              ? "Sem estoque"
-                              : "Em estoque"}</p>
+                            >
+                              {fisicoEstoque.qtdeEstoque === 0
+                                ? "Sem estoque"
+                                : "Em estoque"}
+                            </p>
                           </li>
                         </ul>
                       </div>
-
                     </>
                   )}
                   {tipoLivroSelecionado === "EBOOK" && (
@@ -469,7 +459,7 @@ function InformacaoLivroAdm() {
                             type="text"
                             id="qtdeEstoque"
                             className={styles.inputAdm}
-                            defaultValue={(ebookEstoque.qtdeEstoque)}
+                            defaultValue={ebookEstoque.qtdeEstoque}
                           />
                         </li>
                       </ul>
@@ -479,10 +469,11 @@ function InformacaoLivroAdm() {
                             type="text"
                             id="qtdeEstoque"
                             className={styles.estoque}
-
-                          >{ebookEstoque.qtdeEstoque === 0
-                            ? "Sem estoque"
-                            : "Em estoque"}</p>
+                          >
+                            {ebookEstoque.qtdeEstoque === 0
+                              ? "Sem estoque"
+                              : "Em estoque"}
+                          </p>
                         </li>
                       </ul>
                     </div>
@@ -492,22 +483,17 @@ function InformacaoLivroAdm() {
             </div>
           </div>
 
-
-
           <div className={styles.linhaHorizontal} />
           <div className={styles.containerButtonAdm}>
             <Link
               to={{
-                pathname: '/adm',
+                pathname: "/adm",
                 state: { livro, detalhelivro: [ebookDetalhe, fisicoDetalhe] },
               }}
             >
               <button className={styles.buttonCardAdm}>Cancelar</button>
             </Link>
-            <button
-              className={styles.buttonCardAdm}
-              onClick={handleChangeEdit}
-            >
+            <button className={styles.buttonCardAdm} onClick={handleChangeEdit}>
               Salvar
             </button>
           </div>
