@@ -6,8 +6,16 @@ import {
   AiOutlineClose,
   AiFillHeart,
   AiOutlineArrowLeft,
+  AiOutlineHeart,
 } from "react-icons/ai";
-import { BiBook, BiCalendar, BiFile, BiBuilding, BiUser, BiBookmark } from 'react-icons/bi';
+import {
+  BiBook,
+  BiCalendar,
+  BiFile,
+  BiBuilding,
+  BiUser,
+  BiBookmark,
+} from "react-icons/bi";
 import Modal from "react-modal";
 import Navbar from "../../components/layout/NavBar";
 import Footer from "../../components/layout/Footer";
@@ -36,7 +44,6 @@ function InformacaoLivro() {
       setFavorito(JSON.parse(favoritoSalvo));
     }
   }, []);
-  
 
   useEffect(() => {
     axios
@@ -61,57 +68,70 @@ function InformacaoLivro() {
     (detalhe) => detalhe.id === detalheSelecionado
   );
 
-function adicionarAoCarrinho(detalhe) {
-  if (!detalhe) {
-    return;
+  function adicionarAoCarrinho(detalhe) {
+    if (!detalhe) {
+      return;
+    }
+
+    if (detalhe.qtdeEstoque > 0) {
+      const itemCarrinho = {
+        ...detalhe,
+        quantidade: 1,
+        oferta,
+        imagem,
+      };
+
+      const novoCarrinho = [...carrinho, itemCarrinho];
+      setCarrinho(novoCarrinho);
+      localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
+      toast.success("Livro adicionado ao carrinho!");
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+      setModalIsOpenLivroAdd(true);
+    } else {
+      toast.error("Livro sem estoque!");
+    }
   }
 
-  if (detalhe.qtdeEstoque > 0) {
-    const itemCarrinho = {
-      ...detalhe,
-      quantidade: 1,
-      oferta,
-      imagem
+  const adicionarAoFavorito = (livro) => {
+    if (!livro) {
+      return;
+    }
+
+    const itemFavorito = {
+      livro: {
+        id: livro.id,
+        titulo: livro.titulo,
+        imagem: livro.imagem,
+        oferta: livro.oferta,
+      },
     };
 
-    const novoCarrinho = [...carrinho, itemCarrinho];
-    setCarrinho(novoCarrinho);
-    localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
-    toast.success("Livro adicionado ao carrinho!");
+    const novoFavorito = [...favorito, itemFavorito];
+    setFavorito(novoFavorito);
+    localStorage.setItem("favorito", JSON.stringify(novoFavorito));
+
+    toast.success("Livro adicionado aos favoritos!");
     setTimeout(() => {
       window.location.reload();
     }, 3000);
-    setModalIsOpenLivroAdd(true);
-  } else {
-    toast.error("Livro sem estoque!");
-  }
-}
-
-const adicionarAoFavorito = (livro) => {
-  if (!livro) {
-    return;
-  }
-
-  const itemFavorito = {
-    livro: {
-      id: livro.id,
-      titulo: livro.titulo,
-      imagem: livro.imagem,
-      oferta: livro.oferta,
-    },
   };
 
-  const novoFavorito = [...favorito, itemFavorito];
-  setFavorito(novoFavorito);
-  localStorage.setItem("favorito", JSON.stringify(novoFavorito));
+  const removerDosFavoritos = (livro) => {
+    if (!livro) {
+      return;
+    }
 
- toast.success("Livro adicionado ao favorito!");
-  setTimeout(() => {
-    window.location.reload();
-  }, 3000);
-};
+    const novoFavorito = favorito.filter((item) => item.livro.id !== livro.id);
+    setFavorito(novoFavorito);
+    localStorage.setItem("favorito", JSON.stringify(novoFavorito));
 
-
+    toast.success("Livro removido dos favoritos!");
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
+  };
 
   function closeModal() {
     setModalIsOpenLivroAdd(false);
@@ -167,14 +187,24 @@ const adicionarAoFavorito = (livro) => {
           </div>
           <div className={styles.gridItemLong}>
             <div className={styles.containerInfoLivro}>
-            <div className={styles.divTituloFavorito}>
-                  <p
-                    className={styles.tituloFavorito}
-                    onClick={() => adicionarAoFavorito(livro)}
-                  >
-                    <AiFillHeart />
-                  </p>
-                </div>
+              <div className={styles.divTituloFavorito}>
+                <p
+                  className={styles.tituloFavorito}
+                  onClick={() => {
+                    if (favorito.some((item) => item.livro.id === livro.id)) {
+                      removerDosFavoritos(livro);
+                    } else {
+                      adicionarAoFavorito(livro);
+                    }
+                  }}
+                >
+                  {favorito.some((item) => item.livro.id === livro.id) ? (
+                    <AiFillHeart color="#015a80" />
+                  ) : (
+                    <AiOutlineHeart />
+                  )}
+                </p>
+              </div>
               <p className={styles.titulo}>{livro.titulo}</p>
               <p className={styles.autor}>{livro.autor}</p>
               <p className={styles.editora}>{livro.editora}</p>
@@ -296,35 +326,35 @@ const adicionarAoFavorito = (livro) => {
         <div>
           <div className={styles.gridFichaTecnica}>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Livro</p>
-            <BiBook className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.titulo}</p>
+              <p className={styles.tituloFichaTecnica}>Livro</p>
+              <BiBook className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.titulo}</p>
             </div>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Ano de publicação</p>
-            <BiCalendar className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.anoPublicacao}</p>
+              <p className={styles.tituloFichaTecnica}>Ano de publicação</p>
+              <BiCalendar className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.anoPublicacao}</p>
             </div>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Número de páginas</p>
-            <BiFile className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.qtdePagina}</p>
+              <p className={styles.tituloFichaTecnica}>Número de páginas</p>
+              <BiFile className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.qtdePagina}</p>
             </div>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Editora</p>
-            <BiBuilding className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.editora}</p>
+              <p className={styles.tituloFichaTecnica}>Editora</p>
+              <BiBuilding className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.editora}</p>
             </div>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Autor</p>
-            <BiUser className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.autor}</p>
+              <p className={styles.tituloFichaTecnica}>Autor</p>
+              <BiUser className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.autor}</p>
             </div>
             <div className={styles.gridItemFichaTecnica}>
-            <p className={styles.tituloFichaTecnica}>Gênero</p>
-            <BiBookmark className={styles.iconFichaTecnica}/>
-            <p className={styles.infoFichaTecnica}>{livro.genero}</p>
-              </div>
+              <p className={styles.tituloFichaTecnica}>Gênero</p>
+              <BiBookmark className={styles.iconFichaTecnica} />
+              <p className={styles.infoFichaTecnica}>{livro.genero}</p>
+            </div>
           </div>
         </div>
       </div>
