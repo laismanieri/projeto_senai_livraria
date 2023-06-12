@@ -584,6 +584,23 @@ function FormPedidos() {
   const [pedidos, setPedidos] = useState([]);
   const { user } = useContext(AuthContext);
   const [userId, setUserId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recordsPerPage] = useState(5);
+
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const previousPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const goToPage = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   useEffect(() => {
     fetch(`http://localhost:8082/pedido/dto/${user.id}`)
@@ -607,7 +624,7 @@ function FormPedidos() {
         </thead>
         <tbody>
           {pedidos.length > 0 ? (
-            pedidos.map((pedido) => (
+            pedidos.slice(indexOfFirstRecord, indexOfLastRecord).map((pedido) => (
               <tr key={pedido.id} className={styles.tabelaPedidoTr}>
                 <td className={styles.tabelaPedidoTd}>{pedido.dataPedido}</td>
                 <td className={styles.tabelaPedidoTd}>{pedido.valorTotal}</td>
@@ -650,6 +667,39 @@ function FormPedidos() {
           )}
         </tbody>
       </table>
+      <div className={`${styles.pagination}`}>
+          <Button
+            className={`${styles.paginacaoButton}`}
+            variant="secondary"
+            onClick={previousPage}
+            disabled={currentPage === 1}
+          >
+            Anterior
+          </Button>
+          {Array.from({
+            length: Math.ceil(pedidos.length / recordsPerPage),
+          }).map((pageNumber, index) => (
+            <Button
+              key={index}
+              className={styles.paginacaoButton}
+              variant="secondary"
+              onClick={() => goToPage(index + 1)}
+              active={currentPage === index + 1}
+            >
+              {index + 1}
+            </Button>
+          ))}
+          <Button
+            className={styles.paginacaoButton}
+            variant="secondary"
+            onClick={nextPage}
+            disabled={
+              currentPage === Math.ceil(pedidos.length / recordsPerPage)
+            }
+          >
+            Próxima
+          </Button>
+        </div>
     </>
   );
 }

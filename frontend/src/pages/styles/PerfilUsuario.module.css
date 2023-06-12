@@ -167,3 +167,18 @@ width: 100%;
 .listaPedidoLiDiv{
   margin: 0 15px;
 }
+
+.paginacaoButton:hover {
+  background-color: #146b97;
+  color: white;
+}
+
+.paginacaoButton {
+  margin-top: 20px;
+  margin-right: 5px;
+  color: white;
+  background: #146b97b2;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
