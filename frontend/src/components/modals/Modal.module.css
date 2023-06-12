@@ -367,12 +367,20 @@ select:focus {
 
 .carrinhoButtonComprar:hover{
   cursor: pointer;
-  background: #cccccc31;;
+  background: #b3b3b3;
   text-decoration: none;
   color: white;  
 }
 
+.editarEndereco{
+  text-decoration: none;
+  color: #146b97;
+  font-size: 20px;
+}
 
+.editarEndereco:hover{
+  color: #9c9c9c;
+}
 
 
 

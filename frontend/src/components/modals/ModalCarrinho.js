@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 
 import React from "react";
 import { AuthContext } from "../layout/AuthContext";
+import { Link } from "react-router-dom";
 
 const ModalCarrinho = ({
   livro,
@@ -327,8 +328,7 @@ const ModalCarrinho = ({
                   <p>{user.enderecos[0].cidade}, {user.enderecos[0].uf}, {user.enderecos[0].cep}</p>
                 </th>
                 <th className={styles.thSecao}>
-                  {" "}
-                  <AiFillEdit />
+                  <Link to="/perfil-usuario"><AiFillEdit className={styles.editarEndereco}/></Link>
                 </th>
               </tr>
             </table>
@@ -359,9 +359,7 @@ const ModalCarrinho = ({
                     </select>
                   </div>
                 </th>
-                <th className={styles.thSecao}>
-                  <AiFillEdit />
-                </th>
+
               </tr>
             </table>
           </div>
