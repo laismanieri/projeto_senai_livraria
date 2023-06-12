@@ -415,6 +415,7 @@ function LoginCadastrar() {
                               setEndereco((prevState) => ({
                                 ...prevState,
                                 complemento: complemento
+                                
                               }));
                             }}
                           />

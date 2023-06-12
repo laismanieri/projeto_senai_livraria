@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../modals/Modal.module.css";
 import { AiFillDelete, AiOutlineClose, AiFillHeart } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const ModalFavorito = ({ isOpen, onClose }) => {
   const [favorito, setFavorito] = useState([]);
@@ -96,11 +97,19 @@ const ModalFavorito = ({ isOpen, onClose }) => {
                 <div key={item.livro.id}></div>
                 <div className={styles.card}>
                   <div className={styles.cardImageLivro}>
-                    <img
-                      src={item.livro.imagem}
-                      alt={item.livro.titulo}
-                      className={styles.cardImageLivro}
-                    />
+                    <Link
+                      to={{
+                        pathname: `/informacao-livro/${item.livro.id}`,
+                        state: { detalhes: item.livro.detalhes },
+                      }}
+                    >
+                      {" "}
+                      <img
+                        src={item.livro.imagem}
+                        alt={item.livro.titulo}
+                        className={styles.cardImageLivro}
+                      />
+                    </Link>
                   </div>
                   <div className={styles.cardInformacao}>
                     <p className={styles.cardTitulo}>{item.livro.titulo}</p>
