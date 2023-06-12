@@ -16,6 +16,7 @@ import {
   FaUser,
   FaUserCircle,
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function PerfilUsuario() {
   const [activeItem, setActiveItem] = useState("Dados Pessoais");
@@ -30,7 +31,6 @@ function PerfilUsuario() {
     numero: "",
     complemento: "",
   });
-
 
   <FormDadosPessoais
     active={activeItem === "Dados Pessoais"}
@@ -70,9 +70,7 @@ function PerfilUsuario() {
   };
 
   const handleLogout = () => {
-    // Lógica para executar o logout
-    // Por exemplo, redirecionar o usuário para a página de login
-    // ou limpar o token de autenticação, se aplicável
+
   };
 
   const renderForm = () => {
@@ -110,10 +108,7 @@ function PerfilUsuario() {
         <div className={styles.containerGridPerfil}>
           <div className={styles.gridPerfil}>
             <ul className={styles.gridPerfilLista}>
-              <li
-                className={styles.gridPerfilListaItem}
-  
-              >
+              <li className={styles.gridPerfilListaItem}>
                 <FaUserCircle className={styles.iconPerfil} />
                 <span>Olá</span>
               </li>
@@ -156,23 +151,26 @@ function FormDadosPessoais({ active, user, setUser }) {
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [erroSenha, setErroSenha] = useState("");
   const [userSenha, setUserSenha] = useState(user?.senha);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (novaSenha || confirmarSenha) {
       // Validar se a senha atual está correta
-  if (senhaAtual !== authContext.user.senha) {
-    toast.error("Senha atual incorreta");
-    return;
-  }
-
-  // Validar se a nova senha e a confirmação são iguais
-  if (novaSenha !== confirmarSenha) {
-    toast.error("A nova senha e a confirmação não coincidem");
-    return;
-  }
-
-  authContext.atualizarSenha(novaSenha);
+      if (senhaAtual !== authContext.user.senha) {
+        toast.error("Senha atual incorreta");
+        return;
+      }
+  
+      // Validar se a nova senha e a confirmação são iguais
+      if (novaSenha !== confirmarSenha) {
+        toast.error("A nova senha e a confirmação não coincidem");
+        return;
+      }
+  
+      authContext.atualizarSenha(novaSenha);
+    }
 
     try {
       const form = event.target; // Obtenha o formulário do evento
@@ -184,7 +182,7 @@ function FormDadosPessoais({ active, user, setUser }) {
         dataCadastro: form.elements.formDataCadastro
           ? form.elements.formDataCadastro.value
           : "",
-        senha: novaSenha,
+        senha: novaSenha ? novaSenha : userSenha,
         enderecos: [
           {
             id: user.enderecos[0].id,
@@ -215,7 +213,10 @@ function FormDadosPessoais({ active, user, setUser }) {
       });
 
       if (response.ok) {
-        toast.success("Dados atualizados com sucesso!");
+        toast.success("Dados atualizados com sucesso! Faça login novamente");
+        setTimeout(() => {
+          authContext.logoutDadosAtualizados();
+        }, 3500);
       } else {
         toast.error("Erro ao atualizar os dados.");
       }
@@ -318,155 +319,155 @@ function FormDadosPessoais({ active, user, setUser }) {
               </Form.Group>
             </Col>
           </Row>
-          <Button
+          {/* <Button
             className={styles.buttonExpandirSenha}
             variant="secondary"
             onClick={handleToggleExpandEndereco}
           >
             {isExpandedEndereco ? "Recolher" : "Expandir"} Alterar endereço
           </Button>
-          {isExpandedEndereco && (
-            <div>
-              <Row>
-                <Col>
-                  <Form.Group controlId="cep">
-                    <Form.Label column sm={2}>
-                      CEP:
-                    </Form.Label>
-                    <Col sm="12">
-                      <Form.Control
-                        className={styles.inputForm}
-                        type="text"
-                        placeholder="CEP"
-                        name="cep"
-                        defaultValue={user.enderecos[0].cep}
-                        required
-                      />
-                    </Col>
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Form.Group controlId="uf">
-                    <Form.Label column sm={2}>
-                      Estado:
-                    </Form.Label>
-                    <Col sm="12">
-                      <Form.Control
-                        className={styles.inputForm}
-                        type="text"
-                        placeholder="Estado"
-                        name="uf"
-                        defaultValue={user.enderecos[0].uf}
-                        required
-                      />
-                    </Col>
-                  </Form.Group>
-                </Col>
-              </Row>
+          {isExpandedEndereco && ( */}
+          <div>
+            <Row>
+              <Col>
+                <Form.Group controlId="cep">
+                  <Form.Label column sm={2}>
+                    CEP:
+                  </Form.Label>
+                  <Col sm="12">
+                    <Form.Control
+                      className={styles.inputForm}
+                      type="text"
+                      placeholder="CEP"
+                      name="cep"
+                      defaultValue={user.enderecos[0].cep}
+                      required
+                    />
+                  </Col>
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Form.Group controlId="uf">
+                  <Form.Label column sm={2}>
+                    Estado:
+                  </Form.Label>
+                  <Col sm="12">
+                    <Form.Control
+                      className={styles.inputForm}
+                      type="text"
+                      placeholder="Estado"
+                      name="uf"
+                      defaultValue={user.enderecos[0].uf}
+                      required
+                    />
+                  </Col>
+                </Form.Group>
+              </Col>
+            </Row>
 
-              <Row>
-                <Col>
-                  <Form.Group controlId="cidade">
-                    <Form.Label column sm={2}>
-                      Cidade:
-                    </Form.Label>
-                    <Col sm="12">
-                      <Form.Control
-                        className={styles.inputForm}
-                        type="text"
-                        placeholder="Cidade"
-                        name="cidade"
-                        defaultValue={user.enderecos[0].cidade}
-                        required
-                      />
-                    </Col>
-                  </Form.Group>
-                </Col>
-              </Row>
+            <Row>
+              <Col>
+                <Form.Group controlId="cidade">
+                  <Form.Label column sm={2}>
+                    Cidade:
+                  </Form.Label>
+                  <Col sm="12">
+                    <Form.Control
+                      className={styles.inputForm}
+                      type="text"
+                      placeholder="Cidade"
+                      name="cidade"
+                      defaultValue={user.enderecos[0].cidade}
+                      required
+                    />
+                  </Col>
+                </Form.Group>
+              </Col>
+            </Row>
 
-              <Row>
-                <Col>
-                  <Form.Group controlId="logradouro">
-                    <Form.Label column sm={2}>
-                      Rua:
-                    </Form.Label>
-                    <Col sm="12">
-                      <Form.Control
-                        className={styles.inputForm}
-                        type="text"
-                        placeholder="Rua"
-                        name="logradouro"
-                        defaultValue={user.enderecos[0].logradouro}
-                        required
-                      />
-                    </Col>
-                  </Form.Group>
-                </Col>
-              </Row>
+            <Row>
+              <Col>
+                <Form.Group controlId="logradouro">
+                  <Form.Label column sm={2}>
+                    Rua:
+                  </Form.Label>
+                  <Col sm="12">
+                    <Form.Control
+                      className={styles.inputForm}
+                      type="text"
+                      placeholder="Rua"
+                      name="logradouro"
+                      defaultValue={user.enderecos[0].logradouro}
+                      required
+                    />
+                  </Col>
+                </Form.Group>
+              </Col>
+            </Row>
 
-              <Row>
-                <Col>
-                  <Form.Group controlId="bairro">
-                    <Form.Label column sm={2}>
-                      Bairro:
-                    </Form.Label>
-                    <Col sm="12">
-                      <Form.Control
-                        className={styles.inputForm}
-                        type="text"
-                        placeholder="Bairro"
-                        name="bairro"
-                        defaultValue={user.enderecos[0].bairro}
-                        required
-                      />
-                    </Col>
-                  </Form.Group>
-                </Col>
-              </Row>
+            <Row>
+              <Col>
+                <Form.Group controlId="bairro">
+                  <Form.Label column sm={2}>
+                    Bairro:
+                  </Form.Label>
+                  <Col sm="12">
+                    <Form.Control
+                      className={styles.inputForm}
+                      type="text"
+                      placeholder="Bairro"
+                      name="bairro"
+                      defaultValue={user.enderecos[0].bairro}
+                      required
+                    />
+                  </Col>
+                </Form.Group>
+              </Col>
+            </Row>
 
-              <Row>
-                <Col>
-                  <Form.Group controlId="numero">
-                    <Form.Label column sm={2}>
-                      Número:
-                    </Form.Label>
-                    <Col sm="12">
-                      <Form.Control
-                        className={styles.inputForm}
-                        type="text"
-                        placeholder="Número"
-                        name="numero"
-                        defaultValue={user.enderecos[0].numero}
-                        required
-                      />
-                    </Col>
-                  </Form.Group>
-                </Col>
-              </Row>
+            <Row>
+              <Col>
+                <Form.Group controlId="numero">
+                  <Form.Label column sm={2}>
+                    Número:
+                  </Form.Label>
+                  <Col sm="12">
+                    <Form.Control
+                      className={styles.inputForm}
+                      type="text"
+                      placeholder="Número"
+                      name="numero"
+                      defaultValue={user.enderecos[0].numero}
+                      required
+                    />
+                  </Col>
+                </Form.Group>
+              </Col>
+            </Row>
 
-              <Row>
-                <Col>
-                  <Form.Group controlId="complemento">
-                    <Form.Label column sm={2}>
-                      Complemento:
-                    </Form.Label>
-                    <Col sm="12">
-                      <Form.Control
-                        className={styles.inputForm}
-                        type="text"
-                        placeholder="Complemento"
-                        name="complemento"
-                        defaultValue={user.enderecos[0].complemento}
-                        required
-                      />
-                    </Col>
-                  </Form.Group>
-                </Col>
-              </Row>
-            </div>
-          )}
+            <Row>
+              <Col>
+                <Form.Group controlId="complemento">
+                  <Form.Label column sm={2}>
+                    Complemento:
+                  </Form.Label>
+                  <Col sm="12">
+                    <Form.Control
+                      className={styles.inputForm}
+                      type="text"
+                      placeholder="Complemento"
+                      name="complemento"
+                      defaultValue={user.enderecos[0].complemento}
+                      required
+                    />
+                  </Col>
+                </Form.Group>
+              </Col>
+            </Row>
+          </div>
+          {/* )} */}
           <div>
             <Button
               className={styles.buttonExpandirSenha}
@@ -579,7 +580,6 @@ function FormDadosPessoais({ active, user, setUser }) {
   );
 }
 
-
 function FormPedidos() {
   const [pedidos, setPedidos] = useState([]);
   const { user } = useContext(AuthContext);
@@ -624,40 +624,50 @@ function FormPedidos() {
         </thead>
         <tbody>
           {pedidos.length > 0 ? (
-            pedidos.slice(indexOfFirstRecord, indexOfLastRecord).map((pedido) => (
-              <tr key={pedido.id} className={styles.tabelaPedidoTr}>
-                <td className={styles.tabelaPedidoTd}>{pedido.dataPedido}</td>
-                <td className={styles.tabelaPedidoTd}>{pedido.valorTotal}</td>
-                <td className={styles.tabelaPedidoTd}>
-                  {pedido.itensDTO && pedido.itensDTO.length > 0 ? (
-                    <ul className={styles.ulListaPedido}>
-                      {pedido.itensDTO.map((item) => (
-                        <li key={item.id} className={styles.listaPedidoLi}>
-                          <div className={styles.divPedidoImg}>
-                            <img
-                              className={styles.pedidoImg}
-                              src={item.detalheLivroDTO.livro.imagem}
-                              alt=""
-                            />
-                          </div>
-                          <div className={styles.listaPedidoLiDiv}>Titulo: {item.detalheLivroDTO.livro.titulo}</div>
-                          <div className={styles.listaPedidoLiDiv}>
-                            Tipo do Livro: {item.detalheLivroDTO.tipoLivro}
-                          </div>
-                          <div className={styles.listaPedidoLiDiv}>Quantidade: {item.qtdeItens}</div>
-                          <div className={styles.listaPedidoLiDiv}>Valor Unitário: {item.valorUnid}</div>
-                          <div className={styles.listaPedidoLiDiv}>Valor Total Item: {item.valorTotal}</div>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className={styles.customClass}>
-                      Nenhum item disponível.
-                    </p>
-                  )}
-                </td>
-              </tr>
-            ))
+            pedidos
+              .slice(indexOfFirstRecord, indexOfLastRecord)
+              .map((pedido) => (
+                <tr key={pedido.id} className={styles.tabelaPedidoTr}>
+                  <td className={styles.tabelaPedidoTd}>{pedido.dataPedido}</td>
+                  <td className={styles.tabelaPedidoTd}>{pedido.valorTotal}</td>
+                  <td className={styles.tabelaPedidoTd}>
+                    {pedido.itensDTO && pedido.itensDTO.length > 0 ? (
+                      <ul className={styles.ulListaPedido}>
+                        {pedido.itensDTO.map((item) => (
+                          <li key={item.id} className={styles.listaPedidoLi}>
+                            <div className={styles.divPedidoImg}>
+                              <img
+                                className={styles.pedidoImg}
+                                src={item.detalheLivroDTO.livro.imagem}
+                                alt=""
+                              />
+                            </div>
+                            <div className={styles.listaPedidoLiDiv}>
+                              Titulo: {item.detalheLivroDTO.livro.titulo}
+                            </div>
+                            <div className={styles.listaPedidoLiDiv}>
+                              Tipo do Livro: {item.detalheLivroDTO.tipoLivro}
+                            </div>
+                            <div className={styles.listaPedidoLiDiv}>
+                              Quantidade: {item.qtdeItens}
+                            </div>
+                            <div className={styles.listaPedidoLiDiv}>
+                              Valor Unitário: {item.valorUnid}
+                            </div>
+                            <div className={styles.listaPedidoLiDiv}>
+                              Valor Total Item: {item.valorTotal}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className={styles.customClass}>
+                        Nenhum item disponível.
+                      </p>
+                    )}
+                  </td>
+                </tr>
+              ))
           ) : (
             <tr className={styles.customClass}>
               <td colSpan={3} className={styles.customClass}>
@@ -668,38 +678,36 @@ function FormPedidos() {
         </tbody>
       </table>
       <div className={`${styles.pagination}`}>
+        <Button
+          className={`${styles.paginacaoButton}`}
+          variant="secondary"
+          onClick={previousPage}
+          disabled={currentPage === 1}
+        >
+          Anterior
+        </Button>
+        {Array.from({
+          length: Math.ceil(pedidos.length / recordsPerPage),
+        }).map((pageNumber, index) => (
           <Button
-            className={`${styles.paginacaoButton}`}
-            variant="secondary"
-            onClick={previousPage}
-            disabled={currentPage === 1}
-          >
-            Anterior
-          </Button>
-          {Array.from({
-            length: Math.ceil(pedidos.length / recordsPerPage),
-          }).map((pageNumber, index) => (
-            <Button
-              key={index}
-              className={styles.paginacaoButton}
-              variant="secondary"
-              onClick={() => goToPage(index + 1)}
-              active={currentPage === index + 1}
-            >
-              {index + 1}
-            </Button>
-          ))}
-          <Button
+            key={index}
             className={styles.paginacaoButton}
             variant="secondary"
-            onClick={nextPage}
-            disabled={
-              currentPage === Math.ceil(pedidos.length / recordsPerPage)
-            }
+            onClick={() => goToPage(index + 1)}
+            active={currentPage === index + 1}
           >
-            Próxima
+            {index + 1}
           </Button>
-        </div>
+        ))}
+        <Button
+          className={styles.paginacaoButton}
+          variant="secondary"
+          onClick={nextPage}
+          disabled={currentPage === Math.ceil(pedidos.length / recordsPerPage)}
+        >
+          Próxima
+        </Button>
+      </div>
     </>
   );
 }

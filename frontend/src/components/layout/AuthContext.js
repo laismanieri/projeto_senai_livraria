@@ -36,6 +36,15 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const logoutDadosAtualizados = () => {
+    // Remove os dados do usuário do localStorage
+    localStorage.removeItem("userData");
+
+    navigate("/login-entrar");
+    setUser(null);
+  };
+
+
   const atualizarSenha = (novaSenha) => {
     const url = `http://localhost:8082/usuario/${user.id}`;
     axios
@@ -46,7 +55,7 @@ export const AuthProvider = ({ children }) => {
           ...prevState,
           senha: novaSenha
         }));
-        toast.success("Senha atualizada com sucesso");
+        // toast.success("Senha atualizada com sucesso");
       })
       .catch((error) => {
         console.error(error);
@@ -65,7 +74,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, atualizarSenha  }}>
+    <AuthContext.Provider value={{ user, login, logout, atualizarSenha, logoutDadosAtualizados  }}>
       {children}
     </AuthContext.Provider>
   );
