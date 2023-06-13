@@ -494,15 +494,14 @@ function FormDadosPessoais({ active, user, setUser }) {
                       // onChange={(event) => setSenha(event.target.value)}
                       // required
                     />
-
                     <div
                       className={styles.alternarSenha}
                       onClick={alternarMostrarSenha}
                     >
                       {mostrarSenha ? (
-                        <FaEyeSlash />
+                        <FaEye className={styles.iconFormLabel}/>
                       ) : (
-                        <FaEye className={styles.iconFormLabel} />
+                        <FaEyeSlash className={styles.iconFormLabel} />
                       )}
                     </div>
                   </div>
@@ -529,9 +528,9 @@ function FormDadosPessoais({ active, user, setUser }) {
                       onClick={alternarMostrarSenha}
                     >
                       {mostrarSenha ? (
-                        <FaEyeSlash />
+                        < FaEye className={styles.iconFormLabel}/>
                       ) : (
-                        <FaEye className={styles.iconFormLabel} />
+                        <FaEyeSlash className={styles.iconFormLabel} />
                       )}
                     </div>
                   </div>
@@ -560,9 +559,9 @@ function FormDadosPessoais({ active, user, setUser }) {
                       onClick={alternarMostrarSenha}
                     >
                       {mostrarSenha ? (
-                        <FaEyeSlash />
+                        <FaEye  className={styles.iconFormLabel}/>
                       ) : (
-                        <FaEye className={styles.iconFormLabel} />
+                        <FaEyeSlash className={styles.iconFormLabel} />
                       )}
                     </div>
                   </div>

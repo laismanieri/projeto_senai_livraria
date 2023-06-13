@@ -71,7 +71,7 @@ function LoginEntrar() {
                 className={styles.alternarSenha}
                 onClick={alternarMostrarSenha}
               >
-                {mostrarSenha ? <FaEyeSlash /> : <FaEye />}
+                {mostrarSenha ?  <FaEye /> : <FaEyeSlash />}
               </div>
             </div>
           </Form.Group>
